@@ -1,0 +1,184 @@
+{
+ "version": 1,
+ "profile": {
+  "id": "privacy",
+  "nameKey": "Profile_privacy_Name",
+  "descriptionKey": "Profile_privacy_Description",
+  "entries": [
+   {
+    "kind": "user",
+    "id": "privacy.advertising_id",
+    "choice": "disabled",
+    "reasonKey": "ProfileReason_AdId"
+   },
+   {
+    "kind": "user",
+    "id": "privacy.tailored_experiences",
+    "choice": "disabled",
+    "reasonKey": "ProfileReason_Tailored"
+   },
+   {
+    "kind": "user",
+    "id": "privacy.feedback_frequency",
+    "choice": "never",
+    "reasonKey": "ProfileReason_Feedback"
+   },
+   {
+    "kind": "user",
+    "id": "privacy.input_personalization",
+    "choice": "limited",
+    "reasonKey": "ProfileReason_InputPersonalization"
+   },
+   {
+    "kind": "user",
+    "id": "privacy.start_suggestions",
+    "choice": "hidden",
+    "reasonKey": "ProfileReason_StartSuggestions"
+   },
+   {
+    "kind": "user",
+    "id": "privacy.silent_app_installs",
+    "choice": "disabled",
+    "reasonKey": "ProfileReason_SilentInstalls"
+   },
+   {
+    "kind": "user",
+    "id": "privacy.third_party_suggestions",
+    "choice": "blocked",
+    "reasonKey": "ProfileReason_ThirdParty"
+   },
+   {
+    "kind": "user",
+    "id": "privacy.settings_suggestions",
+    "choice": "off",
+    "reasonKey": "ProfileReason_StartSuggestions"
+   },
+   {
+    "kind": "user",
+    "id": "privacy.lock_screen_tips",
+    "choice": "off",
+    "reasonKey": "ProfileReason_LockScreen"
+   },
+   {
+    "kind": "user",
+    "id": "privacy.suggested_toasts",
+    "choice": "off",
+    "reasonKey": "ProfileReason_Tips"
+   },
+   {
+    "kind": "user",
+    "id": "privacy.cross_device_resume",
+    "choice": "off",
+    "reasonKey": "ProfileReason_CrossDevice"
+   },
+   {
+    "kind": "user",
+    "id": "privacy.cloud_clipboard_upload",
+    "choice": "off",
+    "reasonKey": "ProfileReason_CrossDevice"
+   },
+   {
+    "kind": "user",
+    "id": "privacy.online_speech",
+    "choice": "off",
+    "reasonKey": "ProfileReason_Speech"
+   },
+   {
+    "kind": "user",
+    "id": "privacy.dev_tool_telemetry",
+    "choice": "optout",
+    "reasonKey": "ProfileReason_DevTelemetry"
+   },
+   {
+    "kind": "user",
+    "id": "search.web_results",
+    "choice": "disabled",
+    "reasonKey": "ProfileReason_SearchWeb"
+   },
+   {
+    "kind": "user",
+    "id": "search.highlights",
+    "choice": "off",
+    "reasonKey": "ProfileReason_SearchHighlights"
+   },
+   {
+    "kind": "machine",
+    "id": "machine.privacy.diagnostic_level",
+    "choice": "required",
+    "reasonKey": "ProfileReason_Diagnostics"
+   },
+   {
+    "kind": "machine",
+    "id": "machine.privacy.diagnostic_logs",
+    "choice": "off",
+    "reasonKey": "ProfileReason_Diagnostics"
+   },
+   {
+    "kind": "machine",
+    "id": "machine.privacy.diagnostic_dumps",
+    "choice": "limited",
+    "reasonKey": "ProfileReason_Diagnostics"
+   },
+   {
+    "kind": "machine",
+    "id": "machine.privacy.advertising_id",
+    "choice": "off",
+    "reasonKey": "ProfileReason_AdId"
+   },
+   {
+    "kind": "machine",
+    "id": "machine.privacy.activity_feed",
+    "choice": "off",
+    "reasonKey": "ProfileReason_Activity"
+   },
+   {
+    "kind": "machine",
+    "id": "machine.privacy.activity_upload",
+    "choice": "off",
+    "reasonKey": "ProfileReason_Activity"
+   },
+   {
+    "kind": "machine",
+    "id": "machine.privacy.activity_publish",
+    "choice": "off",
+    "reasonKey": "ProfileReason_Activity"
+   },
+   {
+    "kind": "machine",
+    "id": "machine.search.location",
+    "choice": "off",
+    "reasonKey": "ProfileReason_Location"
+   },
+   {
+    "kind": "machine",
+    "id": "machine.privacy.location_policy",
+    "choice": "off",
+    "reasonKey": "ProfileReason_Location"
+   },
+   {
+    "kind": "machine",
+    "id": "machine.privacy.feedback_notifications",
+    "choice": "off",
+    "reasonKey": "ProfileReason_Feedback"
+   },
+   {
+    "kind": "machine",
+    "id": "machine.privacy.cross_device_clipboard",
+    "choice": "off",
+    "reasonKey": "ProfileReason_CrossDevice"
+   },
+   {
+    "kind": "machine",
+    "id": "machine.privacy.online_tips",
+    "choice": "off",
+    "reasonKey": "ProfileReason_OnlineTips"
+   },
+   {
+    "kind": "machine",
+    "id": "machine.update.delivery_peering",
+    "choice": "off",
+    "reasonKey": "ProfileReason_Peering"
+   }
+  ]
+ }
+}

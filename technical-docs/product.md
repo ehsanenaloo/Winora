@@ -1,0 +1,11 @@
+# Product scope
+
+Winora is an independent, free, offline GPL-3.0-only Windows manager. No accounts, telemetry, advertising, subscriptions, paid tiers or cloud services. Behavior evidence for other tools is kept outside this repository and is never an implementation template.
+
+FND-001 acceptance: buildable layered solution, Fluent MVVM shell, eleven destinations, English/Persian live switching, RTL and theme preferences, SQLite schema/migration, durable simulated lifecycle and recovery, fail-closed worker protocol, shared-engine CLI, focused failure tests, honest coverage inventory and dependency-ordered backlog.
+
+The application now makes real changes: the desktop app runs with administrator rights and writes per-user and machine settings from the reviewed catalogs, changes services, scheduled tasks, startup entries, power plans, DNS and optional features, removes apps and programs, and quarantines leftover folders, each after a review and with a journal entry written first. The elevated worker path exists but production composition runs the native adapters in the desktop process (see architecture.md). Simulation stays explicitly labeled. Signing and releases are later tasks. The text of FND-001 above describes the first stage and is kept for history.
+
+Additional stable requirements: WR-PROFILES (desired settings import/export), WR-PREVIEW, WR-JOURNAL, WR-CONFLICT, WR-DRIFT, WR-SERVICES, WR-POWER, WR-MEASURE, WR-CLI, WR-REPORTS, WR-UNINSTALL, WR-L10N, WR-ACCESS, WR-SECURITY. Coverage requirements use independently numbered WR-O/WR-C/WR-T IDs; no internal identifiers of other tools enter production.
+
+M1 acceptance (read-only discovery): startup entries, scheduled tasks, services and installed applications can be listed from the CLI and, when implemented, the matching Desktop destinations, with partial results reported as stable issue codes, local-only data and no mutation. Details, schema, exit codes and privacy rules are in [discovery.md](discovery.md). M1 does not add any enable, disable, delete, uninstall, registry, service or power change; those remain unavailable until M2 and later. Status is recorded in backlog DISC-001..DISC-009 and verification.md; nothing is claimed beyond that evidence.

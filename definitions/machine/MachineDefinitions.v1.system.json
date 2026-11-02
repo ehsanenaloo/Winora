@@ -1,0 +1,1289 @@
+{
+ "format": "winora.machine-definitions/1",
+ "setId": "winora-machine",
+ "serial": 1,
+ "minProtocol": 1,
+ "minWorkerBuild": 22621,
+ "revoked": [],
+ "definitions": [
+  {
+   "id": "machine.update.insider_builds",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_update_insider_builds_Title",
+   "descriptionKey": "Machine_machine_update_insider_builds_Description",
+   "category": "Updates",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\PreviewBuilds",
+    "valueName": "AllowBuildPreview",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_update_insider_builds_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_update_insider_builds_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\PreviewBuilds",
+     "valueName": "AllowBuildPreview"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowbuildpreview"
+   ],
+   "reviewRef": "SEC-DEF-0089",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.apps.push_to_install",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_apps_push_to_install_Title",
+   "descriptionKey": "Machine_machine_apps_push_to_install_Description",
+   "category": "Apps",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\PushToInstall",
+    "valueName": "DisablePushToInstall",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_apps_push_to_install_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_apps_push_to_install_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\PushToInstall",
+     "valueName": "DisablePushToInstall"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-pushtoinstall"
+   ],
+   "reviewRef": "SEC-DEF-0090",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.apps.teams_install",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_apps_teams_install_Title",
+   "descriptionKey": "Machine_machine_apps_teams_install_Description",
+   "category": "Apps",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Teams",
+    "valueName": "DisableInstallation",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_apps_teams_install_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_apps_teams_install_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Teams",
+     "valueName": "DisableInstallation"
+    }
+   ],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-0091",
+   "sourceClass": "C",
+   "communitySources": [
+    "reference source 1"
+   ]
+  },
+  {
+   "id": "machine.apps.game_recording_policy",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_apps_game_recording_policy_Title",
+   "descriptionKey": "Machine_machine_apps_game_recording_policy_Description",
+   "category": "Apps",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR",
+    "valueName": "AllowGameDVR",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_apps_game_recording_policy_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_apps_game_recording_policy_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR",
+     "valueName": "AllowGameDVR"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-applicationmanagement#allowgamedvr"
+   ],
+   "reviewRef": "SEC-DEF-0092",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.system.wpbt_execution",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_system_wpbt_execution_Title",
+   "descriptionKey": "Machine_machine_system_wpbt_execution_Description",
+   "category": "System",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\Session Manager",
+    "valueName": "DisableWpbtExecution",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_system_wpbt_execution_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_system_wpbt_execution_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-0093",
+   "sourceClass": "C",
+   "communitySources": [
+    "reference source 1"
+   ]
+  },
+  {
+   "id": "machine.system.wer_disabled",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_system_wer_disabled_Title",
+   "descriptionKey": "Machine_machine_system_wer_disabled_Description",
+   "category": "System",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\Windows Error Reporting",
+    "valueName": "Disabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_system_wer_disabled_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_system_wer_disabled_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/win32/wer/wer-settings"
+   ],
+   "reviewRef": "SEC-DEF-0094",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.system.wer_no_prompt",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_system_wer_no_prompt_Title",
+   "descriptionKey": "Machine_machine_system_wer_no_prompt_Description",
+   "category": "System",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\Windows Error Reporting",
+    "valueName": "DontShowUI",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_system_wer_no_prompt_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_system_wer_no_prompt_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/win32/wer/wer-settings"
+   ],
+   "reviewRef": "SEC-DEF-0095",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.system.wer_no_extra",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_system_wer_no_extra_Title",
+   "descriptionKey": "Machine_machine_system_wer_no_extra_Description",
+   "category": "System",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\Windows Error Reporting",
+    "valueName": "DontSendAdditionalData",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_system_wer_no_extra_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_system_wer_no_extra_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/win32/wer/wer-settings"
+   ],
+   "reviewRef": "SEC-DEF-0096",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.performance.ntfs_last_access",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_performance_ntfs_last_access_Title",
+   "descriptionKey": "Machine_machine_performance_ntfs_last_access_Description",
+   "category": "Performance",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+    "valueName": "NtfsDisableLastAccessUpdate",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_performance_ntfs_last_access_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 2147483649
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_performance_ntfs_last_access_Choice_default",
+     "value": {
+      "kind": "dword",
+      "number": 2147483650
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    },
+    {
+     "kind": "dword",
+     "number": 2147483649
+    },
+    {
+     "kind": "dword",
+     "number": 2147483650
+    },
+    {
+     "kind": "dword",
+     "number": 2147483648
+    },
+    {
+     "kind": "dword",
+     "number": 2147483651
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior"
+   ],
+   "reviewRef": "SEC-DEF-0097",
+   "sourceClass": "B",
+   "communitySources": [
+    "https://winaero.com/disable-ntfs-last-access-time-updates-in-windows-10"
+   ]
+  },
+  {
+   "id": "machine.performance.ntfs_short_names",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_performance_ntfs_short_names_Title",
+   "descriptionKey": "Machine_machine_performance_ntfs_short_names_Description",
+   "category": "Performance",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+    "valueName": "NtfsDisable8dot3NameCreation",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_performance_ntfs_short_names_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_performance_ntfs_short_names_Choice_default",
+     "value": {
+      "kind": "dword",
+      "number": 2
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    },
+    {
+     "kind": "dword",
+     "number": 2
+    },
+    {
+     "kind": "dword",
+     "number": 3
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior"
+   ],
+   "reviewRef": "SEC-DEF-0098",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.network.webdav_file_limit",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_network_webdav_file_limit_Title",
+   "descriptionKey": "Machine_machine_network_webdav_file_limit_Description",
+   "category": "Network",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Services\\WebClient\\Parameters",
+    "valueName": "FileSizeLimitInBytes",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "raised",
+     "labelKey": "Machine_machine_network_webdav_file_limit_Choice_raised",
+     "value": {
+      "kind": "dword",
+      "number": 4294967295
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_network_webdav_file_limit_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    },
+    {
+     "kind": "dword",
+     "number": 4294967295
+    },
+    {
+     "kind": "dword",
+     "number": 50000000
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://support.microsoft.com/kb/900900"
+   ],
+   "reviewRef": "SEC-DEF-0099",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.system.crash_details",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_system_crash_details_Title",
+   "descriptionKey": "Machine_machine_system_crash_details_Description",
+   "category": "System",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\CrashControl",
+    "valueName": "DisplayParameters",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "on",
+     "labelKey": "Machine_machine_system_crash_details_Choice_on",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_system_crash_details_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-0100",
+   "sourceClass": "B",
+   "communitySources": [
+    "reference source 3",
+    "reference source 1"
+   ]
+  },
+  {
+   "id": "machine.system.crash_no_emoticon",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_system_crash_no_emoticon_Title",
+   "descriptionKey": "Machine_machine_system_crash_no_emoticon_Description",
+   "category": "System",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\CrashControl",
+    "valueName": "DisableEmoticon",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "hide",
+     "labelKey": "Machine_machine_system_crash_no_emoticon_Choice_hide",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_system_crash_no_emoticon_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-0101",
+   "sourceClass": "B",
+   "communitySources": [
+    "reference source 3",
+    "reference source 1"
+   ]
+  },
+  {
+   "id": "machine.system.remote_assistance",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_system_remote_assistance_Title",
+   "descriptionKey": "Machine_machine_system_remote_assistance_Description",
+   "category": "System",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\Remote Assistance",
+    "valueName": "fAllowToGetHelp",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_system_remote_assistance_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_system_remote_assistance_Choice_default",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-0102",
+   "sourceClass": "C",
+   "communitySources": [
+    "reference source 7"
+   ]
+  },
+  {
+   "id": "machine.system.remote_assistance_control",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_system_remote_assistance_control_Title",
+   "descriptionKey": "Machine_machine_system_remote_assistance_control_Description",
+   "category": "System",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\Remote Assistance",
+    "valueName": "fAllowFullControl",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_system_remote_assistance_control_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_system_remote_assistance_control_Choice_default",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-0103",
+   "sourceClass": "C",
+   "communitySources": [
+    "reference source 7"
+   ]
+  },
+  {
+   "id": "machine.system.device_encryption",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_system_device_encryption_Title",
+   "descriptionKey": "Machine_machine_system_device_encryption_Description",
+   "category": "System",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\BitLocker",
+    "valueName": "PreventDeviceEncryption",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_system_device_encryption_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_system_device_encryption_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-0104",
+   "sourceClass": "B",
+   "communitySources": [
+    "reference source 1",
+    "reference source 2"
+   ]
+  },
+  {
+   "id": "machine.power.standby_network_ac",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_power_standby_network_ac_Title",
+   "descriptionKey": "Machine_machine_power_standby_network_ac_Description",
+   "category": "System",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Power\\PowerSettings\\f15576e8-98b7-4186-b944-eafa664402d9",
+    "valueName": "ACSettingIndex",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_power_standby_network_ac_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_power_standby_network_ac_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Power\\PowerSettings\\f15576e8-98b7-4186-b944-eafa664402d9",
+     "valueName": "ACSettingIndex"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-power"
+   ],
+   "reviewRef": "SEC-DEF-0105",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.power.standby_network_dc",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_power_standby_network_dc_Title",
+   "descriptionKey": "Machine_machine_power_standby_network_dc_Description",
+   "category": "System",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Power\\PowerSettings\\f15576e8-98b7-4186-b944-eafa664402d9",
+    "valueName": "DCSettingIndex",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_power_standby_network_dc_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_power_standby_network_dc_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Power\\PowerSettings\\f15576e8-98b7-4186-b944-eafa664402d9",
+     "valueName": "DCSettingIndex"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-power"
+   ],
+   "reviewRef": "SEC-DEF-0106",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.system.clock_utc",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_system_clock_utc_Title",
+   "descriptionKey": "Machine_machine_system_clock_utc_Description",
+   "category": "System",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\TimeZoneInformation",
+    "valueName": "RealTimeIsUniversal",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_system_clock_utc_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_system_clock_utc_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-0107",
+   "sourceClass": "C",
+   "communitySources": [
+    "https://wiki.archlinux.org/title/System_time"
+   ]
+  },
+  {
+   "id": "machine.system.nvidia_dlss_indicator",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_system_nvidia_dlss_indicator_Title",
+   "descriptionKey": "Machine_machine_system_nvidia_dlss_indicator_Description",
+   "category": "Performance",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\NVIDIA Corporation\\Global\\NGXCore",
+    "valueName": "ShowDlssIndicator",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_system_nvidia_dlss_indicator_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "all",
+     "labelKey": "Machine_machine_system_nvidia_dlss_indicator_Choice_all",
+     "value": {
+      "kind": "dword",
+      "number": 1024
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_system_nvidia_dlss_indicator_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    },
+    {
+     "kind": "dword",
+     "number": 1024
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-0108",
+   "sourceClass": "B",
+   "communitySources": [
+    "https://github.com/NVIDIA/DLSS"
+   ]
+  }
+ ]
+}

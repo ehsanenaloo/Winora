@@ -1,0 +1,12 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<!-- Light overlay merged after the WPF-UI light theme. Raises UI-component borders to 3:1 against the surfaces and gives badges 4.5:1 text. HighContrastTests/ContrastTests measure it. -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+ <ResourceDictionary.MergedDictionaries><ResourceDictionary Source="Colors.Light.xaml"/></ResourceDictionary.MergedDictionaries>
+ <Color x:Key="WinoraControlBorderColor">#767676</Color>
+ <SolidColorBrush x:Key="WinoraControlBorderBrush" Color="{StaticResource WinoraControlBorderColor}"/>
+ <SolidColorBrush x:Key="ControlElevationBorderBrush" Color="{StaticResource WinoraControlBorderColor}"/>
+ <SolidColorBrush x:Key="TextControlElevationBorderBrush" Color="{StaticResource WinoraControlBorderColor}"/>
+ <SolidColorBrush x:Key="CheckBoxBorderBrush" Color="{StaticResource WinoraControlBorderColor}"/>
+ <SolidColorBrush x:Key="ToggleSwitchStrokeOff" Color="{StaticResource WinoraControlBorderColor}"/>
+ <DropShadowEffect x:Key="WinoraElevation1" BlurRadius="8" ShadowDepth="2" Direction="270" Opacity="0.14" Color="Black"/>
+</ResourceDictionary>

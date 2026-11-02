@@ -1,0 +1,41 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<UserControl x:Class="Winora.Desktop.CleanupView"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:ctl="clr-namespace:Winora.Desktop.Controls"
+ xmlns:local="clr-namespace:Winora.Desktop"
+ AutomationProperties.Name="{Binding Title}" Focusable="False">
+ <ctl:DashboardPage x:Name="Workspace" BodyScrolls="False" PadBody="False">
+  <ctl:DashboardPage.Header>
+   <!-- The first sentence is the subtitle; the rest, how Free space works, opens under "About this page". -->
+   <ctl:PageHeader Title="{Binding Title}">
+   <ctl:PageHeader.Subtitle><MultiBinding StringFormat="{}{0} {1}"><Binding Path="Text[CleanupSubtitle]"/><Binding Path="Text[FreeSpaceIntro]"/></MultiBinding></ctl:PageHeader.Subtitle>
+   <ctl:PageHeader.Actions>
+    <WrapPanel>
+     <!-- The one primary action follows the tab: scan for files to clean, scan a folder, none on the quarantine list. -->
+     <ui:Button x:Name="ScanFreeSpaceButton" Margin="{StaticResource WinoraSpace.A4}" Content="{Binding Text[FreeSpaceScan]}" Command="{Binding FreeSpace.ScanCommand}" Appearance="Primary" Icon="{ui:SymbolIcon Search24}"
+      Visibility="{Binding IsFreeSpaceSelected, Converter={StaticResource BoolToVisibility}}" AutomationProperties.Name="{Binding Text[FreeSpaceScan]}" AutomationProperties.HelpText="{Binding Text[FreeSpaceScanHelp]}"/>
+     <ui:Button x:Name="ScanFolderButton" Margin="{StaticResource WinoraSpace.A4}" Content="{Binding Text[DiskScanFolder]}" Command="{Binding DiskUsage.ScanCommand}" Appearance="Primary" Icon="{ui:SymbolIcon Search24}"
+      Visibility="{Binding IsDiskUsageSelected, Converter={StaticResource BoolToVisibility}}" AutomationProperties.Name="{Binding Text[DiskScanFolder]}" AutomationProperties.HelpText="{Binding Text[DiskScanHelp]}"/>
+    </WrapPanel>
+   </ctl:PageHeader.Actions>
+  </ctl:PageHeader>
+  </ctl:DashboardPage.Header>
+  <ctl:DashboardPage.Tabs>
+   <ctl:TabRail x:Name="Rail" ContentTabs="{Binding ElementName=Tabs}" AutomationProperties.Name="{Binding Title}" AutomationProperties.HelpText="{Binding Text[CleanupTabsHelp]}"/>
+  </ctl:DashboardPage.Tabs>
+  <ctl:DashboardPage.Body>
+   <ctl:TabBody x:Name="Tabs" Style="{StaticResource WinoraTabContentStyle}" SelectedIndex="{Binding SelectedTab, Mode=TwoWay}">
+   <TabItem Header="{Binding FreeSpaceTabTitle}" AutomationProperties.Name="{Binding FreeSpaceTabTitle}">
+    <ContentControl Content="{Binding FreeSpace}" IsTabStop="False" Focusable="False"/>
+   </TabItem>
+   <TabItem Header="{Binding DiskUsageTabTitle}" AutomationProperties.Name="{Binding DiskUsageTabTitle}">
+    <ContentControl Content="{Binding DiskUsage}" IsTabStop="False" Focusable="False"/>
+   </TabItem>
+   <TabItem Header="{Binding SetAsideTabTitle}" AutomationProperties.Name="{Binding SetAsideTabTitle}">
+    <ContentControl Content="{Binding SetAside}" IsTabStop="False" Focusable="False"/>
+   </TabItem>
+  </ctl:TabBody>
+  </ctl:DashboardPage.Body>
+ </ctl:DashboardPage>
+</UserControl>

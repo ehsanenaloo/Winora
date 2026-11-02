@@ -1,0 +1,88 @@
+{
+ "version": 1,
+ "profile": {
+  "id": "minimal",
+  "nameKey": "Profile_minimal_Name",
+  "descriptionKey": "Profile_minimal_Description",
+  "entries": [
+   {
+    "kind": "user",
+    "id": "start.recommended_items",
+    "choice": "hidden",
+    "reasonKey": "ProfileReason_StartSuggestions"
+   },
+   {
+    "kind": "user",
+    "id": "privacy.start_suggestions",
+    "choice": "hidden",
+    "reasonKey": "ProfileReason_StartSuggestions"
+   },
+   {
+    "kind": "user",
+    "id": "privacy.start_suggested_content",
+    "choice": "off",
+    "reasonKey": "ProfileReason_StartSuggestions"
+   },
+   {
+    "kind": "user",
+    "id": "privacy.settings_suggestions",
+    "choice": "off",
+    "reasonKey": "ProfileReason_StartSuggestions"
+   },
+   {
+    "kind": "user",
+    "id": "privacy.lock_screen_tips",
+    "choice": "off",
+    "reasonKey": "ProfileReason_LockScreen"
+   },
+   {
+    "kind": "user",
+    "id": "privacy.get_most_out_of_windows",
+    "choice": "off",
+    "reasonKey": "ProfileReason_Tips"
+   },
+   {
+    "kind": "user",
+    "id": "privacy.welcome_experience",
+    "choice": "off",
+    "reasonKey": "ProfileReason_Tips"
+   },
+   {
+    "kind": "user",
+    "id": "privacy.windows_tips",
+    "choice": "off",
+    "reasonKey": "ProfileReason_Tips"
+   },
+   {
+    "kind": "user",
+    "id": "start.account_notifications",
+    "choice": "off",
+    "reasonKey": "ProfileReason_AccountNotifications"
+   },
+   {
+    "kind": "user",
+    "id": "explorer.sync_notifications",
+    "choice": "hidden",
+    "reasonKey": "ProfileReason_SyncAds"
+   },
+   {
+    "kind": "user",
+    "id": "search.web_results",
+    "choice": "disabled",
+    "reasonKey": "ProfileReason_SearchWeb"
+   },
+   {
+    "kind": "user",
+    "id": "search.highlights",
+    "choice": "off",
+    "reasonKey": "ProfileReason_SearchHighlights"
+   },
+   {
+    "kind": "machine",
+    "id": "machine.taskbar.widgets",
+    "choice": "off",
+    "reasonKey": "ProfileReason_Widgets"
+   }
+  ]
+ }
+}

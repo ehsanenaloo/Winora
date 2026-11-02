@@ -1,0 +1,79 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<UserControl x:Class="Winora.Desktop.Controls.FilterBar"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:ctl="clr-namespace:Winora.Desktop.Controls"
+ Focusable="False" x:Name="Root" AutomationProperties.Name="{Binding GroupName, RelativeSource={RelativeSource Self}}">
+ <UserControl.Resources>
+  <!-- A tab, drawn like the page tabs (WinoraPivotTabItem): padding, 3 px accent bar under the whole label, hover fill, semibold when selected. -->
+  <Style x:Key="TabChipItem" TargetType="ListBoxItem">
+   <Setter Property="AutomationProperties.Name" Value="{Binding AutomationName}"/><Setter Property="Margin" Value="{StaticResource WinoraSpace.R8}"/>
+   <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/><Setter Property="FocusVisualStyle" Value="{DynamicResource WinoraFocusRect}"/><Setter Property="Cursor" Value="Hand"/>
+   <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ListBoxItem">
+    <Border x:Name="Bar" Padding="{StaticResource WinoraSpace.H12}" BorderThickness="0,0,0,3" BorderBrush="Transparent" Background="Transparent" MinHeight="{DynamicResource MinHitTarget}" SnapsToDevicePixels="True">
+     <TextBlock x:Name="Label" Text="{Binding Label}" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center"/>
+    </Border>
+    <ControlTemplate.Triggers>
+     <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Bar" Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/></Trigger>
+     <Trigger Property="IsSelected" Value="True">
+      <Setter TargetName="Bar" Property="BorderBrush" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
+      <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+      <Setter TargetName="Label" Property="FontWeight" Value="SemiBold"/>
+     </Trigger>
+    </ControlTemplate.Triggers>
+   </ControlTemplate></Setter.Value></Setter>
+  </Style>
+
+  <!-- A category chip: the shared chip, named with its count. -->
+  <Style x:Key="CategoryChipItem" TargetType="ListBoxItem" BasedOn="{StaticResource WinoraChipListItem}">
+   <Setter Property="AutomationProperties.Name" Value="{Binding AutomationName}"/>
+  </Style>
+ </UserControl.Resources>
+
+ <StackPanel>
+  <Grid x:Name="Row">
+   <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+   <ListBox x:Name="Chips" DisplayMemberPath="Label" ItemsSource="{Binding ChipsSource, ElementName=Root}" SelectedItem="{Binding SelectedChip, ElementName=Root, Mode=TwoWay}" ItemContainerStyle="{StaticResource CategoryChipItem}" ItemsPanel="{StaticResource WinoraWrapItems}"
+    BorderThickness="0" Background="Transparent" Padding="{StaticResource WinoraSpace.None}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" KeyboardNavigation.TabNavigation="Once"
+    AutomationProperties.Name="{Binding ChipsName, ElementName=Root}" AutomationProperties.HelpText="{Binding ChipsHelp, ElementName=Root}"/>
+   <!-- Search, sort and the Filters button: one row that wraps on a narrow page. Each box has its caption above it. -->
+   <WrapPanel x:Name="Tools" Grid.Row="1" Margin="{StaticResource WinoraSpace.B8}">
+    <StackPanel x:Name="SearchBlock" Width="320" Margin="{StaticResource WinoraSpace.R12B8}">
+     <TextBlock x:Name="SearchLabelText" Style="{StaticResource WinoraCaption}" Text="{Binding SearchLabel, ElementName=Root}"/>
+     <ui:TextBox x:Name="SearchBox" Text="{Binding SearchText, ElementName=Root, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="{Binding SearchPlaceholder, ElementName=Root}" ClearButtonEnabled="True"
+      Icon="{ui:SymbolIcon Search24}" MinHeight="{StaticResource MinHitTarget}" PreviewKeyDown="OnSearchKeyDown"
+      AutomationProperties.LabeledBy="{Binding ElementName=SearchLabelText}" AutomationProperties.Name="{Binding SearchLabel, ElementName=Root}" AutomationProperties.HelpText="{Binding SearchHelp, ElementName=Root}"/>
+    </StackPanel>
+    <StackPanel x:Name="SortBlock" Margin="{StaticResource WinoraSpace.R8B8}">
+     <TextBlock x:Name="SortLabelText" Style="{StaticResource WinoraCaption}" Text="{Binding SortLabel, ElementName=Root}"/>
+     <ComboBox x:Name="SortBox" ItemsSource="{Binding SortSource, ElementName=Root}" SelectedItem="{Binding SelectedSort, ElementName=Root, Mode=TwoWay}" DisplayMemberPath="Label" MinWidth="160" MinHeight="{StaticResource MinHitTarget}"
+      AutomationProperties.LabeledBy="{Binding ElementName=SortLabelText}" AutomationProperties.Name="{Binding SortLabel, ElementName=Root}" AutomationProperties.HelpText="{Binding SortHelp, ElementName=Root}"/>
+    </StackPanel>
+    <ui:Button x:Name="SortDirection" Command="{Binding SortDirectionCommand, ElementName=Root}" VerticalAlignment="Bottom" Margin="{StaticResource WinoraSpace.R12B8}" MinHeight="{StaticResource MinHitTarget}"
+     AutomationProperties.Name="{Binding SortDirectionText, ElementName=Root}" AutomationProperties.HelpText="{Binding SortDirectionHelp, ElementName=Root}">
+     <StackPanel Orientation="Horizontal">
+      <ui:SymbolIcon Symbol="{Binding SortDirectionSymbol, ElementName=Root}" FontSize="16"/>
+      <TextBlock x:Name="SortDirectionLabel" Text="{Binding SortDirectionText, ElementName=Root}" VerticalAlignment="Center" Margin="{StaticResource WinoraSpace.L8}"/>
+     </StackPanel>
+    </ui:Button>
+    <!-- The Fluent toggle look (the default WPF chrome had no radius or hover and light blue fills in the dark theme). -->
+    <ToggleButton x:Name="FiltersToggle" Style="{StaticResource WinoraToggleButton}" VerticalAlignment="Bottom" Margin="{StaticResource WinoraSpace.R12B8}" Content="{Binding FiltersText, ElementName=Root}"
+     Checked="OnFiltersToggled" Unchecked="OnFiltersToggled"
+     AutomationProperties.Name="{Binding FiltersText, ElementName=Root}" AutomationProperties.HelpText="{Binding FiltersHelp, ElementName=Root}"/>
+    <ContentPresenter x:Name="ExtraSlot" Content="{Binding ExtraContent, ElementName=Root}" VerticalAlignment="Bottom" Margin="{StaticResource WinoraSpace.B8}"/>
+   </WrapPanel>
+  </Grid>
+
+  <!-- The page's own filters: a panel that opens under the row, so nothing is lost to a narrow window. -->
+  <Border x:Name="FilterPanel" Visibility="Collapsed" Background="{DynamicResource WinoraSurfaceCardBrush}" BorderBrush="{DynamicResource WinoraCardBorderBrush}" BorderThickness="1" CornerRadius="{StaticResource WinoraCornerRadius}" Padding="{StaticResource WinoraSpace.H16V8}" Margin="{StaticResource WinoraSpace.B8}"
+   AutomationProperties.Name="{Binding FiltersText, ElementName=Root}">
+   <StackPanel>
+    <ContentPresenter Content="{Binding PanelContent, ElementName=Root}"/>
+    <ui:Button x:Name="ClearButton" Content="{Binding ClearText, ElementName=Root}" Command="{Binding ClearCommand, ElementName=Root}" Icon="{ui:SymbolIcon Dismiss24}" HorizontalAlignment="Left" Margin="{StaticResource WinoraSpace.T4}"
+     Visibility="{Binding ShowClear, ElementName=Root, Converter={StaticResource BoolToVisibility}}" AutomationProperties.Name="{Binding ClearText, ElementName=Root}" AutomationProperties.HelpText="{Binding ClearHelp, ElementName=Root}"/>
+   </StackPanel>
+  </Border>
+  <TextBlock x:Name="CountLine" Style="{StaticResource WinoraCaption}" Text="{Binding CountText, ElementName=Root}" Margin="{StaticResource WinoraSpace.L4B8}" AutomationProperties.LiveSetting="Polite"
+   Visibility="{Binding ShowCount, ElementName=Root, Converter={StaticResource BoolToVisibility}}"/>
+ </StackPanel>
+</UserControl>

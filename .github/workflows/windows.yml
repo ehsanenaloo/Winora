@@ -1,0 +1,66 @@
+# SPDX-License-Identifier: GPL-3.0-only
+name: Windows build, test and unsigned package
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+# Least privilege: the workflow only reads the repository. No secrets are used anywhere in this file.
+permissions:
+  contents: read
+
+concurrency:
+  group: windows-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-test-package:
+    if: github.repository == 'ehsanenaloo/Winora'
+    runs-on: windows-latest
+    timeout-minutes: 60
+    steps:
+      # Actions are pinned to exact release tags. Before a public release, replace each tag with the full commit SHA of that
+      # release (cannot be looked up from the offline development machine) so a moved tag cannot change what runs.
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4.3.1
+        with:
+          global-json-file: global.json
+
+      - name: Restore (locked)
+        run: dotnet restore Winora.slnx --locked-mode
+
+      - name: Build
+        run: dotnet build Winora.slnx -c Release --no-restore
+
+      # Packaging. publish.ps1 builds the portable zip, the per-user MSI (build only), SBOM, release notes and SHA256SUMS, then rebuilds from a
+      # copy of the tree at another path (-ReproCheck) and compares hashes. The tests run in the private repository before each export. Nothing is
+      # installed, nothing is signed.
+      - name: Package (UNSIGNED)
+        shell: pwsh
+        run: ./tools/publish.ps1 -SkipTests -ReproCheck
+
+      - name: Verify packaged artifacts
+        shell: pwsh
+        run: ./tools/verify_dist.ps1
+
+      # --- Where signing would plug in (not implemented, no secrets exist) -------------------------------------------------------------
+      # After "Package" and before "Verify": sign every Winora*.exe and Winora*.dll in dist/stage, then the MSI, with a certificate held in a
+      # protected environment (for example a cloud signing service reached through OIDC, never a .pfx committed or stored as a repository
+      # secret), re-run tools/publish.ps1 steps that depend on file contents (zip, FILES.sha256, SHA256SUMS), and change verify_dist.ps1 so the
+      # "NotSigned" check expects a valid signature from the chosen publisher. The owner has not chosen a certificate or a publisher name yet.
+      # ----------------------------------------------------------------------------------------------------------------------------------
+
+      - name: Upload UNSIGNED artifacts
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: winora-unsigned-dist
+          path: |
+            dist/Winora-*-portable.zip
+            dist/Winora-*.msi
+            dist/SHA256SUMS
+            dist/sbom.cdx.json
+            dist/RELEASE-NOTES.md
+          if-no-files-found: error

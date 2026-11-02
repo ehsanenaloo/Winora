@@ -1,0 +1,204 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<!-- The settings page: setting card, choice row, group header and the list item containers. Colors are DynamicResource so the theme dictionaries swap them. -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:ctl="clr-namespace:Winora.Desktop.Controls" xmlns:local="clr-namespace:Winora.Desktop" xmlns:vm="clr-namespace:Winora.Desktop;assembly=Winora.Presentation">
+ <ResourceDictionary.MergedDictionaries>
+  <ResourceDictionary Source="Tokens.xaml"/>
+  <ResourceDictionary Source="Theme.xaml"/>
+ </ResourceDictionary.MergedDictionaries>
+
+ <!-- The state word before a plain switch ("On" or "Off"), the same place and look as the state word of a setting row switch. Tag takes the IsChecked of the switch. -->
+ <Style x:Key="WinoraSwitchState" TargetType="TextBlock" BasedOn="{StaticResource WinoraCaption}">
+  <Setter Property="VerticalAlignment" Value="Center"/><Setter Property="Margin" Value="0,0,12,0"/><Setter Property="Text" Value="{Binding Text[DashOff]}"/>
+  <Style.Triggers><DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True"><Setter Property="Text" Value="{Binding Text[DashOn]}"/></DataTrigger></Style.Triggers>
+ </Style>
+
+ <!-- Choice row: segments for two or three choices, a drop-down list for more. -->
+ <Style x:Key="WinoraChoiceRowStyle" TargetType="ctl:ChoiceRow">
+  <Setter Property="Focusable" Value="False"/><Setter Property="IsTabStop" Value="False"/><Setter Property="HorizontalAlignment" Value="Stretch"/>
+  <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ctl:ChoiceRow">
+   <Grid>
+    <ListBox x:Name="Segments" Style="{DynamicResource SegmentedList}" Margin="0,0,-4,0" ItemsSource="{TemplateBinding Choices}" SelectedItem="{Binding SelectedChoice, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+     AutomationProperties.Name="{TemplateBinding ControlName}" AutomationProperties.HelpText="{TemplateBinding ControlHelp}" AutomationProperties.LabeledBy="{Binding LabeledBy, RelativeSource={RelativeSource TemplatedParent}}">
+     <ListBox.ItemTemplate><DataTemplate><TextBlock Text="{Binding Label}" TextWrapping="Wrap" TextAlignment="Center"/></DataTemplate></ListBox.ItemTemplate>
+    </ListBox>
+    <StackPanel x:Name="SwitchPanel" Visibility="Collapsed" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+     <TextBlock Text="{Binding SwitchLabel, RelativeSource={RelativeSource TemplatedParent}}" Style="{DynamicResource WinoraCaption}" VerticalAlignment="Center" Margin="0,0,12,0" TextAlignment="Right"/>
+     <ui:ToggleSwitch x:Name="Switch" IsChecked="{Binding SwitchOn, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" VerticalAlignment="Center" Padding="0" MinWidth="0"
+      AutomationProperties.Name="{TemplateBinding ControlName}" AutomationProperties.HelpText="{TemplateBinding ControlHelp}" AutomationProperties.LabeledBy="{Binding LabeledBy, RelativeSource={RelativeSource TemplatedParent}}"/>
+    </StackPanel>
+    <ComboBox x:Name="Drop" Visibility="Collapsed" ItemsSource="{TemplateBinding Choices}" SelectedItem="{Binding SelectedChoice, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" MinWidth="160" MaxWidth="340" HorizontalAlignment="Right"
+     AutomationProperties.Name="{TemplateBinding ControlName}" AutomationProperties.HelpText="{TemplateBinding ControlHelp}" AutomationProperties.LabeledBy="{Binding LabeledBy, RelativeSource={RelativeSource TemplatedParent}}">
+     <ComboBox.ItemTemplate><DataTemplate><TextBlock Text="{Binding Label}" TextWrapping="Wrap"/></DataTemplate></ComboBox.ItemTemplate>
+    </ComboBox>
+   </Grid>
+   <ControlTemplate.Triggers>
+    <Trigger Property="IsSegmented" Value="False">
+     <Setter TargetName="Segments" Property="Visibility" Value="Collapsed"/><Setter TargetName="Drop" Property="Visibility" Value="Visible"/>
+    </Trigger>
+    <Trigger Property="IsSwitch" Value="True">
+     <Setter TargetName="Segments" Property="Visibility" Value="Collapsed"/><Setter TargetName="Drop" Property="Visibility" Value="Collapsed"/><Setter TargetName="SwitchPanel" Property="Visibility" Value="Visible"/>
+    </Trigger>
+   </ControlTemplate.Triggers>
+  </ControlTemplate></Setter.Value></Setter>
+ </Style>
+ <Style TargetType="ctl:ChoiceRow" BasedOn="{StaticResource WinoraChoiceRowStyle}"/>
+
+ <!-- Setting row: the one Winora row (InventoryRow) filled from a setting. Lead icon, title with its badges, description (whole lines up to the density limit; the full text is in the tooltip and the details dialog), meta lines, the control at the End
+  (switch with the state word, segments, list, or the Review change button), and the row menu. The rows of a group share the card edge; a thin divider separates them. The source, the
+  "Changed by Winora" fact and the "Differs from Windows default" fact are not on the row: they are chips of the details dialog and entries of the Show filter. -->
+ <Style x:Key="WinoraSettingCardTitle" TargetType="TextBlock" BasedOn="{StaticResource WinoraBodyStrong}"/>
+ <Style x:Key="WinoraSettingCardDescription" TargetType="TextBlock" BasedOn="{StaticResource WinoraCaption}"/>
+ <Style x:Key="WinoraSettingCardStyle" TargetType="ctl:SettingCard">
+  <Setter Property="Focusable" Value="False"/><Setter Property="IsTabStop" Value="False"/><Setter Property="HorizontalAlignment" Value="Stretch"/>
+  <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ctl:SettingCard">
+   <ctl:InventoryRow x:Name="Frame" DataContext="{Binding Row, RelativeSource={RelativeSource TemplatedParent}}" IsFirst="{Binding IsFirst, RelativeSource={RelativeSource TemplatedParent}}"
+    IsLast="{Binding IsLast, RelativeSource={RelativeSource TemplatedParent}}" IsPending="{Binding IsPending}">
+    <ctl:InventoryRow.Lead>
+     <ui:SymbolIcon Symbol="{Binding LeadSymbol, RelativeSource={RelativeSource AncestorType=ctl:SettingCard}}" FontSize="24" VerticalAlignment="Center" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+    </ctl:InventoryRow.Lead>
+
+    <StackPanel VerticalAlignment="Center">
+     <WrapPanel>
+      <TextBlock x:Name="CardTitle" Style="{StaticResource WinoraSettingCardTitle}" Text="{Binding Title}" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,0,8,0"/>
+      <ctl:RiskChip Level="{Binding Risk}" Text="{Binding RiskText}" HideWhenLow="True"/>
+      <ctl:StatusBadge Kind="Info" Text="{Binding Text[V2PaRecBadge], RelativeSource={RelativeSource AncestorType=ctl:SettingCard}}" Visibility="{Binding IsRecommendedGap, Converter={StaticResource BoolToVisibility}}"/>
+      <ctl:StatusBadge Kind="Restart" Text="{Binding RestartText}" Visibility="{Binding RequiresRestart, Converter={StaticResource BoolToVisibility}}"/>
+      <ctl:StatusBadge Kind="Managed" Text="{Binding Text[RowManaged], RelativeSource={RelativeSource AncestorType=ctl:SettingCard}}" Visibility="{Binding IsManaged, Converter={StaticResource BoolToVisibility}}"/>
+      <ctl:StatusBadge Kind="Warning" Text="{Binding Text[RowChangedSince], RelativeSource={RelativeSource AncestorType=ctl:SettingCard}}" Visibility="{Binding IsChangedSince, Converter={StaticResource BoolToVisibility}}"/>
+      <ctl:StatusBadge Kind="Pending" Text="{Binding Text[RowPending], RelativeSource={RelativeSource AncestorType=ctl:SettingCard}}" Visibility="{Binding IsPending, Converter={StaticResource BoolToVisibility}}"/>
+     </WrapPanel>
+     <TextBlock Margin="0,2,0,0" Text="{Binding Description}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Description}">
+      <TextBlock.Style><Style TargetType="TextBlock" BasedOn="{StaticResource WinoraSettingCardDescription}">
+       <Setter Property="ctl:TextClamp.MaxLines" Value="{DynamicResource WinoraDescriptionLines}"/>
+       <Style.Triggers><DataTrigger Binding="{Binding IsAdvanced}" Value="True"><Setter Property="ctl:TextClamp.MaxLines" Value="0"/></DataTrigger></Style.Triggers>
+      </Style></TextBlock.Style>
+     </TextBlock>
+     <TextBlock Style="{StaticResource WinoraSettingCardDescription}" Margin="0,4,0,0" Text="{Binding ConditionalNote}" Visibility="{Binding HasConditionalNote, Converter={StaticResource BoolToVisibility}}"/>
+     <TextBlock Style="{StaticResource WinoraSettingCardDescription}" Margin="0,2,0,0" Text="{Binding CurrentHint}" Visibility="{Binding HasCurrentHint, Converter={StaticResource BoolToVisibility}}"/>
+    </StackPanel>
+
+    <ctl:InventoryRow.Control>
+     <StackPanel MaxWidth="360">
+      <TextBlock Style="{StaticResource WinoraBodySecondary}" Text="{Binding StatusText}" Visibility="{Binding IsUnavailable, Converter={StaticResource BoolToVisibility}}" AutomationProperties.LiveSetting="Polite"/>
+      <ctl:ChoiceRow Choices="{Binding Choices}" SelectedChoice="{Binding SelectedChoice, Mode=TwoWay}" IsEnabled="{Binding CanChoose}" ControlName="{Binding Title}" ControlHelp="{Binding Text[ChoiceHelp], RelativeSource={RelativeSource AncestorType=ctl:SettingCard}}"
+       LabeledBy="{Binding ElementName=CardTitle}" Visibility="{Binding IsInlineChoice, Converter={StaticResource BoolToVisibility}}"/>
+      <!-- The selected segment already shows the current value. The line is only needed while a change is pending or when the value is none of the choices. -->
+      <TextBlock Text="{Binding ValueText}" Margin="0,4,0,0" HorizontalAlignment="Right" TextAlignment="Right">
+       <TextBlock.Style><Style TargetType="TextBlock" BasedOn="{StaticResource WinoraCaption}">
+        <Setter Property="Visibility" Value="Collapsed"/>
+        <Style.Triggers>
+         <MultiDataTrigger><MultiDataTrigger.Conditions><Condition Binding="{Binding IsAvailable}" Value="True"/><Condition Binding="{Binding IsPending}" Value="True"/></MultiDataTrigger.Conditions><Setter Property="Visibility" Value="Visible"/></MultiDataTrigger>
+         <MultiDataTrigger><MultiDataTrigger.Conditions><Condition Binding="{Binding IsAvailable}" Value="True"/><Condition Binding="{Binding SelectedChoice}" Value="{x:Null}"/></MultiDataTrigger.Conditions><Setter Property="Visibility" Value="Visible"/></MultiDataTrigger>
+        </Style.Triggers>
+       </Style></TextBlock.Style>
+      </TextBlock>
+      <ui:Button x:Name="ReviewChange" Content="{Binding Text[RowReviewChange], RelativeSource={RelativeSource AncestorType=ctl:SettingCard}}" Icon="{ui:SymbolIcon DocumentSearch24}" HorizontalAlignment="Right"
+       Command="{Binding List.OpenDetailsCommand, RelativeSource={RelativeSource AncestorType=ctl:SettingCard}}" CommandParameter="{Binding}" Visibility="{Binding IsReviewOnly, Converter={StaticResource BoolToVisibility}}"
+       AutomationProperties.Name="{Binding ReviewName}" AutomationProperties.HelpText="{Binding Text[RowReviewChangeHelp], RelativeSource={RelativeSource AncestorType=ctl:SettingCard}}"/>
+      <TextBlock Style="{StaticResource WinoraCaption}" Margin="0,4,0,0" HorizontalAlignment="Right" TextAlignment="Right" Text="{Binding PendingText}" Visibility="{Binding IsPending, Converter={StaticResource BoolToVisibility}}" AutomationProperties.LiveSetting="Polite"/>
+     </StackPanel>
+    </ctl:InventoryRow.Control>
+
+    <ctl:InventoryRow.Menu>
+     <ctl:RowMenuButton MoreName="{Binding MoreName}" MoreHelp="{Binding Text[RowMoreHelp], RelativeSource={RelativeSource AncestorType=ctl:SettingCard}}"
+      DetailsCommand="{Binding List.OpenDetailsCommand, RelativeSource={RelativeSource AncestorType=ctl:SettingCard}}" DetailsParameter="{Binding}" DetailsText="{Binding Text[RowDetails], RelativeSource={RelativeSource AncestorType=ctl:SettingCard}}"
+      ResetCommand="{Binding ResetCommand}" ResetText="{Binding Text[SetReset], RelativeSource={RelativeSource AncestorType=ctl:SettingCard}}"
+      UndoCommand="{Binding UndoCommand}" UndoText="{Binding Text[SetRevertLast], RelativeSource={RelativeSource AncestorType=ctl:SettingCard}}"
+      CopyCommand="{Binding List.CopyNameCommand, RelativeSource={RelativeSource AncestorType=ctl:SettingCard}}" CopyParameter="{Binding}" CopyText="{Binding Text[RowCopyName], RelativeSource={RelativeSource AncestorType=ctl:SettingCard}}"/>
+    </ctl:InventoryRow.Menu>
+   </ctl:InventoryRow>
+   <ControlTemplate.Triggers>
+    <MultiTrigger><MultiTrigger.Conditions><Condition Property="IsFirst" Value="True"/><Condition Property="IsLast" Value="True"/></MultiTrigger.Conditions>
+     <Setter TargetName="Frame" Property="Margin" Value="0,0,0,4"/>
+    </MultiTrigger>
+   </ControlTemplate.Triggers>
+  </ControlTemplate></Setter.Value></Setter>
+ </Style>
+ <Style TargetType="ctl:SettingCard" BasedOn="{StaticResource WinoraSettingCardStyle}"/>
+ <!-- Optimize shows its tabs as one column of the same rows: the tile style is the row style. -->
+ <Style x:Key="WinoraSettingTileStyle" TargetType="ctl:SettingCard" BasedOn="{StaticResource WinoraSettingCardStyle}"/>
+
+
+ <!-- Group header: a heading with a fold chevron. The Advanced group is the top of a card that holds its rows: warning icon, title, count and a chevron that turns; the warning shows while it is open. -->
+ <DataTemplate x:Key="WinoraGroupHeaderTemplate" DataType="{x:Type vm:SettingsGroupEntry}">
+  <Grid>
+   <ctl:CardHeader x:Name="Plain" Margin="0,16,0,0" Title="{Binding Title}" IsOpen="{Binding IsOpen, Mode=OneWay}" HasRows="{Binding IsOpen, Mode=OneWay}" IsFoldable="{Binding IsFoldable}" Count="{Binding CountText}"/>
+   <StackPanel x:Name="Adv" Visibility="Collapsed" Margin="0,16,0,0">
+    <Border x:Name="AdvFrame" Background="{DynamicResource WinoraSurfaceCardBrush}" BorderBrush="{DynamicResource WinoraCardBorderBrush}" BorderThickness="1" CornerRadius="{StaticResource WinoraCornerRadius}"
+     Padding="{DynamicResource WinoraCardPadding}" MinHeight="{DynamicResource WinoraRowMinHeight}" SnapsToDevicePixels="True">
+     <Grid>
+      <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <ui:SymbolIcon Symbol="Warning20" FontSize="24" Margin="0,0,16,0" VerticalAlignment="Center" Foreground="{DynamicResource WinoraStatusWarningForeground}"/>
+      <StackPanel Grid.Column="1" VerticalAlignment="Center">
+       <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding Title}" TextWrapping="Wrap" AutomationProperties.HeadingLevel="Level2"/>
+       <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding CountText}" Margin="0,2,0,0"/>
+      </StackPanel>
+      <ctl:TurningChevron Grid.Column="2" IsOpen="{Binding IsOpen, Mode=OneWay}" Margin="16,0,0,0" VerticalAlignment="Center"/>
+     </Grid>
+    </Border>
+    <Border x:Name="Warn" Visibility="Collapsed" Background="{DynamicResource WinoraSurfaceCardBrush}" BorderBrush="{DynamicResource WinoraCardBorderBrush}" BorderThickness="1,0,1,0" Padding="16,0,16,8">
+     <Border Style="{DynamicResource WinoraTuneNote}">
+      <Grid>
+       <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+       <ui:SymbolIcon Symbol="Warning16" FontSize="16" Margin="0,0,8,0" VerticalAlignment="Top" Foreground="{DynamicResource WinoraStatusWarningForeground}"/>
+       <TextBlock Grid.Column="1" Style="{StaticResource WinoraCaption}" Text="{Binding Intro}" TextWrapping="Wrap" Foreground="{DynamicResource WinoraStatusWarningForeground}"/>
+      </Grid>
+     </Border>
+    </Border>
+   </StackPanel>
+  </Grid>
+  <DataTemplate.Triggers>
+   <DataTrigger Binding="{Binding IsAdvanced}" Value="True"><Setter TargetName="Plain" Property="Visibility" Value="Collapsed"/><Setter TargetName="Adv" Property="Visibility" Value="Visible"/></DataTrigger>
+   <MultiDataTrigger><MultiDataTrigger.Conditions><Condition Binding="{Binding IsAdvanced}" Value="True"/><Condition Binding="{Binding IsCollapsed}" Value="False"/></MultiDataTrigger.Conditions>
+    <Setter TargetName="AdvFrame" Property="BorderThickness" Value="1,1,1,0"/><Setter TargetName="AdvFrame" Property="CornerRadius" Value="8,8,0,0"/>
+    <Setter TargetName="Warn" Property="Visibility" Value="Visible"/>
+   </MultiDataTrigger>
+  </DataTemplate.Triggers>
+ </DataTemplate>
+
+ <!-- List items of the virtualized settings list. A group header is an item you can press; a row is an item that holds a row of a group card. The focus ring is drawn over the item and takes no room. -->
+ <Style x:Key="WinoraSettingsItem" TargetType="ListBoxItem">
+  <Setter Property="Padding" Value="0"/><Setter Property="Margin" Value="0,0,12,0"/><Setter Property="HorizontalContentAlignment" Value="Stretch"/><Setter Property="VerticalContentAlignment" Value="Top"/>
+  <Setter Property="SnapsToDevicePixels" Value="True"/><Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+  <Setter Property="AutomationProperties.Name" Value="{Binding AutomationName}"/>
+  <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ListBoxItem">
+   <Grid>
+    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+    <Border x:Name="Focus" BorderThickness="2" BorderBrush="Transparent" CornerRadius="{StaticResource WinoraCornerRadiusSmall}" IsHitTestVisible="False"/>
+   </Grid>
+   <ControlTemplate.Triggers>
+    <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="Focus" Property="BorderBrush" Value="{DynamicResource WinoraFocusBrush}"/></Trigger>
+    <Trigger Property="IsSelected" Value="True"><Setter TargetName="Focus" Property="BorderBrush" Value="{DynamicResource AccentFillColorDefaultBrush}"/></Trigger>
+   </ControlTemplate.Triggers>
+  </ControlTemplate></Setter.Value></Setter>
+  <Style.Triggers>
+   <DataTrigger Binding="{Binding IsFoldable}" Value="False"><Setter Property="Focusable" Value="False"/></DataTrigger>
+  </Style.Triggers>
+ </Style>
+
+ <!-- Accent color swatches: round colors in a wrapping row; the chosen one gets a ring in the text color (shape, not only color). Arrow keys move the selection. -->
+ <Style x:Key="AccentSwatchItem" TargetType="ListBoxItem">
+  <Setter Property="Width" Value="36"/><Setter Property="Height" Value="36"/><Setter Property="Margin" Value="0,0,4,0"/>
+  <Setter Property="AutomationProperties.Name" Value="{Binding Label}"/>
+  <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ListBoxItem">
+   <Grid Background="Transparent" Cursor="Hand">
+    <Ellipse x:Name="Ring" Margin="1" StrokeThickness="2" Stroke="Transparent"/>
+    <Ellipse x:Name="Dot" Margin="4" Fill="{Binding Preview, Converter={x:Static ctl:ColorLook.Brush}}" Stroke="{DynamicResource WinoraControlBorderBrush}" StrokeThickness="1"/>
+    <ui:SymbolIcon x:Name="Mark" Symbol="Checkmark16" FontSize="14" Visibility="Collapsed" Foreground="{Binding MarkIsLight, Converter={x:Static ctl:ColorLook.MarkBrush}}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+   </Grid>
+   <ControlTemplate.Triggers>
+    <!-- Hover shows a light ring; the chosen and the focused ring drawn after it win. -->
+    <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Ring" Property="Stroke" Value="{DynamicResource WinoraControlBorderBrush}"/></Trigger>
+    <Trigger Property="IsSelected" Value="True"><Setter TargetName="Ring" Property="Stroke" Value="{DynamicResource TextFillColorPrimaryBrush}"/><Setter TargetName="Mark" Property="Visibility" Value="Visible"/></Trigger>
+    <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="Ring" Property="Stroke" Value="{DynamicResource TextFillColorPrimaryBrush}"/><Setter TargetName="Ring" Property="StrokeThickness" Value="3"/></Trigger>
+   </ControlTemplate.Triggers>
+  </ControlTemplate></Setter.Value></Setter>
+ </Style>
+ <Style x:Key="AccentSwatchList" TargetType="ListBox">
+  <Setter Property="Background" Value="Transparent"/><Setter Property="BorderThickness" Value="0"/><Setter Property="HorizontalAlignment" Value="Right"/>
+  <Setter Property="ItemContainerStyle" Value="{StaticResource AccentSwatchItem}"/><Setter Property="SelectionMode" Value="Single"/><Setter Property="KeyboardNavigation.TabNavigation" Value="Once"/>
+  <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/><Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled"/>
+  <Setter Property="ItemsPanel"><Setter.Value><ItemsPanelTemplate><WrapPanel MaxWidth="320"/></ItemsPanelTemplate></Setter.Value></Setter>
+ </Style>
+</ResourceDictionary>

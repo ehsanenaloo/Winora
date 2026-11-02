@@ -1,0 +1,8 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Platform neutral elevation protocol library (technical-docs/protocol.md, ADR-015). References Winora.Domain only: no Windows API, no logging
+       framework, no DI container, no reflection serializer. The elevated worker links this assembly, so it stays AOT/trim analyzable. -->
+  <PropertyGroup><IsAotCompatible>true</IsAotCompatible><AssemblyName>Winora.Elevation.Protocol</AssemblyName><RootNamespace>Winora.Elevation.Protocol</RootNamespace></PropertyGroup>
+  <ItemGroup><ProjectReference Include="../Winora.Domain/Winora.Domain.csproj" /></ItemGroup>
+  <ItemGroup><PackageReference Include="System.Security.Cryptography.Cose" /></ItemGroup>
+</Project>

@@ -1,0 +1,416 @@
+{
+ "format": "winora.machine-definitions/1",
+ "setId": "winora-machine",
+ "serial": 1,
+ "minProtocol": 1,
+ "minWorkerBuild": 22621,
+ "revoked": [],
+ "definitions": [
+  {
+   "id": "machine.services.ax_installer",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_services_ax_installer_Title",
+   "descriptionKey": "Machine_machine_services_ax_installer_Description",
+   "category": "Services",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "service",
+    "serviceName": "AxInstSV"
+   },
+   "choices": [
+    {
+     "id": "manual",
+     "labelKey": "Machine_machine_services_ax_installer_Choice_manual",
+     "start": "Manual"
+    },
+    {
+     "id": "disabled",
+     "labelKey": "Machine_machine_services_ax_installer_Choice_disabled",
+     "start": "Disabled"
+    }
+   ],
+   "defaultChoiceId": "manual",
+   "recommendedChoiceId": null,
+   "restoreDomain": [],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/security/windows-services/security-guidelines-for-disabling-system-services-in-windows-server-2016"
+   ],
+   "reviewRef": "SEC-DEF-1401",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.services.geolocation",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_services_geolocation_Title",
+   "descriptionKey": "Machine_machine_services_geolocation_Description",
+   "category": "Services",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "service",
+    "serviceName": "lfsvc"
+   },
+   "choices": [
+    {
+     "id": "manual",
+     "labelKey": "Machine_machine_services_geolocation_Choice_manual",
+     "start": "Manual"
+    },
+    {
+     "id": "disabled",
+     "labelKey": "Machine_machine_services_geolocation_Choice_disabled",
+     "start": "Disabled"
+    }
+   ],
+   "defaultChoiceId": "manual",
+   "recommendedChoiceId": null,
+   "restoreDomain": [],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/security/windows-services/security-guidelines-for-disabling-system-services-in-windows-server-2016"
+   ],
+   "reviewRef": "SEC-DEF-1402",
+   "sourceClass": "B",
+   "communitySources": [
+    "reference source 1"
+   ]
+  },
+  {
+   "id": "machine.services.upnp_host",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_services_upnp_host_Title",
+   "descriptionKey": "Machine_machine_services_upnp_host_Description",
+   "category": "Services",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "service",
+    "serviceName": "upnphost"
+   },
+   "choices": [
+    {
+     "id": "manual",
+     "labelKey": "Machine_machine_services_upnp_host_Choice_manual",
+     "start": "Manual"
+    },
+    {
+     "id": "disabled",
+     "labelKey": "Machine_machine_services_upnp_host_Choice_disabled",
+     "start": "Disabled"
+    }
+   ],
+   "defaultChoiceId": "manual",
+   "recommendedChoiceId": null,
+   "restoreDomain": [],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/security/windows-services/security-guidelines-for-disabling-system-services-in-windows-server-2016"
+   ],
+   "reviewRef": "SEC-DEF-1403",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.services.ssdp",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_services_ssdp_Title",
+   "descriptionKey": "Machine_machine_services_ssdp_Description",
+   "category": "Services",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "service",
+    "serviceName": "SSDPSRV"
+   },
+   "choices": [
+    {
+     "id": "manual",
+     "labelKey": "Machine_machine_services_ssdp_Choice_manual",
+     "start": "Manual"
+    },
+    {
+     "id": "disabled",
+     "labelKey": "Machine_machine_services_ssdp_Choice_disabled",
+     "start": "Disabled"
+    }
+   ],
+   "defaultChoiceId": "manual",
+   "recommendedChoiceId": null,
+   "restoreDomain": [],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/security/windows-services/security-guidelines-for-disabling-system-services-in-windows-server-2016"
+   ],
+   "reviewRef": "SEC-DEF-1404",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.services.offline_files",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_services_offline_files_Title",
+   "descriptionKey": "Machine_machine_services_offline_files_Description",
+   "category": "Services",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "service",
+    "serviceName": "CscService"
+   },
+   "choices": [
+    {
+     "id": "manual",
+     "labelKey": "Machine_machine_services_offline_files_Choice_manual",
+     "start": "Manual"
+    },
+    {
+     "id": "disabled",
+     "labelKey": "Machine_machine_services_offline_files_Choice_disabled",
+     "start": "Disabled"
+    }
+   ],
+   "defaultChoiceId": "manual",
+   "recommendedChoiceId": null,
+   "restoreDomain": [],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/security/windows-services/security-guidelines-for-disabling-system-services-in-windows-server-2016"
+   ],
+   "reviewRef": "SEC-DEF-1405",
+   "sourceClass": "B",
+   "communitySources": [
+    "reference source 1"
+   ]
+  },
+  {
+   "id": "machine.services.insider_service",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_services_insider_service_Title",
+   "descriptionKey": "Machine_machine_services_insider_service_Description",
+   "category": "Services",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "service",
+    "serviceName": "wisvc"
+   },
+   "choices": [
+    {
+     "id": "manual",
+     "labelKey": "Machine_machine_services_insider_service_Choice_manual",
+     "start": "Manual"
+    },
+    {
+     "id": "disabled",
+     "labelKey": "Machine_machine_services_insider_service_Choice_disabled",
+     "start": "Disabled"
+    }
+   ],
+   "defaultChoiceId": "manual",
+   "recommendedChoiceId": null,
+   "restoreDomain": [],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/security/windows-services/security-guidelines-for-disabling-system-services-in-windows-server-2016"
+   ],
+   "reviewRef": "SEC-DEF-1406",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.services.phone_service",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_services_phone_service_Title",
+   "descriptionKey": "Machine_machine_services_phone_service_Description",
+   "category": "Services",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "service",
+    "serviceName": "PhoneSvc"
+   },
+   "choices": [
+    {
+     "id": "manual",
+     "labelKey": "Machine_machine_services_phone_service_Choice_manual",
+     "start": "Manual"
+    },
+    {
+     "id": "disabled",
+     "labelKey": "Machine_machine_services_phone_service_Choice_disabled",
+     "start": "Disabled"
+    }
+   ],
+   "defaultChoiceId": "manual",
+   "recommendedChoiceId": null,
+   "restoreDomain": [],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/security/windows-services/security-guidelines-for-disabling-system-services-in-windows-server-2016"
+   ],
+   "reviewRef": "SEC-DEF-1407",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.services.bluetooth_support",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_services_bluetooth_support_Title",
+   "descriptionKey": "Machine_machine_services_bluetooth_support_Description",
+   "category": "Services",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "service",
+    "serviceName": "bthserv"
+   },
+   "choices": [
+    {
+     "id": "manual",
+     "labelKey": "Machine_machine_services_bluetooth_support_Choice_manual",
+     "start": "Manual"
+    },
+    {
+     "id": "disabled",
+     "labelKey": "Machine_machine_services_bluetooth_support_Choice_disabled",
+     "start": "Disabled"
+    }
+   ],
+   "defaultChoiceId": "manual",
+   "recommendedChoiceId": null,
+   "restoreDomain": [],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/security/windows-services/security-guidelines-for-disabling-system-services-in-windows-server-2016"
+   ],
+   "reviewRef": "SEC-DEF-1408",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.services.compat_assistant",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_services_compat_assistant_Title",
+   "descriptionKey": "Machine_machine_services_compat_assistant_Description",
+   "category": "Services",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "service",
+    "serviceName": "PcaSvc"
+   },
+   "choices": [
+    {
+     "id": "delayed",
+     "labelKey": "Machine_machine_services_compat_assistant_Choice_delayed",
+     "start": "AutomaticDelayed"
+    },
+    {
+     "id": "manual",
+     "labelKey": "Machine_machine_services_compat_assistant_Choice_manual",
+     "start": "Manual"
+    }
+   ],
+   "defaultChoiceId": "delayed",
+   "recommendedChoiceId": null,
+   "restoreDomain": [],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/security/windows-services/security-guidelines-for-disabling-system-services-in-windows-server-2016"
+   ],
+   "reviewRef": "SEC-DEF-1409",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.services.print_spooler",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_services_print_spooler_Title",
+   "descriptionKey": "Machine_machine_services_print_spooler_Description",
+   "category": "Services",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "service",
+    "serviceName": "Spooler"
+   },
+   "choices": [
+    {
+     "id": "automatic",
+     "labelKey": "Machine_machine_services_print_spooler_Choice_automatic",
+     "start": "Automatic"
+    },
+    {
+     "id": "disabled",
+     "labelKey": "Machine_machine_services_print_spooler_Choice_disabled",
+     "start": "Disabled"
+    }
+   ],
+   "defaultChoiceId": "automatic",
+   "recommendedChoiceId": null,
+   "restoreDomain": [],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/security/windows-services/security-guidelines-for-disabling-system-services-in-windows-server-2016"
+   ],
+   "reviewRef": "SEC-DEF-1410",
+   "sourceClass": "A"
+  }
+ ]
+}

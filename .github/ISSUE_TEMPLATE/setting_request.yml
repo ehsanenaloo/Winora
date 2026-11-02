@@ -1,0 +1,68 @@
+name: Setting request
+description: Ask for a new Windows setting in Winora.
+title: "[Setting]: "
+labels: ["setting-request", "needs triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Every setting in Winora is based on an official source and has a risk level. A request without a source cannot be added.
+        Good sources are Microsoft Learn pages, Group Policy (ADMX) reference pages and Policy CSP pages. A forum post or a tweak list is not enough on its own.
+  - type: input
+    id: name
+    attributes:
+      label: Setting name
+      placeholder: "Show seconds in the taskbar clock"
+    validations:
+      required: true
+  - type: textarea
+    id: where
+    attributes:
+      label: Where is it in Windows?
+      description: The path in the Settings app, Control Panel or the Group Policy editor, if there is one.
+      placeholder: "Settings > Personalization > Taskbar > Taskbar behaviors"
+    validations:
+      required: true
+  - type: textarea
+    id: mechanism
+    attributes:
+      label: Registry value or policy, if you know it
+      description: Key, value name, type and the value for each choice. Say whether it is per user or for the whole PC.
+      render: text
+  - type: input
+    id: source
+    attributes:
+      label: Official source link
+      description: A Microsoft page that describes the setting or its policy.
+      placeholder: "https://learn.microsoft.com/..."
+    validations:
+      required: true
+  - type: input
+    id: builds
+    attributes:
+      label: Windows builds where it works
+      description: If you know them. For example "22621 and later".
+  - type: dropdown
+    id: risk
+    attributes:
+      label: Risk, in your view
+      options:
+        - Low (a preference, easy to change back)
+        - Medium (changes how Windows behaves, or needs a sign-out or restart)
+        - High (can weaken security, break a feature or be hard to undo)
+        - "I don't know"
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why do you want it?
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched existing issues and the settings catalog and did not find this setting.
+          required: true
+        - label: I included an official source link.
+          required: true

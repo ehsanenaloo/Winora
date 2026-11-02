@@ -1,0 +1,6 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<Project Sdk="Microsoft.NET.Sdk">
+ <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
+ <ItemGroup><ProjectReference Include="../Winora.Application/Winora.Application.csproj" /><ProjectReference Include="../Winora.Infrastructure.Persistence/Winora.Infrastructure.Persistence.csproj" /><ProjectReference Include="../Winora.Infrastructure.Windows/Winora.Infrastructure.Windows.csproj" /><PackageReference Include="Microsoft.Extensions.DependencyInjection" /><PackageReference Include="Microsoft.Extensions.Logging" /></ItemGroup>
+ <ItemGroup><InternalsVisibleTo Include="Winora.Cli.Tests" /></ItemGroup>
+</Project>

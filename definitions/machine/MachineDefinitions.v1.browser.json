@@ -1,0 +1,927 @@
+{
+ "format": "winora.machine-definitions/1",
+ "setId": "winora-machine",
+ "serial": 1,
+ "minProtocol": 1,
+ "minWorkerBuild": 22621,
+ "revoked": [],
+ "definitions": [
+  {
+   "id": "machine.edge.feedback",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_edge_feedback_Title",
+   "descriptionKey": "Machine_machine_edge_feedback_Description",
+   "category": "Apps",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Edge",
+    "valueName": "UserFeedbackAllowed",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_edge_feedback_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_edge_feedback_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Edge",
+     "valueName": "UserFeedbackAllowed"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-policies/userfeedbackallowed"
+   ],
+   "reviewRef": "SEC-DEF-3600",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.edge.alternate_error_pages",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_edge_alternate_error_pages_Title",
+   "descriptionKey": "Machine_machine_edge_alternate_error_pages_Description",
+   "category": "Apps",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Edge",
+    "valueName": "AlternateErrorPagesEnabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_edge_alternate_error_pages_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_edge_alternate_error_pages_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Edge",
+     "valueName": "AlternateErrorPagesEnabled"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-policies/alternateerrorpagesenabled"
+   ],
+   "reviewRef": "SEC-DEF-3601",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.edge.spotlight",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_edge_spotlight_Title",
+   "descriptionKey": "Machine_machine_edge_spotlight_Description",
+   "category": "Apps",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Edge",
+    "valueName": "SpotlightExperiencesAndRecommendationsEnabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_edge_spotlight_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_edge_spotlight_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Edge",
+     "valueName": "SpotlightExperiencesAndRecommendationsEnabled"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-policies/spotlightexperiencesandrecommendationsenabled"
+   ],
+   "reviewRef": "SEC-DEF-3602",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.edge.sidebar",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_edge_sidebar_Title",
+   "descriptionKey": "Machine_machine_edge_sidebar_Description",
+   "category": "Apps",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Edge",
+    "valueName": "HubsSidebarEnabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_edge_sidebar_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_edge_sidebar_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Edge",
+     "valueName": "HubsSidebarEnabled"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-policies/hubssidebarenabled"
+   ],
+   "reviewRef": "SEC-DEF-3603",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.edge.rewards",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_edge_rewards_Title",
+   "descriptionKey": "Machine_machine_edge_rewards_Description",
+   "category": "Apps",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Edge",
+    "valueName": "ShowMicrosoftRewards",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_edge_rewards_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_edge_rewards_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Edge",
+     "valueName": "ShowMicrosoftRewards"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-policies/showmicrosoftrewards"
+   ],
+   "reviewRef": "SEC-DEF-3604",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.edge.top_sites",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_edge_top_sites_Title",
+   "descriptionKey": "Machine_machine_edge_top_sites_Description",
+   "category": "Apps",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Edge",
+    "valueName": "NewTabPageHideDefaultTopSites",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "hide",
+     "labelKey": "Machine_machine_edge_top_sites_Choice_hide",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_edge_top_sites_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Edge",
+     "valueName": "NewTabPageHideDefaultTopSites"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-policies/newtabpagehidedefaulttopsites"
+   ],
+   "reviewRef": "SEC-DEF-3605",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.edge.do_not_track",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_edge_do_not_track_Title",
+   "descriptionKey": "Machine_machine_edge_do_not_track_Description",
+   "category": "Apps",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Edge",
+    "valueName": "ConfigureDoNotTrack",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "on",
+     "labelKey": "Machine_machine_edge_do_not_track_Choice_on",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_edge_do_not_track_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Edge",
+     "valueName": "ConfigureDoNotTrack"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-policies/configuredonottrack"
+   ],
+   "reviewRef": "SEC-DEF-3606",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.chrome.metrics",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_chrome_metrics_Title",
+   "descriptionKey": "Machine_machine_chrome_metrics_Description",
+   "category": "Apps",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Google\\Chrome",
+    "valueName": "MetricsReportingEnabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_chrome_metrics_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_chrome_metrics_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Google\\Chrome",
+     "valueName": "MetricsReportingEnabled"
+    }
+   ],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-3607",
+   "sourceClass": "B",
+   "communitySources": [
+    "https://github.com/chromium/chromium/blob/main/components/policy/resources/templates/policy_definitions/Miscellaneous/MetricsReportingEnabled.yaml"
+   ]
+  },
+  {
+   "id": "machine.chrome.url_data",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_chrome_url_data_Title",
+   "descriptionKey": "Machine_machine_chrome_url_data_Description",
+   "category": "Apps",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Google\\Chrome",
+    "valueName": "UrlKeyedAnonymizedDataCollectionEnabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_chrome_url_data_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_chrome_url_data_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Google\\Chrome",
+     "valueName": "UrlKeyedAnonymizedDataCollectionEnabled"
+    }
+   ],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-3608",
+   "sourceClass": "B",
+   "communitySources": [
+    "https://github.com/chromium/chromium/blob/main/components/policy/resources/templates/policy_definitions/Miscellaneous/UrlKeyedAnonymizedDataCollectionEnabled.yaml"
+   ]
+  },
+  {
+   "id": "machine.chrome.background_mode",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_chrome_background_mode_Title",
+   "descriptionKey": "Machine_machine_chrome_background_mode_Description",
+   "category": "Apps",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Google\\Chrome",
+    "valueName": "BackgroundModeEnabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_chrome_background_mode_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_chrome_background_mode_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Google\\Chrome",
+     "valueName": "BackgroundModeEnabled"
+    }
+   ],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-3609",
+   "sourceClass": "B",
+   "communitySources": [
+    "https://github.com/chromium/chromium/blob/main/components/policy/resources/templates/policy_definitions/Miscellaneous/BackgroundModeEnabled.yaml"
+   ]
+  },
+  {
+   "id": "machine.chrome.shopping",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_chrome_shopping_Title",
+   "descriptionKey": "Machine_machine_chrome_shopping_Description",
+   "category": "Apps",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Google\\Chrome",
+    "valueName": "ShoppingListEnabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_chrome_shopping_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_chrome_shopping_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Google\\Chrome",
+     "valueName": "ShoppingListEnabled"
+    }
+   ],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-3610",
+   "sourceClass": "B",
+   "communitySources": [
+    "https://github.com/chromium/chromium/blob/main/components/policy/resources/templates/policy_definitions/Miscellaneous/ShoppingListEnabled.yaml"
+   ]
+  },
+  {
+   "id": "machine.chrome.feedback",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_chrome_feedback_Title",
+   "descriptionKey": "Machine_machine_chrome_feedback_Description",
+   "category": "Apps",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Google\\Chrome",
+    "valueName": "UserFeedbackAllowed",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_chrome_feedback_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_chrome_feedback_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Google\\Chrome",
+     "valueName": "UserFeedbackAllowed"
+    }
+   ],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-3611",
+   "sourceClass": "B",
+   "communitySources": [
+    "https://github.com/chromium/chromium/blob/main/components/policy/resources/templates/policy_definitions/Miscellaneous/UserFeedbackAllowed.yaml"
+   ]
+  },
+  {
+   "id": "machine.chrome.promotions",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_chrome_promotions_Title",
+   "descriptionKey": "Machine_machine_chrome_promotions_Description",
+   "category": "Apps",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Google\\Chrome",
+    "valueName": "PromotionsEnabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_chrome_promotions_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_chrome_promotions_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Google\\Chrome",
+     "valueName": "PromotionsEnabled"
+    }
+   ],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-3612",
+   "sourceClass": "B",
+   "communitySources": [
+    "https://github.com/chromium/chromium/blob/main/components/policy/resources/templates/policy_definitions/Miscellaneous/PromotionsEnabled.yaml"
+   ]
+  },
+  {
+   "id": "machine.chrome.alternate_error_pages",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_chrome_alternate_error_pages_Title",
+   "descriptionKey": "Machine_machine_chrome_alternate_error_pages_Description",
+   "category": "Apps",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Google\\Chrome",
+    "valueName": "AlternateErrorPagesEnabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_chrome_alternate_error_pages_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_chrome_alternate_error_pages_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Google\\Chrome",
+     "valueName": "AlternateErrorPagesEnabled"
+    }
+   ],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-3613",
+   "sourceClass": "B",
+   "communitySources": [
+    "https://github.com/chromium/chromium/blob/main/components/policy/resources/templates/policy_definitions/Miscellaneous/AlternateErrorPagesEnabled.yaml"
+   ]
+  }
+ ]
+}

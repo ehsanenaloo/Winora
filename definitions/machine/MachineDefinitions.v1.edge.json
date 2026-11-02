@@ -1,0 +1,700 @@
+{
+ "format": "winora.machine-definitions/1",
+ "setId": "winora-machine",
+ "serial": 1,
+ "minProtocol": 1,
+ "minWorkerBuild": 22621,
+ "revoked": [],
+ "definitions": [
+  {
+   "id": "machine.edge.first_run",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_edge_first_run_Title",
+   "descriptionKey": "Machine_machine_edge_first_run_Description",
+   "category": "Apps",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Edge",
+    "valueName": "HideFirstRunExperience",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "hide",
+     "labelKey": "Machine_machine_edge_first_run_Choice_hide",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_edge_first_run_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    },
+    {
+     "kind": "dword",
+     "number": 2
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Edge",
+     "valueName": "HideFirstRunExperience"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/hidefirstrunexperience"
+   ],
+   "reviewRef": "SEC-DEF-0109",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.edge.recommendations",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_edge_recommendations_Title",
+   "descriptionKey": "Machine_machine_edge_recommendations_Description",
+   "category": "Apps",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Edge",
+    "valueName": "ShowRecommendationsEnabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_edge_recommendations_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_edge_recommendations_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    },
+    {
+     "kind": "dword",
+     "number": 2
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Edge",
+     "valueName": "ShowRecommendationsEnabled"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/showrecommendationsenabled"
+   ],
+   "reviewRef": "SEC-DEF-0110",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.edge.new_tab_content",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_edge_new_tab_content_Title",
+   "descriptionKey": "Machine_machine_edge_new_tab_content_Description",
+   "category": "Apps",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Edge",
+    "valueName": "NewTabPageContentEnabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_edge_new_tab_content_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_edge_new_tab_content_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    },
+    {
+     "kind": "dword",
+     "number": 2
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Edge",
+     "valueName": "NewTabPageContentEnabled"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/newtabpagecontentenabled"
+   ],
+   "reviewRef": "SEC-DEF-0111",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.edge.shopping",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_edge_shopping_Title",
+   "descriptionKey": "Machine_machine_edge_shopping_Description",
+   "category": "Apps",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Edge",
+    "valueName": "EdgeShoppingAssistantEnabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_edge_shopping_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_edge_shopping_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    },
+    {
+     "kind": "dword",
+     "number": 2
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Edge",
+     "valueName": "EdgeShoppingAssistantEnabled"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/edgeshoppingassistantenabled"
+   ],
+   "reviewRef": "SEC-DEF-0112",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.edge.personalized_ads",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_edge_personalized_ads_Title",
+   "descriptionKey": "Machine_machine_edge_personalized_ads_Description",
+   "category": "Apps",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Edge",
+    "valueName": "PersonalizationReportingEnabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_edge_personalized_ads_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_edge_personalized_ads_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    },
+    {
+     "kind": "dword",
+     "number": 2
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Edge",
+     "valueName": "PersonalizationReportingEnabled"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/personalizationreportingenabled"
+   ],
+   "reviewRef": "SEC-DEF-0113",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.edge.diagnostic_data",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_edge_diagnostic_data_Title",
+   "descriptionKey": "Machine_machine_edge_diagnostic_data_Description",
+   "category": "Apps",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Edge",
+    "valueName": "DiagnosticData",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "required",
+     "labelKey": "Machine_machine_edge_diagnostic_data_Choice_required",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_edge_diagnostic_data_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    },
+    {
+     "kind": "dword",
+     "number": 2
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Edge",
+     "valueName": "DiagnosticData"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/diagnosticdata"
+   ],
+   "reviewRef": "SEC-DEF-0114",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.edge.startup_boost",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_edge_startup_boost_Title",
+   "descriptionKey": "Machine_machine_edge_startup_boost_Description",
+   "category": "Apps",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Edge",
+    "valueName": "StartupBoostEnabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_edge_startup_boost_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_edge_startup_boost_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    },
+    {
+     "kind": "dword",
+     "number": 2
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Edge",
+     "valueName": "StartupBoostEnabled"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/startupboostenabled"
+   ],
+   "reviewRef": "SEC-DEF-0115",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.edge.background_mode",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_edge_background_mode_Title",
+   "descriptionKey": "Machine_machine_edge_background_mode_Description",
+   "category": "Apps",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Edge",
+    "valueName": "BackgroundModeEnabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_edge_background_mode_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_edge_background_mode_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    },
+    {
+     "kind": "dword",
+     "number": 2
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Edge",
+     "valueName": "BackgroundModeEnabled"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/backgroundmodeenabled"
+   ],
+   "reviewRef": "SEC-DEF-0116",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.edge.sync",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_edge_sync_Title",
+   "descriptionKey": "Machine_machine_edge_sync_Description",
+   "category": "Apps",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Edge",
+    "valueName": "SyncDisabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_edge_sync_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_edge_sync_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    },
+    {
+     "kind": "dword",
+     "number": 2
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Edge",
+     "valueName": "SyncDisabled"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/syncdisabled"
+   ],
+   "reviewRef": "SEC-DEF-0117",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.edge.sign_in",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_edge_sign_in_Title",
+   "descriptionKey": "Machine_machine_edge_sign_in_Description",
+   "category": "Apps",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Edge",
+    "valueName": "BrowserSignin",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_edge_sign_in_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_edge_sign_in_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    },
+    {
+     "kind": "dword",
+     "number": 2
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Edge",
+     "valueName": "BrowserSignin"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/browsersignin"
+   ],
+   "reviewRef": "SEC-DEF-0118",
+   "sourceClass": "A"
+  }
+ ]
+}

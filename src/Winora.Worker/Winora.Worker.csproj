@@ -1,0 +1,34 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<Project Sdk="Microsoft.NET.Sdk">
+ <!-- Thin composition root of the elevated worker (technical-docs/protocol.md 14, ADR-015, A-3). No DI container, no logging framework, no resource lookup: the worker
+      is silent apart from its documented exit codes and the early-failure record. It references only the two elevation projects; every testable decision
+      lives in Winora.Elevation.Windows (Worker/**), so no test project ever references or starts this executable.
+      Windows subsystem (technical-docs/spikes/s0-nativeaot.md): no console, no window. The manifest stays asInvoker (D-02).
+      NativeAOT is opt-in: -p:WorkerAot=true (then PublishAot, deterministic linking with /Brepro). A normal build stays framework-dependent.
+      Flavor: -p:WinoraFlavor=VmTrust is the compile-time VM-only option (outputs go to bin\VmTrust). -->
+ <PropertyGroup>
+  <OutputType>WinExe</OutputType>
+  <TargetFramework>net10.0-windows</TargetFramework>
+  <ApplicationManifest>app.manifest</ApplicationManifest>
+  <IsAotCompatible>true</IsAotCompatible>
+  <InvariantGlobalization>true</InvariantGlobalization>
+  <StartupHookSupport>false</StartupHookSupport>
+  <UseSystemResourceKeys>true</UseSystemResourceKeys>
+  <GenerateDocumentationFile>false</GenerateDocumentationFile>
+ </PropertyGroup>
+ <PropertyGroup Condition="'$(WorkerAot)' == 'true'">
+  <PublishAot>true</PublishAot>
+  <StripSymbols>true</StripSymbols>
+  <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+ </PropertyGroup>
+ <ItemGroup Condition="'$(WorkerAot)' == 'true'"><LinkerArg Include="/Brepro" /></ItemGroup>
+ <PropertyGroup Condition="'$(WinoraFlavor)' == 'VmTrust'">
+  <DefineConstants>$(DefineConstants);WINORA_VM_TRUST</DefineConstants>
+  <BaseOutputPath>bin\VmTrust\</BaseOutputPath>
+  <IntermediateOutputPath>obj\VmTrust\$(Configuration)\</IntermediateOutputPath>
+ </PropertyGroup>
+ <ItemGroup>
+  <ProjectReference Include="../Winora.Elevation.Protocol/Winora.Elevation.Protocol.csproj" />
+  <ProjectReference Include="../Winora.Elevation.Windows/Winora.Elevation.Windows.csproj" />
+ </ItemGroup>
+</Project>

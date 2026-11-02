@@ -1,0 +1,70 @@
+{
+ "version": 1,
+ "profile": {
+  "id": "speed",
+  "nameKey": "Profile_speed_Name",
+  "descriptionKey": "Profile_speed_Description",
+  "entries": [
+   {
+    "kind": "user",
+    "id": "appearance.transparency",
+    "choice": "off",
+    "reasonKey": "ProfileReason_Transparency"
+   },
+   {
+    "kind": "user",
+    "id": "search.highlights",
+    "choice": "off",
+    "reasonKey": "ProfileReason_SearchHighlights"
+   },
+   {
+    "kind": "user",
+    "id": "search.web_results",
+    "choice": "disabled",
+    "reasonKey": "ProfileReason_SearchWeb"
+   },
+   {
+    "kind": "user",
+    "id": "privacy.silent_app_installs",
+    "choice": "disabled",
+    "reasonKey": "ProfileReason_SilentInstalls"
+   },
+   {
+    "kind": "user",
+    "id": "privacy.suggested_toasts",
+    "choice": "off",
+    "reasonKey": "ProfileReason_Tips"
+   },
+   {
+    "kind": "user",
+    "id": "explorer.sync_notifications",
+    "choice": "hidden",
+    "reasonKey": "ProfileReason_SyncAds"
+   },
+   {
+    "kind": "machine",
+    "id": "machine.taskbar.widgets",
+    "choice": "off",
+    "reasonKey": "ProfileReason_Widgets"
+   },
+   {
+    "kind": "machine",
+    "id": "machine.update.delivery_peering",
+    "choice": "off",
+    "reasonKey": "ProfileReason_Peering"
+   },
+   {
+    "kind": "machine",
+    "id": "machine.services.maps_broker",
+    "choice": "manual",
+    "reasonKey": "ProfileReason_BackgroundService"
+   },
+   {
+    "kind": "machine",
+    "id": "machine.services.compat_assistant",
+    "choice": "manual",
+    "reasonKey": "ProfileReason_BackgroundService"
+   }
+  ]
+ }
+}

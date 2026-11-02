@@ -1,0 +1,6 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<Project Sdk="Microsoft.NET.Sdk">
+ <ItemGroup><ProjectReference Include="../Winora.Domain/Winora.Domain.csproj" /></ItemGroup>
+ <ItemGroup><EmbeddedResource Include="../../definitions/tasks/ScheduledTaskPolicy.v1.json" LogicalName="Winora.ScheduledTaskPolicy.v1.json" /></ItemGroup>
+ <ItemGroup><EmbeddedResource Include="../../definitions/services/ServicePolicy.v1.json" LogicalName="Winora.ServicePolicy.v1.json" /></ItemGroup>
+</Project>

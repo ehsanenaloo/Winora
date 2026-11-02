@@ -1,0 +1,135 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<UserControl x:Class="Winora.Desktop.FreeSpaceView"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:ctl="clr-namespace:Winora.Desktop.Controls"
+ xmlns:local="clr-namespace:Winora.Desktop" xmlns:vm="clr-namespace:Winora.Desktop;assembly=Winora.Presentation"
+ AutomationProperties.Name="{Binding Text[FreeSpace]}" Focusable="False">
+ <UserControl.Resources>
+  <!-- One cleanup group on the shared inventory row; the stripe shows a ticked group. -->
+  <DataTemplate x:Key="RowTemplate" DataType="{x:Type vm:CleanupCategoryRow}">
+   <ctl:InventoryRow IsFirst="False" IsLast="False" IsMarked="{Binding IsSelected}">
+    <ctl:InventoryRow.Lead>
+     <Grid>
+      <Grid.ColumnDefinitions><ColumnDefinition Width="36"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <CheckBox Grid.Column="0" IsChecked="{Binding IsSelected, Mode=TwoWay}" IsEnabled="{Binding CanSelect}" MinWidth="0" Padding="{StaticResource WinoraSpace.None}" VerticalAlignment="Center" AutomationProperties.Name="{Binding AutomationName}"/>
+      <Border Grid.Column="1" Style="{StaticResource WinoraRowIconTile}">
+       <ui:SymbolIcon Symbol="{Binding IconSymbol, Converter={x:Static ctl:IconKeys.Symbol}}" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+      </Border>
+     </Grid>
+    </ctl:InventoryRow.Lead>
+     <StackPanel VerticalAlignment="Center">
+      <WrapPanel>
+       <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding Title}" TextWrapping="Wrap" Margin="{StaticResource WinoraSpace.R8}" VerticalAlignment="Center"/>
+       <ctl:RiskChip Level="{Binding Risk}" Text="{Binding RiskText}" HideWhenLow="True" VerticalAlignment="Center"/>
+      </WrapPanel>
+      <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Description}" TextWrapping="Wrap"/>
+      <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding LocationText}" TextTrimming="CharacterEllipsis" FlowDirection="LeftToRight" HorizontalAlignment="Left" Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+       Visibility="{Binding HasLocation, Converter={StaticResource BoolToVisibility}}" ToolTip="{Binding LocationText}"/>
+      <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding NoteText}" TextWrapping="Wrap" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Visibility="{Binding HasNote, Converter={StaticResource BoolToVisibility}}"/>
+      <Border x:Name="SizeChip" CornerRadius="{StaticResource WinoraCornerRadiusSmall}" Padding="{StaticResource WinoraSpace.H8V4}" Margin="{StaticResource WinoraSpace.T8}" HorizontalAlignment="Left" Background="{DynamicResource WinoraStatusNeutralBackground}">
+       <TextBlock x:Name="SizeChipText" Style="{StaticResource WinoraChipText}" Foreground="{DynamicResource WinoraStatusNeutralForeground}">
+        <TextBlock.Text><MultiBinding StringFormat="{}{0} · {1}"><Binding Path="SizeText"/><Binding Path="CountText"/></MultiBinding></TextBlock.Text>
+       </TextBlock>
+      </Border>
+     </StackPanel>
+     <ctl:InventoryRow.Control>
+     <ctl:MenuSplitButton Text="{Binding DataContext.Text[V2ClRowClean], RelativeSource={RelativeSource AncestorType=UserControl}}" Symbol="Delete24"
+      Command="{Binding CleanOnlyCommand}" MainName="{Binding CleanOnlyName}" MainHelp="{Binding DataContext.Text[V2ClRowCleanHelp], RelativeSource={RelativeSource AncestorType=UserControl}}"
+      MenuName="{Binding MenuName}" MenuHelp="{Binding DataContext.Text[V2ClMenuHelp], RelativeSource={RelativeSource AncestorType=UserControl}}">
+      <ctl:MenuSplitButton.Menu>
+       <ContextMenu>
+        <MenuItem Header="{Binding OpenFolderLabel}" Command="{Binding OpenFolderCommand}" Icon="{ui:SymbolIcon FolderOpen20}"/>
+        <MenuItem Header="{Binding RescanLabel}" Command="{Binding RescanCommand}" Icon="{ui:SymbolIcon ArrowClockwise20}"/>
+       </ContextMenu>
+      </ctl:MenuSplitButton.Menu>
+     </ctl:MenuSplitButton>
+    </ctl:InventoryRow.Control>
+   </ctl:InventoryRow>
+   <DataTemplate.Triggers>
+    <DataTrigger Binding="{Binding SizeBand}" Value="Large">
+     <Setter TargetName="SizeChip" Property="Background" Value="{DynamicResource WinoraStatusErrorBackground}"/><Setter TargetName="SizeChipText" Property="Foreground" Value="{DynamicResource WinoraStatusErrorForeground}"/>
+    </DataTrigger>
+    <DataTrigger Binding="{Binding SizeBand}" Value="Medium">
+     <Setter TargetName="SizeChip" Property="Background" Value="{DynamicResource WinoraStatusWarningBackground}"/><Setter TargetName="SizeChipText" Property="Foreground" Value="{DynamicResource WinoraStatusWarningForeground}"/>
+    </DataTrigger>
+   </DataTemplate.Triggers>
+  </DataTemplate>
+ </UserControl.Resources>
+
+ <ctl:ListPage x:Name="Workspace">
+  <ctl:ListPage.Body>
+   <StackPanel HorizontalAlignment="Stretch">
+   <!-- A scan or a clean that failed: the shared error state; Try again scans again. -->
+   <ctl:ErrorState x:Name="FailureState" Headline="{Binding Text[FreeSpaceErrorTitle]}" Message="{Binding ErrorText}" ActionText="{Binding Text[TryAgain]}" ActionCommand="{Binding ScanCommand}"
+    ActionHelp="{Binding Text[FreeSpaceScanHelp]}" Visibility="{Binding HasError, Converter={StaticResource BoolToVisibility}}"/>
+
+   <!-- The disks: free space at a glance, in every state of the page -->
+   <ItemsControl x:Name="DiskCards" ItemsSource="{Binding Disks}" ItemTemplate="{StaticResource WinoraDriveRowTemplate}" IsTabStop="False" Focusable="False" Margin="{StaticResource WinoraSpace.B4}"
+    Visibility="{Binding HasDisks, Converter={StaticResource BoolToVisibility}}" AutomationProperties.Name="{Binding Text[DiskDisks]}">
+    <ItemsControl.ItemsPanel><ItemsPanelTemplate><ctl:DiskGridPanel/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+   </ItemsControl>
+
+   <!-- How recent a file may be and still be kept: next to the disks and the scan button in the header. Changing it after a scan scans again. -->
+   <StackPanel x:Name="AgePanel" Margin="{StaticResource WinoraSpace.B8}">
+    <TextBlock x:Name="AgeLabel" Style="{StaticResource WinoraCaption}" Text="{Binding Text[FreeSpaceAgeLabel]}"/>
+    <ComboBox x:Name="AgeChoice" ItemsSource="{Binding AgeChoices}" SelectedItem="{Binding SelectedAge, Mode=TwoWay}" DisplayMemberPath="Label" MinWidth="200" HorizontalAlignment="Left"
+     IsEnabled="{Binding CanChangeAge}" AutomationProperties.LabeledBy="{Binding ElementName=AgeLabel}" AutomationProperties.Name="{Binding Text[FreeSpaceAgeLabel]}" AutomationProperties.HelpText="{Binding Text[FreeSpaceAgeHelp]}"/>
+    <TextBlock x:Name="AnyAgeWarning" Style="{StaticResource WinoraCaption}" Text="{Binding Text[FreeSpaceAnyAgeWarning]}" TextWrapping="Wrap" Foreground="{DynamicResource WinoraStatusWarningForeground}" Margin="{StaticResource WinoraSpace.T4}"
+     Visibility="{Binding ShowAnyAgeWarning, Converter={StaticResource BoolToVisibility}}" AutomationProperties.LiveSetting="Polite"/>
+   </StackPanel>
+
+   <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding NotElevatedText}" TextWrapping="Wrap" Margin="{StaticResource WinoraSpace.B8}" Visibility="{Binding ShowNotElevatedHint, Converter={StaticResource BoolToVisibility}}"/>
+   <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Text[FreeSpaceElevated]}" TextWrapping="Wrap" Margin="{StaticResource WinoraSpace.B8}" Visibility="{Binding ShowElevatedNote, Converter={StaticResource BoolToVisibility}}"/>
+
+   <!-- Before the first scan -->
+   <StackPanel x:Name="ReadyState" Visibility="{Binding ShowNotScanned, Converter={StaticResource BoolToVisibility}}">
+    <ctl:EmptyState Icon="Broom24" Headline="{Binding Text[FreeSpaceTitle]}" Message="{Binding Text[FreeSpaceReadyBody]}" MaxWidth="520" Margin="{StaticResource WinoraSpace.T16B8}"/>
+    <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding HistoryText}" Margin="{StaticResource WinoraSpace.B16}" HorizontalAlignment="Center" TextAlignment="Center" Visibility="{Binding HasHistory, Converter={StaticResource BoolToVisibility}}"/>
+   </StackPanel>
+
+   <!-- Scanning: the shared loading skeleton. Stop is in the Action center. -->
+   <StackPanel x:Name="ScanningState" Visibility="{Binding ShowScanning, Converter={StaticResource BoolToVisibility}}">
+    <ctl:LoadingSkeleton Message="{Binding ProgressText}"/>
+   </StackPanel>
+
+   <!-- Review -->
+   <StackPanel Visibility="{Binding ShowReview, Converter={StaticResource BoolToVisibility}}">
+    <ctl:EmptyState x:Name="NothingState" Icon="CheckmarkCircle24" Headline="{Binding Text[FreeSpaceNothingToClean]}" Margin="{StaticResource WinoraSpace.T8B16}" Visibility="{Binding NothingToClean, Converter={StaticResource BoolToVisibility}}"/>
+    <TextBlock x:Name="FoundLine" Style="{StaticResource WinoraCaption}" Text="{Binding FoundHeading}" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="{StaticResource WinoraSpace.B8}"/>
+    <ctl:CardHeader x:Name="ReviewHeader" Title="{Binding TotalTitle}" Description="{Binding TotalSummary}" ActionsBelow="True" Margin="{StaticResource WinoraSpace.None}">
+     <ctl:CardHeader.Actions>
+      <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Left">
+       <ui:Button x:Name="ClearAllButton" Content="{Binding Text[FreeSpaceClearSelection]}" Command="{Binding ClearSelectionCommand}" Icon="{ui:SymbolIcon Square24}" Margin="{StaticResource WinoraSpace.L8T4B4}"
+        AutomationProperties.Name="{Binding Text[FreeSpaceClearSelection]}" AutomationProperties.HelpText="{Binding Text[FreeSpaceClearSelectionHelp]}"/>
+       <ui:Button x:Name="SelectLowRiskButton" Content="{Binding Text[FreeSpaceSelectLow]}" Command="{Binding SelectLowRiskCommand}" Icon="{ui:SymbolIcon CheckmarkCircle24}" Margin="{StaticResource WinoraSpace.L8T4B4}"
+        AutomationProperties.Name="{Binding Text[FreeSpaceSelectLow]}" AutomationProperties.HelpText="{Binding Text[FreeSpaceSelectLowHelp]}"/>
+       <ui:Button x:Name="CleanSelectedButton" Content="{Binding CleanSelectedLabel}" Command="{Binding CleanCommand}" Appearance="Primary" Icon="{ui:SymbolIcon Delete24}" Margin="{StaticResource WinoraSpace.L8T4B4}"
+        AutomationProperties.Name="{Binding CleanSelectedLabel}" AutomationProperties.HelpText="{Binding Text[FreeSpaceCleanHelp]}"/>
+      </WrapPanel>
+     </ctl:CardHeader.Actions>
+    </ctl:CardHeader>
+    <ItemsControl x:Name="Categories" ItemsSource="{Binding Rows}" ItemTemplate="{StaticResource RowTemplate}" IsEnabled="{Binding CanChangeSelection}" IsTabStop="False" Focusable="False"
+     AutomationProperties.Name="{Binding Text[FreeSpaceCategories]}"/>
+    <Border Style="{StaticResource WinoraCardCap}"/>
+    <TextBlock x:Name="SelectionLine" Style="{StaticResource WinoraBody}" Text="{Binding SelectionText}" Margin="{StaticResource WinoraSpace.T4}" AutomationProperties.LiveSetting="Polite" AutomationProperties.Name="{Binding SelectionText}"/>
+    <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Text[FreeSpacePermanent]}" TextWrapping="Wrap" Margin="{StaticResource WinoraSpace.T4}"/>
+   </StackPanel>
+
+   <!-- Result -->
+   <Border x:Name="DoneCard" Style="{StaticResource WinoraListCard}" Padding="{StaticResource WinoraSpace.A24}" Visibility="{Binding ShowReport, Converter={StaticResource BoolToVisibility}}">
+    <StackPanel HorizontalAlignment="Center" MaxWidth="520">
+     <Grid Width="56" Height="56" HorizontalAlignment="Center">
+      <Ellipse Fill="{DynamicResource WinoraRiskLowBackground}" Stroke="{DynamicResource WinoraRiskLowForeground}" StrokeThickness="2"/>
+      <ui:SymbolIcon Symbol="Checkmark24" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource WinoraRiskLowForeground}"/>
+     </Grid>
+     <TextBlock Style="{StaticResource WinoraSubtitle}" Text="{Binding ReportHeadline}" TextWrapping="Wrap" TextAlignment="Center" Margin="{StaticResource WinoraSpace.T12}" AutomationProperties.LiveSetting="Polite" AutomationProperties.HeadingLevel="Level2"/>
+     <ItemsControl ItemsSource="{Binding ReportLines}" IsTabStop="False" Focusable="False" Margin="{StaticResource WinoraSpace.T8}" AutomationProperties.Name="{Binding Text[FreeSpaceReport]}">
+      <ItemsControl.ItemTemplate><DataTemplate><TextBlock Style="{StaticResource WinoraBodySecondary}" Text="{Binding}" TextWrapping="Wrap" TextAlignment="Center"/></DataTemplate></ItemsControl.ItemTemplate>
+     </ItemsControl>
+    </StackPanel>
+   </Border>
+   </StackPanel>
+  </ctl:ListPage.Body>
+ </ctl:ListPage>
+</UserControl>

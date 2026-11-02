@@ -1,0 +1,1582 @@
+{
+ "format": "winora.machine-definitions/1",
+ "setId": "winora-machine",
+ "serial": 1,
+ "minProtocol": 1,
+ "minWorkerBuild": 22621,
+ "revoked": [],
+ "definitions": [
+  {
+   "id": "machine.shell.lock_screen_camera",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_shell_lock_screen_camera_Title",
+   "descriptionKey": "Machine_machine_shell_lock_screen_camera_Description",
+   "category": "Appearance",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\Personalization",
+    "valueName": "NoLockScreenCamera",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_shell_lock_screen_camera_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_shell_lock_screen_camera_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\Personalization",
+     "valueName": "NoLockScreenCamera"
+    }
+   ],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-0064",
+   "sourceClass": "B",
+   "communitySources": [
+    "https://gp.kapilarya.com/prevent-enabling-lock-screen-camera"
+   ]
+  },
+  {
+   "id": "machine.shell.sign_in_blur",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_shell_sign_in_blur_Title",
+   "descriptionKey": "Machine_machine_shell_sign_in_blur_Description",
+   "category": "Appearance",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+    "valueName": "DisableAcrylicBackgroundOnLogon",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_shell_sign_in_blur_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_shell_sign_in_blur_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+     "valueName": "DisableAcrylicBackgroundOnLogon"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-logon"
+   ],
+   "reviewRef": "SEC-DEF-0065",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.shell.lock_screen_off",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_shell_lock_screen_off_Title",
+   "descriptionKey": "Machine_machine_shell_lock_screen_off_Description",
+   "category": "Appearance",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\Personalization",
+    "valueName": "NoLockScreen",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_shell_lock_screen_off_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_shell_lock_screen_off_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\Personalization",
+     "valueName": "NoLockScreen"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-controlpaneldisplay"
+   ],
+   "reviewRef": "SEC-DEF-0066",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.shell.lock_screen_picture",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_shell_lock_screen_picture_Title",
+   "descriptionKey": "Machine_machine_shell_lock_screen_picture_Description",
+   "category": "Appearance",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\Personalization",
+    "valueName": "NoChangingLockScreen",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_shell_lock_screen_picture_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_shell_lock_screen_picture_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\Personalization",
+     "valueName": "NoChangingLockScreen"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-controlpaneldisplay"
+   ],
+   "reviewRef": "SEC-DEF-0067",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.shell.lock_screen_notifications",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_shell_lock_screen_notifications_Title",
+   "descriptionKey": "Machine_machine_shell_lock_screen_notifications_Description",
+   "category": "Appearance",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+    "valueName": "DisableLockScreenAppNotifications",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_shell_lock_screen_notifications_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_shell_lock_screen_notifications_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+     "valueName": "DisableLockScreenAppNotifications"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowslogon#disablelockscreenappnotifications"
+   ],
+   "reviewRef": "SEC-DEF-0068",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.start.hide_recommended",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_start_hide_recommended_Title",
+   "descriptionKey": "Machine_machine_start_hide_recommended_Description",
+   "category": "Start",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer",
+    "valueName": "HideRecommendedSection",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_start_hide_recommended_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_start_hide_recommended_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer",
+     "valueName": "HideRecommendedSection"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start"
+   ],
+   "reviewRef": "SEC-DEF-0069",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.start.hide_recent_apps",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_start_hide_recent_apps_Title",
+   "descriptionKey": "Machine_machine_start_hide_recent_apps_Description",
+   "category": "Start",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer",
+    "valueName": "HideRecentlyAddedApps",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_start_hide_recent_apps_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_start_hide_recent_apps_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer",
+     "valueName": "HideRecentlyAddedApps"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start"
+   ],
+   "reviewRef": "SEC-DEF-0070",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.system.settings_home",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_system_settings_home_Title",
+   "descriptionKey": "Machine_machine_system_settings_home_Description",
+   "category": "System",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+    "valueName": "SettingsPageVisibility",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "hide_home",
+     "labelKey": "Machine_machine_system_settings_home_Choice_hide_home",
+     "value": {
+      "kind": "string",
+      "text": "hide:home"
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_system_settings_home_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    },
+    {
+     "kind": "string",
+     "text": "hide:home"
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+     "valueName": "SettingsPageVisibility"
+    }
+   ],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-0071",
+   "sourceClass": "B",
+   "communitySources": [
+    "reference source 2"
+   ]
+  },
+  {
+   "id": "machine.explorer.menu_ask_copilot",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_explorer_menu_ask_copilot_Title",
+   "descriptionKey": "Machine_machine_explorer_menu_ask_copilot_Description",
+   "category": "Explorer",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked",
+    "valueName": "{CB3B0003-8088-4EDE-8769-8B354AB2FF8C}",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "hide",
+     "labelKey": "Machine_machine_explorer_menu_ask_copilot_Choice_hide",
+     "value": {
+      "kind": "string",
+      "text": ""
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_explorer_menu_ask_copilot_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "string",
+     "text": ""
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-0072",
+   "sourceClass": "C",
+   "communitySources": [
+    "reference source 2"
+   ]
+  },
+  {
+   "id": "machine.explorer.menu_give_access",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_explorer_menu_give_access_Title",
+   "descriptionKey": "Machine_machine_explorer_menu_give_access_Description",
+   "category": "Explorer",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked",
+    "valueName": "{f81e9010-6ea4-11ce-a7ff-00aa003ca9f6}",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "hide",
+     "labelKey": "Machine_machine_explorer_menu_give_access_Choice_hide",
+     "value": {
+      "kind": "string",
+      "text": ""
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_explorer_menu_give_access_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "string",
+     "text": ""
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-0073",
+   "sourceClass": "B",
+   "communitySources": [
+    "reference source 2"
+   ]
+  },
+  {
+   "id": "machine.explorer.menu_include_library",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_explorer_menu_include_library_Title",
+   "descriptionKey": "Machine_machine_explorer_menu_include_library_Description",
+   "category": "Explorer",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked",
+    "valueName": "{3dad6c5d-2167-4cae-9914-f99e41c12cfa}",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "hide",
+     "labelKey": "Machine_machine_explorer_menu_include_library_Choice_hide",
+     "value": {
+      "kind": "string",
+      "text": ""
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_explorer_menu_include_library_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "string",
+     "text": ""
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-0074",
+   "sourceClass": "B",
+   "communitySources": [
+    "reference source 2"
+   ]
+  },
+  {
+   "id": "machine.explorer.menu_share",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_explorer_menu_share_Title",
+   "descriptionKey": "Machine_machine_explorer_menu_share_Description",
+   "category": "Explorer",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Shell Extensions\\Blocked",
+    "valueName": "{e2bf9676-5f8f-435c-97eb-11607a5bedf7}",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "hide",
+     "labelKey": "Machine_machine_explorer_menu_share_Choice_hide",
+     "value": {
+      "kind": "string",
+      "text": ""
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_explorer_menu_share_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "string",
+     "text": ""
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-0075",
+   "sourceClass": "B",
+   "communitySources": [
+    "reference source 2"
+   ]
+  },
+  {
+   "id": "machine.explorer.autoplay_drives",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_explorer_autoplay_drives_Title",
+   "descriptionKey": "Machine_machine_explorer_autoplay_drives_Description",
+   "category": "Explorer",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+    "valueName": "NoDriveTypeAutoRun",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_explorer_autoplay_drives_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 255
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_explorer_autoplay_drives_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    },
+    {
+     "kind": "dword",
+     "number": 255
+    },
+    {
+     "kind": "dword",
+     "number": 145
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+     "valueName": "NoDriveTypeAutoRun"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-autoplay"
+   ],
+   "reviewRef": "SEC-DEF-0076",
+   "sourceClass": "B",
+   "communitySources": [
+    "reference source 6"
+   ]
+  },
+  {
+   "id": "machine.explorer.autorun_commands",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_explorer_autorun_commands_Title",
+   "descriptionKey": "Machine_machine_explorer_autorun_commands_Description",
+   "category": "Explorer",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+    "valueName": "NoAutorun",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_explorer_autorun_commands_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_explorer_autorun_commands_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer",
+     "valueName": "NoAutorun"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-autoplay"
+   ],
+   "reviewRef": "SEC-DEF-0077",
+   "sourceClass": "B",
+   "communitySources": [
+    "reference source 6"
+   ]
+  },
+  {
+   "id": "machine.explorer.autoplay_devices",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_explorer_autoplay_devices_Title",
+   "descriptionKey": "Machine_machine_explorer_autoplay_devices_Description",
+   "category": "Explorer",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer",
+    "valueName": "NoAutoplayfornonVolume",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_explorer_autoplay_devices_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_explorer_autoplay_devices_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer",
+     "valueName": "NoAutoplayfornonVolume"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-autoplay#disallowautoplayfornonvolumedevices"
+   ],
+   "reviewRef": "SEC-DEF-0078",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.explorer.thispc_desktop",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_explorer_thispc_desktop_Title",
+   "descriptionKey": "Machine_machine_explorer_thispc_desktop_Description",
+   "category": "Explorer",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FolderDescriptions\\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\\PropertyBag",
+    "valueName": "ThisPCPolicy",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "hide",
+     "labelKey": "Machine_machine_explorer_thispc_desktop_Choice_hide",
+     "value": {
+      "kind": "string",
+      "text": "Hide"
+     }
+    },
+    {
+     "id": "show",
+     "labelKey": "Machine_machine_explorer_thispc_desktop_Choice_show",
+     "value": {
+      "kind": "string",
+      "text": "Show"
+     }
+    }
+   ],
+   "defaultChoiceId": "show",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "string",
+     "text": "Hide"
+    },
+    {
+     "kind": "string",
+     "text": "Show"
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-0079",
+   "sourceClass": "C",
+   "communitySources": [
+    "reference source 4"
+   ]
+  },
+  {
+   "id": "machine.explorer.thispc_documents",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_explorer_thispc_documents_Title",
+   "descriptionKey": "Machine_machine_explorer_thispc_documents_Description",
+   "category": "Explorer",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FolderDescriptions\\{f42ee2d3-909f-4907-8871-4c22fc0bf756}\\PropertyBag",
+    "valueName": "ThisPCPolicy",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "hide",
+     "labelKey": "Machine_machine_explorer_thispc_documents_Choice_hide",
+     "value": {
+      "kind": "string",
+      "text": "Hide"
+     }
+    },
+    {
+     "id": "show",
+     "labelKey": "Machine_machine_explorer_thispc_documents_Choice_show",
+     "value": {
+      "kind": "string",
+      "text": "Show"
+     }
+    }
+   ],
+   "defaultChoiceId": "show",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "string",
+     "text": "Hide"
+    },
+    {
+     "kind": "string",
+     "text": "Show"
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-0080",
+   "sourceClass": "C",
+   "communitySources": [
+    "reference source 4"
+   ]
+  },
+  {
+   "id": "machine.explorer.thispc_downloads",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_explorer_thispc_downloads_Title",
+   "descriptionKey": "Machine_machine_explorer_thispc_downloads_Description",
+   "category": "Explorer",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FolderDescriptions\\{7d83ee9b-2244-4e70-b1f5-5393042af1e4}\\PropertyBag",
+    "valueName": "ThisPCPolicy",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "hide",
+     "labelKey": "Machine_machine_explorer_thispc_downloads_Choice_hide",
+     "value": {
+      "kind": "string",
+      "text": "Hide"
+     }
+    },
+    {
+     "id": "show",
+     "labelKey": "Machine_machine_explorer_thispc_downloads_Choice_show",
+     "value": {
+      "kind": "string",
+      "text": "Show"
+     }
+    }
+   ],
+   "defaultChoiceId": "show",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "string",
+     "text": "Hide"
+    },
+    {
+     "kind": "string",
+     "text": "Show"
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-0081",
+   "sourceClass": "C",
+   "communitySources": [
+    "reference source 4"
+   ]
+  },
+  {
+   "id": "machine.explorer.thispc_music",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_explorer_thispc_music_Title",
+   "descriptionKey": "Machine_machine_explorer_thispc_music_Description",
+   "category": "Explorer",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FolderDescriptions\\{a0c69a99-21c8-4671-8703-7934162fcf1d}\\PropertyBag",
+    "valueName": "ThisPCPolicy",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "hide",
+     "labelKey": "Machine_machine_explorer_thispc_music_Choice_hide",
+     "value": {
+      "kind": "string",
+      "text": "Hide"
+     }
+    },
+    {
+     "id": "show",
+     "labelKey": "Machine_machine_explorer_thispc_music_Choice_show",
+     "value": {
+      "kind": "string",
+      "text": "Show"
+     }
+    }
+   ],
+   "defaultChoiceId": "show",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "string",
+     "text": "Hide"
+    },
+    {
+     "kind": "string",
+     "text": "Show"
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-0082",
+   "sourceClass": "C",
+   "communitySources": [
+    "reference source 4"
+   ]
+  },
+  {
+   "id": "machine.explorer.thispc_pictures",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_explorer_thispc_pictures_Title",
+   "descriptionKey": "Machine_machine_explorer_thispc_pictures_Description",
+   "category": "Explorer",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FolderDescriptions\\{0ddd015d-b06c-45d5-8c4c-f59713854639}\\PropertyBag",
+    "valueName": "ThisPCPolicy",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "hide",
+     "labelKey": "Machine_machine_explorer_thispc_pictures_Choice_hide",
+     "value": {
+      "kind": "string",
+      "text": "Hide"
+     }
+    },
+    {
+     "id": "show",
+     "labelKey": "Machine_machine_explorer_thispc_pictures_Choice_show",
+     "value": {
+      "kind": "string",
+      "text": "Show"
+     }
+    }
+   ],
+   "defaultChoiceId": "show",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "string",
+     "text": "Hide"
+    },
+    {
+     "kind": "string",
+     "text": "Show"
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-0083",
+   "sourceClass": "C",
+   "communitySources": [
+    "reference source 4"
+   ]
+  },
+  {
+   "id": "machine.explorer.thispc_videos",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_explorer_thispc_videos_Title",
+   "descriptionKey": "Machine_machine_explorer_thispc_videos_Description",
+   "category": "Explorer",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\FolderDescriptions\\{35286a68-3c57-41a1-bbb1-0eae73d76c95}\\PropertyBag",
+    "valueName": "ThisPCPolicy",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "hide",
+     "labelKey": "Machine_machine_explorer_thispc_videos_Choice_hide",
+     "value": {
+      "kind": "string",
+      "text": "Hide"
+     }
+    },
+    {
+     "id": "show",
+     "labelKey": "Machine_machine_explorer_thispc_videos_Choice_show",
+     "value": {
+      "kind": "string",
+      "text": "Show"
+     }
+    }
+   ],
+   "defaultChoiceId": "show",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "string",
+     "text": "Hide"
+    },
+    {
+     "kind": "string",
+     "text": "Show"
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-0084",
+   "sourceClass": "C",
+   "communitySources": [
+    "reference source 4"
+   ]
+  },
+  {
+   "id": "machine.explorer.nav_network",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_explorer_nav_network_Title",
+   "descriptionKey": "Machine_machine_explorer_nav_network_Description",
+   "category": "Explorer",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\NonEnum",
+    "valueName": "{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_explorer_nav_network_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_explorer_nav_network_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\NonEnum",
+     "valueName": "{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}"
+    }
+   ],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-0085",
+   "sourceClass": "C",
+   "communitySources": [
+    "reference source 6"
+   ]
+  },
+  {
+   "id": "machine.explorer.shortcut_arrow",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_explorer_shortcut_arrow_Title",
+   "descriptionKey": "Machine_machine_explorer_shortcut_arrow_Description",
+   "category": "Explorer",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Icons",
+    "valueName": "29",
+    "view": "Registry64",
+    "allowPercent": true
+   },
+   "choices": [
+    {
+     "id": "hide",
+     "labelKey": "Machine_machine_explorer_shortcut_arrow_Choice_hide",
+     "value": {
+      "kind": "string",
+      "text": "%windir%\\System32\\shell32.dll,-50"
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_explorer_shortcut_arrow_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "string",
+     "text": "%windir%\\System32\\shell32.dll,-50"
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-0086",
+   "sourceClass": "C",
+   "communitySources": [
+    "https://windowsreport.com/remove-shortcut-arrow-windows-11/"
+   ]
+  },
+  {
+   "id": "machine.system.developer_mode",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_system_developer_mode_Title",
+   "descriptionKey": "Machine_machine_system_developer_mode_Description",
+   "category": "System",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock",
+    "valueName": "AllowDevelopmentWithoutDevLicense",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "on",
+     "labelKey": "Machine_machine_system_developer_mode_Choice_on",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_system_developer_mode_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development"
+   ],
+   "reviewRef": "SEC-DEF-0087",
+   "sourceClass": "C",
+   "communitySources": [
+    "https://learn.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development"
+   ]
+  },
+  {
+   "id": "machine.system.sideload_apps",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_system_sideload_apps_Title",
+   "descriptionKey": "Machine_machine_system_sideload_apps_Description",
+   "category": "System",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock",
+    "valueName": "AllowAllTrustedApps",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "on",
+     "labelKey": "Machine_machine_system_sideload_apps_Choice_on",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_system_sideload_apps_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development"
+   ],
+   "reviewRef": "SEC-DEF-0088",
+   "sourceClass": "C",
+   "communitySources": [
+    "https://learn.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development"
+   ]
+  }
+ ]
+}

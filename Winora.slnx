@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Winora.Application/Winora.Application.csproj" />
+    <Project Path="src/Winora.Cli/Winora.Cli.csproj" />
+    <Project Path="src/Winora.Desktop/Winora.Desktop.csproj" />
+    <Project Path="src/Winora.Domain/Winora.Domain.csproj" />
+    <Project Path="src/Winora.Elevation.Protocol/Winora.Elevation.Protocol.csproj" />
+    <Project Path="src/Winora.Elevation.Windows/Winora.Elevation.Windows.csproj" />
+    <Project Path="src/Winora.Instance/Winora.Instance.csproj" />
+    <Project Path="src/Winora.Infrastructure.Persistence/Winora.Infrastructure.Persistence.csproj" />
+    <Project Path="src/Winora.Infrastructure.Windows/Winora.Infrastructure.Windows.csproj" />
+    <Project Path="src/Winora.Launch/Winora.Launch.csproj" />
+    <Project Path="src/Winora.Presentation/Winora.Presentation.csproj" />
+    <Project Path="src/Winora.Worker/Winora.Worker.csproj" />
+  </Folder>
+</Solution>
+

@@ -1,0 +1,13 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<Project>
+ <PropertyGroup><TargetFramework>net10.0</TargetFramework><Nullable>enable</Nullable><ImplicitUsings>enable</ImplicitUsings><LangVersion>14.0</LangVersion><TreatWarningsAsErrors>true</TreatWarningsAsErrors><Version>0.1.0</Version><RestorePackagesWithLockFile>true</RestorePackagesWithLockFile><Deterministic>true</Deterministic><DebugType>portable</DebugType></PropertyGroup>
+ <!-- The NativeAOT worker build (-p:WorkerAot=true -r win-x64) restores a different package graph (the ILCompiler); it has its own lock files so both graphs stay locked. -->
+ <PropertyGroup Condition="'$(WorkerAot)' == 'true'"><NuGetLockFilePath>$(MSBuildProjectDirectory)\packages.aot.lock.json</NuGetLockFilePath></PropertyGroup>
+ <PropertyGroup><Product>Winora</Product><Description>Independent offline Windows settings manager (GPL-3.0-only).</Description></PropertyGroup>
+ <!-- VM-only flavor (technical-docs/trust.md 5, D-09): -p:WinoraFlavor=VmTrust defines WINORA_VM_TRUST and keeps the outputs apart from the default build. Disposable VMs only. -->
+ <PropertyGroup Condition="'$(WinoraFlavor)' == 'VmTrust'">
+  <DefineConstants>$(DefineConstants);WINORA_VM_TRUST</DefineConstants>
+  <BaseOutputPath>bin\VmTrust\</BaseOutputPath>
+  <IntermediateOutputPath>obj\VmTrust\$(Configuration)\</IntermediateOutputPath>
+ </PropertyGroup>
+</Project>

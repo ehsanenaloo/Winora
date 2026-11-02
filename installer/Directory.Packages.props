@@ -1,0 +1,5 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<!-- Opt the installer out of the repository's central package management. The only version pin is the WiX SDK in the .wixproj Sdk attribute. -->
+<Project>
+ <PropertyGroup><ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally></PropertyGroup>
+</Project>

@@ -1,0 +1,106 @@
+name: Bug report
+description: Something in Winora does not work as expected.
+title: "[Bug]: "
+labels: ["bug", "needs triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug. Please do **not** paste your user name, computer name, product keys or network addresses.
+        To ask for a new Windows setting, use the **Setting request** form. For security problems, use the private link on the issue chooser instead of this form.
+  - type: input
+    id: version
+    attributes:
+      label: Winora version
+      description: Shown in About Winora.
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows edition and build
+      description: Press Win+R, type `winver` and press Enter.
+      placeholder: "Windows 11 Pro 24H2, build 26100.4652"
+    validations:
+      required: true
+  - type: dropdown
+    id: how
+    attributes:
+      label: How do you run Winora?
+      options:
+        - Installed (MSI)
+        - Portable zip
+        - Built from source
+    validations:
+      required: true
+  - type: dropdown
+    id: page
+    attributes:
+      label: Where does the problem happen?
+      options:
+        - Overview
+        - Profiles
+        - Customize
+        - Optimize
+        - Power
+        - Network
+        - Privacy
+        - Windows Update
+        - Cleanup (Free up space or Disk usage)
+        - Preinstalled apps
+        - Startup
+        - Scheduled tasks
+        - Services
+        - Apps
+        - Repair and features
+        - History
+        - Settings
+        - Action center
+        - First-run guide
+        - Command-line tool (winora)
+        - Installer or uninstaller
+        - Language or right-to-left layout
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open Customize
+        2. Change "Show file extensions" to Show
+        3. Choose Review changes and confirm
+        4. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: What happened instead?
+      description: Quote any message Winora showed. If the problem is about a change, quote its result on the History page.
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics and screenshots
+      description: |
+        In Winora, choose **Settings > Export diagnostics** and pick a folder. Winora removes personal data from the archive, but please open it and read it before you attach it. Attach only what you are happy to share in public.
+        Crop screenshots so your user name and computer name are not visible.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched existing issues and did not find this problem.
+          required: true
+        - label: I did not include personal data.
+          required: true

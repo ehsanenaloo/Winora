@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<!--
+  Winora per-machine MSI (technical-docs/trust.md 3). UNSIGNED unless the release pipeline signs it: an unsigned install is refused by the elevation gates, so
+  administrator-level changes stay unavailable. Installs to the fixed Program Files folder for all users. The folder is not a public property (its Id has lower-case
+  letters, so it is private) and the package never adds an ACE: Program Files defaults are the required state, checked at run time by the image guard.
+
+  Rules of the package, each checked by tools/verify_dist.ps1 on the built MSI:
+  - no custom actions;
+  - registry rows only for the install record (HKLM\SOFTWARE\Winora\Install: Root, Version) and the Event Log source;
+  - the key HKLM\SOFTWARE\Winora\Trust and the parent HKLM\SOFTWARE\Winora are NEVER authored (the worker creates Trust with its own protected permissions, trust.md 6.4);
+  - the install record components are not permanent: uninstall removes them, so a stale record cannot validate a leftover copy;
+  - the empty run folder is created for the worker's attestation and lock files (protocol.md 6, 14).
+  Winora's data folder (%LOCALAPPDATA%\Winora of each user) is not part of the package and is never touched. Uninstall never reverts a Windows setting that Winora changed.
+  UpgradeCode is permanent for this product and differs from the per-user package: Windows Installer treats them as two products (trust.md 3.2).
+-->
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package Name="Winora (all users)" Manufacturer="$(WinoraPublisher)" Version="$(WinoraVersion)"
+           UpgradeCode="E3A7B5C1-9D42-4F6A-8B31-5C2E7D9A1F40" ProductCode="$(WinoraProductCode)"
+           Scope="perMachine" InstallerVersion="500" Language="1033" Compressed="yes">
+
+    <SummaryInformation Description="Winora - independent offline Windows settings manager (all users)" />
+    <MajorUpgrade DowngradeErrorMessage="A newer version of Winora is already installed. Uninstall it first if you really want to go back." />
+    <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
+
+    <!-- Same launch condition as the per-user package: 64-bit Windows 11 (build 22000 or later); the build number is read from the registry because the Installer properties
+         report Windows 8.1 for this package. An unreadable value is empty and refuses an unknown system. Removal of an installed copy is never blocked. -->
+    <Property Id="WINORA_WINDOWS_BUILD" Secure="yes">
+      <RegistrySearch Id="WindowsBuildSearch" Root="HKLM" Key="SOFTWARE\Microsoft\Windows NT\CurrentVersion" Name="CurrentBuildNumber" Type="raw" Bitness="always64" />
+    </Property>
+    <Launch Condition="Installed OR (VersionNT64 AND WINORA_WINDOWS_BUILD &gt;= 22000)"
+            Message="Winora supports 64-bit Windows 11 (build 22000 or later) only." />
+
+    <Property Id="ARPCOMMENTS" Value="Installs Winora for all users. Uninstalling does not revert Windows settings changed with Winora; revert them in Winora first. Winora data in each user's %LOCALAPPDATA%\Winora is kept." />
+
+    <StandardDirectory Id="ProgramFiles64Folder">
+      <Directory Id="WinoraInstallDir" Name="Winora">
+        <Directory Id="WinoraRunDir" Name="run" />
+      </Directory>
+    </StandardDirectory>
+    <StandardDirectory Id="ProgramMenuFolder">
+      <Directory Id="WinoraMenuFolder" Name="Winora" />
+    </StandardDirectory>
+
+    <!-- Everything staged by tools/publish.ps1 -Machine (desktop, cli, worker, notices, SBOM, FILES.sha256), harvested at build time. -->
+    <ComponentGroup Id="WinoraFiles" Directory="WinoraInstallDir">
+      <Files Include="$(StageDir)\**" />
+    </ComponentGroup>
+
+    <!-- The empty run folder. Windows Installer removes it on uninstall when it is empty. -->
+    <Component Id="RunFolder" Directory="WinoraRunDir" Guid="5D9C1E7A-3B24-4C8F-9A16-7E0B2D4F8C31">
+      <CreateFolder />
+    </Component>
+
+    <!-- The install record the client compares with its own path (trust.md 3.1, protocol.md 4.3). Not permanent. -->
+    <Component Id="InstallRecord" Directory="WinoraInstallDir" Guid="*" Bitness="always64">
+      <RegistryKey Root="HKLM" Key="SOFTWARE\Winora\Install">
+        <RegistryValue Name="Root" Type="string" Value="[WinoraInstallDir]" KeyPath="yes" />
+        <RegistryValue Name="Version" Type="string" Value="$(WinoraVersion)" />
+      </RegistryKey>
+      <!-- The all-users Start menu shortcut lives in this component so that no registry key other than Install is authored (the key path of a shortcut component would
+           otherwise need its own value under HKLM\SOFTWARE\Winora). -->
+      <Shortcut Id="WinoraShortcut" Directory="WinoraMenuFolder" Name="Winora" Description="Winora settings manager"
+                Target="[WinoraInstallDir]desktop\Winora.Desktop.exe" WorkingDirectory="WinoraInstallDir" />
+      <RemoveFolder Id="RemoveWinoraMenuFolder" Directory="WinoraMenuFolder" On="uninstall" />
+    </Component>
+
+    <!-- Event Log source for the audit trail (trust.md 12.3), registry rows only so the package keeps its no-custom-action rule. The message file is the framework's generic one. -->
+    <Component Id="EventSource" Directory="WinoraInstallDir" Guid="*" Bitness="always64">
+      <RegistryKey Root="HKLM" Key="SYSTEM\CurrentControlSet\Services\EventLog\Application\Winora">
+        <RegistryValue Name="EventMessageFile" Type="expandable" Value="%SystemRoot%\Microsoft.NET\Framework64\v4.0.30319\EventLogMessages.dll" KeyPath="yes" />
+        <RegistryValue Name="TypesSupported" Type="integer" Value="7" />
+      </RegistryKey>
+    </Component>
+
+    <Feature Id="Main" Title="Winora" Level="1">
+      <ComponentGroupRef Id="WinoraFiles" />
+      <ComponentRef Id="RunFolder" />
+      <ComponentRef Id="InstallRecord" />
+      <ComponentRef Id="EventSource" />
+    </Feature>
+  </Package>
+</Wix>

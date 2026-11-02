@@ -1,0 +1,91 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<UserControl x:Class="Winora.Desktop.Controls.ConfirmDialogContent"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:ctl="clr-namespace:Winora.Desktop.Controls"
+ xmlns:local="clr-namespace:Winora.Desktop" xmlns:vm="clr-namespace:Winora.Desktop;assembly=Winora.Presentation"
+ AutomationProperties.Name="{Binding AutomationName}" Focusable="False">
+ <UserControl.Resources>
+  <DataTemplate x:Key="RowTemplate" DataType="{x:Type vm:ConfirmRow}">
+   <StackPanel Margin="{StaticResource WinoraSpace.B8}" AutomationProperties.Name="{Binding AutomationName}">
+    <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding Name}" TextWrapping="Wrap" Visibility="{Binding ShowName, Converter={StaticResource BoolToVisibility}}"/>
+    <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}" Visibility="{Binding HasChoice, Converter={StaticResource BoolToVisibility}}" AutomationProperties.Name="{Binding AutomationName}">
+     <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding Name}" TextWrapping="Wrap"/>
+    </CheckBox>
+    <ctl:DiffView Margin="{StaticResource WinoraSpace.T4}" Before="{Binding Before}" After="{Binding After}" BeforeLabel="{Binding BeforeLabel}" AfterLabel="{Binding AfterLabel}"
+     Visibility="{Binding HasDiff, Converter={StaticResource BoolToVisibility}}"/>
+    <TextBlock Style="{StaticResource WinoraCaption}" Margin="{StaticResource WinoraSpace.T4}" Text="{Binding Note}" Visibility="{Binding HasNote, Converter={StaticResource BoolToVisibility}}"/>
+    <Expander Margin="{StaticResource WinoraSpace.T4}" Header="{Binding TechnicalLabel}" Visibility="{Binding HasTechnical, Converter={StaticResource BoolToVisibility}}" AutomationProperties.Name="{Binding TechnicalLabel}">
+     <TextBox Style="{StaticResource WinoraLtrText}" Text="{Binding Technical, Mode=OneWay}" AutomationProperties.Name="{Binding RegistryName}"/>
+    </Expander>
+   </StackPanel>
+  </DataTemplate>
+ </UserControl.Resources>
+ <!-- No scroll viewer here: the dialog scrolls its content, so a long review shows one scroll bar. -->
+ <StackPanel>
+  <StackPanel MinWidth="400" MaxWidth="560">
+   <StackPanel>
+   <StackPanel>
+   <TextBlock Style="{StaticResource WinoraBodySecondary}" Text="{Binding Intro}" Margin="{StaticResource WinoraSpace.B12}" Visibility="{Binding HasIntro, Converter={StaticResource BoolToVisibility}}"/>
+
+   <StackPanel Visibility="{Binding HasRows, Converter={StaticResource BoolToVisibility}}" Margin="{StaticResource WinoraSpace.B4}">
+    <TextBlock Style="{StaticResource WinoraSectionHeading}" Text="{Binding WhatWillChange}" Margin="{StaticResource WinoraSpace.B8}"/>
+    <ItemsControl ItemsSource="{Binding Rows}" ItemTemplate="{StaticResource RowTemplate}" IsTabStop="False" Focusable="False" AutomationProperties.Name="{Binding WhatWillChange}"/>
+    <ui:Button Content="{Binding ToggleRowsText}" Command="{Binding ToggleRowsCommand}" Appearance="Transparent" HorizontalAlignment="Left" Margin="{StaticResource WinoraSpace.B4}"
+     Visibility="{Binding CanToggleRows, Converter={StaticResource BoolToVisibility}}" AutomationProperties.Name="{Binding ToggleRowsText}" AutomationProperties.HelpText="{Binding WhatWillChange}"/>
+   </StackPanel>
+   </StackPanel>
+   </StackPanel>
+
+   <Grid Margin="{StaticResource WinoraSpace.V8}">
+    <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="FactLabel"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+    <Grid.Resources><Style x:Key="FactLabel" TargetType="TextBlock" BasedOn="{StaticResource WinoraCaption}"><Setter Property="Margin" Value="{StaticResource WinoraSpace.R16B4}"/><Setter Property="VerticalAlignment" Value="Center"/></Style></Grid.Resources>
+    <TextBlock x:Name="RiskFactLabel" Style="{StaticResource FactLabel}" Text="{Binding RiskLabel}" Visibility="{Binding HasRisk, Converter={StaticResource BoolToVisibility}}"/>
+    <ctl:RiskChip Grid.Column="1" Level="{Binding RiskValue}" Text="{Binding RiskText}" Margin="{StaticResource WinoraSpace.B4}" Visibility="{Binding HasRisk, Converter={StaticResource BoolToVisibility}}"/>
+    <TextBlock Grid.Row="1" Style="{StaticResource FactLabel}" Text="{Binding UndoLabel}" Visibility="{Binding HasUndo, Converter={StaticResource BoolToVisibility}}"/>
+    <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource WinoraBody}" Margin="{StaticResource WinoraSpace.B4}" Text="{Binding UndoText}" Visibility="{Binding HasUndo, Converter={StaticResource BoolToVisibility}}"/>
+    <TextBlock Grid.Row="2" Style="{StaticResource FactLabel}" Text="{Binding RestartLabel}" Visibility="{Binding HasRestart, Converter={StaticResource BoolToVisibility}}"/>
+    <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource WinoraBody}" Margin="{StaticResource WinoraSpace.B4}" Text="{Binding RestartText}" Visibility="{Binding HasRestart, Converter={StaticResource BoolToVisibility}}"/>
+   </Grid>
+
+   <Border Visibility="{Binding HasHighRiskNames, Converter={StaticResource BoolToVisibility}}" Padding="{StaticResource WinoraSpace.A12}" CornerRadius="{StaticResource WinoraCornerRadiusSmall}" Margin="{StaticResource WinoraSpace.B8}"
+    Background="{DynamicResource WinoraRiskHighBackground}" BorderBrush="{DynamicResource WinoraRiskHighBorder}" BorderThickness="{StaticResource WinoraChipBorderThickness}" AutomationProperties.LiveSetting="Assertive">
+    <StackPanel>
+     <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding HighRiskNamesText}" Foreground="{DynamicResource WinoraRiskHighForeground}"/>
+     <TextBlock Style="{StaticResource WinoraBody}" Text="{Binding HighRiskConsequence}" Foreground="{DynamicResource WinoraRiskHighForeground}" Margin="{StaticResource WinoraSpace.T4}"/>
+    </StackPanel>
+   </Border>
+
+   <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Warning}" Margin="{StaticResource WinoraSpace.B8}" Visibility="{Binding HasWarning, Converter={StaticResource BoolToVisibility}}"/>
+   <ItemsControl ItemsSource="{Binding Notes}" IsTabStop="False" Focusable="False">
+    <ItemsControl.ItemTemplate><DataTemplate><TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding}" Margin="{StaticResource WinoraSpace.B4}"/></DataTemplate></ItemsControl.ItemTemplate>
+   </ItemsControl>
+   <ItemsControl ItemsSource="{Binding Details}" IsTabStop="False" Focusable="False">
+    <ItemsControl.ItemTemplate><DataTemplate DataType="{x:Type vm:ConfirmDetail}">
+     <StackPanel Margin="{StaticResource WinoraSpace.B4}">
+      <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Label}"/>
+      <TextBlock Style="{StaticResource WinoraMono}" Text="{Binding Value}" HorizontalAlignment="Left" AutomationProperties.Name="{Binding Value}"/>
+     </StackPanel>
+    </DataTemplate></ItemsControl.ItemTemplate>
+   </ItemsControl>
+
+   <TextBlock x:Name="RestorePointText" Style="{StaticResource WinoraCaption}" Text="{Binding RestorePointLine}" Margin="{StaticResource WinoraSpace.B8}" AutomationProperties.LiveSetting="Polite"
+    Visibility="{Binding HasRestorePointLine, Converter={StaticResource BoolToVisibility}}"/>
+
+   <Border Visibility="{Binding ShowRestartOption, Converter={StaticResource BoolToVisibility}}" Padding="{StaticResource WinoraSpace.A12}" CornerRadius="{StaticResource WinoraCornerRadius}" BorderThickness="1" Margin="{StaticResource WinoraSpace.B8}"
+    Background="{DynamicResource WinoraSurfaceSunkenBrush}" BorderBrush="{DynamicResource WinoraControlBorderBrush}">
+    <StackPanel>
+     <CheckBox x:Name="RestartOption" IsChecked="{Binding RestartExplorer, Mode=TwoWay}" Content="{Binding RestartOptionLabel}" AutomationProperties.Name="{Binding RestartOptionLabel}" AutomationProperties.HelpText="{Binding RestartWarning}"/>
+     <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding RestartWarning}" Margin="{StaticResource WinoraSpace.L28}"/>
+    </StackPanel>
+   </Border>
+   <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding SignOutNote}" Visibility="{Binding ShowSignOutNote, Converter={StaticResource BoolToVisibility}}" Margin="{StaticResource WinoraSpace.B8}"/>
+
+   <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding ChoiceNeededText}" Foreground="{DynamicResource WinoraRiskHighForeground}" Visibility="{Binding ChoiceMissing, Converter={StaticResource BoolToVisibility}}" AutomationProperties.LiveSetting="Assertive"/>
+   <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding AckNeededText}" Foreground="{DynamicResource WinoraRiskHighForeground}" Visibility="{Binding AckMissing, Converter={StaticResource BoolToVisibility}}" AutomationProperties.LiveSetting="Assertive"/>
+   <CheckBox x:Name="Acknowledge" IsChecked="{Binding Acknowledged, Mode=TwoWay}" Content="{Binding AckLabel}" AutomationProperties.Name="{Binding AckLabel}"
+    Visibility="{Binding NeedsAcknowledge, Converter={StaticResource BoolToVisibility}}"/>
+  </StackPanel>
+ </StackPanel>
+</UserControl>

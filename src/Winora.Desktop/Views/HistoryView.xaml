@@ -1,0 +1,62 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<UserControl x:Class="Winora.Desktop.HistoryView"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:ctl="clr-namespace:Winora.Desktop.Controls"
+ AutomationProperties.Name="{Binding Title}" Focusable="False">
+ <ctl:ReportPage x:Name="Workspace">
+  <ctl:ReportPage.Header>
+   <ctl:PageHeader Title="{Binding Title}" Subtitle="{Binding Text[HistorySubtitle]}" MetaText="{Binding SummaryText}">
+    <ctl:PageHeader.Actions>
+     <ui:Button x:Name="RefreshButton" ToolTip="{Binding Text[DiscRefresh]}" Style="{StaticResource WinoraHeaderIconButton}" Command="{Binding RefreshHistoryCommand}" Icon="{ui:SymbolIcon ArrowClockwise24}" Margin="{StaticResource WinoraSpace.A4}"
+      AutomationProperties.Name="{Binding Text[DiscRefresh]}" AutomationProperties.HelpText="{Binding Text[DiscRefreshHelp]}"/>
+    </ctl:PageHeader.Actions>
+   </ctl:PageHeader>
+  </ctl:ReportPage.Header>
+  <ctl:ReportPage.Toolbar>
+   <ctl:FilterBar x:Name="Toolbar" GroupName="{Binding Text[HistFilters]}" Visibility="{Binding HasItems, Converter={StaticResource BoolToVisibility}}"
+    ChipsSource="{Binding Chips}" SelectedChip="{Binding SelectedChip, Mode=TwoWay}" ChipsName="{Binding Text[V2HiChipsName]}" ChipsHelp="{Binding Text[HistFilterResultHelp]}"
+    SearchText="{Binding SearchText, Mode=TwoWay}" SearchLabel="{Binding Text[DiscSearchLabel]}" SearchPlaceholder="{Binding Text[HistSearchPlaceholder]}" SearchHelp="{Binding Text[HistSearchHelp]}"
+    HasFilters="True" FiltersText="{Binding FiltersText}" FiltersHelp="{Binding Text[HistFiltersHelp]}"
+    ClearCommand="{Binding ClearFiltersCommand}" ClearText="{Binding Text[HistClearFilters]}" ClearHelp="{Binding Text[HistClearFiltersHelp]}" ShowClear="{Binding FiltersActive}"
+    CountText="{Binding ShowingText}" ShowCount="{Binding ShowCount}">
+    <ctl:FilterBar.PanelContent>
+     <WrapPanel>
+      <StackPanel Margin="{StaticResource WinoraSpace.R16B8}">
+       <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Text[HistFilterArea]}"/>
+       <ComboBox ItemsSource="{Binding AreaOptions}" SelectedItem="{Binding SelectedArea, Mode=TwoWay}" MinWidth="180" Margin="{StaticResource WinoraSpace.T2}"
+        AutomationProperties.Name="{Binding Text[HistFilterArea]}" AutomationProperties.HelpText="{Binding Text[HistFilterAreaHelp]}"/>
+      </StackPanel>
+      <StackPanel Margin="{StaticResource WinoraSpace.R16B8}">
+       <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Text[HistFilterDate]}"/>
+       <ComboBox ItemsSource="{Binding DateOptions}" SelectedItem="{Binding SelectedDate, Mode=TwoWay}" MinWidth="160" Margin="{StaticResource WinoraSpace.T2}"
+        AutomationProperties.Name="{Binding Text[HistFilterDate]}" AutomationProperties.HelpText="{Binding Text[HistFilterDateHelp]}"/>
+      </StackPanel>
+     </WrapPanel>
+    </ctl:FilterBar.PanelContent>
+   </ctl:FilterBar>
+  </ctl:ReportPage.Toolbar>
+  <ctl:ReportPage.Banners>
+   <StackPanel>
+    <ctl:InfoBanner x:Name="NoticeBar" IsOpen="{Binding NoticeOpen, Mode=TwoWay}" IsClosable="True" CloseText="{Binding Text[BannerDismiss]}" Severity="{Binding NoticeSeverity, Converter={x:Static ctl:BannerLook.Severity}}" Message="{Binding Notice}" AutomationProperties.Name="{Binding Notice}"/>
+    <ctl:InfoBanner x:Name="UnreadableBar" IsOpen="{Binding HasUnreadable, Mode=OneWay}" IsClosable="False" Severity="Warning" Message="{Binding UnreadableText}" AutomationProperties.Name="{Binding UnreadableText}"/>
+   </StackPanel>
+  </ctl:ReportPage.Banners>
+  <ctl:ReportPage.Body>
+   <StackPanel>
+    <ctl:EmptyState x:Name="EmptyBox" Icon="History24" Headline="{Binding Text[HistoryEmptyTitle]}" Message="{Binding Text[HistoryEmptyBody]}" Visibility="{Binding IsEmpty, Converter={StaticResource BoolToVisibility}}"/>
+    <StackPanel x:Name="MainBox" Visibility="{Binding HasItems, Converter={StaticResource BoolToVisibility}}">
+     <ctl:EmptyState x:Name="NoMatchBox" Icon="Filter24" Headline="{Binding Text[HistNoMatchTitle]}" Message="{Binding Text[HistNoMatchBody]}" ActionText="{Binding Text[HistClearFilters]}" ActionHelp="{Binding Text[HistClearFiltersHelp]}"
+      ActionCommand="{Binding ClearFiltersCommand}" Visibility="{Binding NoMatches, Converter={StaticResource BoolToVisibility}}"/>
+     <Grid x:Name="Split" Visibility="{Binding ShowList, Converter={StaticResource BoolToVisibility}}">
+      <StackPanel>
+       <ctl:HistoryTimeline x:Name="Timeline" ListMaxHeight="Infinity"/>
+       <ctl:Pager x:Name="Pages" Margin="{StaticResource WinoraSpace.T8B16}" IsPaged="{Binding HasPages}" PageText="{Binding PageText}" NewerText="{Binding NewerText}" OlderText="{Binding OlderText}" NewerHelp="{Binding NewerHelp}" OlderHelp="{Binding OlderHelp}"
+        NewerCommand="{Binding NewerCommand}" OlderCommand="{Binding OlderCommand}"/>
+      </StackPanel>
+     </Grid>
+    </StackPanel>
+   </StackPanel>
+  </ctl:ReportPage.Body>
+ </ctl:ReportPage>
+</UserControl>

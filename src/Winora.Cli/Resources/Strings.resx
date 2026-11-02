@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<root>
+<resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+<resheader name="version"><value>2.0</value></resheader>
+<data name="OutcomePlanned" xml:space="preserve"><value>Planned</value></data>
+<data name="OutcomePrepared" xml:space="preserve"><value>Prepared</value></data>
+<data name="OutcomeExecuting" xml:space="preserve"><value>Executing</value></data>
+<data name="OutcomeApplied" xml:space="preserve"><value>Simulation applied and verified</value></data>
+<data name="OutcomeAlreadyConfigured" xml:space="preserve"><value>Simulation already configured</value></data>
+<data name="OutcomeUnsupported" xml:space="preserve"><value>Unsupported</value></data>
+<data name="OutcomeFailed" xml:space="preserve"><value>Failed</value></data>
+<data name="OutcomePartial" xml:space="preserve"><value>Partial outcome; review required</value></data>
+<data name="OutcomePendingRestart" xml:space="preserve"><value>Pending restart</value></data>
+<data name="OutcomeReverted" xml:space="preserve"><value>Simulation reverted</value></data>
+<data name="Help" xml:space="preserve"><value>Winora 0.1.0 — simulation foundation
+--help | --version
+simulate preview|apply|recover|history [--json] [--database PATH]
+discover startup|tasks|services|apps|all [--json] [--filter TEXT] [--limit N]   (read-only)
+diagnostics export [--to FOLDER] [--json] | log-path   (local redacted support archive; nothing is uploaded)
+settings list|show|preview|apply|revert|complete|history|recover ...   (real user settings; changes are reviewed first, see settings usage)
+machine selftest [--json]   (exercises the administrator channel with a harmless no-op; needs the signed per-machine install; changes nothing)
+machine plan|apply|revert|recover|history   (administrator-level changes from the trusted list; apply and revert need an interactive console; none are available in this release)
+Simulation commands change only application-owned data. settings commands change your real Windows user settings, only after a review you confirm (or --yes). Discovery only reads.</value></data>
+<data name="InvalidArguments" xml:space="preserve"><value>Invalid arguments. Use --help.</value></data>
+<data name="Simulation" xml:space="preserve"><value>SIMULATION ONLY — no Windows changes.</value></data>
+<data name="Preview" xml:space="preserve"><value>Current: {0}; desired: {1}.</value></data>
+<data name="Record" xml:space="preserve"><value>{0} | {1} | code: {2}</value></data>
+<data name="Failed" xml:space="preserve"><value>Operation failed; no success is claimed. Inspect the journal before retrying.</value></data>
+<data name="RecordsFolderParentUnsafe" xml:space="preserve"><value>Winora stopped. Other accounts can change a folder above %ProgramData%\Winora, so Winora cannot keep its records there safely. Ask an administrator to fix the rights of that folder. Then start Winora again.</value></data>
+<data name="RecordsFolderUnsafe" xml:space="preserve"><value>Winora stopped. The folder %ProgramData%\Winora is not safe, and Winora could not replace it. Ask an administrator to move or delete that folder. Then start Winora again.</value></data>
+<data name="Code_operation_recovery_required" xml:space="preserve"><value>An earlier operation needs recovery first. Restart Winora or run recover so it can be reconciled.</value></data>
+<data name="Code_operation_not_reversible" xml:space="preserve"><value>This operation cannot be reverted.</value></data>
+<data name="Code_operation_superseded" xml:space="preserve"><value>A newer operation has changed this value, so this older operation can no longer be reverted. Nothing was changed.</value></data>
+<data name="Code_operation_revision_unknown" xml:space="preserve"><value>The journal has no record of the exact state this operation produced, so it cannot be reverted safely.</value></data>
+<data name="Code_operation_resource_changed" xml:space="preserve"><value>The value changed while the action was starting. Nothing was changed; review the current value and try again.</value></data>
+<data name="Code_operation_external_conflict" xml:space="preserve"><value>The value was changed by something else, so Winora did not overwrite it. Review the current value.</value></data>
+<data name="Code_operation_verification_failed" xml:space="preserve"><value>The value was written but could not be verified. Review is required.</value></data>
+<data name="Code_operation_reconciled_partial" xml:space="preserve"><value>After an interruption the value matched neither the original nor the requested value. Review is required.</value></data>
+<data name="Code_operation_rollback_uncertain" xml:space="preserve"><value>The revert could not be confirmed. Review is required.</value></data>
+<data name="Code_operation_rollback_failed" xml:space="preserve"><value>The revert did not restore the previous value. Review is required.</value></data>
+<data name="Code_operation_cancelled" xml:space="preserve"><value>The action was cancelled before it changed anything.</value></data>
+<data name="Code_plan_stale" xml:space="preserve"><value>The value changed after you reviewed it. Nothing was applied; review the change again.</value></data>
+<data name="Code_plan_duplicate_feature" xml:space="preserve"><value>The plan lists the same feature more than once.</value></data>
+<data name="Code_plan_missing_dependency" xml:space="preserve"><value>The plan depends on a feature that is not part of it.</value></data>
+<data name="Code_plan_resource_conflict" xml:space="preserve"><value>Two features in the plan change the same resource.</value></data>
+<data name="Code_plan_dependency_cycle" xml:space="preserve"><value>The plan has features that depend on each other in a cycle.</value></data>
+<data name="Code_journal_revision_conflict" xml:space="preserve"><value>The record was changed by another action. Refresh and try again.</value></data>
+<data name="Code_journal_operation_missing" xml:space="preserve"><value>The operation record could not be found.</value></data>
+<data name="Code_journal_invalid_transition" xml:space="preserve"><value>That change of state is not allowed for this operation.</value></data>
+<data name="Code_journal_invalid" xml:space="preserve"><value>Winora&apos;s local journal could not be read safely, so it stopped to protect your data. No Windows setting was changed.</value></data>
+<data name="Code_journal_schema_unsupported" xml:space="preserve"><value>The local journal was created by a newer version of Winora and was not opened.</value></data>
+<data name="Code_journal_schema_corrupt" xml:space="preserve"><value>The local journal structure is damaged and was not opened.</value></data>
+<data name="Code_journal_migration_conflict" xml:space="preserve"><value>The local journal could not be upgraded safely and was not changed.</value></data>
+<data name="Code_journal_untrusted_definition" xml:space="preserve"><value>A journal entry did not match any known definition and was ignored.</value></data>
+<data name="Code_store_busy" xml:space="preserve"><value>Winora&apos;s local storage is busy. Nothing was changed; try again in a moment.</value></data>
+<data name="Code_store_unavailable" xml:space="preserve"><value>Winora&apos;s local storage could not be reached. Nothing was changed; check disk access and try again.</value></data>
+<data name="Code_store_failure" xml:space="preserve"><value>Winora&apos;s local storage reported an error. Review storage before retrying.</value></data>
+<data name="Code_protocol_size" xml:space="preserve"><value>The request was too large and was rejected.</value></data>
+<data name="Code_protocol_version" xml:space="preserve"><value>The request uses an unsupported protocol version and was rejected.</value></data>
+<data name="Code_protocol_operation" xml:space="preserve"><value>The request has no valid operation identifier and was rejected.</value></data>
+<data name="Code_protocol_command" xml:space="preserve"><value>The request command is not supported and was rejected.</value></data>
+<data name="Code_protocol_feature" xml:space="preserve"><value>The request names a feature that is not supported and was rejected.</value></data>
+<data name="Code_worker_unimplemented" xml:space="preserve"><value>This action is not available yet. Nothing was changed.</value></data>
+<data name="Code_profile_size" xml:space="preserve"><value>The profile file is too large and was not imported.</value></data>
+<data name="Code_profile_invalid" xml:space="preserve"><value>The profile is not valid and was not imported.</value></data>
+<data name="Code_profile_duplicate_property" xml:space="preserve"><value>The profile repeats a setting name and was not imported.</value></data>
+<data name="Code_access_denied" xml:space="preserve"><value>Access was denied. Nothing was changed.</value></data>
+<data name="Code_error_unexpected" xml:space="preserve"><value>Something unexpected happened. Nothing was reported as successful. You can copy the reference when asking for help.</value></data>
+<data name="Code_discovery_unavailable" xml:space="preserve"><value>This information is not available on this computer.</value></data>
+<data name="Code_discovery_item_unreadable" xml:space="preserve"><value>Some entries could not be read and were skipped.</value></data>
+<data name="DiscoverUsage" xml:space="preserve"><value>Usage: discover &lt;startup|tasks|services|apps|all&gt; [--json] [--filter TEXT] [--limit N]
+  --filter: case-insensitive text match (not empty). --limit: 1 to 100000 entries per kind.</value></data>
+<data name="DiscoverReadOnly" xml:space="preserve"><value>READ-ONLY discovery — nothing was changed on this computer and nothing was sent anywhere.</value></data>
+<data name="DiscoverSection" xml:space="preserve"><value>{0}: showing {1} of {2}</value></data>
+<data name="DiscoverNone" xml:space="preserve"><value>No entries found.</value></data>
+<data name="DiscoverSummary" xml:space="preserve"><value>Summary: {0} of {1} entries shown; {2} entries could not be read.</value></data>
+<data name="DiscoverIssue" xml:space="preserve"><value>Could not read {0}: {1} — {2}</value></data>
+<data name="DiscoverError" xml:space="preserve"><value>{0} (code: {1})</value></data>
+<data name="DiscoverReference" xml:space="preserve"><value>(reference: {0})</value></data>
+<data name="DiscoverCancelled" xml:space="preserve"><value>Cancelled. Nothing was changed.</value></data>
+<data name="KindStartup" xml:space="preserve"><value>Startup entries</value></data>
+<data name="KindTasks" xml:space="preserve"><value>Scheduled tasks</value></data>
+<data name="KindServices" xml:space="preserve"><value>Services</value></data>
+<data name="KindApps" xml:space="preserve"><value>Installed applications</value></data>
+<data name="ColName" xml:space="preserve"><value>Name</value></data>
+<data name="ColSource" xml:space="preserve"><value>Source</value></data>
+<data name="ColScope" xml:space="preserve"><value>Scope</value></data>
+<data name="ColApproval" xml:space="preserve"><value>Approval</value></data>
+<data name="ColCommand" xml:space="preserve"><value>Command</value></data>
+<data name="ColState" xml:space="preserve"><value>State</value></data>
+<data name="ColPath" xml:space="preserve"><value>Path</value></data>
+<data name="ColStartMode" xml:space="preserve"><value>Start mode</value></data>
+<data name="ColRunState" xml:space="preserve"><value>Run state</value></data>
+<data name="ColAccount" xml:space="preserve"><value>Account</value></data>
+<data name="ColVersion" xml:space="preserve"><value>Version</value></data>
+<data name="ColPublisher" xml:space="preserve"><value>Publisher</value></data>
+<data name="Code_setting_unknown" xml:space="preserve"><value>This setting is not part of Winora's catalog. Nothing was changed.</value></data>
+<data name="Code_setting_choice_invalid" xml:space="preserve"><value>That choice is not valid for this setting. Nothing was changed.</value></data>
+<data name="Code_setting_unsupported_build" xml:space="preserve"><value>This setting is not supported on this version of Windows. Nothing was changed.</value></data>
+<data name="Code_setting_state_unrecognized" xml:space="preserve"><value>This setting currently holds a value of a kind Winora does not manage, so Winora will not change it. Nothing was changed.</value></data>
+<data name="Code_shell_refresh_failed" xml:space="preserve"><value>The setting was changed, but Windows could not be told to refresh, so some apps may not show it yet. You can apply it again from History.</value></data>
+<data name="Code_shell_restart_failed" xml:space="preserve"><value>The setting was changed, but Windows Explorer could not be restarted, so it takes effect after you sign out or restart Explorer. You can try again from History.</value></data>
+<data name="Code_target_not_allowed" xml:space="preserve"><value>Winora refused a change outside its own catalog. Nothing was changed.</value></data>
+<data name="Code_target_kind_unsupported" xml:space="preserve"><value>The administrator helper does not support this kind of setting. Nothing was changed.</value></data>
+<data name="Setting_explorer_show_file_extensions_Title" xml:space="preserve"><value>Show file extensions</value></data>
+<data name="Setting_explorer_show_file_extensions_Description" xml:space="preserve"><value>Show the extension (such as .txt) at the end of every file name in File Explorer.</value></data>
+<data name="Choice_explorer_show_file_extensions_show" xml:space="preserve"><value>Show</value></data>
+<data name="Choice_explorer_show_file_extensions_hide" xml:space="preserve"><value>Hide</value></data>
+<data name="Setting_explorer_show_hidden_files_Title" xml:space="preserve"><value>Show hidden files and folders</value></data>
+<data name="Setting_explorer_show_hidden_files_Description" xml:space="preserve"><value>Show items marked hidden. Protected system files stay hidden.</value></data>
+<data name="Choice_explorer_show_hidden_files_shown" xml:space="preserve"><value>Show</value></data>
+<data name="Choice_explorer_show_hidden_files_hidden" xml:space="preserve"><value>Do not show</value></data>
+<data name="Setting_explorer_open_to_Title" xml:space="preserve"><value>Open File Explorer to</value></data>
+<data name="Setting_explorer_open_to_Description" xml:space="preserve"><value>Choose whether new File Explorer windows start at Home or This PC.</value></data>
+<data name="Choice_explorer_open_to_home" xml:space="preserve"><value>Home</value></data>
+<data name="Choice_explorer_open_to_this_pc" xml:space="preserve"><value>This PC</value></data>
+<data name="Setting_explorer_compact_view_Title" xml:space="preserve"><value>Compact view</value></data>
+<data name="Setting_explorer_compact_view_Description" xml:space="preserve"><value>Reduce the spacing between items in File Explorer lists.</value></data>
+<data name="Choice_explorer_compact_view_comfortable" xml:space="preserve"><value>Standard spacing</value></data>
+<data name="Choice_explorer_compact_view_compact" xml:space="preserve"><value>Compact</value></data>
+<data name="Setting_taskbar_alignment_Title" xml:space="preserve"><value>Taskbar alignment</value></data>
+<data name="Setting_taskbar_alignment_Description" xml:space="preserve"><value>Place taskbar icons in the center or at the left edge.</value></data>
+<data name="Choice_taskbar_alignment_center" xml:space="preserve"><value>Center</value></data>
+<data name="Choice_taskbar_alignment_left" xml:space="preserve"><value>Left</value></data>
+<data name="Setting_taskbar_clock_seconds_Title" xml:space="preserve"><value>Seconds in the taskbar clock</value></data>
+<data name="Setting_taskbar_clock_seconds_Description" xml:space="preserve"><value>Show seconds in the system tray clock.</value></data>
+<data name="Choice_taskbar_clock_seconds_hidden" xml:space="preserve"><value>Hide seconds</value></data>
+<data name="Choice_taskbar_clock_seconds_shown" xml:space="preserve"><value>Show seconds</value></data>
+<data name="Setting_taskbar_search_mode_Title" xml:space="preserve"><value>Taskbar search</value></data>
+<data name="Setting_taskbar_search_mode_Description" xml:space="preserve"><value>Choose how search appears on the taskbar.</value></data>
+<data name="Choice_taskbar_search_mode_hidden" xml:space="preserve"><value>Hidden</value></data>
+<data name="Choice_taskbar_search_mode_icon" xml:space="preserve"><value>Icon only</value></data>
+<data name="Choice_taskbar_search_mode_box" xml:space="preserve"><value>Search box</value></data>
+<data name="Setting_taskbar_task_view_button_Title" xml:space="preserve"><value>Task View button</value></data>
+<data name="Setting_taskbar_task_view_button_Description" xml:space="preserve"><value>Show or hide the Task View button on the taskbar.</value></data>
+<data name="Choice_taskbar_task_view_button_shown" xml:space="preserve"><value>Show</value></data>
+<data name="Choice_taskbar_task_view_button_hidden" xml:space="preserve"><value>Hide</value></data>
+<data name="Setting_privacy_advertising_id_Title" xml:space="preserve"><value>Advertising ID</value></data>
+<data name="Setting_privacy_advertising_id_Description" xml:space="preserve"><value>Let apps use your advertising ID for personalized ads. A device policy may override this.</value></data>
+<data name="Choice_privacy_advertising_id_enabled" xml:space="preserve"><value>On</value></data>
+<data name="Choice_privacy_advertising_id_disabled" xml:space="preserve"><value>Off</value></data>
+<data name="Setting_privacy_tailored_experiences_Title" xml:space="preserve"><value>Tailored experiences</value></data>
+<data name="Setting_privacy_tailored_experiences_Description" xml:space="preserve"><value>Let Windows use diagnostic data to offer tips and recommendations.</value></data>
+<data name="Choice_privacy_tailored_experiences_enabled" xml:space="preserve"><value>On</value></data>
+<data name="Choice_privacy_tailored_experiences_disabled" xml:space="preserve"><value>Off</value></data>
+<data name="Setting_search_web_results_Title" xml:space="preserve"><value>Web results in Start search</value></data>
+<data name="Setting_search_web_results_Description" xml:space="preserve"><value>Include web suggestions when searching from Start. Verified only up to Windows 11 23H2; needs sign-out.</value></data>
+<data name="Choice_search_web_results_enabled" xml:space="preserve"><value>Include web results</value></data>
+<data name="Choice_search_web_results_disabled" xml:space="preserve"><value>Local results only</value></data>
+<data name="Setting_appearance_apps_theme_Title" xml:space="preserve"><value>App mode</value></data>
+<data name="Setting_appearance_apps_theme_Description" xml:space="preserve"><value>Choose light or dark for apps that follow the system.</value></data>
+<data name="Choice_appearance_apps_theme_light" xml:space="preserve"><value>Light</value></data>
+<data name="Choice_appearance_apps_theme_dark" xml:space="preserve"><value>Dark</value></data>
+<data name="Setting_appearance_system_theme_Title" xml:space="preserve"><value>Windows mode</value></data>
+<data name="Setting_appearance_system_theme_Description" xml:space="preserve"><value>Choose light or dark for the taskbar and Start.</value></data>
+<data name="Choice_appearance_system_theme_light" xml:space="preserve"><value>Light</value></data>
+<data name="Choice_appearance_system_theme_dark" xml:space="preserve"><value>Dark</value></data>
+<data name="Setting_appearance_window_snapping_Title" xml:space="preserve"><value>Snap windows</value></data>
+<data name="Setting_appearance_window_snapping_Description" xml:space="preserve"><value>Let windows snap to screen edges and layouts. Takes effect after you sign out and in.</value></data>
+<data name="Choice_appearance_window_snapping_on" xml:space="preserve"><value>On</value></data>
+<data name="Choice_appearance_window_snapping_off" xml:space="preserve"><value>Off</value></data>
+<data name="SettingsUsage" xml:space="preserve"><value>Usage: settings &lt;list|show|preview|apply|revert|complete|history|recover&gt; ...
+  list [--json] [--category Explorer|Taskbar|Privacy|Search|Appearance]
+  show &lt;id&gt; [--json]
+  preview &lt;id&gt; &lt;choice&gt; [--json]            plan only; nothing is written
+  apply &lt;id&gt; &lt;choice&gt; [--yes] [--json] [--no-refresh] [--no-restart-explorer] [--restart-explorer]
+  revert &lt;operation-id&gt; [--yes] [--json]
+  complete &lt;operation-id&gt; [--yes] [--json]  run the pending shell refresh (restarts Explorer)
+  history [--json]
+  recover [--json]
+  Without --yes a write asks for an interactive "y"; without a terminal it exits with code 2 and writes nothing.</value></data>
+<data name="SettingsSandboxInvalid" xml:space="preserve"><value>The test-only --sandbox-root value must be one name of letters, digits and hyphens (at most 64). Nothing was done.</value></data>
+<data name="SettingsNeedsYes" xml:space="preserve"><value>This would change your Windows settings. Run it in a terminal and answer y, or pass --yes after reviewing the change with preview. Nothing was changed.</value></data>
+<data name="SettingsCancelled" xml:space="preserve"><value>Cancelled. Winora stopped waiting; check "settings history" for anything already recorded.</value></data>
+<data name="SettingsDeclined" xml:space="preserve"><value>Declined. Nothing was changed.</value></data>
+<data name="SettingsBanner" xml:space="preserve"><value>Windows user settings (current user). Every change is reviewed first and can be reverted.</value></data>
+<data name="SettingsNone" xml:space="preserve"><value>No settings found.</value></data>
+<data name="SettingsListSummary" xml:space="preserve"><value>{0} settings listed.</value></data>
+<data name="ColId" xml:space="preserve"><value>Id</value></data>
+<data name="ColCategory" xml:space="preserve"><value>Category</value></data>
+<data name="ColCurrent" xml:space="preserve"><value>Current</value></data>
+<data name="ColStatus" xml:space="preserve"><value>Status</value></data>
+<data name="SettingsShowTitle" xml:space="preserve"><value>{0} ({1})</value></data>
+<data name="SettingsShowCurrent" xml:space="preserve"><value>Current value: {0}</value></data>
+<data name="SettingsShowStatus" xml:space="preserve"><value>Status: {0}</value></data>
+<data name="SettingsShowLocation" xml:space="preserve"><value>Registry location: {0}</value></data>
+<data name="SettingsShowRisk" xml:space="preserve"><value>Risk: {0}; recovery: {1}</value></data>
+<data name="SettingsShowChoices" xml:space="preserve"><value>Choices: {0}</value></data>
+<data name="SettingsShowDefault" xml:space="preserve"><value>Windows default choice: {0}</value></data>
+<data name="SettingsIssue" xml:space="preserve"><value>Could not read: {0} - {1}</value></data>
+<data name="SettingsPreviewBanner" xml:space="preserve"><value>PREVIEW only - nothing was written.</value></data>
+<data name="SettingsReviewTitle" xml:space="preserve"><value>Review: {0} ({1})</value></data>
+<data name="SettingsBeforeAfter" xml:space="preserve"><value>Before: {0}  -&gt;  After: {1}</value></data>
+<data name="SettingsNoChange" xml:space="preserve"><value>The setting already has this value; applying records no change.</value></data>
+<data name="SettingsExplorerWarning" xml:space="preserve"><value>Afterwards Windows Explorer is restarted so this takes effect now. Open File Explorer windows will close and the taskbar will flicker.</value></data>
+<data name="SettingsExplorerNotRestarted" xml:space="preserve"><value>Explorer will not be restarted. The change takes effect after Explorer restarts; run "settings complete" later.</value></data>
+<data name="SettingsSignOutNote" xml:space="preserve"><value>This takes effect after your next sign-in. Winora does not sign you out.</value></data>
+<data name="SettingsConfirmApply" xml:space="preserve"><value>Apply this change? [y/N]</value></data>
+<data name="SettingsConfirmRevert" xml:space="preserve"><value>Revert this change? [y/N]</value></data>
+<data name="SettingsConfirmComplete" xml:space="preserve"><value>Restart Explorer now? [y/N]</value></data>
+<data name="SettingsRevertReview" xml:space="preserve"><value>Review revert: {0} ({1})</value></data>
+<data name="SettingsCompleteReview" xml:space="preserve"><value>Review: make {0} ({1}) take effect now</value></data>
+<data name="SettingsRevertNote" xml:space="preserve"><value>Winora restores the previous value only if nothing else changed it since; it never overwrites a newer outside change.</value></data>
+<data name="SettingsPreviousValue" xml:space="preserve"><value>previous value</value></data>
+<data name="SettingsCustomValue" xml:space="preserve"><value>custom value</value></data>
+<data name="SettingsApplied" xml:space="preserve"><value>Applied: {0} is now "{1}". It is recorded and can be reverted.</value></data>
+<data name="SettingsReverted" xml:space="preserve"><value>Reverted: {0} is back to its previous value.</value></data>
+<data name="SettingsExplorerRestarted" xml:space="preserve"><value>Explorer was restarted so the change is in effect now.</value></data>
+<data name="SettingsAlready" xml:space="preserve"><value>{0} already had this value; nothing was written.</value></data>
+<data name="SettingsPending" xml:space="preserve"><value>Written, but not in effect yet: {0}.</value></data>
+<data name="SettingsPendingExplorer" xml:space="preserve"><value>It takes effect after Windows Explorer restarts. Run: winora settings complete {0}</value></data>
+<data name="SettingsPendingSignOut" xml:space="preserve"><value>It takes effect after your next sign-in.</value></data>
+<data name="SettingsShellFailed" xml:space="preserve"><value>The shell refresh did not complete (code: {0}).</value></data>
+<data name="SettingsNotChanged" xml:space="preserve"><value>{0} was not changed (state: {1}).</value></data>
+<data name="SettingsCode" xml:space="preserve"><value>Code: {0}</value></data>
+<data name="SettingsOperation" xml:space="preserve"><value>Operation {0} | {1} | code: {2}</value></data>
+<data name="SettingsHistoryLine" xml:space="preserve"><value>{0} | {1} | {2} | {3} | {4}</value></data>
+<data name="SettingsHistoryNone" xml:space="preserve"><value>No settings changes recorded.</value></data>
+<data name="SettingsRecoverNone" xml:space="preserve"><value>Nothing needed recovery.</value></data>
+<data name="SettingsRecovered" xml:space="preserve"><value>{0} interrupted operations were reconciled.</value></data>
+<data name="SettingsStatusOk" xml:space="preserve"><value>ok</value></data>
+<data name="SettingsStatusCustom" xml:space="preserve"><value>custom value</value></data>
+<data name="SettingsStatusUnsupported" xml:space="preserve"><value>unsupported on this Windows build</value></data>
+<data name="SettingsStatusUnknown" xml:space="preserve"><value>compatibility unknown</value></data>
+<data name="SettingsStatusUnreadable" xml:space="preserve"><value>unreadable ({0})</value></data>
+<data name="SettingsRestartExplorer" xml:space="preserve"><value>Takes effect after Windows Explorer restarts.</value></data>
+<data name="SettingsRestartSignOut" xml:space="preserve"><value>Takes effect after your next sign-in.</value></data>
+<data name="SettingsRestartBoth" xml:space="preserve"><value>Takes effect after Windows Explorer restarts and you sign in again.</value></data>
+<data name="Code_diagnostics_destination_invalid" xml:space="preserve"><value>The chosen folder cannot be used for the diagnostics archive. Pick a normal local folder outside Winora's own data folder. Nothing was created.</value></data>
+<data name="Code_diagnostics_export_failed" xml:space="preserve"><value>The diagnostics archive could not be created. Nothing was uploaded and no partial file was kept; check disk space and folder access, then try again.</value></data>
+<data name="DiagnosticsUsage" xml:space="preserve"><value>Usage: diagnostics export [--to FOLDER] [--json] | diagnostics log-path. The archive is created in FOLDER (default: the current directory).</value></data>
+<data name="DiagExported" xml:space="preserve"><value>Diagnostics archive created: {0}</value></data>
+<data name="DiagSummary" xml:space="preserve"><value>{0} files, {1} bytes.</value></data>
+<data name="DiagNothingUploaded" xml:space="preserve"><value>Created on this computer only. Nothing was uploaded or sent anywhere.</value></data>
+<data name="DiagReview" xml:space="preserve"><value>Review the archive before you share it; redaction is automatic and best effort.</value></data>
+<data name="Code_elevation_unavailable" xml:space="preserve"><value>Administrator changes are not available in this session or installation.</value></data>
+<data name="Code_elevation_unsigned_build" xml:space="preserve"><value>This build is not signed by the expected publisher, so administrator changes are turned off.</value></data>
+<data name="Code_elevation_install_untrusted" xml:space="preserve"><value>Winora's installation location or files cannot be trusted for administrator changes.</value></data>
+<data name="Code_elevation_uac_disabled" xml:space="preserve"><value>User Account Control is turned off, so administrator changes are not available.</value></data>
+<data name="Code_elevation_client_elevated" xml:space="preserve"><value>Run Winora without administrator rights to make machine changes.</value></data>
+<data name="Code_elevation_declined" xml:space="preserve"><value>The administrator prompt was declined. Nothing changed.</value></data>
+<data name="Code_elevation_launch_failed" xml:space="preserve"><value>The administrator helper could not be started. Nothing changed.</value></data>
+<data name="Code_elevation_blocked" xml:space="preserve"><value>Windows or your organization blocked the administrator helper. Nothing changed.</value></data>
+<data name="Code_elevation_timeout" xml:space="preserve"><value>The administrator helper did not respond in time. Nothing changed; trying again shows the prompt again.</value></data>
+<data name="Code_elevation_server_untrusted" xml:space="preserve"><value>The administrator helper could not be verified, so nothing was sent to it.</value></data>
+<data name="Code_elevation_client_untrusted" xml:space="preserve"><value>The helper refused the requesting program because it could not be verified.</value></data>
+<data name="Code_elevation_channel_failed" xml:space="preserve"><value>The secure channel to the administrator helper failed. Review the change before trying again.</value></data>
+<data name="Code_elevation_confirmation_required" xml:space="preserve"><value>Administrator changes need an interactive confirmation. Run this in an interactive window.</value></data>
+<data name="Code_elevation_platform_unsupported" xml:space="preserve"><value>Administrator changes are not supported on this version of Windows.</value></data>
+<data name="Code_elevation_platform_unverified" xml:space="preserve"><value>Administrator changes have not been verified on this Windows configuration, so they are turned off.</value></data>
+<data name="Code_definition_unknown" xml:space="preserve"><value>The change is not in Winora's trusted list.</value></data>
+<data name="Code_definition_set_mismatch" xml:space="preserve"><value>The app and the helper disagree about the trusted list.</value></data>
+<data name="Code_definition_revoked" xml:space="preserve"><value>The change was withdrawn and is no longer available.</value></data>
+<data name="Code_definition_signature_invalid" xml:space="preserve"><value>Winora&apos;s trusted list failed verification.</value></data>
+<data name="Code_definition_rollback" xml:space="preserve"><value>An older trusted list was refused.</value></data>
+<data name="Code_trust_store_insecure" xml:space="preserve"><value>The machine trust record has unsafe permissions.</value></data>
+<data name="Code_setting_managed_by_policy" xml:space="preserve"><value>This setting is managed by a policy. Winora does not change it.</value></data>
+<data name="Code_worker_busy" xml:space="preserve"><value>Another administrator helper is running. Try again in a moment.</value></data>
+<data name="Code_worker_hardening_failed" xml:space="preserve"><value>The administrator helper could not start safely on this system. Nothing changed.</value></data>
+<data name="MachineUsage" xml:space="preserve"><value>Usage: machine selftest [--json]. Exercises the administrator channel with a harmless no-op. It needs the signed per-machine installation of Winora and an interactive window.</value></data>
+<data name="MachineBanner" xml:space="preserve"><value>Administrator channel self-test. This starts the Winora administrator helper (Windows asks for your consent), sends it one harmless no-op that reads and changes nothing, and checks the answer. It works only from the signed per-machine installation of Winora and only in an interactive window. No setting on this computer is changed and nothing is recorded in your history.</value></data>
+<data name="MachinePromptDigest" xml:space="preserve"><value>Type {0} to continue, or anything else to cancel: </value></data>
+<data name="MachineNoConsentWarning" xml:space="preserve"><value>Windows is set to elevate without asking for consent on this computer, so no Windows prompt will protect you here. The only safeguard is this confirmation.</value></data>
+<data name="MachinePromptSecond" xml:space="preserve"><value>Type {0} once more to confirm that you want to continue without a Windows prompt: </value></data>
+<data name="MachineSelftestOk" xml:space="preserve"><value>The administrator channel works: the helper answered the harmless no-op and the answer was verified. Nothing on this computer was changed.</value></data>
+<data name="MachineSelftestFailed" xml:space="preserve"><value>The administrator channel self-test did not complete.</value></data>
+<data name="MachineNothingStarted" xml:space="preserve"><value>No administrator prompt was shown and nothing was started.</value></data>
+<data name="MachineChangeUsage" xml:space="preserve"><value>Usage: machine plan &lt;definition&gt; &lt;choice&gt; [--json] | machine apply &lt;definition&gt; &lt;choice&gt; | machine revert &lt;operation id&gt; | machine recover [--json] | machine history [--json]. Apply and revert need an interactive console and ask you to type a code. There is no --yes.</value></data>
+<data name="MachineChangeReviewTitle" xml:space="preserve"><value>Change for this computer: {0} (version {1})</value></data>
+<data name="MachineChangeScope" xml:space="preserve"><value>This change applies to every account on this computer and needs the Winora administrator helper.</value></data>
+<data name="MachineChangeCurrent" xml:space="preserve"><value>Current value: {0}</value></data>
+<data name="MachineChangeDesired" xml:space="preserve"><value>New value: {0}</value></data>
+<data name="MachineChangeRestoreNote" xml:space="preserve"><value>To undo it, Winora writes back: {0}</value></data>
+<data name="MachineChangeNeedsRestart" xml:space="preserve"><value>A restart is needed before this change takes full effect.</value></data>
+<data name="MachineChangeSet" xml:space="preserve"><value>Trusted list: serial {0}, hash {1}</value></data>
+<data name="MachineChangeNothingChanged" xml:space="preserve"><value>This was only a plan. Nothing was changed.</value></data>
+<data name="MachineChangeAlreadySet" xml:space="preserve"><value>The computer already has this value. Nothing will be changed.</value></data>
+<data name="MachineChangeRevertReview" xml:space="preserve"><value>Undo the change {0} (record {1}).</value></data>
+<data name="MachineChangeDone" xml:space="preserve"><value>Done: {0} is now {1}.</value></data>
+<data name="MachineChangeRestart" xml:space="preserve"><value>Restart the computer to finish.</value></data>
+<data name="MachineChangeRecovery" xml:space="preserve"><value>The result could not be confirmed yet. Run machine recover later.</value></data>
+<data name="MachineChangeNothingToRecover" xml:space="preserve"><value>Nothing needs recovery.</value></data>
+<data name="MachineChangeRecoverLine" xml:space="preserve"><value>{0}  {1}  {2}  {3}</value></data>
+<data name="MachineChangeNoHistory" xml:space="preserve"><value>No administrator-level changes were made.</value></data>
+<data name="MachineChangeHistoryLine" xml:space="preserve"><value>{0}  {1}  {2}  {3}  {4}</value></data>
+<data name="MachineChangeNotSet" xml:space="preserve"><value>(not set)</value></data>
+<data name="MachineChangeKeyMissing" xml:space="preserve"><value>(the key does not exist)</value></data>
+<data name="MachineChangeUnknownState" xml:space="preserve"><value>(unknown)</value></data>
+<data name="MachineChangeServiceMissing" xml:space="preserve"><value>(the service does not exist)</value></data>
+<data name="MachineChangeStartAutomatic" xml:space="preserve"><value>starts automatically</value></data>
+<data name="MachineChangeStartManual" xml:space="preserve"><value>starts manually</value></data>
+<data name="MachineChangeStartDisabled" xml:space="preserve"><value>disabled</value></data>
+<data name="Setting_desktop_icon_this_pc_Title" xml:space="preserve"><value>This PC icon on the desktop</value></data>
+<data name="Setting_desktop_icon_this_pc_Description" xml:space="preserve"><value>Show or hide the This PC icon on the desktop.</value></data>
+<data name="Choice_desktop_icon_this_pc_shown" xml:space="preserve"><value>Show icon</value></data>
+<data name="Choice_desktop_icon_this_pc_hidden" xml:space="preserve"><value>Hide icon</value></data>
+<data name="Setting_desktop_icon_recycle_bin_Title" xml:space="preserve"><value>Recycle Bin icon on the desktop</value></data>
+<data name="Setting_desktop_icon_recycle_bin_Description" xml:space="preserve"><value>Show or hide the Recycle Bin icon on the desktop.</value></data>
+<data name="Choice_desktop_icon_recycle_bin_shown" xml:space="preserve"><value>Show icon</value></data>
+<data name="Choice_desktop_icon_recycle_bin_hidden" xml:space="preserve"><value>Hide icon</value></data>
+<data name="Setting_desktop_icon_user_files_Title" xml:space="preserve"><value>User files icon on the desktop</value></data>
+<data name="Setting_desktop_icon_user_files_Description" xml:space="preserve"><value>Show or hide the User files icon on the desktop.</value></data>
+<data name="Choice_desktop_icon_user_files_shown" xml:space="preserve"><value>Show icon</value></data>
+<data name="Choice_desktop_icon_user_files_hidden" xml:space="preserve"><value>Hide icon</value></data>
+<data name="Setting_desktop_icon_network_Title" xml:space="preserve"><value>Network icon on the desktop</value></data>
+<data name="Setting_desktop_icon_network_Description" xml:space="preserve"><value>Show or hide the Network icon on the desktop.</value></data>
+<data name="Choice_desktop_icon_network_shown" xml:space="preserve"><value>Show icon</value></data>
+<data name="Choice_desktop_icon_network_hidden" xml:space="preserve"><value>Hide icon</value></data>
+<data name="Setting_desktop_icon_control_panel_Title" xml:space="preserve"><value>Control Panel icon on the desktop</value></data>
+<data name="Setting_desktop_icon_control_panel_Description" xml:space="preserve"><value>Show or hide the Control Panel icon on the desktop.</value></data>
+<data name="Choice_desktop_icon_control_panel_shown" xml:space="preserve"><value>Show icon</value></data>
+<data name="Choice_desktop_icon_control_panel_hidden" xml:space="preserve"><value>Hide icon</value></data>
+<data name="Setting_desktop_all_icons_Title" xml:space="preserve"><value>All desktop icons</value></data>
+<data name="Setting_desktop_all_icons_Description" xml:space="preserve"><value>Show or hide every icon on the desktop. Files stay where they are.</value></data>
+<data name="Choice_desktop_all_icons_shown" xml:space="preserve"><value>Show icons</value></data>
+<data name="Choice_desktop_all_icons_hidden" xml:space="preserve"><value>Hide icons</value></data>
+<data name="Setting_explorer_item_checkboxes_Title" xml:space="preserve"><value>Check boxes to select items</value></data>
+<data name="Setting_explorer_item_checkboxes_Description" xml:space="preserve"><value>Show a check box next to each file so you can select several files without the Ctrl key.</value></data>
+<data name="Choice_explorer_item_checkboxes_off" xml:space="preserve"><value>No check boxes</value></data>
+<data name="Choice_explorer_item_checkboxes_on" xml:space="preserve"><value>Show check boxes</value></data>
+<data name="Setting_explorer_sync_notifications_Title" xml:space="preserve"><value>Sync provider notices in Explorer</value></data>
+<data name="Setting_explorer_sync_notifications_Description" xml:space="preserve"><value>Show or hide notices from cloud storage providers inside File Explorer.</value></data>
+<data name="Choice_explorer_sync_notifications_shown" xml:space="preserve"><value>Show notices</value></data>
+<data name="Choice_explorer_sync_notifications_hidden" xml:space="preserve"><value>Hide notices</value></data>
+<data name="Setting_taskbar_end_task_Title" xml:space="preserve"><value>End Task in the taskbar menu</value></data>
+<data name="Setting_taskbar_end_task_Description" xml:space="preserve"><value>Add an End Task command to the right-click menu of taskbar apps.</value></data>
+<data name="Choice_taskbar_end_task_off" xml:space="preserve"><value>Hidden</value></data>
+<data name="Choice_taskbar_end_task_on" xml:space="preserve"><value>Show End Task</value></data>
+<data name="Setting_taskbar_battery_percentage_Title" xml:space="preserve"><value>Battery percentage in the taskbar</value></data>
+<data name="Setting_taskbar_battery_percentage_Description" xml:space="preserve"><value>Show the battery percentage next to the battery icon. Only PCs with a battery show it.</value></data>
+<data name="Choice_taskbar_battery_percentage_hidden" xml:space="preserve"><value>Hide percentage</value></data>
+<data name="Choice_taskbar_battery_percentage_shown" xml:space="preserve"><value>Show percentage</value></data>
+<data name="Setting_appearance_snap_layouts_Title" xml:space="preserve"><value>Snap layouts on the maximize button</value></data>
+<data name="Setting_appearance_snap_layouts_Description" xml:space="preserve"><value>Show the snap layouts menu when you point at a window's maximize button.</value></data>
+<data name="Choice_appearance_snap_layouts_on" xml:space="preserve"><value>Show layouts</value></data>
+<data name="Choice_appearance_snap_layouts_off" xml:space="preserve"><value>Do not show</value></data>
+<data name="Setting_appearance_window_shake_Title" xml:space="preserve"><value>Shake a window to minimize others</value></data>
+<data name="Setting_appearance_window_shake_Description" xml:space="preserve"><value>Shake a window by its title bar to minimize all other windows.</value></data>
+<data name="Choice_appearance_window_shake_enabled" xml:space="preserve"><value>Shake works</value></data>
+<data name="Choice_appearance_window_shake_disabled" xml:space="preserve"><value>Shake does nothing</value></data>
+<data name="Setting_appearance_transparency_Title" xml:space="preserve"><value>Transparency effects</value></data>
+<data name="Setting_appearance_transparency_Description" xml:space="preserve"><value>Use see-through materials on windows, Start and the taskbar. Turning it off is lighter for weak graphics cards.</value></data>
+<data name="Choice_appearance_transparency_on" xml:space="preserve"><value>Transparent</value></data>
+<data name="Choice_appearance_transparency_off" xml:space="preserve"><value>Solid</value></data>
+<data name="Setting_privacy_toast_notifications_Title" xml:space="preserve"><value>App notifications</value></data>
+<data name="Setting_privacy_toast_notifications_Description" xml:space="preserve"><value>Allow apps and the system to show notification banners. Off silences all of them, including security prompts from apps.</value></data>
+<data name="Choice_privacy_toast_notifications_on" xml:space="preserve"><value>Allowed</value></data>
+<data name="Choice_privacy_toast_notifications_off" xml:space="preserve"><value>Silenced</value></data>
+<data name="Setting_privacy_clipboard_history_Title" xml:space="preserve"><value>Clipboard history</value></data>
+<data name="Setting_privacy_clipboard_history_Description" xml:space="preserve"><value>Keep a list of recent copied items for Win+V. Copied passwords stay in the list until it is cleared.</value></data>
+<data name="Choice_privacy_clipboard_history_off" xml:space="preserve"><value>Off</value></data>
+<data name="Choice_privacy_clipboard_history_on" xml:space="preserve"><value>On</value></data>
+<data name="Setting_privacy_start_suggestions_Title" xml:space="preserve"><value>Suggestions in Start and Settings</value></data>
+<data name="Setting_privacy_start_suggestions_Description" xml:space="preserve"><value>Show app suggestions and tips from Microsoft in Start and Settings.</value></data>
+<data name="Choice_privacy_start_suggestions_shown" xml:space="preserve"><value>Show suggestions</value></data>
+<data name="Choice_privacy_start_suggestions_hidden" xml:space="preserve"><value>No suggestions</value></data>
+<data name="Setting_privacy_preinstalled_apps_Title" xml:space="preserve"><value>Suggested apps for new accounts</value></data>
+<data name="Setting_privacy_preinstalled_apps_Description" xml:space="preserve"><value>Let Windows add suggested apps when an account is created and after updates.</value></data>
+<data name="Choice_privacy_preinstalled_apps_enabled" xml:space="preserve"><value>Allow</value></data>
+<data name="Choice_privacy_preinstalled_apps_disabled" xml:space="preserve"><value>Block</value></data>
+<data name="Setting_privacy_oem_preinstalled_apps_Title" xml:space="preserve"><value>Apps pushed by your PC maker</value></data>
+<data name="Setting_privacy_oem_preinstalled_apps_Description" xml:space="preserve"><value>Let content from your PC maker install apps on this account.</value></data>
+<data name="Choice_privacy_oem_preinstalled_apps_enabled" xml:space="preserve"><value>Allow</value></data>
+<data name="Choice_privacy_oem_preinstalled_apps_disabled" xml:space="preserve"><value>Block</value></data>
+<data name="Setting_privacy_silent_app_installs_Title" xml:space="preserve"><value>Silent app installs</value></data>
+<data name="Setting_privacy_silent_app_installs_Description" xml:space="preserve"><value>Let Windows install suggested apps without asking you.</value></data>
+<data name="Choice_privacy_silent_app_installs_enabled" xml:space="preserve"><value>Allow</value></data>
+<data name="Choice_privacy_silent_app_installs_disabled" xml:space="preserve"><value>Block</value></data>
+<data name="Setting_start_recommended_items_Title" xml:space="preserve"><value>Recommended items in Start</value></data>
+<data name="Setting_start_recommended_items_Description" xml:space="preserve"><value>Show tips, shortcuts and new app suggestions in the Recommended section of Start.</value></data>
+<data name="Choice_start_recommended_items_hidden" xml:space="preserve"><value>Hide</value></data>
+<data name="Choice_start_recommended_items_shown" xml:space="preserve"><value>Show</value></data>
+<data name="Setting_start_recent_lists_Title" xml:space="preserve"><value>Recent and frequent items in Start</value></data>
+<data name="Setting_start_recent_lists_Description" xml:space="preserve"><value>Show recent files and most-used apps in Start. Hiding them also stops Windows from tracking the documents you open for Start.</value></data>
+<data name="Choice_start_recent_lists_hidden" xml:space="preserve"><value>Hide</value></data>
+<data name="Choice_start_recent_lists_shown" xml:space="preserve"><value>Show</value></data>
+<data name="Setting_start_track_programs_Title" xml:space="preserve"><value>Track launched apps for Start</value></data>
+<data name="Setting_start_track_programs_Description" xml:space="preserve"><value>Let Windows remember which apps you start, so Start can rank your most-used apps. Turning it off changes that ranking.</value></data>
+<data name="Choice_start_track_programs_off" xml:space="preserve"><value>Do not track</value></data>
+<data name="Choice_start_track_programs_on" xml:space="preserve"><value>Track</value></data>
+<data name="Setting_start_account_notifications_Title" xml:space="preserve"><value>Account notifications</value></data>
+<data name="Setting_start_account_notifications_Description" xml:space="preserve"><value>Show account messages in Start and Settings, for example offers to finish setting up your Microsoft account.</value></data>
+<data name="Choice_start_account_notifications_off" xml:space="preserve"><value>Hide</value></data>
+<data name="Choice_start_account_notifications_on" xml:space="preserve"><value>Show</value></data>
+<data name="Setting_start_all_apps_view_Title" xml:space="preserve"><value>All apps view in Start</value></data>
+<data name="Setting_start_all_apps_view_Description" xml:space="preserve"><value>Choose how the All apps list looks in the new Start menu.</value></data>
+<data name="Choice_start_all_apps_view_category" xml:space="preserve"><value>Category</value></data>
+<data name="Choice_start_all_apps_view_grid" xml:space="preserve"><value>Grid</value></data>
+<data name="Choice_start_all_apps_view_list" xml:space="preserve"><value>List</value></data>
+<data name="Setting_start_hide_all_apps_Title" xml:space="preserve"><value>Hide the All apps list</value></data>
+<data name="Setting_start_hide_all_apps_Description" xml:space="preserve"><value>Remove the All apps list from Start. Start then has no full list of your apps. Windows treats this as a policy for your account.</value></data>
+<data name="Choice_start_hide_all_apps_hidden" xml:space="preserve"><value>Hide</value></data>
+<data name="Choice_start_hide_all_apps_shown" xml:space="preserve"><value>Show</value></data>
+<data name="Setting_privacy_lock_screen_tips_Title" xml:space="preserve"><value>Lock screen tips</value></data>
+<data name="Setting_privacy_lock_screen_tips_Description" xml:space="preserve"><value>Show fun facts and tips on the lock screen. Windows may turn this on again after an update. The switch only shows in Settings when the lock screen is not Windows Spotlight.</value></data>
+<data name="Choice_privacy_lock_screen_tips_off" xml:space="preserve"><value>Off</value></data>
+<data name="Choice_privacy_lock_screen_tips_on" xml:space="preserve"><value>On</value></data>
+<data name="Setting_privacy_start_suggested_content_Title" xml:space="preserve"><value>Start suggestions, second switch</value></data>
+<data name="Setting_privacy_start_suggested_content_Description" xml:space="preserve"><value>Windows uses a second switch for app suggestions in Start. Turn it off together with 'Suggestions in Start and Settings'. Windows may turn it on again after an update.</value></data>
+<data name="Choice_privacy_start_suggested_content_off" xml:space="preserve"><value>Off</value></data>
+<data name="Choice_privacy_start_suggested_content_on" xml:space="preserve"><value>On</value></data>
+<data name="Setting_privacy_windows_tips_Title" xml:space="preserve"><value>Tips and suggestions while using Windows</value></data>
+<data name="Setting_privacy_windows_tips_Description" xml:space="preserve"><value>Show tips, tricks and suggestions while you use Windows. Windows may turn this on again after an update.</value></data>
+<data name="Choice_privacy_windows_tips_off" xml:space="preserve"><value>Off</value></data>
+<data name="Choice_privacy_windows_tips_on" xml:space="preserve"><value>On</value></data>
+<data name="Setting_privacy_settings_suggestions_Title" xml:space="preserve"><value>Suggested content in Settings</value></data>
+<data name="Setting_privacy_settings_suggestions_Description" xml:space="preserve"><value>Show suggested content in the Settings app. Windows may turn this on again after an update.</value></data>
+<data name="Choice_privacy_settings_suggestions_off" xml:space="preserve"><value>Off</value></data>
+<data name="Choice_privacy_settings_suggestions_on" xml:space="preserve"><value>On</value></data>
+<data name="Setting_privacy_welcome_experience_Title" xml:space="preserve"><value>Welcome experience after updates</value></data>
+<data name="Setting_privacy_welcome_experience_Description" xml:space="preserve"><value>Show the welcome screen that can appear after Windows updates. Windows may turn this on again after an update.</value></data>
+<data name="Choice_privacy_welcome_experience_off" xml:space="preserve"><value>Off</value></data>
+<data name="Choice_privacy_welcome_experience_on" xml:space="preserve"><value>On</value></data>
+<data name="Setting_privacy_get_most_out_of_windows_Title" xml:space="preserve"><value>Get the most out of Windows prompts</value></data>
+<data name="Setting_privacy_get_most_out_of_windows_Description" xml:space="preserve"><value>Show the prompts that offer to finish setting up your PC and your account.</value></data>
+<data name="Choice_privacy_get_most_out_of_windows_off" xml:space="preserve"><value>Off</value></data>
+<data name="Choice_privacy_get_most_out_of_windows_on" xml:space="preserve"><value>On</value></data>
+<data name="Setting_privacy_suggested_toasts_Title" xml:space="preserve"><value>Suggestion and backup reminder notifications</value></data>
+<data name="Setting_privacy_suggested_toasts_Description" xml:space="preserve"><value>Show notifications that suggest features or remind you to back up. Other app notifications are not changed.</value></data>
+<data name="Choice_privacy_suggested_toasts_off" xml:space="preserve"><value>Off</value></data>
+<data name="Choice_privacy_suggested_toasts_on" xml:space="preserve"><value>On</value></data>
+<data name="Setting_privacy_feedback_frequency_Title" xml:space="preserve"><value>Feedback requests</value></data>
+<data name="Setting_privacy_feedback_frequency_Description" xml:space="preserve"><value>Choose how often Windows asks you for feedback.</value></data>
+<data name="Choice_privacy_feedback_frequency_never" xml:space="preserve"><value>Never ask</value></data>
+<data name="Choice_privacy_feedback_frequency_windows" xml:space="preserve"><value>Windows decides</value></data>
+<data name="Setting_privacy_input_personalization_Title" xml:space="preserve"><value>Inking and typing personalization</value></data>
+<data name="Setting_privacy_input_personalization_Description" xml:space="preserve"><value>Let Windows learn from your handwriting, typing and contacts to improve suggestions. Limiting it stops that collection.</value></data>
+<data name="Choice_privacy_input_personalization_limited" xml:space="preserve"><value>Limit collection</value></data>
+<data name="Choice_privacy_input_personalization_windows" xml:space="preserve"><value>Windows default</value></data>
+<data name="Setting_privacy_online_speech_Title" xml:space="preserve"><value>Online speech recognition</value></data>
+<data name="Setting_privacy_online_speech_Description" xml:space="preserve"><value>Send your voice to Microsoft speech services to get better recognition. Turning it off also stops voice typing and dictation from working.</value></data>
+<data name="Choice_privacy_online_speech_off" xml:space="preserve"><value>Off</value></data>
+<data name="Choice_privacy_online_speech_windows" xml:space="preserve"><value>Windows default</value></data>
+<data name="Setting_privacy_third_party_suggestions_Title" xml:space="preserve"><value>Third-party suggestions in Spotlight</value></data>
+<data name="Setting_privacy_third_party_suggestions_Description" xml:space="preserve"><value>Stop Windows Spotlight from showing suggestions from other companies. Windows treats this as a policy for your account.</value></data>
+<data name="Choice_privacy_third_party_suggestions_blocked" xml:space="preserve"><value>Block</value></data>
+<data name="Choice_privacy_third_party_suggestions_allowed" xml:space="preserve"><value>Allow</value></data>
+<data name="Setting_privacy_cross_device_resume_Title" xml:space="preserve"><value>Resume from other devices</value></data>
+<data name="Setting_privacy_cross_device_resume_Description" xml:space="preserve"><value>Let Windows offer to continue what you did on your phone.</value></data>
+<data name="Choice_privacy_cross_device_resume_off" xml:space="preserve"><value>Off</value></data>
+<data name="Choice_privacy_cross_device_resume_on" xml:space="preserve"><value>On</value></data>
+<data name="Setting_privacy_cloud_clipboard_upload_Title" xml:space="preserve"><value>Upload the clipboard to the cloud</value></data>
+<data name="Setting_privacy_cloud_clipboard_upload_Description" xml:space="preserve"><value>Let Windows upload what you copy to your account so you can paste it on other PCs.</value></data>
+<data name="Choice_privacy_cloud_clipboard_upload_off" xml:space="preserve"><value>Off</value></data>
+<data name="Choice_privacy_cloud_clipboard_upload_on" xml:space="preserve"><value>On</value></data>
+<data name="Setting_privacy_dev_tool_telemetry_Title" xml:space="preserve"><value>Developer tool telemetry</value></data>
+<data name="Setting_privacy_dev_tool_telemetry_Description" xml:space="preserve"><value>Opt out of usage data from the .NET command line tools and from PowerShell by setting two user variables. Programs that are already running do not see the change.</value></data>
+<data name="Choice_privacy_dev_tool_telemetry_optout" xml:space="preserve"><value>Opt out</value></data>
+<data name="Choice_privacy_dev_tool_telemetry_send" xml:space="preserve"><value>Send usage data</value></data>
+<data name="Setting_search_box_suggestions_Title" xml:space="preserve"><value>Web suggestions in search boxes</value></data>
+<data name="Setting_search_box_suggestions_Description" xml:space="preserve"><value>Turn off web suggestions in the search box of File Explorer and Start. Windows treats this as a policy for your account, and the effect on Start is not confirmed by Microsoft.</value></data>
+<data name="Choice_search_box_suggestions_hidden" xml:space="preserve"><value>Turn off</value></data>
+<data name="Choice_search_box_suggestions_shown" xml:space="preserve"><value>Windows default</value></data>
+<data name="Setting_search_highlights_Title" xml:space="preserve"><value>Search highlights</value></data>
+<data name="Setting_search_highlights_Description" xml:space="preserve"><value>Show daily pictures and events in the search box.</value></data>
+<data name="Choice_search_highlights_off" xml:space="preserve"><value>Off</value></data>
+<data name="Choice_search_highlights_on" xml:space="preserve"><value>On</value></data>
+<data name="Setting_taskbar_button_grouping_Title" xml:space="preserve"><value>Combine taskbar buttons</value></data>
+<data name="Setting_taskbar_button_grouping_Description" xml:space="preserve"><value>Choose when windows of the same app share one taskbar button. This applies to the main taskbar and to the taskbars on other displays.</value></data>
+<data name="Choice_taskbar_button_grouping_always" xml:space="preserve"><value>Always combine</value></data>
+<data name="Choice_taskbar_button_grouping_when_full" xml:space="preserve"><value>When the taskbar is full</value></data>
+<data name="Choice_taskbar_button_grouping_never" xml:space="preserve"><value>Never combine</value></data>
+<data name="Setting_taskbar_multi_display_Title" xml:space="preserve"><value>Taskbar on several displays</value></data>
+<data name="Setting_taskbar_multi_display_Description" xml:space="preserve"><value>Choose where taskbar buttons appear when you use more than one display.</value></data>
+<data name="Choice_taskbar_multi_display_all" xml:space="preserve"><value>All displays</value></data>
+<data name="Choice_taskbar_multi_display_main_only" xml:space="preserve"><value>Main display only</value></data>
+<data name="Choice_taskbar_multi_display_main_and_open" xml:space="preserve"><value>Main display and where the window is</value></data>
+<data name="Choice_taskbar_multi_display_open_only" xml:space="preserve"><value>Only where the window is</value></data>
+<data name="Setting_taskbar_notification_center_Title" xml:space="preserve"><value>Notification center and calendar</value></data>
+<data name="Setting_taskbar_notification_center_Description" xml:space="preserve"><value>Remove the notification center and the calendar flyout from the taskbar clock. Windows treats this as a policy for your account.</value></data>
+<data name="Choice_taskbar_notification_center_hidden" xml:space="preserve"><value>Hide</value></data>
+<data name="Choice_taskbar_notification_center_shown" xml:space="preserve"><value>Show</value></data>
+<data name="Setting_appearance_alt_tab_tabs_Title" xml:space="preserve"><value>Edge tabs in Alt+Tab</value></data>
+<data name="Setting_appearance_alt_tab_tabs_Description" xml:space="preserve"><value>Choose how many Microsoft Edge tabs show next to your windows when you press Alt+Tab or snap a window.</value></data>
+<data name="Choice_appearance_alt_tab_tabs_tabs20" xml:space="preserve"><value>Windows and 20 tabs</value></data>
+<data name="Choice_appearance_alt_tab_tabs_tabs5" xml:space="preserve"><value>Windows and 5 tabs</value></data>
+<data name="Choice_appearance_alt_tab_tabs_tabs3" xml:space="preserve"><value>Windows and 3 tabs</value></data>
+<data name="Choice_appearance_alt_tab_tabs_windows_only" xml:space="preserve"><value>Windows only</value></data>
+<data name="Setting_appearance_snap_bar_Title" xml:space="preserve"><value>Snap bar at the top of the screen</value></data>
+<data name="Setting_appearance_snap_bar_Description" xml:space="preserve"><value>Show the snap layouts bar when you drag a window to the top of the screen.</value></data>
+<data name="Choice_appearance_snap_bar_off" xml:space="preserve"><value>Off</value></data>
+<data name="Choice_appearance_snap_bar_on" xml:space="preserve"><value>On</value></data>
+<data name="Setting_appearance_desktop_spotlight_Title" xml:space="preserve"><value>Windows Spotlight on the desktop</value></data>
+<data name="Setting_appearance_desktop_spotlight_Description" xml:space="preserve"><value>Use Windows Spotlight pictures on the desktop. Windows treats this as a policy for your account.</value></data>
+<data name="Choice_appearance_desktop_spotlight_disabled" xml:space="preserve"><value>Off</value></data>
+<data name="Choice_appearance_desktop_spotlight_enabled" xml:space="preserve"><value>Windows default</value></data>
+<data name="Setting_explorer_drive_letters_Title" xml:space="preserve"><value>Drive letters in File Explorer</value></data>
+<data name="Setting_explorer_drive_letters_Description" xml:space="preserve"><value>Choose where drive letters appear in the drive names.</value></data>
+<data name="Choice_explorer_drive_letters_after_label" xml:space="preserve"><value>After the name</value></data>
+<data name="Choice_explorer_drive_letters_network_first" xml:space="preserve"><value>Before network drive names</value></data>
+<data name="Choice_explorer_drive_letters_hidden" xml:space="preserve"><value>Hidden</value></data>
+<data name="Choice_explorer_drive_letters_local_first" xml:space="preserve"><value>Before local drive names</value></data>
+<data name="Setting_explorer_nav_home_Title" xml:space="preserve"><value>Home in the navigation pane</value></data>
+<data name="Setting_explorer_nav_home_Description" xml:space="preserve"><value>Show Home in the left pane of File Explorer. If you hide it, set File Explorer to open to This PC.</value></data>
+<data name="Choice_explorer_nav_home_hidden" xml:space="preserve"><value>Hide</value></data>
+<data name="Choice_explorer_nav_home_shown" xml:space="preserve"><value>Show</value></data>
+<data name="Setting_explorer_nav_gallery_Title" xml:space="preserve"><value>Gallery in the navigation pane</value></data>
+<data name="Setting_explorer_nav_gallery_Description" xml:space="preserve"><value>Show Gallery in the left pane of File Explorer.</value></data>
+<data name="Choice_explorer_nav_gallery_hidden" xml:space="preserve"><value>Hide</value></data>
+<data name="Choice_explorer_nav_gallery_shown" xml:space="preserve"><value>Show</value></data>
+<data name="Setting_explorer_nav_onedrive_Title" xml:space="preserve"><value>OneDrive in the navigation pane</value></data>
+<data name="Setting_explorer_nav_onedrive_Description" xml:space="preserve"><value>Show OneDrive in the left pane of File Explorer. Your OneDrive files are not touched.</value></data>
+<data name="Choice_explorer_nav_onedrive_hidden" xml:space="preserve"><value>Hide</value></data>
+<data name="Choice_explorer_nav_onedrive_shown" xml:space="preserve"><value>Show</value></data>
+<data name="Setting_explorer_classic_context_menu_Title" xml:space="preserve"><value>Classic right-click menu</value></data>
+<data name="Setting_explorer_classic_context_menu_Description" xml:space="preserve"><value>Show the full right-click menu at once, without 'Show more options'. This uses an unsupported registry key. Windows may ignore it after an update, and some security tools may report the key.</value></data>
+<data name="Choice_explorer_classic_context_menu_modern" xml:space="preserve"><value>Windows 11 menu</value></data>
+<data name="Choice_explorer_classic_context_menu_classic" xml:space="preserve"><value>Classic menu</value></data>
+<data name="Setting_explorer_copy_dialog_details_Title" xml:space="preserve"><value>Detailed file copy dialog</value></data>
+<data name="Setting_explorer_copy_dialog_details_Description" xml:space="preserve"><value>Show the speed graph and the details in the dialog that appears when you copy or move files.</value></data>
+<data name="Choice_explorer_copy_dialog_details_detailed" xml:space="preserve"><value>Detailed</value></data>
+<data name="Choice_explorer_copy_dialog_details_simple" xml:space="preserve"><value>Short</value></data>
+<data name="Setting_explorer_autoplay_Title" xml:space="preserve"><value>AutoPlay</value></data>
+<data name="Setting_explorer_autoplay_Description" xml:space="preserve"><value>Let Windows start an action when you connect a drive or a memory card.</value></data>
+<data name="Choice_explorer_autoplay_off" xml:space="preserve"><value>Off</value></data>
+<data name="Choice_explorer_autoplay_on" xml:space="preserve"><value>On</value></data>
+<data name="Setting_desktop_unsupported_hardware_notice_Title" xml:space="preserve"><value>System requirements notice</value></data>
+<data name="Setting_desktop_unsupported_hardware_notice_Description" xml:space="preserve"><value>Show the notice that tells you this PC does not meet the Windows 11 system requirements. It only appears on such PCs.</value></data>
+<data name="Choice_desktop_unsupported_hardware_notice_hidden" xml:space="preserve"><value>Hide</value></data>
+<data name="Choice_desktop_unsupported_hardware_notice_shown" xml:space="preserve"><value>Show</value></data>
+<data name="Setting_desktop_lock_wallpaper_Title" xml:space="preserve"><value>Lock the desktop picture</value></data>
+<data name="Setting_desktop_lock_wallpaper_Description" xml:space="preserve"><value>Stop this account from changing the desktop picture. Use it on shared PCs. Settings then shows the option as managed by your organization.</value></data>
+<data name="Choice_desktop_lock_wallpaper_locked" xml:space="preserve"><value>Locked</value></data>
+<data name="Choice_desktop_lock_wallpaper_allowed" xml:space="preserve"><value>Allowed</value></data>
+<data name="Setting_input_scrollbars_Title" xml:space="preserve"><value>Scroll bars</value></data>
+<data name="Setting_input_scrollbars_Description" xml:space="preserve"><value>Choose whether scroll bars always show or hide when you do not use them. Takes effect after you sign out and in.</value></data>
+<data name="Choice_input_scrollbars_always" xml:space="preserve"><value>Always show</value></data>
+<data name="Choice_input_scrollbars_auto_hide" xml:space="preserve"><value>Hide automatically</value></data>
+<data name="Setting_input_time_format_24h_Title" xml:space="preserve"><value>24-hour clock</value></data>
+<data name="Setting_input_time_format_24h_Description" xml:space="preserve"><value>Show the time in 24-hour format in the taskbar clock and in apps that follow your region format. A different region format shows as a custom value.</value></data>
+<data name="Choice_input_time_format_24h_h24" xml:space="preserve"><value>24-hour</value></data>
+<data name="Choice_input_time_format_24h_h12" xml:space="preserve"><value>12-hour</value></data>
+<data name="Setting_input_mouse_acceleration_Title" xml:space="preserve"><value>Enhance pointer precision</value></data>
+<data name="Setting_input_mouse_acceleration_Description" xml:space="preserve"><value>Pointer acceleration makes the pointer move farther when you move the mouse faster. Turn it off for steady aim. Some people with limited hand movement depend on it.</value></data>
+<data name="Choice_input_mouse_acceleration_on" xml:space="preserve"><value>On</value></data>
+<data name="Choice_input_mouse_acceleration_off" xml:space="preserve"><value>Off</value></data>
+<data name="Setting_input_keyboard_repeat_Title" xml:space="preserve"><value>Key repeat delay</value></data>
+<data name="Setting_input_keyboard_repeat_Description" xml:space="preserve"><value>Choose how long you hold a key before it starts to repeat. A short delay can cause repeated letters if you hold keys longer than you mean to.</value></data>
+<data name="Choice_input_keyboard_repeat_standard" xml:space="preserve"><value>Standard</value></data>
+<data name="Choice_input_keyboard_repeat_fast" xml:space="preserve"><value>Short</value></data>
+<data name="Setting_input_accessibility_hotkeys_Title" xml:space="preserve"><value>Accessibility shortcut prompts</value></data>
+<data name="Setting_input_accessibility_hotkeys_Description" xml:space="preserve"><value>Stop the pop-ups for Sticky Keys, Filter Keys and Toggle Keys that appear when you press Shift five times or hold a key. The features stay available in Settings.</value></data>
+<data name="Choice_input_accessibility_hotkeys_allowed" xml:space="preserve"><value>Shortcuts on</value></data>
+<data name="Choice_input_accessibility_hotkeys_off" xml:space="preserve"><value>Shortcuts off</value></data>
+<data name="Setting_apps_game_mode_Title" xml:space="preserve"><value>Game Mode</value></data>
+<data name="Setting_apps_game_mode_Description" xml:space="preserve"><value>Let Windows give games more of the PC's power. Leaving it on is recommended.</value></data>
+<data name="Choice_apps_game_mode_on" xml:space="preserve"><value>On</value></data>
+<data name="Choice_apps_game_mode_off" xml:space="preserve"><value>Off</value></data>
+<data name="Setting_apps_game_capture_Title" xml:space="preserve"><value>Game recording and clips</value></data>
+<data name="Setting_apps_game_capture_Description" xml:space="preserve"><value>Let Windows record gameplay in the background and save clips with the Game Bar. Turning it off stops clip recording.</value></data>
+<data name="Choice_apps_game_capture_on" xml:space="preserve"><value>On</value></data>
+<data name="Choice_apps_game_capture_off" xml:space="preserve"><value>Off</value></data>
+<data name="Setting_apps_new_outlook_migration_Title" xml:space="preserve"><value>Move to the new Outlook</value></data>
+<data name="Setting_apps_new_outlook_migration_Description" xml:space="preserve"><value>Stop classic Outlook from moving you to the new Outlook by itself. It only matters when classic Outlook is installed.</value></data>
+<data name="Choice_apps_new_outlook_migration_blocked" xml:space="preserve"><value>Block</value></data>
+<data name="Choice_apps_new_outlook_migration_allowed" xml:space="preserve"><value>Allow</value></data>
+<data name="Setting_performance_storage_sense_Title" xml:space="preserve"><value>Storage Sense</value></data>
+<data name="Setting_performance_storage_sense_Description" xml:space="preserve"><value>Let Windows free disk space on its own by deleting temporary files and emptying the recycle bin on a schedule.</value></data>
+<data name="Choice_performance_storage_sense_off" xml:space="preserve"><value>Off</value></data>
+<data name="Choice_performance_storage_sense_on" xml:space="preserve"><value>On</value></data>
+<data name="Setting_performance_app_shutdown_timeouts_Title" xml:space="preserve"><value>App wait time at shutdown</value></data>
+<data name="Setting_performance_app_shutdown_timeouts_Description" xml:space="preserve"><value>Choose how long Windows waits for apps to close at sign-out and shutdown. A short wait can cut off an app that is still saving. Takes effect after you sign out and in.</value></data>
+<data name="Choice_performance_app_shutdown_timeouts_windows" xml:space="preserve"><value>Windows default</value></data>
+<data name="Choice_performance_app_shutdown_timeouts_faster" xml:space="preserve"><value>Faster (5 seconds)</value></data>
+<data name="Setting_performance_auto_end_tasks_Title" xml:space="preserve"><value>End apps at shutdown without asking</value></data>
+<data name="Setting_performance_auto_end_tasks_Description" xml:space="preserve"><value>Close apps at sign-out and shutdown without asking you first. Unsaved work in those apps is lost. Takes effect after you sign out and in.</value></data>
+<data name="Choice_performance_auto_end_tasks_ask" xml:space="preserve"><value>Ask first</value></data>
+<data name="Choice_performance_auto_end_tasks_auto" xml:space="preserve"><value>Close without asking</value></data>
+<data name="Choice_taskbar_search_mode_icon_label" xml:space="preserve"><value>Icon and label</value></data>
+<data name="Choice_explorer_open_to_downloads" xml:space="preserve"><value>Downloads</value></data>
+<data name="Choice_explorer_open_to_onedrive" xml:space="preserve"><value>OneDrive</value></data>
+</root>

@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability (private)
+    url: https://github.com/ehsanenaloo/Winora/security/advisories/new
+    about: Please report security issues privately. Do not open a public issue.
+  - name: Support and where to ask
+    url: https://github.com/ehsanenaloo/Winora/blob/main/.github/SUPPORT.md
+    about: Find out where to ask a question, report a problem or request a change, and what help to expect.
+  - name: Contributing guide
+    url: https://github.com/ehsanenaloo/Winora/blob/main/.github/CONTRIBUTING.md
+    about: Learn how to build Winora, run the tests, add a setting or fix a translation.
+  - name: Support the project
+    url: https://enaloo.com/support/
+    about: Winora is free. If it saves you time, you can support its development.

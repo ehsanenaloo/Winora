@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<!--
+  Winora per-user MSI, UNSIGNED. Installs to %LOCALAPPDATA%\Programs\Winora, adds a Start menu shortcut and the normal Apps & features
+  entry (HKCU, because the package is per-user). No elevation, no HKLM, no services, no PATH change, no file association.
+  Winora's data folder (%LOCALAPPDATA%\Winora: journal, preferences, logs) is NOT part of the package and is never touched by install,
+  upgrade or uninstall: it is kept by default. Removing it is a manual step (technical-docs/release-limits.md). Uninstall never reverts any Windows
+  setting that Winora changed; users revert those from the app first.
+  UpgradeCode is permanent for this product. ProductCode is derived from the version by tools/publish.ps1.
+-->
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package Name="Winora" Manufacturer="$(WinoraPublisher)" Version="$(WinoraVersion)"
+           UpgradeCode="912F5E18-EB3C-4C58-A6C7-4FE958DA71BE" ProductCode="$(WinoraProductCode)"
+           Scope="perUser" InstallerVersion="500" Language="1033" Compressed="yes">
+
+    <SummaryInformation Description="Winora - independent offline Windows settings manager (UNSIGNED build)" />
+    <MajorUpgrade DowngradeErrorMessage="A newer version of Winora is already installed. Uninstall it first if you really want to go back." />
+    <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
+
+    <!-- Windows 11 (build 22000) or later; never block removal of an already installed copy.
+         The Windows Installer properties VersionNT and WindowsBuild report Windows 8.1 (603 and 9600) for this package on Windows 11 (build 26200 was observed),
+         so the build number is read from the registry. A value that cannot be read is empty and the condition fails, so an unknown system is refused. -->
+    <Property Id="WINORA_WINDOWS_BUILD" Secure="yes">
+      <RegistrySearch Id="WindowsBuildSearch" Root="HKLM" Key="SOFTWARE\Microsoft\Windows NT\CurrentVersion" Name="CurrentBuildNumber" Type="raw" Bitness="always64" />
+    </Property>
+    <Launch Condition="Installed OR (VersionNT64 AND WINORA_WINDOWS_BUILD &gt;= 22000)"
+            Message="Winora supports 64-bit Windows 11 (build 22000 or later) only." />
+
+    <Property Id="ARPCOMMENTS" Value="UNSIGNED build. Uninstalling does not revert Windows settings changed with Winora; revert them in Winora first. Winora data in %LOCALAPPDATA%\Winora is kept." />
+
+    <StandardDirectory Id="LocalAppDataFolder">
+      <Directory Id="WinoraProgramsFolder" Name="Programs">
+        <Directory Id="INSTALLFOLDER" Name="Winora" />
+      </Directory>
+    </StandardDirectory>
+    <StandardDirectory Id="ProgramMenuFolder">
+      <Directory Id="WinoraMenuFolder" Name="Winora" />
+    </StandardDirectory>
+
+    <!-- Everything staged by tools/publish.ps1 (binaries, notices, SBOM, FILES.sha256), harvested at build time. -->
+    <ComponentGroup Id="WinoraFiles" Directory="INSTALLFOLDER">
+      <Files Include="$(StageDir)\**" />
+    </ComponentGroup>
+
+    <!-- Per-user shortcut components need an HKCU key path (installer bookkeeping only, removed on uninstall). -->
+    <Component Id="StartMenuShortcut" Directory="WinoraMenuFolder">
+      <Shortcut Id="WinoraShortcut" Name="Winora" Description="Winora settings manager"
+                Target="[INSTALLFOLDER]desktop\Winora.Desktop.exe" WorkingDirectory="INSTALLFOLDER" />
+      <RemoveFolder Id="RemoveWinoraMenuFolder" On="uninstall" />
+      <RegistryValue Root="HKCU" Key="Software\Winora\Installer" Name="StartMenuShortcut" Type="integer" Value="1" KeyPath="yes" />
+    </Component>
+
+    <Feature Id="Main" Title="Winora" Level="1">
+      <ComponentGroupRef Id="WinoraFiles" />
+      <ComponentRef Id="StartMenuShortcut" />
+    </Feature>
+  </Package>
+</Wix>

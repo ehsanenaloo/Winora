@@ -1,0 +1,2330 @@
+{
+ "format": "winora.machine-definitions/1",
+ "setId": "winora-machine",
+ "serial": 1,
+ "minProtocol": 1,
+ "minWorkerBuild": 22621,
+ "revoked": [],
+ "definitions": [
+  {
+   "id": "machine.privacy.feedback_notifications",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_privacy_feedback_notifications_Title",
+   "descriptionKey": "Machine_machine_privacy_feedback_notifications_Description",
+   "category": "Privacy",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+    "valueName": "DoNotShowFeedbackNotifications",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_privacy_feedback_notifications_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_privacy_feedback_notifications_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+     "valueName": "DoNotShowFeedbackNotifications"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications"
+   ],
+   "reviewRef": "SEC-DEF-0002",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.privacy.clipboard_history",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_privacy_clipboard_history_Title",
+   "descriptionKey": "Machine_machine_privacy_clipboard_history_Description",
+   "category": "Privacy",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+    "valueName": "AllowClipboardHistory",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_privacy_clipboard_history_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_privacy_clipboard_history_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+     "valueName": "AllowClipboardHistory"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowclipboardhistory"
+   ],
+   "reviewRef": "SEC-DEF-0003",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.explorer.onedrive_file_sync",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_explorer_onedrive_file_sync_Title",
+   "descriptionKey": "Machine_machine_explorer_onedrive_file_sync_Description",
+   "category": "Explorer",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\OneDrive",
+    "valueName": "DisableFileSyncNGSC",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_explorer_onedrive_file_sync_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_explorer_onedrive_file_sync_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\OneDrive",
+     "valueName": "DisableFileSyncNGSC"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disableonedrivefilesync"
+   ],
+   "reviewRef": "SEC-DEF-0004",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.explorer.file_history",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_explorer_file_history_Title",
+   "descriptionKey": "Machine_machine_explorer_file_history_Description",
+   "category": "Explorer",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\FileHistory",
+    "valueName": "Disabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_explorer_file_history_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_explorer_file_history_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\FileHistory",
+     "valueName": "Disabled"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#turnofffilehistory"
+   ],
+   "reviewRef": "SEC-DEF-0005",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.privacy.activity_feed",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_privacy_activity_feed_Title",
+   "descriptionKey": "Machine_machine_privacy_activity_feed_Description",
+   "category": "Privacy",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+    "valueName": "EnableActivityFeed",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_privacy_activity_feed_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_privacy_activity_feed_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+     "valueName": "EnableActivityFeed"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-privacy#enableactivityfeed"
+   ],
+   "reviewRef": "SEC-DEF-0006",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.privacy.activity_upload",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_privacy_activity_upload_Title",
+   "descriptionKey": "Machine_machine_privacy_activity_upload_Description",
+   "category": "Privacy",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+    "valueName": "UploadUserActivities",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_privacy_activity_upload_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_privacy_activity_upload_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+     "valueName": "UploadUserActivities"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-privacy#uploaduseractivities"
+   ],
+   "reviewRef": "SEC-DEF-0007",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.privacy.advertising_id",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_privacy_advertising_id_Title",
+   "descriptionKey": "Machine_machine_privacy_advertising_id_Description",
+   "category": "Privacy",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\AdvertisingInfo",
+    "valueName": "DisabledByGroupPolicy",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_privacy_advertising_id_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_privacy_advertising_id_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\AdvertisingInfo",
+     "valueName": "DisabledByGroupPolicy"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-privacy#disableadvertisingid"
+   ],
+   "reviewRef": "SEC-DEF-0008",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.privacy.diagnostic_level",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_privacy_diagnostic_level_Title",
+   "descriptionKey": "Machine_machine_privacy_diagnostic_level_Description",
+   "category": "Privacy",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+    "valueName": "AllowTelemetry",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "required",
+     "labelKey": "Machine_machine_privacy_diagnostic_level_Choice_required",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_privacy_diagnostic_level_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    },
+    {
+     "kind": "dword",
+     "number": 2
+    },
+    {
+     "kind": "dword",
+     "number": 3
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+     "valueName": "AllowTelemetry"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowtelemetry"
+   ],
+   "reviewRef": "SEC-DEF-0009",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.privacy.diagnostic_logs",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_privacy_diagnostic_logs_Title",
+   "descriptionKey": "Machine_machine_privacy_diagnostic_logs_Description",
+   "category": "Privacy",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+    "valueName": "LimitDiagnosticLogCollection",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_privacy_diagnostic_logs_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_privacy_diagnostic_logs_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+     "valueName": "LimitDiagnosticLogCollection"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#limitdiagnosticlogcollection"
+   ],
+   "reviewRef": "SEC-DEF-0010",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.privacy.diagnostic_dumps",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_privacy_diagnostic_dumps_Title",
+   "descriptionKey": "Machine_machine_privacy_diagnostic_dumps_Description",
+   "category": "Privacy",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+    "valueName": "LimitDumpCollection",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "limited",
+     "labelKey": "Machine_machine_privacy_diagnostic_dumps_Choice_limited",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_privacy_diagnostic_dumps_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+     "valueName": "LimitDumpCollection"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#limitdumpcollection"
+   ],
+   "reviewRef": "SEC-DEF-0011",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.privacy.onesettings",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_privacy_onesettings_Title",
+   "descriptionKey": "Machine_machine_privacy_onesettings_Description",
+   "category": "Privacy",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+    "valueName": "DisableOneSettingsDownloads",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_privacy_onesettings_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_privacy_onesettings_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+     "valueName": "DisableOneSettingsDownloads"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disableonesettingsdownloads"
+   ],
+   "reviewRef": "SEC-DEF-0012",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.privacy.app_location",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_privacy_app_location_Title",
+   "descriptionKey": "Machine_machine_privacy_app_location_Description",
+   "category": "Privacy",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\AppPrivacy",
+    "valueName": "LetAppsAccessLocation",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "deny",
+     "labelKey": "Machine_machine_privacy_app_location_Choice_deny",
+     "value": {
+      "kind": "dword",
+      "number": 2
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_privacy_app_location_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    },
+    {
+     "kind": "dword",
+     "number": 2
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\AppPrivacy",
+     "valueName": "LetAppsAccessLocation"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-privacy#letappsaccesslocation"
+   ],
+   "reviewRef": "SEC-DEF-0013",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.search.highlights",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_search_highlights_Title",
+   "descriptionKey": "Machine_machine_search_highlights_Description",
+   "category": "Search",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+    "valueName": "EnableDynamicContentInWSB",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_search_highlights_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_search_highlights_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+     "valueName": "EnableDynamicContentInWSB"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-search#allowsearchhighlights"
+   ],
+   "reviewRef": "SEC-DEF-0014",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.search.location",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_search_location_Title",
+   "descriptionKey": "Machine_machine_search_location_Description",
+   "category": "Search",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+    "valueName": "AllowSearchToUseLocation",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_search_location_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_search_location_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+     "valueName": "AllowSearchToUseLocation"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-search#allowsearchtouselocation"
+   ],
+   "reviewRef": "SEC-DEF-0015",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.privacy.font_providers",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_privacy_font_providers_Title",
+   "descriptionKey": "Machine_machine_privacy_font_providers_Description",
+   "category": "Privacy",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+    "valueName": "EnableFontProviders",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_privacy_font_providers_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_privacy_font_providers_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+     "valueName": "EnableFontProviders"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowfontproviders"
+   ],
+   "reviewRef": "SEC-DEF-0016",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.privacy.recall_snapshots",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_privacy_recall_snapshots_Title",
+   "descriptionKey": "Machine_machine_privacy_recall_snapshots_Description",
+   "category": "Privacy",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 26100,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI",
+    "valueName": "DisableAIDataAnalysis",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_privacy_recall_snapshots_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_privacy_recall_snapshots_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI",
+     "valueName": "DisableAIDataAnalysis"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai#disableaidataanalysis"
+   ],
+   "reviewRef": "SEC-DEF-0017",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.ai.paint_cocreator",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_ai_paint_cocreator_Title",
+   "descriptionKey": "Machine_machine_ai_paint_cocreator_Description",
+   "category": "Privacy",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Paint",
+    "valueName": "DisableCocreator",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_ai_paint_cocreator_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_ai_paint_cocreator_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Paint",
+     "valueName": "DisableCocreator"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai#disablecocreator"
+   ],
+   "reviewRef": "SEC-DEF-0018",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.ai.paint_generative_fill",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_ai_paint_generative_fill_Title",
+   "descriptionKey": "Machine_machine_ai_paint_generative_fill_Description",
+   "category": "Privacy",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Paint",
+    "valueName": "DisableGenerativeFill",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_ai_paint_generative_fill_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_ai_paint_generative_fill_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Paint",
+     "valueName": "DisableGenerativeFill"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai#disablegenerativefill"
+   ],
+   "reviewRef": "SEC-DEF-0019",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.ai.paint_image_creator",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_ai_paint_image_creator_Title",
+   "descriptionKey": "Machine_machine_ai_paint_image_creator_Description",
+   "category": "Privacy",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Paint",
+    "valueName": "DisableImageCreator",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_ai_paint_image_creator_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_ai_paint_image_creator_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Paint",
+     "valueName": "DisableImageCreator"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai#disableimagecreator"
+   ],
+   "reviewRef": "SEC-DEF-0020",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.update.delivery_peering",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_update_delivery_peering_Title",
+   "descriptionKey": "Machine_machine_update_delivery_peering_Description",
+   "category": "Privacy",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization",
+    "valueName": "DODownloadMode",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_update_delivery_peering_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_update_delivery_peering_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    },
+    {
+     "kind": "dword",
+     "number": 2
+    },
+    {
+     "kind": "dword",
+     "number": 3
+    },
+    {
+     "kind": "dword",
+     "number": 99
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization",
+     "valueName": "DODownloadMode"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-deliveryoptimization#dodownloadmode"
+   ],
+   "reviewRef": "SEC-DEF-0021",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.system.long_paths",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_system_long_paths_Title",
+   "descriptionKey": "Machine_machine_system_long_paths_Description",
+   "category": "System",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+    "valueName": "LongPathsEnabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "on",
+     "labelKey": "Machine_machine_system_long_paths_Choice_on",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_system_long_paths_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    }
+   ],
+   "defaultChoiceId": "off",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation"
+   ],
+   "reviewRef": "SEC-DEF-0022",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.system.responsiveness",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_system_responsiveness_Title",
+   "descriptionKey": "Machine_machine_system_responsiveness_Description",
+   "category": "System",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+    "valueName": "SystemResponsiveness",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "reserve_10",
+     "labelKey": "Machine_machine_system_responsiveness_Choice_reserve_10",
+     "value": {
+      "kind": "dword",
+      "number": 10
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_system_responsiveness_Choice_default",
+     "value": {
+      "kind": "dword",
+      "number": 20
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 10
+    },
+    {
+     "kind": "dword",
+     "number": 20
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service"
+   ],
+   "reviewRef": "SEC-DEF-0023",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.update.exclude_drivers",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_update_exclude_drivers_Title",
+   "descriptionKey": "Machine_machine_update_exclude_drivers_Description",
+   "category": "Updates",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+    "valueName": "ExcludeWUDriversInQualityUpdate",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "exclude",
+     "labelKey": "Machine_machine_update_exclude_drivers_Choice_exclude",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_update_exclude_drivers_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+     "valueName": "ExcludeWUDriversInQualityUpdate"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/deployment/update/waas-wu-settings#do-not-include-drivers-with-windows-updates"
+   ],
+   "reviewRef": "SEC-DEF-0024",
+   "sourceClass": "A",
+   "editions": [
+    "Pro",
+    "Enterprise",
+    "Education"
+   ]
+  },
+  {
+   "id": "machine.update.auto_updates_off",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_update_auto_updates_off_Title",
+   "descriptionKey": "Machine_machine_update_auto_updates_off_Description",
+   "category": "Updates",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU",
+    "valueName": "NoAutoUpdate",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_update_auto_updates_off_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_update_auto_updates_off_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU",
+     "valueName": "NoAutoUpdate"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/deployment/update/waas-wu-settings#configuring-automatic-updates-by-editing-the-registry"
+   ],
+   "reviewRef": "SEC-DEF-0025",
+   "sourceClass": "A",
+   "editions": [
+    "Pro",
+    "Enterprise",
+    "Education"
+   ]
+  },
+  {
+   "id": "machine.system.verbose_status",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_system_verbose_status_Title",
+   "descriptionKey": "Machine_machine_system_verbose_status_Description",
+   "category": "System",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+    "valueName": "VerboseStatus",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "on",
+     "labelKey": "Machine_machine_system_verbose_status_Choice_on",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_system_verbose_status_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+     "valueName": "VerboseStatus"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/enable-verbose-startup-shutdown-logon-logoff-status-messages"
+   ],
+   "reviewRef": "SEC-DEF-0026",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.privacy.consumer_features",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_privacy_consumer_features_Title",
+   "descriptionKey": "Machine_machine_privacy_consumer_features_Description",
+   "category": "Privacy",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent",
+    "valueName": "DisableWindowsConsumerFeatures",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_privacy_consumer_features_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_privacy_consumer_features_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent",
+     "valueName": "DisableWindowsConsumerFeatures"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience"
+   ],
+   "reviewRef": "SEC-DEF-0027",
+   "sourceClass": "A",
+   "editions": [
+    "Enterprise",
+    "Education"
+   ]
+  },
+  {
+   "id": "machine.taskbar.widgets",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_taskbar_widgets_Title",
+   "descriptionKey": "Machine_machine_taskbar_widgets_Description",
+   "category": "Taskbar",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Dsh",
+    "valueName": "AllowNewsAndInterests",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_taskbar_widgets_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_taskbar_widgets_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Dsh",
+     "valueName": "AllowNewsAndInterests"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-newsandinterests#allownewsandinterests"
+   ],
+   "reviewRef": "SEC-DEF-0028",
+   "sourceClass": "A",
+   "editions": [
+    "Pro",
+    "Enterprise",
+    "Education"
+   ]
+  },
+  {
+   "id": "machine.network.prefer_ipv4",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_network_prefer_ipv4_Title",
+   "descriptionKey": "Machine_machine_network_prefer_ipv4_Description",
+   "category": "Network",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters",
+    "valueName": "DisabledComponents",
+    "view": "Registry64",
+    "bits": {
+     "mask": 32,
+     "storage": "DWord"
+    }
+   },
+   "choices": [
+    {
+     "id": "prefer_ipv4",
+     "labelKey": "Machine_machine_network_prefer_ipv4_Choice_prefer_ipv4",
+     "value": {
+      "kind": "dword",
+      "number": 32
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_network_prefer_ipv4_Choice_default",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 32
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows"
+   ],
+   "reviewRef": "SEC-DEF-0029",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.ai.notepad",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_ai_notepad_Title",
+   "descriptionKey": "Machine_machine_ai_notepad_Description",
+   "category": "Privacy",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\WindowsNotepad",
+    "valueName": "DisableAIFeatures",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_ai_notepad_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_ai_notepad_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\WindowsNotepad",
+     "valueName": "DisableAIFeatures"
+    }
+   ],
+   "sourceRefs": [],
+   "reviewRef": "SEC-DEF-0030",
+   "sourceClass": "B",
+   "communitySources": [
+    "reference source 2",
+    "reference source 1"
+   ]
+  },
+  {
+   "id": "machine.services.maps_broker",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_services_maps_broker_Title",
+   "descriptionKey": "Machine_machine_services_maps_broker_Description",
+   "category": "Services",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "service",
+    "serviceName": "MapsBroker"
+   },
+   "choices": [
+    {
+     "id": "delayed",
+     "labelKey": "Machine_machine_services_maps_broker_Choice_delayed",
+     "start": "AutomaticDelayed"
+    },
+    {
+     "id": "manual",
+     "labelKey": "Machine_machine_services_maps_broker_Choice_manual",
+     "start": "Manual"
+    }
+   ],
+   "defaultChoiceId": "delayed",
+   "recommendedChoiceId": null,
+   "restoreDomain": [],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/security/windows-services/security-guidelines-for-disabling-system-services-in-windows-server-2016"
+   ],
+   "reviewRef": "SEC-DEF-0031",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.services.lltdsvc",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_services_lltdsvc_Title",
+   "descriptionKey": "Machine_machine_services_lltdsvc_Description",
+   "category": "Services",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "service",
+    "serviceName": "lltdsvc"
+   },
+   "choices": [
+    {
+     "id": "manual",
+     "labelKey": "Machine_machine_services_lltdsvc_Choice_manual",
+     "start": "Manual"
+    },
+    {
+     "id": "disabled",
+     "labelKey": "Machine_machine_services_lltdsvc_Choice_disabled",
+     "start": "Disabled"
+    }
+   ],
+   "defaultChoiceId": "manual",
+   "recommendedChoiceId": null,
+   "restoreDomain": [],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/security/windows-services/security-guidelines-for-disabling-system-services-in-windows-server-2016"
+   ],
+   "reviewRef": "SEC-DEF-0032",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.services.xbl_game_save",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_services_xbl_game_save_Title",
+   "descriptionKey": "Machine_machine_services_xbl_game_save_Description",
+   "category": "Services",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "service",
+    "serviceName": "XblGameSave"
+   },
+   "choices": [
+    {
+     "id": "manual",
+     "labelKey": "Machine_machine_services_xbl_game_save_Choice_manual",
+     "start": "Manual"
+    },
+    {
+     "id": "disabled",
+     "labelKey": "Machine_machine_services_xbl_game_save_Choice_disabled",
+     "start": "Disabled"
+    }
+   ],
+   "defaultChoiceId": "manual",
+   "recommendedChoiceId": null,
+   "restoreDomain": [],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/security/windows-services/security-guidelines-for-disabling-system-services-in-windows-server-2016"
+   ],
+   "reviewRef": "SEC-DEF-0033",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.services.xbl_auth_manager",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_services_xbl_auth_manager_Title",
+   "descriptionKey": "Machine_machine_services_xbl_auth_manager_Description",
+   "category": "Services",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "service",
+    "serviceName": "XblAuthManager"
+   },
+   "choices": [
+    {
+     "id": "manual",
+     "labelKey": "Machine_machine_services_xbl_auth_manager_Choice_manual",
+     "start": "Manual"
+    },
+    {
+     "id": "disabled",
+     "labelKey": "Machine_machine_services_xbl_auth_manager_Choice_disabled",
+     "start": "Disabled"
+    }
+   ],
+   "defaultChoiceId": "manual",
+   "recommendedChoiceId": null,
+   "restoreDomain": [],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/security/windows-services/security-guidelines-for-disabling-system-services-in-windows-server-2016"
+   ],
+   "reviewRef": "SEC-DEF-0034",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.services.diagtrack",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_services_diagtrack_Title",
+   "descriptionKey": "Machine_machine_services_diagtrack_Description",
+   "category": "Services",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "service",
+    "serviceName": "DiagTrack"
+   },
+   "choices": [
+    {
+     "id": "automatic",
+     "labelKey": "Machine_machine_services_diagtrack_Choice_automatic",
+     "start": "Automatic"
+    },
+    {
+     "id": "disabled",
+     "labelKey": "Machine_machine_services_diagtrack_Choice_disabled",
+     "start": "Disabled"
+    }
+   ],
+   "defaultChoiceId": "automatic",
+   "recommendedChoiceId": null,
+   "restoreDomain": [],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/privacy/configure-windows-diagnostic-data-in-your-organization"
+   ],
+   "reviewRef": "SEC-DEF-0035",
+   "sourceClass": "B",
+   "communitySources": [
+    "reference source 5",
+    "reference source 1"
+   ]
+  },
+  {
+   "id": "machine.security.memory_integrity",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_memory_integrity_Title",
+   "descriptionKey": "Machine_machine_security_memory_integrity_Description",
+   "category": "System",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\DeviceGuard\\Scenarios\\HypervisorEnforcedCodeIntegrity",
+    "valueName": "Enabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_security_memory_integrity_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_memory_integrity_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SYSTEM\\CurrentControlSet\\Control\\DeviceGuard\\Scenarios\\HypervisorEnforcedCodeIntegrity",
+     "valueName": "Enabled"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/security/hardware-security/enable-virtualization-based-protection-of-code-integrity"
+   ],
+   "reviewRef": "SEC-DEF-0036",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.security.smartscreen_policy",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_smartscreen_policy_Title",
+   "descriptionKey": "Machine_machine_security_smartscreen_policy_Description",
+   "category": "System",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+    "valueName": "EnableSmartScreen",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_security_smartscreen_policy_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_smartscreen_policy_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+     "valueName": "EnableSmartScreen"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-smartscreen"
+   ],
+   "reviewRef": "SEC-DEF-0037",
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.system.fast_startup",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_system_fast_startup_Title",
+   "descriptionKey": "Machine_machine_system_fast_startup_Description",
+   "category": "System",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+    "valueName": "HiberbootEnabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_system_fast_startup_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_system_fast_startup_Choice_default",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\System",
+     "valueName": "HiberbootEnabled"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/win32/power/system-power-states",
+    "https://learn.microsoft.com/en-us/troubleshoot/windows-client/setup-upgrade-and-drivers/disable-and-re-enable-hibernation"
+   ],
+   "reviewRef": "SEC-DEF-1400",
+   "sourceClass": "C",
+   "communitySources": [
+    "reference source 1"
+   ]
+  }
+ ]
+}

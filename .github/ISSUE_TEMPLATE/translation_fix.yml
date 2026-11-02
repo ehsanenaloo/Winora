@@ -1,0 +1,68 @@
+name: Translation fix
+description: Report a wrong, awkward or missing Persian text.
+title: "[Translation]: "
+labels: ["translation", "persian"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping with the Persian text. It was machine-drafted and no native speaker has reviewed it yet, so your report is useful.
+        You can also send a pull request. See the Translations section of CONTRIBUTING.md.
+  - type: input
+    id: location
+    attributes:
+      label: Where the text appears
+      description: The page and the button, label or message where you see it. If you know it, add the resource key, for example `HistUndoButton`. A screenshot also helps.
+      placeholder: "History page, the undo button"
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: Current text
+      description: Copy the Persian text as it appears now.
+    validations:
+      required: true
+  - type: textarea
+    id: suggested
+    attributes:
+      label: Suggested text
+      description: Keep placeholders such as {0} and {1} exactly as they are. Keep product names and keyboard keys in Latin letters.
+    validations:
+      required: true
+  - type: dropdown
+    id: problem
+    attributes:
+      label: What is wrong?
+      options:
+        - Wrong meaning
+        - Awkward or unnatural wording
+        - Spelling, spacing or half-space (نیم‌فاصله)
+        - Text in the wrong direction or mixed up with Latin text
+        - Text is cut off or does not fit
+        - Text is missing or still in English
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: native
+    attributes:
+      label: Are you a native Persian speaker?
+      options:
+        - "Yes, I am a native speaker"
+        - "I am fluent but not a native speaker"
+        - "No, I used a translation tool"
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else
+      description: For example, why the current text is wrong, or other strings with the same problem.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I did not include personal data.
+          required: true

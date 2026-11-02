@@ -1,0 +1,31 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<UserControl x:Class="Winora.Desktop.PlannedView"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:ctl="clr-namespace:Winora.Desktop.Controls"
+ AutomationProperties.Name="{Binding Heading}" Focusable="False">
+ <ctl:DashboardPage x:Name="Workspace">
+  <ctl:DashboardPage.Body>
+   <StackPanel>
+   <ui:SymbolIcon Symbol="{Binding Icon, Converter={x:Static ctl:IconKeys.Symbol}}" FontSize="64" Foreground="{DynamicResource TextFillColorTertiaryBrush}" HorizontalAlignment="Center" Margin="{StaticResource WinoraSpace.T32B16}"/>
+   <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+    <ctl:StatusBadge Kind="Info" Text="{Binding Text[StatusPlanned]}"/>
+    <ctl:StatusBadge Kind="Neutral" Text="{Binding Text[StatusUnavailable]}"/>
+   </StackPanel>
+   <TextBlock Style="{StaticResource WinoraPageHeading}" Text="{Binding Heading}" TextAlignment="Center" Margin="{StaticResource WinoraSpace.T16B8}"/>
+   <TextBlock Style="{StaticResource WinoraBodySecondary}" Text="{Binding Text[PlannedLead]}" TextAlignment="Center"/>
+   <TextBlock Style="{StaticResource WinoraBody}" Text="{Binding Summary}" TextAlignment="Center" Margin="{StaticResource WinoraSpace.T12B24}"/>
+   <Border Style="{StaticResource WinoraCardBorder}" AutomationProperties.Name="{Binding Text[PlannedWhatWillCome]}">
+    <StackPanel>
+     <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding Text[PlannedWhatWillCome]}" Margin="{StaticResource WinoraSpace.B12}" AutomationProperties.HeadingLevel="Level2"/>
+     <Grid Margin="{StaticResource WinoraSpace.B8}"><Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+      <ui:SymbolIcon Symbol="Clock24" FontSize="16" Margin="{StaticResource WinoraSpace.T2R12}" VerticalAlignment="Top"/><TextBlock Grid.Column="1" Style="{StaticResource WinoraBody}" Text="{Binding Item1}"/></Grid>
+     <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+      <ui:SymbolIcon Symbol="Clock24" FontSize="16" Margin="{StaticResource WinoraSpace.T2R12}" VerticalAlignment="Top"/><TextBlock Grid.Column="1" Style="{StaticResource WinoraBody}" Text="{Binding Item2}"/></Grid>
+    </StackPanel>
+   </Border>
+   <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Text[PlannedPromise]}" TextAlignment="Center" Margin="{StaticResource WinoraSpace.T16}"/>
+   </StackPanel>
+  </ctl:DashboardPage.Body>
+ </ctl:DashboardPage>
+</UserControl>

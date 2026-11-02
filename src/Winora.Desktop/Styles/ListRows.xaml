@@ -1,0 +1,160 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<!-- Grouped lists of the new design: a card that holds rows, a row with an optional divider, and the details toggle with a turning chevron. -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:ctl="clr-namespace:Winora.Desktop.Controls">
+
+ <Style x:Key="WinoraListCard" TargetType="Border">
+  <Setter Property="Background" Value="{DynamicResource WinoraSurfaceCardBrush}"/>
+  <Setter Property="BorderBrush" Value="{DynamicResource WinoraCardBorderBrush}"/>
+  <Setter Property="BorderThickness" Value="{DynamicResource WinoraBorderThickness}"/>
+  <Setter Property="CornerRadius" Value="{DynamicResource WinoraCornerRadius}"/>
+  <Setter Property="Margin" Value="0,0,0,16"/>
+  <Setter Property="SnapsToDevicePixels" Value="True"/>
+ </Style>
+
+ <!-- One row inside a list card. The divider is the top line; the first row has none. -->
+ <Style x:Key="WinoraListRow" TargetType="Border">
+  <Setter Property="Padding" Value="16,8"/>
+  <Setter Property="MinHeight" Value="56"/>
+  <Setter Property="BorderBrush" Value="{DynamicResource WinoraCardBorderBrush}"/>
+  <Setter Property="BorderThickness" Value="0"/>
+ </Style>
+
+ <!-- The one row kind of every inventory list: a card per row, 3 px stripe at Start (accent when ticked, pending tint when staged), a grey fill for the row selected in a list, hover tint, density height and padding. -->
+ <Style x:Key="WinoraInventoryRowStyle" TargetType="ctl:InventoryRow">
+  <Setter Property="Focusable" Value="False"/><Setter Property="IsTabStop" Value="False"/>
+  <Setter Property="Background" Value="{DynamicResource WinoraSurfaceCardBrush}"/>
+  <Setter Property="BorderBrush" Value="{DynamicResource WinoraCardBorderBrush}"/>
+  <Setter Property="BorderThickness" Value="{DynamicResource WinoraBorderThickness}"/>
+  <Setter Property="Padding" Value="{DynamicResource WinoraCardPadding}"/>
+  <Setter Property="MinHeight" Value="{DynamicResource WinoraRowMinHeight}"/>
+  <Setter Property="HorizontalContentAlignment" Value="Stretch"/><Setter Property="VerticalContentAlignment" Value="Center"/>
+  <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ctl:InventoryRow">
+   <Border x:Name="Card" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+    CornerRadius="{DynamicResource WinoraCornerRadius}" MinHeight="{TemplateBinding MinHeight}" SnapsToDevicePixels="True">
+    <Grid>
+     <Border x:Name="Tint" Background="{DynamicResource WinoraChangedByWinoraBrush}" CornerRadius="{DynamicResource WinoraCornerRadius}" IsHitTestVisible="False" Visibility="Collapsed"/>
+     <Rectangle x:Name="Divider" Height="1" VerticalAlignment="Top" Fill="{DynamicResource WinoraCardBorderBrush}" Visibility="Collapsed"/>
+     <Grid>
+      <Grid.ColumnDefinitions><ColumnDefinition Width="3"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+      <Border x:Name="Stripe" Background="Transparent" CornerRadius="4,0,0,4"/>
+      <Grid Grid.Column="1" Margin="{TemplateBinding Padding}">
+       <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+       <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+       <ContentPresenter x:Name="LeadHost" Grid.Column="0" Content="{TemplateBinding Lead}" Margin="0,0,16,0" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+       <ContentPresenter x:Name="TextHost" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+       <ContentPresenter x:Name="ControlHost" Grid.Column="2" Content="{TemplateBinding Control}" Margin="16,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+       <ContentPresenter x:Name="MenuHost" Grid.Column="3" Content="{TemplateBinding Menu}" Margin="8,0,-6,0" VerticalAlignment="Center"/>
+      </Grid>
+     </Grid>
+    </Grid>
+   </Border>
+   <ControlTemplate.Triggers>
+    <Trigger Property="HasLead" Value="False"><Setter TargetName="LeadHost" Property="Visibility" Value="Collapsed"/></Trigger>
+    <Trigger Property="HasControl" Value="False"><Setter TargetName="ControlHost" Property="Visibility" Value="Collapsed"/></Trigger>
+    <Trigger Property="HasMenu" Value="False"><Setter TargetName="MenuHost" Property="Visibility" Value="Collapsed"/></Trigger>
+    <Trigger Property="IsWide" Value="False">
+     <Setter TargetName="ControlHost" Property="Grid.Row" Value="1"/><Setter TargetName="ControlHost" Property="Grid.Column" Value="1"/><Setter TargetName="ControlHost" Property="Grid.ColumnSpan" Value="3"/>
+     <Setter TargetName="ControlHost" Property="Margin" Value="0,8,0,0"/><Setter TargetName="ControlHost" Property="HorizontalAlignment" Value="Stretch"/>
+    </Trigger>
+    <Trigger Property="FlowDirection" Value="RightToLeft"><Setter TargetName="Stripe" Property="CornerRadius" Value="0,4,4,0"/></Trigger>
+    <MultiTrigger><MultiTrigger.Conditions><Condition Property="IsFirst" Value="True"/><Condition Property="IsLast" Value="False"/></MultiTrigger.Conditions>
+     <Setter TargetName="Card" Property="BorderThickness" Value="1,1,1,0"/><Setter TargetName="Card" Property="CornerRadius" Value="8,8,0,0"/><Setter TargetName="Tint" Property="CornerRadius" Value="7,7,0,0"/>
+     <Setter TargetName="Stripe" Property="CornerRadius" Value="0"/><Setter TargetName="Stripe" Property="Margin" Value="0,4,0,0"/>
+    </MultiTrigger>
+    <MultiTrigger><MultiTrigger.Conditions><Condition Property="IsFirst" Value="False"/><Condition Property="IsLast" Value="True"/></MultiTrigger.Conditions>
+     <Setter TargetName="Card" Property="BorderThickness" Value="1,0,1,1"/><Setter TargetName="Card" Property="CornerRadius" Value="0,0,8,8"/><Setter TargetName="Tint" Property="CornerRadius" Value="0,0,7,7"/>
+     <Setter TargetName="Stripe" Property="CornerRadius" Value="0"/><Setter TargetName="Stripe" Property="Margin" Value="0,0,0,4"/><Setter TargetName="Divider" Property="Visibility" Value="Visible"/>
+    </MultiTrigger>
+    <MultiTrigger><MultiTrigger.Conditions><Condition Property="IsFirst" Value="False"/><Condition Property="IsLast" Value="False"/></MultiTrigger.Conditions>
+     <Setter TargetName="Card" Property="BorderThickness" Value="1,0,1,0"/><Setter TargetName="Card" Property="CornerRadius" Value="0"/><Setter TargetName="Tint" Property="CornerRadius" Value="0"/>
+     <Setter TargetName="Stripe" Property="CornerRadius" Value="0"/><Setter TargetName="Divider" Property="Visibility" Value="Visible"/>
+    </MultiTrigger>
+    <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Card" Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/></Trigger>
+    <Trigger Property="IsSelectedInList" Value="True"><Setter TargetName="Card" Property="Background" Value="{DynamicResource WinoraRowSelectedBrush}"/><Setter TargetName="Stripe" Property="Background" Value="{DynamicResource WinoraRowSelectedStripeBrush}"/></Trigger>
+    <Trigger Property="IsMarked" Value="True"><Setter TargetName="Stripe" Property="Background" Value="{DynamicResource AccentFillColorDefaultBrush}"/></Trigger>
+    <Trigger Property="IsPending" Value="True"><Setter TargetName="Stripe" Property="Background" Value="{DynamicResource WinoraStripePendingBrush}"/><Setter TargetName="Tint" Property="Visibility" Value="Visible"/></Trigger>
+   </ControlTemplate.Triggers>
+  </ControlTemplate></Setter.Value></Setter>
+ </Style>
+ <Style TargetType="ctl:InventoryRow" BasedOn="{StaticResource WinoraInventoryRowStyle}"/>
+
+ <!-- The round icon plate of a row whose lead is an outline icon (quarantine, cleanup group, repair). -->
+ <Style x:Key="WinoraRowIconTile" TargetType="Border">
+  <Setter Property="Width" Value="32"/><Setter Property="Height" Value="32"/><Setter Property="CornerRadius" Value="16"/><Setter Property="VerticalAlignment" Value="Center"/>
+  <Setter Property="Background" Value="{DynamicResource WinoraSurfaceSunkenBrush}"/>
+ </Style>
+
+ <!-- The list item that holds an inventory row: no chrome of its own (the row draws the card), a gap below, the row's name for UI Automation. -->
+ <Style x:Key="WinoraInventoryItem" TargetType="ui:ListViewItem" BasedOn="{StaticResource {x:Type ui:ListViewItem}}">
+  <Setter Property="Padding" Value="0"/><Setter Property="Margin" Value="0,0,0,4"/><Setter Property="MinHeight" Value="0"/><Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+  <Setter Property="Background" Value="Transparent"/><Setter Property="BorderThickness" Value="0"/>
+  <Setter Property="AutomationProperties.Name" Value="{Binding AutomationName}"/>
+ </Style>
+ <!-- Rows of an inventory list that is not a selectable list (a plain items control): the same card and gap. -->
+ <Style x:Key="WinoraInventoryRowGap" TargetType="ctl:InventoryRow" BasedOn="{StaticResource WinoraInventoryRowStyle}">
+  <Setter Property="Margin" Value="0,0,0,4"/>
+ </Style>
+
+ <!-- The header of a profile card: a whole-width radio button that draws no radio mark of its own (the card shows the choice). -->
+ <Style x:Key="WinoraProfileChoice" TargetType="RadioButton">
+  <Setter Property="Padding" Value="16,12,16,8"/>
+  <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+  <Setter Property="FocusVisualStyle" Value="{DynamicResource WinoraFocusRect}"/>
+  <Setter Property="Cursor" Value="Hand"/>
+  <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="RadioButton">
+   <Border x:Name="Frame" Background="Transparent" Padding="{TemplateBinding Padding}" CornerRadius="7,7,0,0" SnapsToDevicePixels="True">
+    <ContentPresenter HorizontalAlignment="Stretch"/>
+   </Border>
+   <ControlTemplate.Triggers>
+    <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Frame" Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/></Trigger>
+   </ControlTemplate.Triggers>
+  </ControlTemplate></Setter.Value></Setter>
+ </Style>
+
+ <!-- Filter chips: a list box with one choice selected; the selected chip is filled and carries a check mark, so colour is not the only cue. -->
+ <Style x:Key="WinoraFilterChipItem" TargetType="ListBoxItem">
+  <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+  <Setter Property="Margin" Value="0,0,8,8"/>
+  <Setter Property="MinHeight" Value="{DynamicResource MinHitTarget}"/>
+  <Setter Property="FocusVisualStyle" Value="{DynamicResource WinoraFocusRect}"/>
+  <Setter Property="AutomationProperties.Name" Value="{Binding Label}"/>
+  <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ListBoxItem">
+   <Border x:Name="Pill" Background="{DynamicResource WinoraSurfaceCardBrush}" BorderBrush="{DynamicResource WinoraCardBorderBrush}" BorderThickness="1" CornerRadius="16" Padding="12,0" MinHeight="{TemplateBinding MinHeight}" SnapsToDevicePixels="True">
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+     <ui:SymbolIcon x:Name="Mark" Symbol="Checkmark16" FontSize="14" Margin="0,0,4,0" Visibility="Collapsed" Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
+     <ContentPresenter VerticalAlignment="Center" TextElement.Foreground="{TemplateBinding Foreground}" TextElement.FontSize="14"/>
+    </StackPanel>
+   </Border>
+   <ControlTemplate.Triggers>
+    <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Pill" Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/></Trigger>
+    <Trigger Property="IsSelected" Value="True">
+     <Setter TargetName="Pill" Property="Background" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
+     <Setter TargetName="Pill" Property="BorderBrush" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
+     <Setter TargetName="Mark" Property="Visibility" Value="Visible"/>
+     <Setter Property="Foreground" Value="{DynamicResource TextOnAccentFillColorPrimaryBrush}"/>
+    </Trigger>
+   </ControlTemplate.Triggers>
+  </ControlTemplate></Setter.Value></Setter>
+ </Style>
+
+ <Style TargetType="ctl:ChevronToggle">
+  <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+  <Setter Property="MinHeight" Value="{DynamicResource MinHitTarget}"/>
+  <Setter Property="Padding" Value="8,4"/>
+  <Setter Property="FocusVisualStyle" Value="{DynamicResource WinoraFocusRect}"/>
+  <Setter Property="Cursor" Value="Hand"/>
+  <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ctl:ChevronToggle">
+   <Border x:Name="Frame" Background="Transparent" CornerRadius="{StaticResource WinoraCornerRadiusSmall}" Padding="{TemplateBinding Padding}" MinHeight="{TemplateBinding MinHeight}" SnapsToDevicePixels="True">
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+     <ContentPresenter VerticalAlignment="Center" TextElement.Foreground="{TemplateBinding Foreground}" TextElement.FontSize="14"/>
+     <ui:SymbolIcon x:Name="PART_Chevron" Symbol="ChevronDown16" FontSize="14" Margin="4,0,0,0" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}"/>
+    </StackPanel>
+   </Border>
+   <ControlTemplate.Triggers>
+    <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Frame" Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/></Trigger>
+    <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="0.5"/></Trigger>
+   </ControlTemplate.Triggers>
+  </ControlTemplate></Setter.Value></Setter>
+ </Style>
+</ResourceDictionary>

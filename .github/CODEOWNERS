@@ -1,0 +1,24 @@
+# Code owners are asked to review pull requests that touch the files they own.
+# Winora has one maintainer, so every rule below names the same person.
+# The last matching pattern wins, so keep the specific paths after the default.
+
+# Default owner for everything in the repository.
+* @ehsanenaloo
+
+# Application source: engine, Windows adapters, desktop app, command-line tool.
+/src/ @ehsanenaloo
+
+# Interface text in English and Persian.
+/src/Winora.Presentation/Resources/ @ehsanenaloo
+
+# Machine settings, profiles, service and task policies, preinstalled app rules.
+/definitions/ @ehsanenaloo
+
+# MSI installers.
+/installer/ @ehsanenaloo
+
+# Build, packaging and verification scripts.
+/tools/ @ehsanenaloo
+
+# Issue forms, pull request template, labels and community files.
+/.github/ @ehsanenaloo
