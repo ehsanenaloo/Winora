@@ -5,4 +5,5 @@
   <PropertyGroup><IsAotCompatible>true</IsAotCompatible><AssemblyName>Winora.Elevation.Protocol</AssemblyName><RootNamespace>Winora.Elevation.Protocol</RootNamespace></PropertyGroup>
   <ItemGroup><ProjectReference Include="../Winora.Domain/Winora.Domain.csproj" /></ItemGroup>
   <ItemGroup><PackageReference Include="System.Security.Cryptography.Cose" /></ItemGroup>
+ <ItemGroup><PackageReference Include="Microsoft.NET.ILLink.Tasks" PrivateAssets="all" /></ItemGroup>
 </Project>

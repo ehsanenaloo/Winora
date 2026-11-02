@@ -31,4 +31,5 @@
   <ProjectReference Include="../Winora.Elevation.Protocol/Winora.Elevation.Protocol.csproj" />
   <ProjectReference Include="../Winora.Elevation.Windows/Winora.Elevation.Windows.csproj" />
  </ItemGroup>
+ <ItemGroup><PackageReference Include="Microsoft.NET.ILLink.Tasks" PrivateAssets="all" /></ItemGroup>
 </Project>
