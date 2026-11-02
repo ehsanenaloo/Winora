@@ -1,0 +1,409 @@
+{
+ "version": 1,
+ "verified": "2026-10-17",
+ "features": [
+  {
+   "name": "NetFx3",
+   "class": "safe",
+   "description": ".NET Framework 3.5 including 2.0 and 3.0. Some older programs need it. Turning it on may download files from Windows Update.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "NetFx4-AdvSrvs",
+   "class": "safe",
+   "description": ".NET Framework 4 advanced services. Needed by some business programs.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "NetFx4Extended-ASPNET45",
+   "class": "safe",
+   "description": "ASP.NET 4.x support for the .NET Framework. Needed only by web applications that run on this PC.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "WCF-Services45",
+   "class": "safe",
+   "description": "Windows Communication Foundation services for .NET 4.x.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "WCF-HTTP-Activation45",
+   "class": "safe",
+   "description": "WCF HTTP activation for .NET 4.x. Needed only by programs that host WCF services.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "WCF-TCP-Activation45",
+   "class": "safe",
+   "description": "WCF TCP activation for .NET 4.x. Needed only by programs that host WCF services.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "WCF-Pipe-Activation45",
+   "class": "safe",
+   "description": "WCF named pipe activation for .NET 4.x. Needed only by programs that host WCF services.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "WCF-MSMQ-Activation45",
+   "class": "safe",
+   "description": "WCF message queue activation for .NET 4.x. Needed only by programs that host WCF services.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "WCF-TCP-PortSharing45",
+   "class": "safe",
+   "description": "WCF TCP port sharing for .NET 4.x.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "TelnetClient",
+   "class": "safe",
+   "description": "The old Telnet command line client. It sends text without encryption, so use it only on trusted networks.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "TFTP",
+   "class": "safe",
+   "description": "The old TFTP command line client. It sends files without encryption.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "TIFFIFilter",
+   "class": "safe",
+   "description": "Search index filter for TIFF image text.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "SimpleTCP",
+   "class": "safe",
+   "description": "Simple TCP/IP services (echo, daytime, quote of the day). Almost nobody needs them.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "DirectPlay",
+   "class": "safe",
+   "description": "Old DirectPlay networking used by some games from before 2005.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "LegacyComponents",
+   "class": "safe",
+   "description": "Old media components that some very old programs ask for.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "Printing-PrintToPDFServices-Features",
+   "class": "safe",
+   "description": "The Microsoft Print to PDF printer.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "Printing-XPSServices-Features",
+   "class": "safe",
+   "description": "The Microsoft XPS Document Writer printer and XPS support.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "Printing-Foundation-LPDPortMonitor",
+   "class": "safe",
+   "description": "LPD print port monitor for old network printers.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "Printing-Foundation-LPRPortMonitor",
+   "class": "safe",
+   "description": "LPR print port monitor for old network printers.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "Printing-Foundation-InternetPrinting-Client",
+   "class": "safe",
+   "description": "Internet Printing Client for printers that use an IPP web address.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "WorkFolders-Client",
+   "class": "safe",
+   "description": "Work Folders client for company file sync.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "MSMQ-Container",
+   "class": "safe",
+   "description": "Message Queuing base. Needed only by programs that use message queues.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "MSMQ-Server",
+   "class": "safe",
+   "description": "Message Queuing server. Needed only by programs that use message queues.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "Client-ProjFS",
+   "class": "safe",
+   "description": "Windows Projected File System. Used by some developer tools.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "ClientForNFS-Infrastructure",
+   "class": "safe",
+   "description": "Client for NFS, to use files from Unix and Linux servers.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "ServicesForNFS-ClientOnly",
+   "class": "safe",
+   "description": "Services for NFS, client only.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "NFS-Administration",
+   "class": "safe",
+   "description": "NFS administration tools.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "Printing-Foundation-Features",
+   "class": "caution",
+   "description": "Print spooler base features. Printing stops working without them.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "MediaPlayback",
+   "class": "caution",
+   "description": "Media playback parts (Windows Media Player, codecs, media sharing). Some programs need them.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "SMB1Protocol",
+   "class": "caution",
+   "description": "SMB 1.0 file sharing. It is old and not safe. Turn it on only for a device that cannot use a newer version, and turn it off after.",
+   "source": "Microsoft Learn: Stop using SMB1; Detect, enable and disable SMBv1, SMBv2 and SMBv3"
+  },
+  {
+   "name": "SMB1Protocol-Client",
+   "class": "caution",
+   "description": "SMB 1.0 client. It is old and not safe. Turn it on only for a device that cannot use a newer version.",
+   "source": "Microsoft Learn: Stop using SMB1; Detect, enable and disable SMBv1, SMBv2 and SMBv3"
+  },
+  {
+   "name": "SMB1Protocol-Server",
+   "class": "caution",
+   "description": "SMB 1.0 server. It is old and not safe. Other PCs could use it to reach your files.",
+   "source": "Microsoft Learn: Stop using SMB1; Detect, enable and disable SMBv1, SMBv2 and SMBv3"
+  },
+  {
+   "name": "SMB1Protocol-Deprecation",
+   "class": "caution",
+   "description": "Marker feature for the SMB 1.0 removal. Leave it as Windows set it.",
+   "source": "Microsoft Learn: Stop using SMB1; Detect, enable and disable SMBv1, SMBv2 and SMBv3"
+  },
+  {
+   "name": "SmbDirect",
+   "class": "caution",
+   "description": "SMB Direct for fast network cards (RDMA). Most PCs do not use it.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "MicrosoftWindowsPowerShellV2",
+   "class": "caution",
+   "description": "Windows PowerShell 2.0. It is old and lacks modern security logging. Turn it off unless an old script needs it.",
+   "source": "Microsoft Learn: Windows PowerShell 2.0 deprecation"
+  },
+  {
+   "name": "MicrosoftWindowsPowerShellV2Root",
+   "class": "caution",
+   "description": "Windows PowerShell 2.0 engine. It is old and lacks modern security logging. Turn it off unless an old script needs it.",
+   "source": "Microsoft Learn: Windows PowerShell 2.0 deprecation"
+  },
+  {
+   "name": "Microsoft-Hyper-V-All",
+   "class": "caution",
+   "description": "Hyper-V virtual machines. It changes how the PC starts: Windows then runs on top of the hypervisor. Other virtual machine programs can slow down or fail.",
+   "source": "Microsoft Learn: Enable Hyper-V on Windows 10 or 11",
+   "disableBlockedBy": [
+    "Containers-DisposableClientVM"
+   ]
+  },
+  {
+   "name": "Microsoft-Hyper-V",
+   "class": "caution",
+   "description": "Hyper-V platform. It changes how the PC starts and can affect other virtual machine programs.",
+   "source": "Microsoft Learn: Enable Hyper-V on Windows 10 or 11",
+   "disableBlockedBy": [
+    "Containers-DisposableClientVM"
+   ]
+  },
+  {
+   "name": "Microsoft-Hyper-V-Hypervisor",
+   "class": "caution",
+   "description": "The Hyper-V hypervisor. It changes how the PC starts.",
+   "source": "Microsoft Learn: Enable Hyper-V on Windows 10 or 11",
+   "disableBlockedBy": [
+    "Containers-DisposableClientVM",
+    "VirtualMachinePlatform"
+   ]
+  },
+  {
+   "name": "Microsoft-Hyper-V-Services",
+   "class": "caution",
+   "description": "Hyper-V services.",
+   "source": "Microsoft Learn: Enable Hyper-V on Windows 10 or 11"
+  },
+  {
+   "name": "Microsoft-Hyper-V-Tools-All",
+   "class": "caution",
+   "description": "Hyper-V Manager and tools.",
+   "source": "Microsoft Learn: Enable Hyper-V on Windows 10 or 11"
+  },
+  {
+   "name": "Microsoft-Hyper-V-Management-Clients",
+   "class": "caution",
+   "description": "Hyper-V Manager console.",
+   "source": "Microsoft Learn: Enable Hyper-V on Windows 10 or 11"
+  },
+  {
+   "name": "Microsoft-Hyper-V-Management-PowerShell",
+   "class": "caution",
+   "description": "Hyper-V commands for the command line.",
+   "source": "Microsoft Learn: Enable Hyper-V on Windows 10 or 11"
+  },
+  {
+   "name": "HypervisorPlatform",
+   "class": "caution",
+   "description": "Windows Hypervisor Platform, used by some emulators and virtual machine programs.",
+   "source": "Microsoft Learn: Windows Hypervisor Platform"
+  },
+  {
+   "name": "VirtualMachinePlatform",
+   "class": "caution",
+   "description": "Virtual Machine Platform, needed by WSL 2, Windows Sandbox and some Android apps. It stays on while WSL or Windows Sandbox is on.",
+   "source": "Microsoft Learn: Install WSL",
+   "disableBlockedBy": [
+    "Microsoft-Windows-Subsystem-Linux",
+    "Containers-DisposableClientVM"
+   ]
+  },
+  {
+   "name": "Microsoft-Windows-Subsystem-Linux",
+   "class": "caution",
+   "description": "Windows Subsystem for Linux. Turning it off hides your Linux installs until you turn it on again.",
+   "source": "Microsoft Learn: Install WSL"
+  },
+  {
+   "name": "Containers",
+   "class": "caution",
+   "description": "Windows containers support.",
+   "source": "Microsoft Learn: Windows containers"
+  },
+  {
+   "name": "Containers-DisposableClientVM",
+   "class": "caution",
+   "description": "Windows Sandbox, a throw-away desktop. It needs virtualization in the firmware.",
+   "source": "Microsoft Learn: Windows Sandbox"
+  },
+  {
+   "name": "Internet-Explorer-Optional-amd64",
+   "class": "caution",
+   "description": "Internet Explorer mode parts. Some company sites still need them.",
+   "source": "Microsoft Learn: Internet Explorer retirement"
+  },
+  {
+   "name": "Recall",
+   "class": "caution",
+   "description": "Recall, the Windows feature that saves snapshots of your screen. Turning it off removes its snapshots.",
+   "source": "Microsoft Learn: Recall overview"
+  },
+  {
+   "name": "Microsoft-RemoteDesktopConnection",
+   "class": "caution",
+   "description": "Remote Desktop Connection, the program that connects to other PCs.",
+   "source": "Microsoft Learn: Remote Desktop clients"
+  },
+  {
+   "name": "Client-DeviceLockdown",
+   "class": "caution",
+   "description": "Device Lockdown base for kiosks. It is not for a normal PC.",
+   "source": "Microsoft Learn: Assigned access"
+  },
+  {
+   "name": "Client-EmbeddedShellLauncher",
+   "class": "caution",
+   "description": "Shell Launcher for kiosks. It replaces the Windows shell for a user.",
+   "source": "Microsoft Learn: Shell Launcher"
+  },
+  {
+   "name": "Client-KeyboardFilter",
+   "class": "caution",
+   "description": "Keyboard Filter for kiosks. It blocks key combinations.",
+   "source": "Microsoft Learn: Keyboard Filter"
+  },
+  {
+   "name": "Client-UnifiedWriteFilter",
+   "class": "caution",
+   "description": "Unified Write Filter. It keeps disk writes in memory and loses them at restart. Not for a normal PC.",
+   "source": "Microsoft Learn: Unified Write Filter"
+  },
+  {
+   "name": "DataCenterBridging",
+   "class": "caution",
+   "description": "Data Center Bridging for special network cards.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "HostGuardian",
+   "class": "caution",
+   "description": "Host Guardian, a Hyper-V security service.",
+   "source": "Microsoft Learn: Enable or Disable Windows Features Using DISM"
+  },
+  {
+   "name": "IIS-",
+   "prefix": true,
+   "class": "caution",
+   "description": "Internet Information Services (a web server) and its parts. A running web server opens network ports.",
+   "source": "Microsoft Learn: Internet Information Services"
+  },
+  {
+   "name": "SearchEngine-Client-Package",
+   "class": "protected",
+   "description": "Windows Search. Start, the File Explorer search box and Outlook search need it.",
+   "source": "Winora review: parts the system needs are never changed"
+  },
+  {
+   "name": "MSRDC-Infrastructure",
+   "class": "protected",
+   "description": "Remote Desktop support used by Windows itself.",
+   "source": "Winora review: parts the system needs are never changed"
+  },
+  {
+   "name": "Windows-Defender-",
+   "prefix": true,
+   "class": "protected",
+   "description": "Microsoft Defender parts. Winora never changes security features through this list.",
+   "source": "Winora review: parts the system needs are never changed"
+  },
+  {
+   "name": "Microsoft-Windows-Client-",
+   "prefix": true,
+   "class": "protected",
+   "description": "Windows client base packages. The system needs them.",
+   "source": "Winora review: parts the system needs are never changed"
+  },
+  {
+   "name": "Microsoft-Windows-Foundation",
+   "prefix": true,
+   "class": "protected",
+   "description": "Windows foundation package. The system needs it.",
+   "source": "Winora review: parts the system needs are never changed"
+  },
+  {
+   "name": "SearchEngine-",
+   "prefix": true,
+   "class": "protected",
+   "description": "Windows Search parts.",
+   "source": "Winora review: parts the system needs are never changed"
+  }
+ ]
+}

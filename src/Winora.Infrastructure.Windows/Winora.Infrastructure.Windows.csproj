@@ -1,0 +1,23 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<Project Sdk="Microsoft.NET.Sdk">
+ <!-- The client adapter of the elevation channel references both elevation projects; the worker image never references this assembly. -->
+ <ItemGroup><ProjectReference Include="../Winora.Domain/Winora.Domain.csproj" /><ProjectReference Include="../Winora.Application/Winora.Application.csproj" /><ProjectReference Include="../Winora.Elevation.Protocol/Winora.Elevation.Protocol.csproj" /><ProjectReference Include="../Winora.Elevation.Windows/Winora.Elevation.Windows.csproj" /></ItemGroup>
+ <ItemGroup><InternalsVisibleTo Include="Winora.Windows.Tests" /></ItemGroup>
+ <!-- The machine definition set ships inside the app. -->
+ <ItemGroup><EmbeddedResource Include="../../definitions/machine/MachineDefinitions.v1*.json" LogicalName="Winora.%(Filename)%(Extension)" /></ItemGroup>
+ <!-- The reviewed bloatware rule list ships inside the app. -->
+ <ItemGroup><EmbeddedResource Include="../../definitions/bloatware/BloatwareRules.v1.json" LogicalName="Winora.BloatwareRules.v1.json" /></ItemGroup>
+ <!-- The reviewed DNS provider list ships inside the app. -->
+ <ItemGroup><EmbeddedResource Include="../../definitions/network/DnsProviders.v1.json" LogicalName="Winora.DnsProviders.v1.json" /></ItemGroup>
+ <!-- The built-in profiles ship inside the app. -->
+ <ItemGroup><EmbeddedResource Include="../../definitions/profiles/Profiles.*.v1.json" LogicalName="Winora.%(Filename)%(Extension)" /></ItemGroup>
+ <!-- The reviewed optional feature list ships inside the app. -->
+ <ItemGroup><EmbeddedResource Include="../../definitions/features/FeatureClasses.v1.json" LogicalName="Winora.FeatureClasses.v1.json" /></ItemGroup>
+ <!-- VmTrust only: the signer pin of the per-run test chain is compiled in from build properties (public values, no secrets). Release builds have no pin. -->
+ <Target Name="WriteVmTrustPin" BeforeTargets="CoreCompile" Condition="'$(WinoraFlavor)' == 'VmTrust'">
+  <Error Condition="'$(VmTrustPinLeafSubject)' == '' Or '$(VmTrustPinIssuerSpkiSha256)' == ''" Text="A VmTrust build needs -p:VmTrustPinLeafSubject and -p:VmTrustPinIssuerSpkiSha256 (see a test script of the development repository)." />
+  <PropertyGroup><VmTrustPinFile>$(IntermediateOutputPath)VmTrustPin.g.cs</VmTrustPinFile></PropertyGroup>
+  <WriteLinesToFile File="$(VmTrustPinFile)" Overwrite="true" Lines="namespace Winora.Infrastructure.Windows.Elevation%3B internal static class VmTrustPin { public const string LeafSubject = &quot;$(VmTrustPinLeafSubject)&quot;%3B public const string IssuerSpkiSha256 = &quot;$(VmTrustPinIssuerSpkiSha256)&quot;%3B }" />
+  <ItemGroup><Compile Include="$(VmTrustPinFile)" /><FileWrites Include="$(VmTrustPinFile)" /></ItemGroup>
+ </Target>
+</Project>

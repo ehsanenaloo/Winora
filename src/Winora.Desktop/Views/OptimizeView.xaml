@@ -1,0 +1,34 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<UserControl x:Class="Winora.Desktop.OptimizeView"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+ xmlns:local="clr-namespace:Winora.Desktop" xmlns:ctl="clr-namespace:Winora.Desktop.Controls"
+ AutomationProperties.Name="{Binding Title}" Focusable="False">
+ <UserControl.CommandBindings>
+  <CommandBinding Command="ApplicationCommands.Find" Executed="OnFind"/>
+ </UserControl.CommandBindings>
+ <UserControl.Resources>
+ </UserControl.Resources>
+ <ctl:SettingsPageView x:Name="PageView" FooterContext="{Binding HistoryList}">
+  <ctl:SettingsPageView.Header>
+   <ctl:PageHeader Title="{Binding Title}" Subtitle="{Binding Text[OptimizeIntro]}">
+    <ctl:PageHeader.Actions><WrapPanel><ui:Button Margin="{StaticResource WinoraSpace.A4}" ToolTip="{Binding Text[DiscRefresh]}" Style="{StaticResource WinoraHeaderIconButton}" Command="{Binding RefreshCommand}" Icon="{ui:SymbolIcon ArrowClockwise24}"
+     AutomationProperties.Name="{Binding Text[DiscRefresh]}" AutomationProperties.HelpText="{Binding Text[OptimizeRefreshHelp]}"/></WrapPanel></ctl:PageHeader.Actions>
+   </ctl:PageHeader>
+  </ctl:SettingsPageView.Header>
+  <ctl:SettingsPageView.Banners>
+   <StackPanel>
+    <ctl:AdminNotice IsOpen="{Binding ShowNeedsAdministrator, Mode=OneWay}" Title="{Binding NeedsAdministratorTitle}" Message="{Binding NeedsAdministratorText, Mode=OneWay}" ShowLink="{Binding ShowAdminHowTo}" LinkText="{Binding Text[AdminNoticeLink]}" LinkHelp="{Binding Text[AdminNoticeLinkHelp]}"/>
+    <ctl:InfoBanner IsOpen="{Binding ShowNoticeBanner, Mode=OneWay}" IsClosable="False" Severity="Warning" Title="{Binding Text[PowerResult]}" Message="{Binding Notice}"
+     AutomationProperties.LiveSetting="Assertive" AutomationProperties.Name="{Binding Notice}"/>
+   </StackPanel>
+  </ctl:SettingsPageView.Banners>
+  <ctl:SettingsPageView.States>
+   <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding Text[OptimizeEmpty]}" TextWrapping="Wrap" Margin="{StaticResource WinoraSpace.V8}" Visibility="{Binding ShowEmpty, Converter={StaticResource BoolToVisibility}}"/>
+  </ctl:SettingsPageView.States>
+  <ctl:SettingsPageView.Footer>
+   <ctl:PageHistory/>
+  </ctl:SettingsPageView.Footer>
+ </ctl:SettingsPageView>
+</UserControl>

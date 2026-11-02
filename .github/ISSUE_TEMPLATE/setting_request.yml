@@ -1,0 +1,62 @@
+name: Setting request
+description: Ask for a new Windows setting in Winora.
+title: "[Setting]: "
+labels: ["setting-request", "needs triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Each setting in Winora needs an official Microsoft page that describes it, such as a Microsoft Learn, Group Policy or Policy CSP page. A request without one cannot be added.
+  - type: input
+    id: name
+    attributes:
+      label: Setting name
+      placeholder: "Show seconds in the taskbar clock"
+    validations:
+      required: true
+  - type: textarea
+    id: where
+    attributes:
+      label: Where is it in Windows?
+      description: The path in the Settings app, Control Panel or Group Policy editor, if there is one.
+      placeholder: "Settings > Personalization > Taskbar > Taskbar behaviors"
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Official source link
+      description: A Microsoft page that describes the setting or its policy.
+      placeholder: "https://learn.microsoft.com/..."
+    validations:
+      required: true
+  - type: textarea
+    id: mechanism
+    attributes:
+      label: Registry value or policy (optional)
+      description: Key, value name, type and the value for each choice. Say if it is per user or for the whole PC.
+      render: text
+  - type: dropdown
+    id: risk
+    attributes:
+      label: Risk, in your view
+      options:
+        - Low (a preference, easy to change back)
+        - Medium (changes how Windows behaves, or needs a restart)
+        - High (can weaken security, break a feature or be hard to undo)
+        - "I don't know"
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why do you want it?
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you submit
+      options:
+        - label: I searched existing issues and Winora and did not find this setting.
+          required: true
+        - label: I included an official source link.
+          required: true

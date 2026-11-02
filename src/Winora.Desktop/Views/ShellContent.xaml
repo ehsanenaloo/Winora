@@ -1,0 +1,57 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<UserControl x:Class="Winora.Desktop.ShellContent"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:ctl="clr-namespace:Winora.Desktop.Controls"
+ xmlns:local="clr-namespace:Winora.Desktop" xmlns:vm="clr-namespace:Winora.Desktop;assembly=Winora.Presentation"
+ Focusable="False">
+ <UserControl.Resources>
+  <DataTemplate DataType="{x:Type vm:OverviewViewModel}"><local:OverviewView/></DataTemplate>
+  <DataTemplate DataType="{x:Type vm:CustomizeViewModel}"><local:CustomizeView/></DataTemplate>
+  <DataTemplate DataType="{x:Type vm:HistoryViewModel}"><local:HistoryView/></DataTemplate>
+  <DataTemplate DataType="{x:Type vm:SettingsViewModel}"><local:SettingsView/></DataTemplate>
+  <DataTemplate DataType="{x:Type vm:PlannedViewModel}"><local:PlannedView/></DataTemplate>
+  <DataTemplate DataType="{x:Type vm:StartupViewModel}"><local:DiscoveryView/></DataTemplate>
+  <DataTemplate DataType="{x:Type vm:ScheduledTasksViewModel}"><local:DiscoveryView/></DataTemplate>
+  <DataTemplate DataType="{x:Type vm:ServicesViewModel}"><local:DiscoveryView/></DataTemplate>
+  <DataTemplate DataType="{x:Type vm:ApplicationsViewModel}"><local:DiscoveryView/></DataTemplate>
+  <DataTemplate DataType="{x:Type vm:BloatwareViewModel}"><local:BloatwareView/></DataTemplate>
+  <DataTemplate DataType="{x:Type vm:PowerViewModel}"><local:PowerView/></DataTemplate>
+  <DataTemplate DataType="{x:Type vm:NetworkViewModel}"><local:NetworkView/></DataTemplate>
+  <DataTemplate DataType="{x:Type vm:UpdatesViewModel}"><local:UpdatesView/></DataTemplate>
+  <DataTemplate DataType="{x:Type vm:ProfilesViewModel}"><local:ProfilesView/></DataTemplate>
+  <DataTemplate DataType="{x:Type vm:PermissionsViewModel}"><local:PermissionsView/></DataTemplate>
+  <DataTemplate DataType="{x:Type vm:ToolsViewModel}"><local:ToolsView/></DataTemplate>
+  <DataTemplate DataType="{x:Type vm:OptimizeViewModel}"><local:OptimizeView/></DataTemplate>
+  <DataTemplate DataType="{x:Type vm:CleanupViewModel}"><local:CleanupView/></DataTemplate>
+  <DataTemplate DataType="{x:Type vm:DiskUsageViewModel}"><local:DiskUsageView/></DataTemplate>
+  <DataTemplate DataType="{x:Type vm:FreeSpaceViewModel}"><local:FreeSpaceView/></DataTemplate>
+  <DataTemplate DataType="{x:Type vm:QuarantineViewModel}"><local:DiscoveryView/></DataTemplate>
+ </UserControl.Resources>
+ <Grid>
+  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+  <ctl:InfoBanner x:Name="SimulationBanner" Grid.Row="0" IsOpen="True" IsClosable="False" Severity="Informational" Margin="{StaticResource WinoraSpace.L32T8R32}" Visibility="{Binding CurrentPage.ShowsSimulationBanner, Converter={StaticResource BoolToVisibility}}"
+   Title="{Binding Text[SimulationBannerTitle]}" Message="{Binding Text[SimulationNotice]}" AutomationProperties.Name="{Binding Text[SimulationBannerTitle]}"/>
+  <StackPanel Grid.Row="1">
+  <ctl:InfoBanner CloseText="{Binding Text[BannerDismiss]}" x:Name="OutcomeBar" IsOpen="{Binding OutcomeOpen, Mode=TwoWay}" IsClosable="True" Margin="{StaticResource WinoraSpace.L32T8R32}" Severity="{Binding OutcomeSeverity, Converter={x:Static ctl:BannerLook.Severity}}" AutomationProperties.LiveSetting="{Binding OutcomeIsUrgent, Converter={x:Static ctl:BannerLook.Live}}"
+   Title="{Binding OutcomeTitle}" Message="{Binding OutcomeMessage}" AutomationProperties.Name="{Binding OutcomeTitle}"/>
+   <ui:Button x:Name="OutcomeAction" Content="{Binding OutcomeActionLabel}" Click="OnOutcomeAction" Margin="{StaticResource WinoraSpace.L32T8R32}" HorizontalAlignment="Left"
+    Visibility="{Binding OutcomeHasAction, Converter={StaticResource BoolToVisibility}}" AutomationProperties.Name="{Binding OutcomeActionLabel}" AutomationProperties.HelpText="{Binding Text[OutcomeActionHelp]}"/>
+  <ctl:InfoBanner CloseText="{Binding Text[BannerDismiss]}" x:Name="SettingsNoticeBar" IsOpen="{Binding SettingsNotice.IsOpen, Mode=TwoWay}" IsClosable="True" Margin="{StaticResource WinoraSpace.L32T8R32}" Severity="{Binding SettingsNotice.Severity, Converter={x:Static ctl:BannerLook.Severity}}"
+   Title="{Binding SettingsNotice.Title}" Message="{Binding SettingsNotice.Message}" AutomationProperties.LiveSetting="{Binding SettingsNotice.IsUrgent, Converter={x:Static ctl:BannerLook.Live}}" AutomationProperties.Name="{Binding SettingsNotice.Title}"
+   Visibility="{Binding SettingsNoticeVisible, Converter={StaticResource BoolToVisibility}}"/>
+  <WrapPanel Margin="{StaticResource WinoraSpace.L32T8R32}" Visibility="{Binding SettingsNoticeVisible, Converter={StaticResource BoolToVisibility}}">
+   <ui:Button x:Name="NoticeAction" Content="{Binding SettingsNotice.ActionLabel}" Click="OnNoticeAction" Margin="{StaticResource WinoraSpace.R8}" Visibility="{Binding SettingsNotice.HasAction, Converter={StaticResource BoolToVisibility}}"
+    AutomationProperties.Name="{Binding SettingsNotice.ActionLabel}" AutomationProperties.HelpText="{Binding Text[OutcomeActionHelp]}"/>
+   <ui:Button x:Name="NoticeSecondary" Content="{Binding SettingsNotice.SecondaryLabel}" Click="OnNoticeSecondary" Visibility="{Binding SettingsNotice.HasSecondary, Converter={StaticResource BoolToVisibility}}"
+    AutomationProperties.Name="{Binding SettingsNotice.SecondaryLabel}" AutomationProperties.HelpText="{Binding Text[OutcomeActionHelp]}"/>
+  </WrapPanel>
+  <ctl:ResultReport x:Name="Report" Margin="{StaticResource WinoraSpace.L32T8R32}" Model="{Binding Feedback.Report}" Visibility="{Binding Feedback.HasReport, Converter={StaticResource BoolToVisibility}}"/>
+  </StackPanel>
+  <Grid Grid.Row="3">
+   <ContentControl x:Name="PageHost" Content="{Binding CurrentPage}" IsTabStop="False" Focusable="False"/>
+   <ctl:ToastHost x:Name="Toasts" Center="{Binding Feedback}" CloseText="{Binding Text[BannerDismiss]}" RegionName="{Binding Text[ToastRegion]}"/>
+  </Grid>
+  <ctl:ActionCenterStrip x:Name="Strip" Grid.Row="4" DataContext="{Binding ActionCenter}" KeyboardNavigation.TabIndex="2"/>
+ </Grid>
+</UserControl>

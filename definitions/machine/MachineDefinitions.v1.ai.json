@@ -1,0 +1,333 @@
+{
+ "format": "winora.machine-definitions/1",
+ "setId": "winora-machine",
+ "serial": 1,
+ "minProtocol": 1,
+ "minWorkerBuild": 22621,
+ "revoked": [],
+ "definitions": [
+  {
+   "id": "machine.ai.recall_removal",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_ai_recall_removal_Title",
+   "descriptionKey": "Machine_machine_ai_recall_removal_Description",
+   "category": "Privacy",
+   "risk": "Medium",
+   "recovery": "Conditional",
+   "requiresRestart": true,
+   "minBuild": 26100,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI",
+    "valueName": "AllowRecallEnablement",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_ai_recall_removal_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_ai_recall_removal_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI",
+     "valueName": "AllowRecallEnablement"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai",
+    "https://learn.microsoft.com/en-us/windows/client-management/manage-recall"
+   ],
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.ai.click_to_do",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_ai_click_to_do_Title",
+   "descriptionKey": "Machine_machine_ai_click_to_do_Description",
+   "category": "Privacy",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 26100,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI",
+    "valueName": "DisableClickToDo",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_ai_click_to_do_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_ai_click_to_do_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI",
+     "valueName": "DisableClickToDo"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/manage-click-to-do"
+   ],
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.ai.paint_generative_erase",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_ai_paint_generative_erase_Title",
+   "descriptionKey": "Machine_machine_ai_paint_generative_erase_Description",
+   "category": "Apps",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Paint",
+    "valueName": "DisableGenerativeErase",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_ai_paint_generative_erase_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_ai_paint_generative_erase_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Paint",
+     "valueName": "DisableGenerativeErase"
+    }
+   ],
+   "sourceRefs": [],
+   "sourceClass": "B",
+   "communitySources": [
+    "community source 2"
+   ]
+  },
+  {
+   "id": "machine.ai.paint_remove_background",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_ai_paint_remove_background_Title",
+   "descriptionKey": "Machine_machine_ai_paint_remove_background_Description",
+   "category": "Apps",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Paint",
+    "valueName": "DisableRemoveBackground",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_ai_paint_remove_background_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_ai_paint_remove_background_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\Paint",
+     "valueName": "DisableRemoveBackground"
+    }
+   ],
+   "sourceRefs": [],
+   "sourceClass": "B",
+   "communitySources": [
+    "community source 2"
+   ]
+  },
+  {
+   "id": "machine.ai.copilot_sidebar",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_ai_copilot_sidebar_Title",
+   "descriptionKey": "Machine_machine_ai_copilot_sidebar_Description",
+   "category": "Apps",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": 22631,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot",
+    "valueName": "TurnOffWindowsCopilot",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_ai_copilot_sidebar_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_ai_copilot_sidebar_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot",
+     "valueName": "TurnOffWindowsCopilot"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai"
+   ],
+   "sourceClass": "A"
+  }
+ ]
+}

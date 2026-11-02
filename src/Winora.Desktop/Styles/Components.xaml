@@ -1,0 +1,204 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<!-- Styles of the Winora controls (Controls folder). Colors are DynamicResource so the light, dark and high contrast dictionaries swap them at run time. -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:ctl="clr-namespace:Winora.Desktop.Controls">
+
+ <!-- Every card keeps its content at the top: a card stretched to the height of its row (a grid of cards) must not center the text. -->
+ <Style TargetType="ui:Card" BasedOn="{StaticResource {x:Type ui:Card}}">
+  <Setter Property="VerticalContentAlignment" Value="Top"/>
+ </Style>
+
+ <!-- One busy ring size on every page (24, the Space6 step): pages set only visibility and position. -->
+ <Style TargetType="ui:ProgressRing" BasedOn="{StaticResource {x:Type ui:ProgressRing}}">
+  <Setter Property="Width" Value="{DynamicResource WinoraSpace6}"/><Setter Property="Height" Value="{DynamicResource WinoraSpace6}"/>
+ </Style>
+
+ <!-- Chips: a tinted pill with an icon and a label. The border is decoration; meaning comes from the icon and the text. -->
+ <ControlTemplate x:Key="WinoraChipTemplate" TargetType="ctl:ChipBase">
+  <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{DynamicResource WinoraChipBorderThickness}"
+   CornerRadius="{DynamicResource WinoraCornerRadiusPill}" MinHeight="22" Padding="8,2" SnapsToDevicePixels="True">
+   <Grid>
+    <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+    <ui:SymbolIcon x:Name="ChipIcon" Symbol="{TemplateBinding Symbol}" FontSize="16" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" Margin="0,0,4,0"/>
+    <TextBlock Grid.Column="1" Style="{DynamicResource WinoraChipText}" Text="{TemplateBinding Text}" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center"/>
+   </Grid>
+  </Border>
+  <!-- A plain fact (a neutral chip) has no icon. -->
+  <ControlTemplate.Triggers><Trigger Property="Symbol" Value="Empty"><Setter TargetName="ChipIcon" Property="Visibility" Value="Collapsed"/></Trigger></ControlTemplate.Triggers>
+ </ControlTemplate>
+
+ <Style x:Key="WinoraChipStyle" TargetType="ctl:ChipBase">
+  <Setter Property="OverridesDefaultStyle" Value="True"/><Setter Property="Focusable" Value="False"/><Setter Property="IsTabStop" Value="False"/>
+  <Setter Property="Margin" Value="0,0,4,4"/><Setter Property="HorizontalAlignment" Value="Left"/><Setter Property="VerticalAlignment" Value="Center"/>
+  <Setter Property="Template" Value="{StaticResource WinoraChipTemplate}"/>
+  <Setter Property="Background" Value="{DynamicResource WinoraStatusNeutralBackground}"/><Setter Property="Foreground" Value="{DynamicResource WinoraStatusNeutralForeground}"/><Setter Property="BorderBrush" Value="{DynamicResource WinoraStatusNeutralBorder}"/>
+  <Style.Triggers>
+   <Trigger Property="Tone" Value="RiskLow"><Setter Property="Background" Value="{DynamicResource WinoraRiskLowBackground}"/><Setter Property="Foreground" Value="{DynamicResource WinoraRiskLowForeground}"/><Setter Property="BorderBrush" Value="{DynamicResource WinoraRiskLowBorder}"/></Trigger>
+   <Trigger Property="Tone" Value="RiskMedium"><Setter Property="Background" Value="{DynamicResource WinoraRiskMediumBackground}"/><Setter Property="Foreground" Value="{DynamicResource WinoraRiskMediumForeground}"/><Setter Property="BorderBrush" Value="{DynamicResource WinoraRiskMediumBorder}"/></Trigger>
+   <Trigger Property="Tone" Value="RiskHigh"><Setter Property="Background" Value="{DynamicResource WinoraRiskHighBackground}"/><Setter Property="Foreground" Value="{DynamicResource WinoraRiskHighForeground}"/><Setter Property="BorderBrush" Value="{DynamicResource WinoraRiskHighBorder}"/></Trigger>
+   <Trigger Property="Tone" Value="SourceA"><Setter Property="Background" Value="{DynamicResource WinoraSourceABackground}"/><Setter Property="Foreground" Value="{DynamicResource WinoraSourceAForeground}"/><Setter Property="BorderBrush" Value="{DynamicResource WinoraSourceABorder}"/></Trigger>
+   <Trigger Property="Tone" Value="SourceB"><Setter Property="Background" Value="{DynamicResource WinoraSourceBBackground}"/><Setter Property="Foreground" Value="{DynamicResource WinoraSourceBForeground}"/><Setter Property="BorderBrush" Value="{DynamicResource WinoraSourceBBorder}"/></Trigger>
+   <Trigger Property="Tone" Value="SourceC"><Setter Property="Background" Value="{DynamicResource WinoraSourceCBackground}"/><Setter Property="Foreground" Value="{DynamicResource WinoraSourceCForeground}"/><Setter Property="BorderBrush" Value="{DynamicResource WinoraSourceCBorder}"/></Trigger>
+   <Trigger Property="Tone" Value="Success"><Setter Property="Background" Value="{DynamicResource WinoraStatusSuccessBackground}"/><Setter Property="Foreground" Value="{DynamicResource WinoraStatusSuccessForeground}"/><Setter Property="BorderBrush" Value="{DynamicResource WinoraStatusSuccessBorder}"/></Trigger>
+   <Trigger Property="Tone" Value="Warning"><Setter Property="Background" Value="{DynamicResource WinoraStatusWarningBackground}"/><Setter Property="Foreground" Value="{DynamicResource WinoraStatusWarningForeground}"/><Setter Property="BorderBrush" Value="{DynamicResource WinoraStatusWarningBorder}"/></Trigger>
+   <Trigger Property="Tone" Value="Error"><Setter Property="Background" Value="{DynamicResource WinoraStatusErrorBackground}"/><Setter Property="Foreground" Value="{DynamicResource WinoraStatusErrorForeground}"/><Setter Property="BorderBrush" Value="{DynamicResource WinoraStatusErrorBorder}"/></Trigger>
+   <Trigger Property="Tone" Value="Info"><Setter Property="Background" Value="{DynamicResource WinoraStatusInfoBackground}"/><Setter Property="Foreground" Value="{DynamicResource WinoraStatusInfoForeground}"/><Setter Property="BorderBrush" Value="{DynamicResource WinoraStatusInfoBorder}"/></Trigger>
+   <Trigger Property="Tone" Value="Restart"><Setter Property="Background" Value="{DynamicResource WinoraRestartBadgeBackground}"/><Setter Property="Foreground" Value="{DynamicResource WinoraRestartBadgeForeground}"/><Setter Property="BorderBrush" Value="{DynamicResource WinoraRestartBadgeBorder}"/></Trigger>
+   <Trigger Property="Tone" Value="Managed"><Setter Property="Background" Value="{DynamicResource WinoraManagedBadgeBackground}"/><Setter Property="Foreground" Value="{DynamicResource WinoraManagedBadgeForeground}"/><Setter Property="BorderBrush" Value="{DynamicResource WinoraManagedBadgeBorder}"/></Trigger>
+   <Trigger Property="Tone" Value="Changed"><Setter Property="Background" Value="{DynamicResource WinoraChangedByWinoraBrush}"/><Setter Property="Foreground" Value="{DynamicResource WinoraTextPrimaryBrush}"/><Setter Property="BorderBrush" Value="{DynamicResource WinoraStatusInfoBorder}"/></Trigger>
+  </Style.Triggers>
+ </Style>
+ <Style x:Key="WinoraRiskChipStyle" TargetType="ctl:RiskChip" BasedOn="{StaticResource WinoraChipStyle}"/>
+ <ControlTemplate x:Key="WinoraCompactSourceChipTemplate" TargetType="ctl:ChipBase">
+  <Border Width="18" Height="18" CornerRadius="9" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{DynamicResource WinoraChipBorderThickness}"
+   ToolTip="{TemplateBinding Text}" SnapsToDevicePixels="True">
+   <TextBlock Style="{DynamicResource WinoraChipText}" FontSize="12" Text="{Binding Letter, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+  </Border>
+ </ControlTemplate>
+ <Style x:Key="WinoraSourceChipStyle" TargetType="ctl:SourceChip" BasedOn="{StaticResource WinoraChipStyle}">
+  <Style.Triggers><Trigger Property="IsCompact" Value="True"><Setter Property="Template" Value="{StaticResource WinoraCompactSourceChipTemplate}"/></Trigger></Style.Triggers>
+ </Style>
+ <Style x:Key="WinoraStatusBadgeStyle" TargetType="ctl:StatusBadge" BasedOn="{StaticResource WinoraChipStyle}"/>
+ <Style TargetType="ctl:RiskChip" BasedOn="{StaticResource WinoraRiskChipStyle}"/>
+ <Style TargetType="ctl:SourceChip" BasedOn="{StaticResource WinoraSourceChipStyle}"/>
+ <Style TargetType="ctl:StatusBadge" BasedOn="{StaticResource WinoraStatusBadgeStyle}"/>
+
+ <!-- One chip for a BadgeModel: the model says which kind of chip it is. -->
+ <DataTemplate x:Key="WinoraRiskChipItem"><ctl:RiskChip Level="{Binding Risk}" Text="{Binding Label}" AutomationProperties.Name="{Binding Label}"/></DataTemplate>
+ <DataTemplate x:Key="WinoraSourceChipItem"><ctl:SourceChip SourceClass="{Binding Source}" Text="{Binding Label}" AutomationProperties.Name="{Binding Label}"/></DataTemplate>
+ <DataTemplate x:Key="WinoraStatusChipItem"><ctl:StatusBadge StatusTone="{Binding Tone}" Text="{Binding Label}" AutomationProperties.Name="{Binding Label}"/></DataTemplate>
+ <DataTemplate x:Key="WinoraBadgeItemTemplate">
+  <ContentControl Content="{Binding}" IsTabStop="False" Focusable="False">
+   <ContentControl.Style>
+    <Style TargetType="ContentControl">
+     <Setter Property="ContentTemplate" Value="{StaticResource WinoraStatusChipItem}"/>
+     <Style.Triggers>
+      <DataTrigger Binding="{Binding Role}" Value="Risk"><Setter Property="ContentTemplate" Value="{StaticResource WinoraRiskChipItem}"/></DataTrigger>
+      <DataTrigger Binding="{Binding Role}" Value="Source"><Setter Property="ContentTemplate" Value="{StaticResource WinoraSourceChipItem}"/></DataTrigger>
+     </Style.Triggers>
+    </Style>
+   </ContentControl.Style>
+  </ContentControl>
+ </DataTemplate>
+ <ItemsPanelTemplate x:Key="WinoraChipPanel"><WrapPanel/></ItemsPanelTemplate>
+
+ <!-- Pivot tabs: text with an underline on the selected one. The label carries the meaning; the underline is the cue. -->
+ <Style x:Key="WinoraPivotTabItem" TargetType="TabItem">
+  <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+  <Setter Property="FocusVisualStyle" Value="{DynamicResource WinoraFocusRect}"/>
+  <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="TabItem">
+   <Border x:Name="Bar" Padding="12,0" Margin="0,0,8,0" BorderThickness="0,0,0,3" BorderBrush="Transparent" Background="Transparent" MinHeight="{DynamicResource MinHitTarget}" SnapsToDevicePixels="True">
+    <ContentPresenter ContentSource="Header" VerticalAlignment="Center" TextElement.FontWeight="Normal" TextElement.Foreground="{TemplateBinding Foreground}"/>
+   </Border>
+   <ControlTemplate.Triggers>
+    <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Bar" Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/></Trigger>
+    <Trigger Property="IsSelected" Value="True">
+     <Setter TargetName="Bar" Property="BorderBrush" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
+     <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+     <Setter TargetName="Bar" Property="TextElement.FontWeight" Value="SemiBold"/>
+    </Trigger>
+   </ControlTemplate.Triggers>
+  </ControlTemplate></Setter.Value></Setter>
+ </Style>
+
+ <!-- The card of the list and settings pages: surface, edge, radius and padding from the tokens, so density and high contrast apply everywhere. -->
+ <Style x:Key="WinoraCardBorder" TargetType="Border">
+  <Setter Property="Background" Value="{DynamicResource WinoraSurfaceCardBrush}"/>
+  <Setter Property="BorderBrush" Value="{DynamicResource WinoraCardBorderBrush}"/>
+  <Setter Property="BorderThickness" Value="{DynamicResource WinoraBorderThickness}"/>
+  <Setter Property="CornerRadius" Value="{DynamicResource WinoraCornerRadius}"/>
+  <Setter Property="Padding" Value="{DynamicResource WinoraCardPadding}"/>
+  <Setter Property="Margin" Value="0,0,0,8"/>
+ </Style>
+
+
+ <!-- Tooltip card: title, optional shortcut and one sentence (navigation items, title bar buttons). -->
+ <Style x:Key="WinoraRichToolTip" TargetType="ToolTip">
+  <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ToolTip">
+   <Border CornerRadius="{StaticResource WinoraCornerRadius}" BorderThickness="1" Padding="16,12" MaxWidth="280" MinWidth="160" Background="{DynamicResource WinoraSurfaceRaisedBrush}" BorderBrush="{DynamicResource WinoraControlBorderBrush}">
+    <ContentPresenter/>
+   </Border>
+  </ControlTemplate></Setter.Value></Setter>
+ </Style>
+
+ <!-- The one pager (page history blocks and the History page): Newer, "Page i of n", Older. -->
+ <Style x:Key="WinoraPagerStyle" TargetType="ctl:Pager">
+  <Setter Property="HorizontalAlignment" Value="Left"/>
+  <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ctl:Pager">
+   <StackPanel Orientation="Horizontal">
+    <ui:Button x:Name="PART_Newer" Appearance="Secondary" Content="{TemplateBinding NewerText}" Command="{TemplateBinding NewerCommand}" Icon="{ui:SymbolIcon ChevronUp20}" MinHeight="{DynamicResource MinHitTarget}"
+     AutomationProperties.AutomationId="HistoryNewer" AutomationProperties.Name="{Binding NewerText, RelativeSource={RelativeSource TemplatedParent}}" AutomationProperties.HelpText="{Binding NewerHelp, RelativeSource={RelativeSource TemplatedParent}}"/>
+    <TextBlock x:Name="PART_Page" Style="{StaticResource WinoraBodySecondary}" Text="{TemplateBinding PageText}" VerticalAlignment="Center" Margin="12,0" AutomationProperties.LiveSetting="Polite"/>
+    <ui:Button x:Name="PART_Older" Appearance="Secondary" Content="{TemplateBinding OlderText}" Command="{TemplateBinding OlderCommand}" Icon="{ui:SymbolIcon ChevronDown20}" MinHeight="{DynamicResource MinHitTarget}"
+     AutomationProperties.AutomationId="HistoryOlder" AutomationProperties.Name="{Binding OlderText, RelativeSource={RelativeSource TemplatedParent}}" AutomationProperties.HelpText="{Binding OlderHelp, RelativeSource={RelativeSource TemplatedParent}}"/>
+   </StackPanel>
+  </ControlTemplate></Setter.Value></Setter>
+ </Style>
+ <Style TargetType="ctl:Pager" BasedOn="{StaticResource WinoraPagerStyle}"/>
+  <!-- A filter chip that is a toggle button: icon and text, pressed state shown by fill and border weight. -->
+  <Style x:Key="WinoraFilterToggleStyle" TargetType="ToggleButton">
+   <Setter Property="MinHeight" Value="{StaticResource MinHitTarget}"/><Setter Property="MinWidth" Value="{StaticResource MinHitTarget}"/><Setter Property="Margin" Value="0,0,8,8"/><Setter Property="Padding" Value="12,4"/>
+   <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/><Setter Property="Background" Value="Transparent"/><Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+   <Setter Property="AutomationProperties.Name" Value="{Binding AutomationName}"/>
+   <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ToggleButton">
+    <Border x:Name="Chrome" Background="{TemplateBinding Background}" BorderBrush="{DynamicResource WinoraControlBorderBrush}" BorderThickness="1" CornerRadius="{StaticResource WinoraCornerRadiusPill}" Padding="{TemplateBinding Padding}" MinHeight="{TemplateBinding MinHeight}">
+     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+      <ui:SymbolIcon Symbol="{Binding Symbol, Converter={x:Static ctl:IconKeys.Symbol}}" FontSize="16" Margin="0,0,8,0" VerticalAlignment="Center"/>
+      <TextBlock Style="{StaticResource WinoraChipText}" Text="{Binding Label}" VerticalAlignment="Center"/>
+      <ui:SymbolIcon x:Name="OnMark" Symbol="Checkmark16" FontSize="14" Margin="8,0,0,0" Visibility="Collapsed" VerticalAlignment="Center"/>
+     </StackPanel>
+    </Border>
+    <ControlTemplate.Triggers>
+     <Trigger Property="IsChecked" Value="True"><Setter TargetName="Chrome" Property="Background" Value="{DynamicResource WinoraChangedByWinoraBrush}"/><Setter TargetName="Chrome" Property="BorderThickness" Value="2"/><Setter TargetName="OnMark" Property="Visibility" Value="Visible"/></Trigger>
+     <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Chrome" Property="BorderBrush" Value="{DynamicResource AccentFillColorDefaultBrush}"/></Trigger>
+     <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="Chrome" Property="BorderBrush" Value="{DynamicResource WinoraFocusBrush}"/><Setter TargetName="Chrome" Property="BorderThickness" Value="2"/></Trigger>
+    </ControlTemplate.Triggers>
+   </ControlTemplate></Setter.Value></Setter>
+  </Style>
+  <DataTemplate x:Key="WinoraFilterToggleItem">
+   <ToggleButton Style="{StaticResource WinoraFilterToggleStyle}" IsChecked="{Binding IsOn, Mode=TwoWay}" AutomationProperties.HelpText="{Binding DataContext.Text[FbToggleHelp], RelativeSource={RelativeSource AncestorType=ctl:FilterBar}}"/>
+  </DataTemplate>
+  <ItemsPanelTemplate x:Key="WinoraWrapItems"><WrapPanel/></ItemsPanelTemplate>
+
+
+ <!-- The stat strip: a card with a few figures, each with its label under it. -->
+ <Style x:Key="WinoraStatStripStyle" TargetType="ctl:StatStrip">
+  <Setter Property="Margin" Value="0,0,0,8"/>
+  <Setter Property="ItemsPanel"><Setter.Value><ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate></Setter.Value></Setter>
+  <Setter Property="ItemTemplate"><Setter.Value><DataTemplate>
+   <StackPanel MinWidth="120" Margin="0,0,24,0" AutomationProperties.Name="{Binding AutomationName}">
+    <TextBlock Style="{StaticResource WinoraSubtitle}" Text="{Binding Value}" TextWrapping="NoWrap"/>
+    <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Label}" TextWrapping="Wrap"/>
+   </StackPanel>
+  </DataTemplate></Setter.Value></Setter>
+  <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ctl:StatStrip">
+   <Border Style="{StaticResource WinoraCardBorder}" Margin="0"><ItemsPresenter/></Border>
+  </ControlTemplate></Setter.Value></Setter>
+ </Style>
+ <Style TargetType="ctl:StatStrip" BasedOn="{StaticResource WinoraStatStripStyle}"/>
+
+ <!-- The administrator notice: one line (title, message) with the how-to link; the warning colours of the banners. -->
+ <Style x:Key="WinoraAdminNoticeStyle" TargetType="ctl:AdminNotice">
+  <Setter Property="Margin" Value="{StaticResource WinoraBannerMargin}"/>
+  <Setter Property="AutomationProperties.LiveSetting" Value="Assertive"/>
+  <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ctl:AdminNotice">
+   <Border Background="{DynamicResource WinoraStatusWarningBackground}" BorderBrush="{DynamicResource WinoraStatusWarningBorder}" BorderThickness="{DynamicResource WinoraChipBorderThickness}"
+    CornerRadius="{StaticResource WinoraCornerRadius}" Padding="12,4">
+    <Grid>
+     <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+     <ui:SymbolIcon Symbol="Shield20" FontSize="20" Foreground="{DynamicResource WinoraStatusWarningForeground}" VerticalAlignment="Center" Margin="0,0,12,0"/>
+     <WrapPanel Grid.Column="1" VerticalAlignment="Center">
+      <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{TemplateBinding Title}" Foreground="{DynamicResource WinoraStatusWarningForeground}" Margin="0,0,4,0"/>
+      <TextBlock Style="{StaticResource WinoraBody}" Text="{TemplateBinding Message}" Foreground="{DynamicResource WinoraStatusWarningForeground}"/>
+     </WrapPanel>
+     <ui:Button x:Name="PART_Link" Grid.Column="2" Appearance="Transparent" Margin="12,0,0,0" MinHeight="{DynamicResource MinHitTarget}" VerticalAlignment="Center"
+      Visibility="{Binding ShowLink, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolToVisibility}}"
+      AutomationProperties.AutomationId="AdminHowTo" AutomationProperties.Name="{Binding LinkText, RelativeSource={RelativeSource TemplatedParent}}" AutomationProperties.HelpText="{Binding LinkHelp, RelativeSource={RelativeSource TemplatedParent}}">
+      <TextBlock Text="{Binding LinkText, RelativeSource={RelativeSource TemplatedParent}}" TextDecorations="Underline" TextWrapping="Wrap" Foreground="{DynamicResource WinoraStatusWarningForeground}"/>
+     </ui:Button>
+    </Grid>
+   </Border>
+  </ControlTemplate></Setter.Value></Setter>
+ </Style>
+ <Style TargetType="ctl:AdminNotice" BasedOn="{StaticResource WinoraAdminNoticeStyle}"/>
+</ResourceDictionary>

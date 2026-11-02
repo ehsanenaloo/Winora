@@ -1,0 +1,52 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<UserControl x:Class="Winora.Desktop.Controls.ActionCenterRail"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+ Focusable="False" IsTabStop="False" Visibility="{Binding ShowRail, Converter={StaticResource BoolToVisibility}}">
+ <UserControl.Resources>
+  <!-- The outline of WinoraFocusRect, drawn inside: the rail touches the window edge, where an outline outside would be cut. -->
+  <Style x:Key="WinoraRailFocus"><Setter Property="Control.Template"><Setter.Value><ControlTemplate>
+   <Rectangle Margin="{StaticResource WinoraSpace.A2}" SnapsToDevicePixels="True" Stroke="{DynamicResource TextFillColorPrimaryBrush}" StrokeThickness="2" RadiusX="4" RadiusY="4"/>
+  </ControlTemplate></Setter.Value></Setter></Style>
+ </UserControl.Resources>
+ <!-- The closed Action center: a 40 px strip at the inline end with the icon, the state marks and the name running down. One button: click, Enter or Space opens the pane.
+ The rotation sits inside the mirrored tree, so in Persian the strip is on the left and the name reads the mirrored way. -->
+ <Button x:Name="RailButton" Command="{Binding RailOpenCommand}" Width="40" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Cursor="Hand"
+  FocusVisualStyle="{StaticResource WinoraRailFocus}" AutomationProperties.AutomationId="ActionCenterRail" AutomationProperties.Name="{Binding ButtonName}"
+  AutomationProperties.HelpText="{Binding Text[ACRailHelp]}" ToolTip="{Binding ButtonToolTip}">
+  <Button.Template>
+   <ControlTemplate TargetType="Button">
+    <Border x:Name="Frame" Background="{DynamicResource WinoraSurfaceRaisedBrush}" BorderBrush="{DynamicResource WinoraCardBorderBrush}" BorderThickness="1,0,0,0">
+     <ContentPresenter/>
+    </Border>
+    <ControlTemplate.Triggers>
+     <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Frame" Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/></Trigger>
+     <Trigger Property="IsPressed" Value="True"><Setter TargetName="Frame" Property="Background" Value="{DynamicResource SubtleFillColorTertiaryBrush}"/></Trigger>
+    </ControlTemplate.Triggers>
+   </ControlTemplate>
+  </Button.Template>
+  <!-- A star row for the name: a rotated text in an unbounded panel is measured too short and cut. -->
+  <Grid Margin="{StaticResource WinoraSpace.T12}" HorizontalAlignment="Center">
+   <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+   <ui:SymbolIcon x:Name="Icon" Symbol="PanelRight20" FontSize="20" HorizontalAlignment="Center"/>
+   <!-- The state, top to bottom: the count of staged changes, then a spinner (with the run count from two), a check, a warning or a dot for unseen events. -->
+   <StackPanel Grid.Row="1" Margin="{StaticResource WinoraSpace.T8}" HorizontalAlignment="Center">
+    <Border x:Name="Badge" Background="{DynamicResource AccentFillColorDefaultBrush}" CornerRadius="{DynamicResource WinoraCornerRadiusPill}" MinWidth="18" Height="18" Padding="{StaticResource WinoraSpace.H4}" HorizontalAlignment="Center"
+     Visibility="{Binding HasBadge, Converter={StaticResource BoolToVisibility}}" AutomationProperties.AutomationId="ActionCenterRailBadge">
+     <TextBlock Text="{Binding BadgeText}" Style="{StaticResource WinoraBadgeText}" Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" AutomationProperties.Name=""/>
+    </Border>
+    <StackPanel Margin="{StaticResource WinoraSpace.T4}" HorizontalAlignment="Center">
+     <ui:SymbolIcon x:Name="Spinner" Symbol="ArrowSync12" FontSize="14" HorizontalAlignment="Center" Visibility="{Binding IndicatorIsRunning, Converter={StaticResource BoolToVisibility}}"/>
+     <TextBlock Text="{Binding IndicatorText}" Style="{StaticResource WinoraBadgeMarkText}" HorizontalAlignment="Center" Visibility="{Binding IndicatorShowsCount, Converter={StaticResource BoolToVisibility}}" AutomationProperties.Name=""/>
+     <ui:SymbolIcon x:Name="Succeeded" Symbol="CheckmarkCircle12" FontSize="14" HorizontalAlignment="Center" Foreground="{DynamicResource WinoraStatusSuccessForeground}" Visibility="{Binding IndicatorIsSucceeded, Converter={StaticResource BoolToVisibility}}"/>
+     <ui:SymbolIcon x:Name="Warning" Symbol="Warning12" FontSize="14" HorizontalAlignment="Center" Foreground="{DynamicResource WinoraStatusWarningForeground}" Visibility="{Binding IndicatorIsWarning, Converter={StaticResource BoolToVisibility}}"/>
+     <Ellipse x:Name="Unread" Width="8" Height="8" HorizontalAlignment="Center" Fill="{DynamicResource AccentFillColorDefaultBrush}" Visibility="{Binding IndicatorIsUnread, Converter={StaticResource BoolToVisibility}}"/>
+    </StackPanel>
+   </StackPanel>
+   <TextBlock x:Name="Label" Grid.Row="2" Text="{Binding Name}" Style="{StaticResource WinoraChromeTextStrong}" Margin="{StaticResource WinoraSpace.T8}" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="{DynamicResource TextFillColorSecondaryBrush}" AutomationProperties.Name="">
+    <TextBlock.LayoutTransform><RotateTransform Angle="90"/></TextBlock.LayoutTransform>
+   </TextBlock>
+  </Grid>
+ </Button>
+</UserControl>

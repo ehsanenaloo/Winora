@@ -1,0 +1,1332 @@
+{
+ "format": "winora.machine-definitions/1",
+ "setId": "winora-machine",
+ "serial": 1,
+ "minProtocol": 1,
+ "minWorkerBuild": 22621,
+ "revoked": [],
+ "definitions": [
+  {
+   "id": "machine.security.ssl2_client",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_ssl2_client_Title",
+   "descriptionKey": "Machine_machine_security_ssl2_client_Description",
+   "category": "System",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 2.0\\Client",
+    "valueName": "Enabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_security_ssl2_client_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_ssl2_client_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/security/tls/tls-registry-settings"
+   ],
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.security.ssl2_server",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_ssl2_server_Title",
+   "descriptionKey": "Machine_machine_security_ssl2_server_Description",
+   "category": "System",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 2.0\\Server",
+    "valueName": "Enabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_security_ssl2_server_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_ssl2_server_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/security/tls/tls-registry-settings"
+   ],
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.security.ssl3_client",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_ssl3_client_Title",
+   "descriptionKey": "Machine_machine_security_ssl3_client_Description",
+   "category": "System",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 3.0\\Client",
+    "valueName": "Enabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_security_ssl3_client_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_ssl3_client_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/security/tls/tls-registry-settings"
+   ],
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.security.ssl3_server",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_ssl3_server_Title",
+   "descriptionKey": "Machine_machine_security_ssl3_server_Description",
+   "category": "System",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\SSL 3.0\\Server",
+    "valueName": "Enabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_security_ssl3_server_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_ssl3_server_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/security/tls/tls-registry-settings"
+   ],
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.security.tls10_client",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_tls10_client_Title",
+   "descriptionKey": "Machine_machine_security_tls10_client_Description",
+   "category": "System",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.0\\Client",
+    "valueName": "Enabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_security_tls10_client_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_tls10_client_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/security/tls/tls-registry-settings"
+   ],
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.security.tls10_server",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_tls10_server_Title",
+   "descriptionKey": "Machine_machine_security_tls10_server_Description",
+   "category": "System",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.0\\Server",
+    "valueName": "Enabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_security_tls10_server_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_tls10_server_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/security/tls/tls-registry-settings"
+   ],
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.security.tls11_client",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_tls11_client_Title",
+   "descriptionKey": "Machine_machine_security_tls11_client_Description",
+   "category": "System",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.1\\Client",
+    "valueName": "Enabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_security_tls11_client_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_tls11_client_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/security/tls/tls-registry-settings"
+   ],
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.security.tls11_server",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_tls11_server_Title",
+   "descriptionKey": "Machine_machine_security_tls11_server_Description",
+   "category": "System",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\TLS 1.1\\Server",
+    "valueName": "Enabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_security_tls11_server_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_tls11_server_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/security/tls/tls-registry-settings"
+   ],
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.security.dtls10_client",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_dtls10_client_Title",
+   "descriptionKey": "Machine_machine_security_dtls10_client_Description",
+   "category": "System",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\DTLS 1.0\\Client",
+    "valueName": "Enabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_security_dtls10_client_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_dtls10_client_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/security/tls/tls-registry-settings"
+   ],
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.security.dtls10_server",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_dtls10_server_Title",
+   "descriptionKey": "Machine_machine_security_dtls10_server_Description",
+   "category": "System",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Protocols\\DTLS 1.0\\Server",
+    "valueName": "Enabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_security_dtls10_server_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_dtls10_server_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/security/tls/tls-registry-settings"
+   ],
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.security.cipher_rc4_128",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_cipher_rc4_128_Title",
+   "descriptionKey": "Machine_machine_security_cipher_rc4_128_Description",
+   "category": "System",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers\\RC4 128/128",
+    "valueName": "Enabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_security_cipher_rc4_128_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_cipher_rc4_128_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 4294967295
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "sourceClass": "C",
+   "communitySources": [
+    "community source 4"
+   ]
+  },
+  {
+   "id": "machine.security.cipher_rc4_56",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_cipher_rc4_56_Title",
+   "descriptionKey": "Machine_machine_security_cipher_rc4_56_Description",
+   "category": "System",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers\\RC4 56/128",
+    "valueName": "Enabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_security_cipher_rc4_56_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_cipher_rc4_56_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 4294967295
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "sourceClass": "C",
+   "communitySources": [
+    "community source 4"
+   ]
+  },
+  {
+   "id": "machine.security.cipher_rc4_40",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_cipher_rc4_40_Title",
+   "descriptionKey": "Machine_machine_security_cipher_rc4_40_Description",
+   "category": "System",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers\\RC4 40/128",
+    "valueName": "Enabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_security_cipher_rc4_40_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_cipher_rc4_40_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 4294967295
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "sourceClass": "C",
+   "communitySources": [
+    "community source 4"
+   ]
+  },
+  {
+   "id": "machine.security.cipher_des56",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_cipher_des56_Title",
+   "descriptionKey": "Machine_machine_security_cipher_des56_Description",
+   "category": "System",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers\\DES 56/56",
+    "valueName": "Enabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_security_cipher_des56_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_cipher_des56_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 4294967295
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "sourceClass": "C",
+   "communitySources": [
+    "community source 4"
+   ]
+  },
+  {
+   "id": "machine.security.cipher_3des168",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_cipher_3des168_Title",
+   "descriptionKey": "Machine_machine_security_cipher_3des168_Description",
+   "category": "System",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers\\Triple DES 168",
+    "valueName": "Enabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_security_cipher_3des168_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_cipher_3des168_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 4294967295
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "sourceClass": "C",
+   "communitySources": [
+    "community source 4"
+   ]
+  },
+  {
+   "id": "machine.security.cipher_null",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_cipher_null_Title",
+   "descriptionKey": "Machine_machine_security_cipher_null_Description",
+   "category": "System",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Ciphers\\NULL",
+    "valueName": "Enabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_security_cipher_null_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_cipher_null_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 4294967295
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "sourceClass": "C",
+   "communitySources": [
+    "community source 4"
+   ]
+  },
+  {
+   "id": "machine.security.hash_md5",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_hash_md5_Title",
+   "descriptionKey": "Machine_machine_security_hash_md5_Description",
+   "category": "System",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\SecurityProviders\\SCHANNEL\\Hashes\\MD5",
+    "valueName": "Enabled",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_security_hash_md5_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_hash_md5_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 4294967295
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "sourceClass": "C",
+   "communitySources": [
+    "community source 4"
+   ]
+  },
+  {
+   "id": "machine.security.uac_admin_prompt",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_uac_admin_prompt_Title",
+   "descriptionKey": "Machine_machine_security_uac_admin_prompt_Description",
+   "category": "System",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+    "valueName": "ConsentPromptBehaviorAdmin",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "no_prompt",
+     "labelKey": "Machine_machine_security_uac_admin_prompt_Choice_no_prompt",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "secure_always",
+     "labelKey": "Machine_machine_security_uac_admin_prompt_Choice_secure_always",
+     "value": {
+      "kind": "dword",
+      "number": 2
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_uac_admin_prompt_Choice_default",
+     "value": {
+      "kind": "dword",
+      "number": 5
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    },
+    {
+     "kind": "dword",
+     "number": 2
+    },
+    {
+     "kind": "dword",
+     "number": 3
+    },
+    {
+     "kind": "dword",
+     "number": 4
+    },
+    {
+     "kind": "dword",
+     "number": 5
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+     "valueName": "ConsentPromptBehaviorAdmin"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration"
+   ],
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.security.uac_secure_desktop",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_uac_secure_desktop_Title",
+   "descriptionKey": "Machine_machine_security_uac_secure_desktop_Description",
+   "category": "System",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+    "valueName": "PromptOnSecureDesktop",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "no_dim",
+     "labelKey": "Machine_machine_security_uac_secure_desktop_Choice_no_dim",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_uac_secure_desktop_Choice_default",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+     "valueName": "PromptOnSecureDesktop"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration"
+   ],
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.security.cpu_mitigations_override",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_cpu_mitigations_override_Title",
+   "descriptionKey": "Machine_machine_security_cpu_mitigations_override_Description",
+   "category": "System",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+    "valueName": "FeatureSettingsOverride",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_security_cpu_mitigations_override_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 3
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_cpu_mitigations_override_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 3
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://support.microsoft.com/en-us/topic/kb4072698-windows-server-and-azure-stack-hci-guidance-to-protect-against-silicon-based-microarchitectural-and-speculative-execution-side-channel-vulnerabilities-2f965763-00e2-8f98-b632-0d96f30c8c8e"
+   ],
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.security.cpu_mitigations_mask",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_cpu_mitigations_mask_Title",
+   "descriptionKey": "Machine_machine_security_cpu_mitigations_mask_Description",
+   "category": "System",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+    "valueName": "FeatureSettingsOverrideMask",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_security_cpu_mitigations_mask_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 3
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_cpu_mitigations_mask_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 3
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://support.microsoft.com/en-us/topic/kb4072698-windows-server-and-azure-stack-hci-guidance-to-protect-against-silicon-based-microarchitectural-and-speculative-execution-side-channel-vulnerabilities-2f965763-00e2-8f98-b632-0d96f30c8c8e"
+   ],
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.security.clear_pagefile",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_clear_pagefile_Title",
+   "descriptionKey": "Machine_machine_security_clear_pagefile_Description",
+   "category": "System",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+    "valueName": "ClearPageFileAtShutdown",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "on",
+     "labelKey": "Machine_machine_security_clear_pagefile_Choice_on",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_security_clear_pagefile_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    }
+   ],
+   "defaultChoiceId": "off",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/shutdown-clear-virtual-memory-pagefile"
+   ],
+   "sourceClass": "A"
+  }
+ ]
+}

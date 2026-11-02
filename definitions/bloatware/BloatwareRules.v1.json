@@ -1,0 +1,1118 @@
+{
+ "version": 1,
+ "rules": [
+  {
+   "id": "exact:microsoft.windowsstore",
+   "match": "exact",
+   "name": "Microsoft.WindowsStore",
+   "class": "protected",
+   "group": "store",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.storepurchaseapp",
+   "match": "exact",
+   "name": "Microsoft.StorePurchaseApp",
+   "class": "protected",
+   "group": "store",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.desktopappinstaller",
+   "match": "exact",
+   "name": "Microsoft.DesktopAppInstaller",
+   "class": "protected",
+   "group": "store",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.sechealthui",
+   "match": "exact",
+   "name": "Microsoft.SecHealthUI",
+   "class": "protected",
+   "group": "security",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.services.store.engagement",
+   "match": "exact",
+   "name": "Microsoft.Services.Store.Engagement",
+   "class": "protected",
+   "group": "runtime",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "prefix:microsoft.vclibs.",
+   "match": "prefix",
+   "name": "Microsoft.VCLibs.",
+   "class": "protected",
+   "group": "runtime",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Windows App SDK deployment and framework package dependencies",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "prefix:microsoft.ui.xaml.",
+   "match": "prefix",
+   "name": "Microsoft.UI.Xaml.",
+   "class": "protected",
+   "group": "runtime",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Windows App SDK deployment and framework package dependencies",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "prefix:microsoft.net.native.framework.",
+   "match": "prefix",
+   "name": "Microsoft.NET.Native.Framework.",
+   "class": "protected",
+   "group": "runtime",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Windows App SDK deployment and framework package dependencies",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "prefix:microsoft.net.native.runtime.",
+   "match": "prefix",
+   "name": "Microsoft.NET.Native.Runtime.",
+   "class": "protected",
+   "group": "runtime",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Windows App SDK deployment and framework package dependencies",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "prefix:microsoft.windowsappruntime.",
+   "match": "prefix",
+   "name": "Microsoft.WindowsAppRuntime.",
+   "class": "protected",
+   "group": "runtime",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Windows App SDK deployment and framework package dependencies",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "prefix:microsoft.winappruntime.",
+   "match": "prefix",
+   "name": "Microsoft.WinAppRuntime.",
+   "class": "protected",
+   "group": "runtime",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Windows App SDK deployment and framework package dependencies",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "prefix:microsoft.",
+   "match": "prefix",
+   "name": "Microsoft.",
+   "class": "protected",
+   "group": "shell",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "cw5n1h2txyewy"
+  },
+  {
+   "id": "prefix:microsoftwindows.client.",
+   "match": "prefix",
+   "name": "MicrosoftWindows.Client.",
+   "class": "protected",
+   "group": "shell",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "cw5n1h2txyewy",
+   "except": [
+    "MicrosoftWindows.Client.WebExperience"
+   ]
+  },
+  {
+   "id": "prefix:windows.",
+   "match": "prefix",
+   "name": "Windows.",
+   "class": "protected",
+   "group": "shell",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "cw5n1h2txyewy"
+  },
+  {
+   "id": "exact:windows.immersivecontrolpanel",
+   "match": "exact",
+   "name": "windows.immersivecontrolpanel",
+   "class": "protected",
+   "group": "shell",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "cw5n1h2txyewy"
+  },
+  {
+   "id": "exact:microsoft.microsoftedge",
+   "match": "exact",
+   "name": "Microsoft.MicrosoftEdge",
+   "class": "protected",
+   "group": "edge",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.microsoftedge.stable",
+   "match": "exact",
+   "name": "Microsoft.MicrosoftEdge.Stable",
+   "class": "protected",
+   "group": "edge",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.bingnews",
+   "match": "exact",
+   "name": "Microsoft.BingNews",
+   "class": "safe",
+   "group": "bing_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.bingweather",
+   "match": "exact",
+   "name": "Microsoft.BingWeather",
+   "class": "safe",
+   "group": "bing_apps",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.bingfinance",
+   "match": "exact",
+   "name": "Microsoft.BingFinance",
+   "class": "safe",
+   "group": "bing_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.bingsports",
+   "match": "exact",
+   "name": "Microsoft.BingSports",
+   "class": "safe",
+   "group": "bing_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.bingfoodanddrink",
+   "match": "exact",
+   "name": "Microsoft.BingFoodAndDrink",
+   "class": "safe",
+   "group": "bing_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.binghealthandfitness",
+   "match": "exact",
+   "name": "Microsoft.BingHealthAndFitness",
+   "class": "safe",
+   "group": "bing_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.bingtravel",
+   "match": "exact",
+   "name": "Microsoft.BingTravel",
+   "class": "safe",
+   "group": "bing_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.bingtranslator",
+   "match": "exact",
+   "name": "Microsoft.BingTranslator",
+   "class": "safe",
+   "group": "bing_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.news",
+   "match": "exact",
+   "name": "Microsoft.News",
+   "class": "safe",
+   "group": "bing_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.getstarted",
+   "match": "exact",
+   "name": "Microsoft.Getstarted",
+   "class": "safe",
+   "group": "help_tips",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.gethelp",
+   "match": "exact",
+   "name": "Microsoft.GetHelp",
+   "class": "safe",
+   "group": "help_tips",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.windowsfeedbackhub",
+   "match": "exact",
+   "name": "Microsoft.WindowsFeedbackHub",
+   "class": "safe",
+   "group": "help_tips",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.messaging",
+   "match": "exact",
+   "name": "Microsoft.Messaging",
+   "class": "safe",
+   "group": "communications",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.oneconnect",
+   "match": "exact",
+   "name": "Microsoft.OneConnect",
+   "class": "safe",
+   "group": "communications",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.people",
+   "match": "exact",
+   "name": "Microsoft.People",
+   "class": "safe",
+   "group": "communications",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.microsoftofficehub",
+   "match": "exact",
+   "name": "Microsoft.MicrosoftOfficeHub",
+   "class": "safe",
+   "group": "office_apps",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.office.onenote",
+   "match": "exact",
+   "name": "Microsoft.Office.OneNote",
+   "class": "safe",
+   "group": "office_apps",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.office.sway",
+   "match": "exact",
+   "name": "Microsoft.Office.Sway",
+   "class": "safe",
+   "group": "office_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.todos",
+   "match": "exact",
+   "name": "Microsoft.Todos",
+   "class": "safe",
+   "group": "office_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.powerautomatedesktop",
+   "match": "exact",
+   "name": "Microsoft.PowerAutomateDesktop",
+   "class": "safe",
+   "group": "office_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.microsoftpowerbiforwindows",
+   "match": "exact",
+   "name": "Microsoft.MicrosoftPowerBIForWindows",
+   "class": "safe",
+   "group": "office_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.wallet",
+   "match": "exact",
+   "name": "Microsoft.Wallet",
+   "class": "safe",
+   "group": "wallet",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.microsoft3dviewer",
+   "match": "exact",
+   "name": "Microsoft.Microsoft3DViewer",
+   "class": "safe",
+   "group": "mixed_reality",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.mixedreality.portal",
+   "match": "exact",
+   "name": "Microsoft.MixedReality.Portal",
+   "class": "safe",
+   "group": "mixed_reality",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.print3d",
+   "match": "exact",
+   "name": "Microsoft.Print3D",
+   "class": "safe",
+   "group": "mixed_reality",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.3dbuilder",
+   "match": "exact",
+   "name": "Microsoft.3DBuilder",
+   "class": "safe",
+   "group": "mixed_reality",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.mspaint",
+   "match": "exact",
+   "name": "Microsoft.MSPaint",
+   "class": "safe",
+   "group": "mixed_reality",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.zunevideo",
+   "match": "exact",
+   "name": "Microsoft.ZuneVideo",
+   "class": "safe",
+   "group": "media_legacy",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.microsoftsolitairecollection",
+   "match": "exact",
+   "name": "Microsoft.MicrosoftSolitaireCollection",
+   "class": "safe",
+   "group": "games_casual",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.xboxapp",
+   "match": "exact",
+   "name": "Microsoft.XboxApp",
+   "class": "safe",
+   "group": "games_casual",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.549981c3f5f10",
+   "match": "exact",
+   "name": "Microsoft.549981C3F5F10",
+   "class": "safe",
+   "group": "cortana",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.windowsmaps",
+   "match": "exact",
+   "name": "Microsoft.WindowsMaps",
+   "class": "safe",
+   "group": "maps",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.yourphone",
+   "match": "exact",
+   "name": "Microsoft.YourPhone",
+   "class": "safe",
+   "group": "phone_link",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.windows.devhome",
+   "match": "exact",
+   "name": "Microsoft.Windows.DevHome",
+   "class": "safe",
+   "group": "devhome",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.skypeapp",
+   "match": "exact",
+   "name": "Microsoft.SkypeApp",
+   "class": "safe",
+   "group": "communications",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "kzf8qxf38zg5c"
+  },
+  {
+   "id": "exact:microsoftteams",
+   "match": "exact",
+   "name": "MicrosoftTeams",
+   "class": "safe",
+   "group": "communications",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:clipchamp.clipchamp",
+   "match": "exact",
+   "name": "Clipchamp.Clipchamp",
+   "class": "safe",
+   "group": "video_editor",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "yxz26nhyzhsrt"
+  },
+  {
+   "id": "exact:spotifyab.spotifymusic",
+   "match": "exact",
+   "name": "SpotifyAB.SpotifyMusic",
+   "class": "safe",
+   "group": "promoted_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "zpdnekdrzrea0"
+  },
+  {
+   "id": "exact:disney.37853fc22b2ce",
+   "match": "exact",
+   "name": "Disney.37853FC22B2CE",
+   "class": "safe",
+   "group": "promoted_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "6rarf9sa4v8jt"
+  },
+  {
+   "id": "exact:4df9e0f8.netflix",
+   "match": "exact",
+   "name": "4DF9E0F8.Netflix",
+   "class": "safe",
+   "group": "promoted_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "mcm4njqhnhss8"
+  },
+  {
+   "id": "exact:bytedancepte.ltd.tiktok",
+   "match": "exact",
+   "name": "BytedancePte.Ltd.TikTok",
+   "class": "safe",
+   "group": "promoted_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "6yccndn6064se"
+  },
+  {
+   "id": "exact:king.com.candycrushsaga",
+   "match": "exact",
+   "name": "king.com.CandyCrushSaga",
+   "class": "safe",
+   "group": "promoted_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "kgqvnymyfvs32"
+  },
+  {
+   "id": "exact:king.com.candycrushsodasaga",
+   "match": "exact",
+   "name": "king.com.CandyCrushSodaSaga",
+   "class": "safe",
+   "group": "promoted_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "kgqvnymyfvs32"
+  },
+  {
+   "id": "exact:king.com.bubblewitch3saga",
+   "match": "exact",
+   "name": "king.com.BubbleWitch3Saga",
+   "class": "safe",
+   "group": "promoted_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "kgqvnymyfvs32"
+  },
+  {
+   "id": "exact:amazonvideo.primevideo",
+   "match": "exact",
+   "name": "AmazonVideo.PrimeVideo",
+   "class": "safe",
+   "group": "promoted_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "pwbj9vvecjh7j"
+  },
+  {
+   "id": "exact:facebook.instagrambeta",
+   "match": "exact",
+   "name": "Facebook.InstagramBeta",
+   "class": "safe",
+   "group": "promoted_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8xx8rvfyw5nnt"
+  },
+  {
+   "id": "exact:facebook.facebook",
+   "match": "exact",
+   "name": "Facebook.Facebook",
+   "class": "safe",
+   "group": "promoted_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8xx8rvfyw5nnt"
+  },
+  {
+   "id": "exact:7ee7776c.linkedinforwindows",
+   "match": "exact",
+   "name": "7EE7776C.LinkedInforWindows",
+   "class": "safe",
+   "group": "promoted_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "w2gh52qy24etm"
+  },
+  {
+   "id": "exact:microsoft.windowscalculator",
+   "match": "exact",
+   "name": "Microsoft.WindowsCalculator",
+   "class": "caution",
+   "group": "core_apps",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.windows.photos",
+   "match": "exact",
+   "name": "Microsoft.Windows.Photos",
+   "class": "caution",
+   "group": "core_apps",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.windowscamera",
+   "match": "exact",
+   "name": "Microsoft.WindowsCamera",
+   "class": "caution",
+   "group": "core_apps",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.windowsnotepad",
+   "match": "exact",
+   "name": "Microsoft.WindowsNotepad",
+   "class": "caution",
+   "group": "core_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.paint",
+   "match": "exact",
+   "name": "Microsoft.Paint",
+   "class": "caution",
+   "group": "core_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.screensketch",
+   "match": "exact",
+   "name": "Microsoft.ScreenSketch",
+   "class": "caution",
+   "group": "core_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.microsoftstickynotes",
+   "match": "exact",
+   "name": "Microsoft.MicrosoftStickyNotes",
+   "class": "caution",
+   "group": "core_apps",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.windowssoundrecorder",
+   "match": "exact",
+   "name": "Microsoft.WindowsSoundRecorder",
+   "class": "caution",
+   "group": "core_apps",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.windowsalarms",
+   "match": "exact",
+   "name": "Microsoft.WindowsAlarms",
+   "class": "caution",
+   "group": "core_apps",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.windowscommunicationsapps",
+   "match": "exact",
+   "name": "microsoft.windowscommunicationsapps",
+   "class": "caution",
+   "group": "mail_calendar",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.outlookforwindows",
+   "match": "exact",
+   "name": "Microsoft.OutlookForWindows",
+   "class": "caution",
+   "group": "mail_calendar",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.zunemusic",
+   "match": "exact",
+   "name": "Microsoft.ZuneMusic",
+   "class": "caution",
+   "group": "media_player",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.xboxgamingoverlay",
+   "match": "exact",
+   "name": "Microsoft.XboxGamingOverlay",
+   "class": "caution",
+   "group": "xbox_gaming",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.gamingapp",
+   "match": "exact",
+   "name": "Microsoft.GamingApp",
+   "class": "caution",
+   "group": "xbox_gaming",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.xboxidentityprovider",
+   "match": "exact",
+   "name": "Microsoft.XboxIdentityProvider",
+   "class": "caution",
+   "group": "xbox_gaming",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.xbox.tcui",
+   "match": "exact",
+   "name": "Microsoft.Xbox.TCUI",
+   "class": "caution",
+   "group": "xbox_gaming",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.xboxgameoverlay",
+   "match": "exact",
+   "name": "Microsoft.XboxGameOverlay",
+   "class": "caution",
+   "group": "xbox_gaming",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.xboxspeechtotextoverlay",
+   "match": "exact",
+   "name": "Microsoft.XboxSpeechToTextOverlay",
+   "class": "caution",
+   "group": "xbox_gaming",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.startexperiencesapp",
+   "match": "exact",
+   "name": "Microsoft.StartExperiencesApp",
+   "class": "caution",
+   "group": "widgets",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.widgetsplatformruntime",
+   "match": "exact",
+   "name": "Microsoft.WidgetsPlatformRuntime",
+   "class": "caution",
+   "group": "widgets",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.bingsearch",
+   "match": "exact",
+   "name": "Microsoft.BingSearch",
+   "class": "caution",
+   "group": "widgets",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:msteams",
+   "match": "exact",
+   "name": "MSTeams",
+   "class": "caution",
+   "group": "teams_work",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.copilot",
+   "match": "exact",
+   "name": "Microsoft.Copilot",
+   "class": "caution",
+   "group": "copilot",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.windowsterminal",
+   "match": "exact",
+   "name": "Microsoft.WindowsTerminal",
+   "class": "caution",
+   "group": "developer_tools",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.windowsterminalpreview",
+   "match": "exact",
+   "name": "Microsoft.WindowsTerminalPreview",
+   "class": "caution",
+   "group": "developer_tools",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.remotedesktop",
+   "match": "exact",
+   "name": "Microsoft.RemoteDesktop",
+   "class": "caution",
+   "group": "developer_tools",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoftcorporationii.microsoftfamily",
+   "match": "exact",
+   "name": "MicrosoftCorporationII.MicrosoftFamily",
+   "class": "caution",
+   "group": "family_support",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoftcorporationii.quickassist",
+   "match": "exact",
+   "name": "MicrosoftCorporationII.QuickAssist",
+   "class": "caution",
+   "group": "family_support",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.whiteboard",
+   "match": "exact",
+   "name": "Microsoft.Whiteboard",
+   "class": "caution",
+   "group": "office_apps_work",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.hevcvideoextension",
+   "match": "exact",
+   "name": "Microsoft.HEVCVideoExtension",
+   "class": "caution",
+   "group": "media_codecs",
+   "basis": "docs",
+   "reference": "Microsoft Learn: Keep removed apps from returning during an update (package list)",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.heifimageextension",
+   "match": "exact",
+   "name": "Microsoft.HEIFImageExtension",
+   "class": "caution",
+   "group": "media_codecs",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.webmediaextensions",
+   "match": "exact",
+   "name": "Microsoft.WebMediaExtensions",
+   "class": "caution",
+   "group": "media_codecs",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.webpimageextension",
+   "match": "exact",
+   "name": "Microsoft.WebpImageExtension",
+   "class": "caution",
+   "group": "media_codecs",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.rawimageextension",
+   "match": "exact",
+   "name": "Microsoft.RawImageExtension",
+   "class": "caution",
+   "group": "media_codecs",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.vp9videoextensions",
+   "match": "exact",
+   "name": "Microsoft.VP9VideoExtensions",
+   "class": "caution",
+   "group": "media_codecs",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.av1videoextension",
+   "match": "exact",
+   "name": "Microsoft.AV1VideoExtension",
+   "class": "caution",
+   "group": "media_codecs",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoft.mpeg2videoextension",
+   "match": "exact",
+   "name": "Microsoft.MPEG2VideoExtension",
+   "class": "caution",
+   "group": "media_codecs",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8wekyb3d8bbwe"
+  },
+  {
+   "id": "exact:microsoftwindows.client.webexperience",
+   "match": "exact",
+   "name": "MicrosoftWindows.Client.WebExperience",
+   "class": "caution",
+   "group": "widgets",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "cw5n1h2txyewy"
+  },
+  {
+   "id": "exact:microsoftwindows.crossdevice",
+   "match": "exact",
+   "name": "MicrosoftWindows.CrossDevice",
+   "class": "caution",
+   "group": "phone_link",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "cw5n1h2txyewy"
+  },
+  {
+   "id": "exact:dolbylaboratories.dolbyaccess",
+   "match": "exact",
+   "name": "DolbyLaboratories.DolbyAccess",
+   "class": "caution",
+   "group": "media_codecs",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "rz1tebttyb220"
+  },
+  {
+   "id": "exact:nvidiacorp.nvidiacontrolpanel",
+   "match": "exact",
+   "name": "NVIDIACorp.NVIDIAControlPanel",
+   "class": "caution",
+   "group": "driver_panels",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "56jybvy8sckqj"
+  },
+  {
+   "id": "exact:appup.intelgraphicsexperience",
+   "match": "exact",
+   "name": "AppUp.IntelGraphicsExperience",
+   "class": "caution",
+   "group": "driver_panels",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "8j3eq9eme6ctt"
+  },
+  {
+   "id": "exact:realteksemiconductorcorp.realtekaudiocontrol",
+   "match": "exact",
+   "name": "RealtekSemiconductorCorp.RealtekAudioControl",
+   "class": "caution",
+   "group": "driver_panels",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "dt26b99r8h8gj"
+  },
+  {
+   "id": "prefix:ad2f1837.",
+   "match": "prefix",
+   "name": "AD2F1837.",
+   "class": "caution",
+   "group": "oem_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "v10z8vjag6ke6"
+  },
+  {
+   "id": "prefix:dellinc.",
+   "match": "prefix",
+   "name": "DellInc.",
+   "class": "caution",
+   "group": "oem_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "htrsf667h5kn2"
+  },
+  {
+   "id": "prefix:e046963f.",
+   "match": "prefix",
+   "name": "E046963F.",
+   "class": "caution",
+   "group": "oem_apps",
+   "basis": "observed",
+   "reference": "Observed on Windows 11 with Get-AppxPackage; not listed in Microsoft documentation",
+   "publisherId": "k1h2ywk1493x8"
+  }
+ ]
+}

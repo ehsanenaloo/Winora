@@ -1,0 +1,36 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<UserControl x:Class="Winora.Desktop.CustomizeView"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:ctl="clr-namespace:Winora.Desktop.Controls"
+ xmlns:local="clr-namespace:Winora.Desktop"
+ AutomationProperties.Name="{Binding Title}" Focusable="False">
+ <UserControl.CommandBindings>
+  <CommandBinding Command="ApplicationCommands.Find" Executed="OnFind"/>
+ </UserControl.CommandBindings>
+ <ctl:SettingsPageView x:Name="PageView" FooterContext="{Binding HistoryList}">
+  <ctl:SettingsPageView.Header>
+   <ctl:PageHeader Title="{Binding Title}" Subtitle="{Binding Text[CustomizeIntro]}" MetaText="{Binding PendingSummary}">
+    <ctl:PageHeader.Actions>
+     <WrapPanel>
+      <ui:Button Margin="{StaticResource WinoraSpace.A4}" Content="{Binding ReviewAllLabel}" Command="{Binding ReviewAllCommand}" Appearance="Primary" Icon="{ui:SymbolIcon ClipboardTaskListLtr24}"
+       AutomationProperties.Name="{Binding ReviewAllLabel}" AutomationProperties.HelpText="{Binding Text[SetReviewAllHelp]}"/>
+      <ui:Button ToolTip="{Binding Text[DiscRefresh]}" Style="{StaticResource WinoraHeaderIconButton}" Command="{Binding RefreshCommand}" Icon="{ui:SymbolIcon ArrowClockwise24}" Margin="{StaticResource WinoraSpace.A4}"
+       AutomationProperties.Name="{Binding Text[DiscRefresh]}" AutomationProperties.HelpText="{Binding Text[SetRefreshHelp]}"/>
+     </WrapPanel>
+    </ctl:PageHeader.Actions>
+   </ctl:PageHeader>
+  </ctl:SettingsPageView.Header>
+  <ctl:SettingsPageView.States>
+   <StackPanel>
+    <ctl:LoadingSkeleton Message="{Binding Text[Working]}" Visibility="{Binding ShowProgressState, Converter={StaticResource BoolToVisibility}}"/>
+    <ctl:ErrorState Headline="{Binding Text[SetLoadFailedTitle]}" Message="{Binding FailureMessage}" Details="{Binding FailureDetails}" DetailsHeader="{Binding Text[DetailsTitle]}" ActionText="{Binding Text[TryAgain]}" ActionCommand="{Binding RefreshCommand}" ActionHelp="{Binding Text[DiscTryAgainHelp]}"
+     Visibility="{Binding ShowFailure, Converter={StaticResource BoolToVisibility}}"/>
+    <ctl:EmptyState Icon="PaintBrush24" Headline="{Binding Text[SetEmptyTitle]}" Message="{Binding Text[SetEmptyBody]}" Visibility="{Binding ShowEmptyCatalog, Converter={StaticResource BoolToVisibility}}"/>
+   </StackPanel>
+  </ctl:SettingsPageView.States>
+  <ctl:SettingsPageView.Footer>
+   <ctl:PageHistory/>
+  </ctl:SettingsPageView.Footer>
+ </ctl:SettingsPageView>
+</UserControl>

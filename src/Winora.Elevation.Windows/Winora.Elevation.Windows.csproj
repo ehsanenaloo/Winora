@@ -1,0 +1,16 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<Project Sdk="Microsoft.NET.Sdk">
+ <!-- Shared Windows primitives of the elevation channel and the testable worker logic.
+ No launcher, no process start, no registry write, no service API. AOT and trim analyzable: source-generated P/Invoke only.
+ Winora.Elevation.Protocol is referenced for the worker's pipe server (IConnectionAcceptor / IWorkerConnection / IPeerIdentity / IFrameChannel). -->
+ <PropertyGroup><IsAotCompatible>true</IsAotCompatible><AllowUnsafeBlocks>true</AllowUnsafeBlocks></PropertyGroup>
+ <!-- Flavor: -p:WinoraFlavor=VmTrust is a compile-time option for disposable VMs only. It defines WINORA_VM_TRUST and
+ redirects the outputs so a VmTrust build can never overwrite the default (release flavor) build. -->
+ <PropertyGroup Condition="'$(WinoraFlavor)' == 'VmTrust'">
+  <DefineConstants>$(DefineConstants);WINORA_VM_TRUST</DefineConstants>
+  <BaseOutputPath>bin\VmTrust\</BaseOutputPath>
+  <IntermediateOutputPath>obj\VmTrust\$(Configuration)\</IntermediateOutputPath>
+ </PropertyGroup>
+ <ItemGroup><ProjectReference Include="../Winora.Domain/Winora.Domain.csproj" /><ProjectReference Include="../Winora.Elevation.Protocol/Winora.Elevation.Protocol.csproj" /></ItemGroup>
+ <ItemGroup><InternalsVisibleTo Include="Winora.Elevation.Windows.Tests" /></ItemGroup>
+</Project>

@@ -1,0 +1,6 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<Project Sdk="Microsoft.NET.Sdk">
+ <!-- Page state and commands. No WPF, no WPF-UI and no Windows-only target: a view model that touches a UI type does not build here. -->
+ <PropertyGroup><RootNamespace>Winora.Desktop</RootNamespace></PropertyGroup>
+ <ItemGroup><ProjectReference Include="../Winora.Domain/Winora.Domain.csproj"/><ProjectReference Include="../Winora.Application/Winora.Application.csproj"/><ProjectReference Include="../Winora.Infrastructure.Persistence/Winora.Infrastructure.Persistence.csproj"/><PackageReference Include="CommunityToolkit.Mvvm"/><PackageReference Include="Microsoft.Extensions.Logging"/></ItemGroup>
+</Project>

@@ -1,0 +1,207 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<UserControl x:Class="Winora.Desktop.SettingsView"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:ctl="clr-namespace:Winora.Desktop.Controls"
+ AutomationProperties.Name="{Binding Title}" Focusable="False">
+ <ctl:SettingsPage x:Name="Workspace">
+  <ctl:SettingsPage.Header>
+   <ctl:PageHeader Title="{Binding Title}" Subtitle="{Binding Text[SettingsSubtitle]}"/>
+  </ctl:SettingsPage.Header>
+  <ctl:SettingsPage.Body>
+   <StackPanel>
+
+   <ctl:CardHeader Title="{Binding Text[AppearanceGroup]}" Margin="{StaticResource WinoraSpace.None}"/>
+   <ctl:InventoryRow StacksWhenNarrow="False" IsFirst="False" IsLast="False" AutomationProperties.Name="{Binding Text[Language]}">
+    <ctl:InventoryRow.Lead><ui:SymbolIcon Symbol="LocalLanguage24" FontSize="24"/></ctl:InventoryRow.Lead>
+    <StackPanel><TextBlock x:Name="LanguageLabel" Style="{StaticResource WinoraBodyStrong}" Text="{Binding Text[Language]}"/><TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Text[LanguageHelp]}"/></StackPanel>
+    <ctl:InventoryRow.Control>
+            <ComboBox ItemsSource="{Binding LanguageOptions}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding LanguageCode, Mode=TwoWay}"
+     AutomationProperties.LabeledBy="{Binding ElementName=LanguageLabel}" AutomationProperties.Name="{Binding Text[Language]}" AutomationProperties.HelpText="{Binding Text[LanguageHelp]}"/>
+    </ctl:InventoryRow.Control>
+   </ctl:InventoryRow>
+   <ctl:InventoryRow StacksWhenNarrow="False" IsFirst="False" IsLast="False" AutomationProperties.Name="{Binding Text[Theme]}">
+    <ctl:InventoryRow.Lead><ui:SymbolIcon Symbol="PaintBrush24" FontSize="24"/></ctl:InventoryRow.Lead>
+    <StackPanel><TextBlock x:Name="ThemeLabel" Style="{StaticResource WinoraBodyStrong}" Text="{Binding Text[Theme]}"/><TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Text[ThemeHelp]}"/></StackPanel>
+    <ctl:InventoryRow.Control>
+            <ComboBox ItemsSource="{Binding ThemeOptions}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding ThemeCode, Mode=TwoWay}"
+     AutomationProperties.LabeledBy="{Binding ElementName=ThemeLabel}" AutomationProperties.Name="{Binding Text[Theme]}" AutomationProperties.HelpText="{Binding Text[ThemeHelp]}"/>
+    </ctl:InventoryRow.Control>
+   </ctl:InventoryRow>
+   <ctl:InventoryRow StacksWhenNarrow="False" IsFirst="False" IsLast="False" AutomationProperties.Name="{Binding Text[Accent]}">
+    <ctl:InventoryRow.Lead><ui:SymbolIcon Symbol="Color24" FontSize="24"/></ctl:InventoryRow.Lead>
+    <StackPanel><TextBlock x:Name="AccentLabel" Style="{StaticResource WinoraBodyStrong}" Text="{Binding Text[Accent]}"/><TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Text[AccentHelp]}"/></StackPanel>
+    <ctl:InventoryRow.Control>
+            <ListBox x:Name="AccentList" Style="{StaticResource AccentSwatchList}" ItemsSource="{Binding AccentOptions}" SelectedValuePath="Value" SelectedValue="{Binding AccentCode, Mode=TwoWay}"
+     AutomationProperties.LabeledBy="{Binding ElementName=AccentLabel}" AutomationProperties.Name="{Binding Text[Accent]}" AutomationProperties.HelpText="{Binding Text[AccentHelp]}"/>
+    </ctl:InventoryRow.Control>
+   </ctl:InventoryRow>
+   <ctl:InventoryRow x:Name="AccentCustomRow" StacksWhenNarrow="False" IsFirst="False" IsLast="False" Visibility="{Binding IsCustomAccent, Converter={StaticResource BoolToVisibility}}" AutomationProperties.Name="{Binding Text[AccentCustom]}">
+    <StackPanel><TextBlock x:Name="AccentHexLabel" Style="{StaticResource WinoraBodyStrong}" Text="{Binding Text[AccentHexLabel]}"/>
+     <TextBlock x:Name="AccentHint" Style="{StaticResource WinoraCaption}" Text="{Binding AccentHintText}" AutomationProperties.LiveSetting="Polite">
+      <TextBlock.Resources><Style TargetType="TextBlock" BasedOn="{StaticResource WinoraCaption}"><Style.Triggers><DataTrigger Binding="{Binding AccentHintIsError}" Value="True"><Setter Property="Foreground" Value="{DynamicResource WinoraStatusErrorForeground}"/></DataTrigger></Style.Triggers></Style></TextBlock.Resources>
+     </TextBlock></StackPanel>
+    <ctl:InventoryRow.Control>
+        <TextBox x:Name="AccentHexBox" Width="160" FlowDirection="LeftToRight" FontFamily="{StaticResource WinoraMonoFontFamily}" MaxLength="7" Text="{Binding AccentHex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+     AutomationProperties.LabeledBy="{Binding ElementName=AccentHexLabel}" AutomationProperties.Name="{Binding Text[AccentHexLabel]}" AutomationProperties.HelpText="{Binding Text[AccentHexHint]}"/>
+    </ctl:InventoryRow.Control>
+   </ctl:InventoryRow>
+   <ctl:InventoryRow StacksWhenNarrow="False" IsFirst="False" IsLast="False" AutomationProperties.Name="{Binding Text[Density]}">
+    <ctl:InventoryRow.Lead><ui:SymbolIcon Symbol="TextLineSpacing24" FontSize="24"/></ctl:InventoryRow.Lead>
+    <StackPanel><TextBlock x:Name="DensityLabel" Style="{StaticResource WinoraBodyStrong}" Text="{Binding Text[Density]}"/><TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Text[DensityHelp]}"/></StackPanel>
+    <ctl:InventoryRow.Control>
+            <ComboBox x:Name="DensityBox" ItemsSource="{Binding DensityOptions}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding DensityCode, Mode=TwoWay}"
+     AutomationProperties.LabeledBy="{Binding ElementName=DensityLabel}" AutomationProperties.Name="{Binding Text[Density]}" AutomationProperties.HelpText="{Binding Text[DensityHelp]}"/>
+    </ctl:InventoryRow.Control>
+   </ctl:InventoryRow>
+   <ctl:InventoryRow StacksWhenNarrow="False" IsFirst="False" IsLast="False" AutomationProperties.Name="{Binding Text[SmoothScrolling]}">
+    <ctl:InventoryRow.Lead><ui:SymbolIcon Symbol="ArrowSort24" FontSize="24"/></ctl:InventoryRow.Lead>
+    <StackPanel><TextBlock x:Name="SmoothLabel" Style="{StaticResource WinoraBodyStrong}" Text="{Binding Text[SmoothScrolling]}"/><TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Text[SmoothScrollingHelp]}" TextWrapping="Wrap"/></StackPanel>
+    <ctl:InventoryRow.Control>
+            <StackPanel Orientation="Horizontal">
+             <TextBlock Style="{StaticResource WinoraSwitchState}" Tag="{Binding IsChecked, ElementName=SmoothSwitch}"/>
+             <ui:ToggleSwitch x:Name="SmoothSwitch" Padding="{StaticResource WinoraSpace.None}" MinWidth="0" VerticalAlignment="Center" IsChecked="{Binding SmoothScrolling, Mode=TwoWay}"
+     AutomationProperties.LabeledBy="{Binding ElementName=SmoothLabel}" AutomationProperties.Name="{Binding Text[SmoothScrolling]}" AutomationProperties.HelpText="{Binding Text[SmoothScrollingHelp]}"/>
+            </StackPanel>
+    </ctl:InventoryRow.Control>
+   </ctl:InventoryRow>
+   <ctl:InventoryRow StacksWhenNarrow="False" IsFirst="False" IsLast="False" AutomationProperties.Name="{Binding Text[NotifyOnCompletion]}">
+    <ctl:InventoryRow.Lead><ui:SymbolIcon Symbol="Alert24" FontSize="24"/></ctl:InventoryRow.Lead>
+    <StackPanel><TextBlock x:Name="NotifyLabel" Style="{StaticResource WinoraBodyStrong}" Text="{Binding Text[NotifyOnCompletion]}"/><TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Text[NotifyOnCompletionHelp]}" TextWrapping="Wrap"/></StackPanel>
+    <ctl:InventoryRow.Control>
+            <StackPanel Orientation="Horizontal">
+             <TextBlock Style="{StaticResource WinoraSwitchState}" Tag="{Binding IsChecked, ElementName=NotifySwitch}"/>
+             <ui:ToggleSwitch x:Name="NotifySwitch" Padding="{StaticResource WinoraSpace.None}" MinWidth="0" VerticalAlignment="Center" IsChecked="{Binding NotifyOnCompletion, Mode=TwoWay}"
+     AutomationProperties.LabeledBy="{Binding ElementName=NotifyLabel}" AutomationProperties.Name="{Binding Text[NotifyOnCompletion]}" AutomationProperties.HelpText="{Binding Text[NotifyOnCompletionHelp]}"/>
+            </StackPanel>
+    </ctl:InventoryRow.Control>
+   </ctl:InventoryRow>
+   <ctl:InventoryRow StacksWhenNarrow="False" IsFirst="False" IsLast="False" AutomationProperties.Name="{Binding Text[KeepInTray]}">
+    <ctl:InventoryRow.Lead><ui:SymbolIcon Symbol="WindowArrowUp24" FontSize="24"/></ctl:InventoryRow.Lead>
+    <StackPanel><TextBlock x:Name="KeepInTrayLabel" Style="{StaticResource WinoraBodyStrong}" Text="{Binding Text[KeepInTray]}" TextWrapping="Wrap"/><TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Text[KeepInTrayHelp]}" TextWrapping="Wrap"/></StackPanel>
+    <ctl:InventoryRow.Control>
+            <StackPanel Orientation="Horizontal">
+             <TextBlock Style="{StaticResource WinoraSwitchState}" Tag="{Binding IsChecked, ElementName=KeepInTraySwitch}"/>
+             <ui:ToggleSwitch x:Name="KeepInTraySwitch" Padding="{StaticResource WinoraSpace.None}" MinWidth="0" VerticalAlignment="Center" IsChecked="{Binding KeepInTray, Mode=TwoWay}"
+     AutomationProperties.LabeledBy="{Binding ElementName=KeepInTrayLabel}" AutomationProperties.Name="{Binding Text[KeepInTray]}" AutomationProperties.HelpText="{Binding Text[KeepInTrayHelp]}"/>
+            </StackPanel>
+    </ctl:InventoryRow.Control>
+   </ctl:InventoryRow>
+   <ctl:InventoryRow StacksWhenNarrow="False" IsFirst="False" IsLast="True" AutomationProperties.Name="{Binding Text[RemoveProvisioned]}">
+    <ctl:InventoryRow.Lead><ui:SymbolIcon Symbol="AppsListDetail24" FontSize="24"/></ctl:InventoryRow.Lead>
+    <StackPanel><TextBlock x:Name="ProvisionedLabel" Style="{StaticResource WinoraBodyStrong}" Text="{Binding Text[RemoveProvisioned]}"/><TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Text[RemoveProvisionedHelp]}" TextWrapping="Wrap"/></StackPanel>
+    <ctl:InventoryRow.Control>
+            <StackPanel Orientation="Horizontal">
+             <TextBlock Style="{StaticResource WinoraSwitchState}" Tag="{Binding IsChecked, ElementName=ProvisionedSwitch}"/>
+             <ui:ToggleSwitch x:Name="ProvisionedSwitch" Padding="{StaticResource WinoraSpace.None}" MinWidth="0" VerticalAlignment="Center" IsChecked="{Binding RemoveProvisioned, Mode=TwoWay}"
+     AutomationProperties.LabeledBy="{Binding ElementName=ProvisionedLabel}" AutomationProperties.Name="{Binding Text[RemoveProvisioned]}" AutomationProperties.HelpText="{Binding Text[RemoveProvisionedHelp]}"/>
+            </StackPanel>
+    </ctl:InventoryRow.Control>
+   </ctl:InventoryRow>
+   <TextBlock Style="{StaticResource WinoraCaption}" Foreground="{DynamicResource SystemFillColorCautionBrush}" Text="{Binding SaveFailedText}" Margin="{StaticResource WinoraSpace.L4T4}" AutomationProperties.LiveSetting="Assertive"/>
+
+   <ctl:CardHeader x:Name="BehaviorHeading" Title="{Binding Text[V2SeBehaviorGroup]}" Margin="{StaticResource WinoraSpace.T24}"/>
+   <ctl:InventoryRow StacksWhenNarrow="False" IsFirst="False" IsLast="False" AutomationProperties.Name="{Binding Text[V2SeShortcutsTitle]}">
+    <ctl:InventoryRow.Lead><ui:SymbolIcon Symbol="Keyboard24" FontSize="24"/></ctl:InventoryRow.Lead>
+    <StackPanel><TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding Text[V2SeShortcutsTitle]}"/><TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Text[V2SeShortcutsHelp]}"/></StackPanel>
+    <ctl:InventoryRow.Control>
+            <ui:Button x:Name="ShortcutsButton" MaxWidth="280" Command="{Binding ShowShortcutsCommand}" Icon="{ui:SymbolIcon Keyboard24}"
+     AutomationProperties.Name="{Binding Text[ShortcutsButton]}" AutomationProperties.HelpText="{Binding Text[ShortcutsButtonHelp]}"><TextBlock Text="{Binding Text[ShortcutsButton]}" TextWrapping="Wrap" MaxWidth="200"/></ui:Button>
+    </ctl:InventoryRow.Control>
+   </ctl:InventoryRow>
+   <ctl:InventoryRow StacksWhenNarrow="False" IsFirst="False" IsLast="True" AutomationProperties.Name="{Binding Text[V2SeWelcomeTitle]}">
+    <ctl:InventoryRow.Lead><ui:SymbolIcon Symbol="HandWave24" FontSize="24"/></ctl:InventoryRow.Lead>
+    <StackPanel><TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding Text[V2SeWelcomeTitle]}"/><TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Text[V2SeWelcomeHelp]}"/></StackPanel>
+    <ctl:InventoryRow.Control>
+            <ui:Button x:Name="WelcomeButton" MaxWidth="280" Command="{Binding ShowWelcomeCommand}" Icon="{ui:SymbolIcon HandWave24}"
+     AutomationProperties.Name="{Binding Text[WelcomeShowAgain]}" AutomationProperties.HelpText="{Binding Text[WelcomeShowAgainHelp]}"><TextBlock Text="{Binding Text[V2SeWelcomeButton]}" TextWrapping="Wrap" MaxWidth="200"/></ui:Button>
+    </ctl:InventoryRow.Control>
+   </ctl:InventoryRow>
+
+   <ctl:CardHeader x:Name="AdvancedHeading" Title="{Binding Text[V2SeAdvancedGroup]}" Margin="{StaticResource WinoraSpace.T24}"/>
+   <ctl:InventoryRow StacksWhenNarrow="False" IsFirst="False" IsLast="True" AutomationProperties.Name="{Binding Text[SlowWait]}">
+    <ctl:InventoryRow.Lead><ui:SymbolIcon Symbol="Timer24" FontSize="24"/></ctl:InventoryRow.Lead>
+    <StackPanel><TextBlock x:Name="SlowWaitLabel" Style="{StaticResource WinoraBodyStrong}" Text="{Binding Text[SlowWait]}"/><TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Text[SlowWaitHelp]}" TextWrapping="Wrap"/></StackPanel>
+    <ctl:InventoryRow.Control>
+            <ComboBox x:Name="SlowWaitBox" ItemsSource="{Binding SlowToolWaitOptions}" DisplayMemberPath="Label" SelectedValuePath="Value" SelectedValue="{Binding SlowToolWaitCode, Mode=TwoWay}"
+     AutomationProperties.LabeledBy="{Binding ElementName=SlowWaitLabel}" AutomationProperties.Name="{Binding Text[SlowWait]}" AutomationProperties.HelpText="{Binding Text[SlowWaitHelp]}"/>
+    </ctl:InventoryRow.Control>
+   </ctl:InventoryRow>
+
+   <ctl:CardHeader x:Name="DataHeading" Title="{Binding Text[V2SeDataGroup]}" Margin="{StaticResource WinoraSpace.T24}"/>
+   <Border Style="{StaticResource WinoraSectionRow}" Padding="{StaticResource WinoraSpace.A16}">
+    <StackPanel>
+     <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions><ui:SymbolIcon Symbol="Database24" FontSize="24" Margin="{StaticResource WinoraSpace.R12}" VerticalAlignment="Top"/>
+      <StackPanel Grid.Column="1"><TextBlock x:Name="StorageLabel" Style="{StaticResource WinoraBody}" Text="{Binding Text[Storage]}"/><TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Text[StorageHelp]}"/></StackPanel></Grid>
+     <Grid Margin="{StaticResource WinoraSpace.T12}">
+      <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <TextBox x:Name="DataFolderBox" Style="{StaticResource WinoraLtrText}" Text="{Binding DataFolder, Mode=OneWay}" AutomationProperties.LabeledBy="{Binding ElementName=StorageLabel}" AutomationProperties.Name="{Binding Text[Storage]}" AutomationProperties.HelpText="{Binding Text[StorageHelp]}"/>
+      <ui:Button Grid.Column="1" Content="{Binding Text[CopyPath]}" Command="{Binding CopyPathCommand}" CommandParameter="{Binding DataFolder}" Icon="{ui:SymbolIcon Copy24}" Margin="{StaticResource WinoraSpace.L8}" VerticalAlignment="Top"
+       AutomationProperties.Name="{Binding Text[CopyPath]}" AutomationProperties.HelpText="{Binding Text[CopyPathHelp]}"/>
+      <!-- The one place that opens the data folder (it was also a row of the appearance group). -->
+      <ui:Button Grid.Column="2" Margin="{StaticResource WinoraSpace.L8}" VerticalAlignment="Center" Content="{Binding Text[OpenDataFolderButton]}" Command="{Binding OpenDataFolderCommand}" Icon="{ui:SymbolIcon FolderOpen24}"
+     AutomationProperties.Name="{Binding Text[OpenDataFolder]}" AutomationProperties.HelpText="{Binding Text[OpenDataFolderHelp]}"/>
+     </Grid>
+     <Rectangle Height="1" Fill="{DynamicResource WinoraCardBorderBrush}" Margin="{StaticResource WinoraSpace.V16}"/>
+     <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding Text[DiagGroup]}" AutomationProperties.HeadingLevel="Level3"/>
+     <TextBlock Style="{StaticResource WinoraBody}" Text="{Binding Text[DiagIntro]}" Margin="{StaticResource WinoraSpace.T4}" TextWrapping="Wrap"/>
+     <StackPanel Orientation="Horizontal" Margin="{StaticResource WinoraSpace.T12}">
+      <ui:Button x:Name="ExportButton" Content="{Binding Text[DiagExport]}" Command="{Binding ExportDiagnosticsCommand}" Icon="{ui:SymbolIcon ArrowExportUp24}" Appearance="Primary"
+       AutomationProperties.Name="{Binding Text[DiagExport]}" AutomationProperties.HelpText="{Binding Text[DiagExportHelp]}"/>
+      <ui:ProgressRing IsIndeterminate="{Binding IsVisible, RelativeSource={RelativeSource Self}, Mode=OneWay}" Margin="{StaticResource WinoraSpace.L12}" Visibility="{Binding IsExporting, Converter={StaticResource BoolToVisibility}}" AutomationProperties.Name="{Binding Text[DiagWorking]}"/>
+      <TextBlock Style="{StaticResource WinoraBodySecondary}" Text="{Binding Text[DiagWorking]}" Margin="{StaticResource WinoraSpace.L8}" VerticalAlignment="Center" Visibility="{Binding IsExporting, Converter={StaticResource BoolToVisibility}}" AutomationProperties.LiveSetting="Polite"/>
+     </StackPanel>
+     <ctl:InfoBanner CloseText="{Binding Text[BannerDismiss]}" x:Name="DiagnosticsBar" IsOpen="{Binding DiagnosticsNotice.IsOpen, Mode=TwoWay}" IsClosable="True" Margin="{StaticResource WinoraSpace.T12}" Severity="{Binding DiagnosticsNotice.Severity, Converter={x:Static ctl:BannerLook.Severity}}"
+      Title="{Binding DiagnosticsNotice.Title}" Message="{Binding DiagnosticsNotice.Message}" AutomationProperties.LiveSetting="{Binding DiagnosticsNotice.IsUrgent, Converter={x:Static ctl:BannerLook.Live}}" AutomationProperties.Name="{Binding DiagnosticsNotice.Title}"/>
+     <StackPanel Visibility="{Binding HasArchive, Converter={StaticResource BoolToVisibility}}" Margin="{StaticResource WinoraSpace.T8}">
+      <TextBlock x:Name="ArchiveLabel" Style="{StaticResource WinoraCaption}" Text="{Binding Text[DiagArchiveLabel]}"/>
+      <Grid>
+       <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+       <TextBox x:Name="ArchiveBox" Style="{StaticResource WinoraLtrText}" Text="{Binding ArchivePath, Mode=OneWay}" AutomationProperties.LabeledBy="{Binding ElementName=ArchiveLabel}" AutomationProperties.Name="{Binding Text[DiagArchiveLabel]}"/>
+       <ui:Button Grid.Column="1" Content="{Binding Text[CopyPath]}" Command="{Binding CopyPathCommand}" CommandParameter="{Binding ArchivePath}" Icon="{ui:SymbolIcon Copy24}" Margin="{StaticResource WinoraSpace.L8}" VerticalAlignment="Top"
+        AutomationProperties.Name="{Binding Text[CopyPath]}" AutomationProperties.HelpText="{Binding Text[CopyPathHelp]}"/>
+      </Grid>
+     </StackPanel>
+     <TextBlock x:Name="LogLabel" Style="{StaticResource WinoraBodyStrong}" Text="{Binding Text[DiagLogFolderLabel]}" Margin="{StaticResource WinoraSpace.T16}"/>
+     <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Text[DiagLogFolderHelp]}"/>
+     <Grid Margin="{StaticResource WinoraSpace.T4}">
+      <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <TextBox x:Name="LogFolderBox" Style="{StaticResource WinoraLtrText}" Text="{Binding LogFolder, Mode=OneWay}" AutomationProperties.LabeledBy="{Binding ElementName=LogLabel}" AutomationProperties.Name="{Binding Text[DiagLogFolderLabel]}" AutomationProperties.HelpText="{Binding Text[DiagLogFolderHelp]}"/>
+      <ui:Button Grid.Column="1" Content="{Binding Text[CopyPath]}" Command="{Binding CopyPathCommand}" CommandParameter="{Binding LogFolder}" Icon="{ui:SymbolIcon Copy24}" Margin="{StaticResource WinoraSpace.L8}" VerticalAlignment="Top"
+       AutomationProperties.Name="{Binding Text[CopyPath]}" AutomationProperties.HelpText="{Binding Text[CopyPathHelp]}"/>
+     </Grid>
+     <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding CopyStatus}" Margin="{StaticResource WinoraSpace.T8}" AutomationProperties.LiveSetting="Polite"/>
+    </StackPanel>
+   </Border>
+
+   <Border Style="{StaticResource WinoraCardCap}"/>
+   <ctl:CardHeader Title="{Binding Text[About]}" Margin="{StaticResource WinoraSpace.T24}"/>
+   <Border Style="{StaticResource WinoraSectionRow}" Padding="{StaticResource WinoraSpace.A16}" AutomationProperties.Name="{Binding Text[About]}">
+    <StackPanel>
+     <Grid Margin="{StaticResource WinoraSpace.B12}"><Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions><ui:SymbolIcon Symbol="Info24" FontSize="24" Margin="{StaticResource WinoraSpace.R12}" VerticalAlignment="Top"/><StackPanel Grid.Column="1"><TextBlock Style="{StaticResource WinoraBody}" Text="{Binding Text[AppName]}"/><TextBlock x:Name="VersionValue" Style="{StaticResource WinoraCaption}" Text="{Binding VersionText}"/></StackPanel></Grid>
+     <TextBlock Style="{StaticResource WinoraBody}" Text="{Binding Text[AboutBody]}"/>
+     <TextBlock x:Name="CopyrightValue" Style="{StaticResource WinoraBodyStrong}" Margin="{StaticResource WinoraSpace.T12}" Text="{Binding Text[AboutCopyright]}"/>
+     <TextBlock Style="{StaticResource WinoraCaption}" Margin="{StaticResource WinoraSpace.T12}" Text="{Binding Text[LinkWebsite]}"/>
+     <Grid>
+      <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <TextBlock x:Name="WebsiteValue" Style="{StaticResource WinoraBodyStrong}" Text="https://enaloo.com" FlowDirection="LeftToRight" HorizontalAlignment="Left" VerticalAlignment="Center" AutomationProperties.Name="{Binding Text[LinkWebsite]}"/>
+      <ui:Button Grid.Column="1" Tag="https://enaloo.com" Click="OnCopyLink" Icon="{ui:SymbolIcon Copy24}" Appearance="Transparent" ToolTip="{Binding Text[LinkCopyHelp]}"
+       AutomationProperties.Name="{Binding Text[LinkCopyWebsite]}" AutomationProperties.HelpText="{Binding Text[LinkCopyHelp]}"/>
+     </Grid>
+     <TextBlock Style="{StaticResource WinoraCaption}" Margin="{StaticResource WinoraSpace.T12}" Text="{Binding Text[LinkGitHub]}"/>
+     <Grid>
+      <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <TextBlock x:Name="GitHubValue" Style="{StaticResource WinoraBodyStrong}" Text="https://github.com/ehsanenaloo/Winora" FlowDirection="LeftToRight" HorizontalAlignment="Left" VerticalAlignment="Center" AutomationProperties.Name="{Binding Text[LinkGitHub]}"/>
+      <ui:Button Grid.Column="1" Tag="https://github.com/ehsanenaloo/Winora" Click="OnCopyLink" Icon="{ui:SymbolIcon Copy24}" Appearance="Transparent" ToolTip="{Binding Text[LinkCopyHelp]}"
+       AutomationProperties.Name="{Binding Text[LinkCopyGitHub]}" AutomationProperties.HelpText="{Binding Text[LinkCopyHelp]}"/>
+     </Grid>
+     <TextBlock Style="{StaticResource WinoraCaption}" Margin="{StaticResource WinoraSpace.T4}" Text="{Binding Text[LinkNote]}"/>
+     <TextBlock Style="{StaticResource WinoraCaption}" Margin="{StaticResource WinoraSpace.T12}" Text="{Binding Text[BuildInfoLabel]}"/>
+     <TextBlock x:Name="BuildValue" Style="{StaticResource WinoraBody}" Text="{Binding BuildInfoText}" AutomationProperties.Name="{Binding BuildInfoText}"/>
+    </StackPanel>
+   </Border>
+   <Border Style="{StaticResource WinoraCardCap}"/>
+   </StackPanel>
+  </ctl:SettingsPage.Body>
+ </ctl:SettingsPage>
+</UserControl>

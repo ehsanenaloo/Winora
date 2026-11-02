@@ -1,0 +1,142 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<UserControl x:Class="Winora.Desktop.PowerView"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+ xmlns:local="clr-namespace:Winora.Desktop" xmlns:vm="clr-namespace:Winora.Desktop;assembly=Winora.Presentation" xmlns:ctl="clr-namespace:Winora.Desktop.Controls"
+ AutomationProperties.Name="{Binding Title}" Focusable="False">
+ <UserControl.Resources>
+  <DataTemplate x:Key="PlanTemplate" DataType="{x:Type vm:PowerPlanRow}">
+   <ctl:InventoryRow>
+    <ctl:InventoryRow.Lead><ui:SymbolIcon Symbol="PlugConnected24" FontSize="24" VerticalAlignment="Center" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/></ctl:InventoryRow.Lead>
+    <StackPanel>
+     <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding Name}" TextTrimming="CharacterEllipsis"/>
+     <WrapPanel Margin="{StaticResource WinoraSpace.T4}">
+      <ctl:StatusBadge Kind="Success" Text="{Binding ActiveText}" Visibility="{Binding ShowActive, Converter={StaticResource BoolToVisibility}}"/>
+      <ctl:StatusBadge Kind="Neutral" Text="{Binding KindText}"/>
+     </WrapPanel>
+    </StackPanel>
+   </ctl:InventoryRow>
+  </DataTemplate>
+
+  <!-- Each power setting is two cards of the settings page component, one for mains power and one for battery. -->
+  <DataTemplate x:Key="SettingTemplate" DataType="{x:Type vm:PowerSideRow}">
+   <ctl:SettingCard Row="{Binding}" IsFirst="False" IsLast="False" Text="{Binding DataContext.Text, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+  </DataTemplate>
+
+  <DataTemplate x:Key="ProfileTemplate" DataType="{x:Type vm:PowerProfileRow}">
+   <Border Style="{StaticResource WinoraActionCard}">
+    <Grid AutomationProperties.Name="{Binding AutomationName}">
+     <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+     <StackPanel VerticalAlignment="Center">
+      <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding Title}" TextWrapping="Wrap"/>
+      <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Description}" TextWrapping="Wrap" Margin="{StaticResource WinoraSpace.T2}"/>
+     </StackPanel>
+     <ui:Button Grid.Column="1" Style="{StaticResource WinoraRowButton}" Content="{Binding DataContext.Text[PowerProfileApply], RelativeSource={RelativeSource AncestorType=UserControl}}" Command="{Binding ApplyCommand}" CommandParameter="{Binding}" Margin="{StaticResource WinoraSpace.L16}"
+      IsEnabled="{Binding DataContext.CanApplyProfile, RelativeSource={RelativeSource AncestorType=UserControl}}" ctl:A11y.Label="{Binding DataContext.Text[PowerProfileApply], RelativeSource={RelativeSource AncestorType=UserControl}}" ctl:A11y.Item="{Binding Title}"
+      AutomationProperties.HelpText="{Binding DataContext.Text[PowerProfilesHelp], RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+    </Grid>
+   </Border>
+  </DataTemplate>
+
+ </UserControl.Resources>
+
+ <ctl:SettingsPage x:Name="Workspace">
+  <ctl:SettingsPage.Header>
+   <ctl:PageHeader Title="{Binding Title}" Subtitle="{Binding Text[PowerIntro]}">
+     <ctl:PageHeader.Actions><WrapPanel><ui:Button Margin="{StaticResource WinoraSpace.A4}" x:Name="RefreshButton" ToolTip="{Binding Text[DiscRefresh]}" Style="{StaticResource WinoraHeaderIconButton}" Command="{Binding RefreshCommand}" Icon="{ui:SymbolIcon ArrowClockwise24}"
+      AutomationProperties.Name="{Binding Text[DiscRefresh]}" AutomationProperties.HelpText="{Binding Text[PowerRefreshHelp]}"/></WrapPanel></ctl:PageHeader.Actions>
+    </ctl:PageHeader>
+  </ctl:SettingsPage.Header>
+  <ctl:SettingsPage.Tabs>
+   <ctl:TabRail x:Name="Rail" ContentTabs="{Binding ElementName=Tabs}" AutomationProperties.Name="{Binding Title}" AutomationProperties.HelpText="{Binding Text[V2PaTabsHelp]}" Visibility="{Binding Visibility, ElementName=Tabs}"/>
+  </ctl:SettingsPage.Tabs>
+  <ctl:SettingsPage.Banners>
+   <StackPanel>
+    <ctl:AdminNotice IsOpen="{Binding ShowNeedsAdministrator, Mode=OneWay}" Title="{Binding NeedsAdministratorTitle}" Message="{Binding NeedsAdministratorText, Mode=OneWay}" ShowLink="{Binding ShowAdminHowTo}" LinkText="{Binding Text[AdminNoticeLink]}" LinkHelp="{Binding Text[AdminNoticeLinkHelp]}"/>
+    <ctl:InfoBanner x:Name="NoticeBar" IsOpen="{Binding ShowNoticeBanner, Mode=OneWay}" IsClosable="False" Severity="Warning" Title="{Binding Text[PowerResult]}" Message="{Binding Notice}"
+     AutomationProperties.LiveSetting="Polite" AutomationProperties.Name="{Binding Notice}"/>
+
+    <ctl:InfoBanner IsOpen="{Binding ShowBatteryNotice, Mode=OneWay}" IsClosable="False" Severity="Informational" Title="{Binding Text[PowerBatteryNoticeTitle]}" Message="{Binding BatteryNotice, Mode=OneWay}"
+     AutomationProperties.Name="{Binding BatteryNotice}"/>
+
+    <!-- Page states: the first read, or a read that failed -->
+    <ctl:LoadingSkeleton x:Name="LoadingState" Message="{Binding Text[PowerLoading]}" Visibility="{Binding ShowLoading, Converter={StaticResource BoolToVisibility}}"/>
+    <ctl:ErrorState x:Name="FailureState" Headline="{Binding Text[PowerLoadFailedTitle]}" Message="{Binding LoadError}" ActionText="{Binding Text[TryAgain]}" ActionCommand="{Binding RefreshCommand}"
+     ActionHelp="{Binding Text[PowerRefreshHelp]}" Visibility="{Binding HasLoadError, Converter={StaticResource BoolToVisibility}}"/>
+
+    
+   </StackPanel>
+  </ctl:SettingsPage.Banners>
+  <ctl:SettingsPage.Body>
+   <ctl:TabBody x:Name="Tabs" Style="{StaticResource WinoraTabContentStyle}" SelectedIndex="{Binding SelectedTab, Mode=TwoWay}">
+     <TabItem Header="{Binding Text[PowerPlans]}" AutomationProperties.Name="{Binding Text[PowerPlans]}">
+      <StackPanel Margin="{StaticResource WinoraSpace.T16}">
+    <!-- Plans: the list, or the empty state when Windows returned none -->
+    <ctl:EmptyState x:Name="EmptyListState" Icon="PlugConnected24" Headline="{Binding Text[PowerNoPlansTitle]}" Message="{Binding Text[PowerNoPlansBody]}" ActionText="{Binding Text[DiscRefresh]}" ActionCommand="{Binding RefreshCommand}"
+     ActionHelp="{Binding Text[PowerRefreshHelp]}" Visibility="{Binding ShowEmpty, Converter={StaticResource BoolToVisibility}}"/>
+    <ui:ListView x:Name="PlanList" ItemsSource="{Binding Plans}" SelectedItem="{Binding SelectedPlan, Mode=TwoWay}" ItemTemplate="{StaticResource PlanTemplate}" SelectionMode="Single"
+     ItemContainerStyle="{StaticResource WinoraInventoryItem}" AutomationProperties.Name="{Binding Text[PowerPlans]}" AutomationProperties.HelpText="{Binding Text[PowerPlansHelp]}" MaxHeight="320" Margin="{StaticResource WinoraSpace.B8}"
+     Visibility="{Binding HasPlans, Converter={StaticResource BoolToVisibility}}"/>
+    <WrapPanel>
+     <ui:Button x:Name="ActivateButton" Style="{StaticResource WinoraRowButton}" Content="{Binding Text[PowerMakeActive]}" Command="{Binding ActivateCommand}" Appearance="Primary" Icon="{ui:SymbolIcon Flash24}" Margin="{StaticResource WinoraSpace.R8B8}"
+      AutomationProperties.Name="{Binding Text[PowerMakeActive]}" AutomationProperties.HelpText="{Binding Text[PowerMakeActiveHelp]}"/>
+     <ui:Button x:Name="CopyButton" Style="{StaticResource WinoraRowButton}" Content="{Binding Text[PowerCopy]}" Command="{Binding CopyCommand}" Icon="{ui:SymbolIcon Copy24}" Margin="{StaticResource WinoraSpace.R8B8}"
+      AutomationProperties.Name="{Binding Text[PowerCopy]}" AutomationProperties.HelpText="{Binding Text[PowerCopyHelp]}"/>
+     <ui:Button x:Name="DeleteButton" Style="{StaticResource WinoraRowButton}" Content="{Binding Text[PowerDeleteCopy]}" Command="{Binding DeleteCopyCommand}" Icon="{ui:SymbolIcon Delete24}" Margin="{StaticResource WinoraSpace.R8B8}"
+      Visibility="{Binding CanDeleteCopy, Converter={StaticResource BoolToVisibility}}" AutomationProperties.Name="{Binding Text[PowerDeleteCopy]}" AutomationProperties.HelpText="{Binding Text[PowerDeleteCopyHelp]}"/>
+    </WrapPanel>
+
+    <!-- Hibernation and the performance plan: text on one side and one action on the other, like a setting row. -->
+    <Border Style="{StaticResource WinoraActionCard}" Visibility="{Binding HibernationKnown, Converter={StaticResource BoolToVisibility}}">
+     <Grid>
+      <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <StackPanel VerticalAlignment="Center">
+       <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding Text[PowerHibernationHeading]}" TextWrapping="Wrap"/>
+       <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Text[PowerHibernationHelp]}" TextWrapping="Wrap" Margin="{StaticResource WinoraSpace.T2}"/>
+       <TextBlock Style="{StaticResource WinoraBody}" Text="{Binding HibernationText}" TextWrapping="Wrap" Margin="{StaticResource WinoraSpace.T4}" AutomationProperties.LiveSetting="Polite"/>
+      </StackPanel>
+      <ui:Button x:Name="HibernationButton" Grid.Column="1" Style="{StaticResource WinoraRowButton}" Content="{Binding HibernationButton}" Command="{Binding HibernationCommand}" Icon="{ui:SymbolIcon Power24}" Margin="{StaticResource WinoraSpace.L16}"
+       AutomationProperties.Name="{Binding HibernationButton}" AutomationProperties.HelpText="{Binding Text[PowerHibernationHelp]}"/>
+     </Grid>
+    </Border>
+    <Border Style="{StaticResource WinoraActionCard}">
+     <Grid>
+      <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <StackPanel VerticalAlignment="Center">
+       <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding Text[PowerInstallHeading]}" TextWrapping="Wrap"/>
+       <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Text[PowerInstallHelp]}" TextWrapping="Wrap" Margin="{StaticResource WinoraSpace.T2}"/>
+      </StackPanel>
+      <ui:Button x:Name="InstallPerformanceButton" Grid.Column="1" Style="{StaticResource WinoraRowButton}" Content="{Binding Text[PowerInstallButton]}" Command="{Binding InstallPerformanceCommand}" Icon="{ui:SymbolIcon Flash24}" Margin="{StaticResource WinoraSpace.L16}"
+       AutomationProperties.Name="{Binding Text[PowerInstallButton]}" AutomationProperties.HelpText="{Binding Text[PowerInstallHelp]}"/>
+     </Grid>
+    </Border>
+
+      </StackPanel>
+     </TabItem>
+     <TabItem Header="{Binding Text[PowerProfiles]}" AutomationProperties.Name="{Binding Text[PowerProfiles]}">
+      <StackPanel Margin="{StaticResource WinoraSpace.T16}">
+    <!-- Profiles -->
+    <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Text[PowerProfilesHelp]}" TextWrapping="Wrap" Margin="{StaticResource WinoraSpace.Tn4B8}"/>
+    <ItemsControl x:Name="ProfileList" ItemsSource="{Binding Profiles}" ItemTemplate="{StaticResource ProfileTemplate}" IsTabStop="False" Focusable="False" AutomationProperties.Name="{Binding Text[PowerProfiles]}"/>
+
+      </StackPanel>
+     </TabItem>
+     <TabItem Header="{Binding Text[V2PaTabSettings]}" AutomationProperties.Name="{Binding Text[V2PaTabSettings]}">
+      <StackPanel Margin="{StaticResource WinoraSpace.T16}">
+    <!-- Settings of the selected plan -->
+    <ctl:CardHeader Title="{Binding SelectedPlanName}" Margin="{StaticResource WinoraSpace.None}"/>
+    <ItemsControl x:Name="SettingList" ItemsSource="{Binding SettingCards}" ItemTemplate="{StaticResource SettingTemplate}" IsTabStop="False" Focusable="False" AutomationProperties.Name="{Binding Text[PowerSettings]}"/>
+    <Border Style="{StaticResource WinoraCardCap}"/>
+    <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Text[PowerHiddenSettings]}" TextWrapping="Wrap" Margin="{StaticResource WinoraSpace.B8}" Visibility="{Binding HasHiddenSettings, Converter={StaticResource BoolToVisibility}}"/>
+
+      </StackPanel>
+     </TabItem>
+    </ctl:TabBody>
+  </ctl:SettingsPage.Body>
+  <ctl:SettingsPage.Footer>
+    <!-- History -->
+    <ctl:PageHistory DataContext="{Binding HistoryList}"/>
+  </ctl:SettingsPage.Footer>
+ </ctl:SettingsPage>
+</UserControl>

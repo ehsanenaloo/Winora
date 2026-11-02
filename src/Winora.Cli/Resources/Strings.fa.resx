@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<root>
+<resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+<resheader name="version"><value>2.0</value></resheader>
+<data name="OutcomePlanned" xml:space="preserve"><value>برنامه‌ریزی‌شده</value></data>
+<data name="OutcomePrepared" xml:space="preserve"><value>آماده‌شده</value></data>
+<data name="OutcomeExecuting" xml:space="preserve"><value>در حال اجرا</value></data>
+<data name="OutcomeApplied" xml:space="preserve"><value>شبیه‌سازی اجرا و بررسی شد</value></data>
+<data name="OutcomeAlreadyConfigured" xml:space="preserve"><value>شبیه‌سازی از قبل تنظیم شده است</value></data>
+<data name="OutcomeUnsupported" xml:space="preserve"><value>پشتیبانی‌نشده</value></data>
+<data name="OutcomeFailed" xml:space="preserve"><value>ناموفق</value></data>
+<data name="OutcomePartial" xml:space="preserve"><value>نتیجه‌ی ناقص؛ بررسی لازم است</value></data>
+<data name="OutcomePendingRestart" xml:space="preserve"><value>در انتظار راه‌اندازی مجدد</value></data>
+<data name="OutcomeReverted" xml:space="preserve"><value>شبیه‌سازی برگردانده شد</value></data>
+<data name="Help" xml:space="preserve"><value>وینورا ۰٫۱٫۰ — زیرساخت شبیه‌سازی
+--help | --version
+simulate preview|apply|recover|history [--json] [--database PATH]
+discover startup|tasks|services|apps|all [--json] [--filter TEXT] [--limit N]   (فقط‌خواندنی)
+diagnostics export [--to FOLDER] [--json] | log-path   (بایگانی پشتیبانی محلی و پاک‌سازی‌شده؛ چیزی ارسال نمی‌شود)
+settings list|show|preview|apply|revert|complete|history|recover ...   (تنظیمات واقعی کاربر؛ تغییرها ابتدا بازبینی می‌شوند)
+machine selftest [--json]   (کانال مدیر را با یک عملیات بی‌اثر آزمایش می‌کند؛ به نصب امضاشده‌ی همه‌ی کاربران نیاز دارد؛ چیزی را تغییر نمی‌دهد)
+machine plan|apply|revert|recover|history   (تغییرهای سطح مدیر از فهرست مورد اعتماد؛ اعمال و برگرداندن به کنسول تعاملی نیاز دارند؛ در این نسخه هیچ‌کدام در دسترس نیست)
+دستورهای شبیه‌سازی فقط داده‌های خود برنامه را تغییر می‌دهند. دستورهای settings تنظیمات واقعی کاربری ویندوز را فقط پس از بازبینی تأییدشده (یا --yes) تغییر می‌دهند. کشف فقط می‌خواند.</value></data>
+<data name="InvalidArguments" xml:space="preserve"><value>آرگومان نامعتبر. از --help استفاده کنید.</value></data>
+<data name="Simulation" xml:space="preserve"><value>فقط شبیه‌سازی — بدون تغییر ویندوز.</value></data>
+<data name="Preview" xml:space="preserve"><value>فعلی: {0}؛ پیشنهادی: {1}.</value></data>
+<data name="Record" xml:space="preserve"><value>{0} | {1} | کد: {2}</value></data>
+<data name="Failed" xml:space="preserve"><value>عملیات ناموفق بود. پیش از تلاش دوباره سوابق را بررسی کنید.</value></data>
+<data name="RecordsFolderParentUnsafe" xml:space="preserve"><value>وینورا متوقف شد. حساب‌های دیگر می‌توانند یکی از پوشه‌های بالای پوشه‌ی وینورا در ProgramData را تغییر دهند، پس وینورا نمی‌تواند سوابقش را آنجا امن نگه دارد. از مدیر سیستم بخواهید دسترسی‌های آن پوشه را درست کند. بعد وینورا را دوباره باز کنید.</value></data>
+<data name="RecordsFolderUnsafe" xml:space="preserve"><value>وینورا متوقف شد. پوشه‌ی وینورا در ProgramData امن نیست و وینورا نتوانست آن را جایگزین کند. از مدیر سیستم بخواهید آن پوشه را جابه‌جا یا حذف کند. بعد وینورا را دوباره باز کنید.</value></data>
+<data name="Code_operation_recovery_required" xml:space="preserve"><value>یک عملیات پیشین ابتدا نیاز به بازیابی دارد. وینورا را دوباره اجرا کنید تا تطبیق داده شود.</value></data>
+<data name="Code_operation_not_reversible" xml:space="preserve"><value>این عملیات برگشت‌پذیر نیست.</value></data>
+<data name="Code_operation_superseded" xml:space="preserve"><value>عملیات جدیدتری این مقدار را تغییر داده است، بنابراین این عملیات قدیمی‌تر دیگر برگشت‌پذیر نیست. چیزی تغییر نکرد.</value></data>
+<data name="Code_operation_revision_unknown" xml:space="preserve"><value>در دفتر ثبت، وضعیت دقیق حاصل از این عملیات ثبت نشده است، بنابراین نمی‌توان آن را با ایمنی برگرداند.</value></data>
+<data name="Code_operation_resource_changed" xml:space="preserve"><value>مقدار شبیه‌سازی‌شده هنگام شروع اقدام تغییر کرد. چیزی تغییر نکرد؛ بازبینی کنید و دوباره تلاش کنید.</value></data>
+<data name="Code_operation_external_conflict" xml:space="preserve"><value>مقدار توسط چیز دیگری تغییر کرده است، بنابراین وینورا آن را بازنویسی نکرد. مقدار فعلی را بازبینی کنید.</value></data>
+<data name="Code_operation_verification_failed" xml:space="preserve"><value>مقدار نوشته شد اما راستی‌آزمایی نشد. بررسی لازم است.</value></data>
+<data name="Code_operation_reconciled_partial" xml:space="preserve"><value>پس از یک وقفه، مقدار نه با مقدار اولیه برابر بود و نه با مقدار درخواستی. بررسی لازم است.</value></data>
+<data name="Code_operation_rollback_uncertain" xml:space="preserve"><value>برگرداندن تأیید نشد. بررسی لازم است.</value></data>
+<data name="Code_operation_rollback_failed" xml:space="preserve"><value>برگرداندن مقدار پیشین را برنگرداند. بررسی لازم است.</value></data>
+<data name="Code_operation_cancelled" xml:space="preserve"><value>اقدام لغو شد. چیزی تغییر نکرد.</value></data>
+<data name="Code_plan_stale" xml:space="preserve"><value>مقدار پس از بازبینی شما تغییر کرد. چیزی اعمال نشد؛ تغییر را دوباره بازبینی کنید.</value></data>
+<data name="Code_plan_duplicate_feature" xml:space="preserve"><value>برنامه یک قابلیت را دو بار فهرست کرده است، بنابراین اجرا نشد.</value></data>
+<data name="Code_plan_missing_dependency" xml:space="preserve"><value>برنامه به قابلیت دیگری نیاز دارد که شامل نشده است، بنابراین اجرا نشد.</value></data>
+<data name="Code_plan_resource_conflict" xml:space="preserve"><value>دو بخش برنامه یک منبع را تغییر می‌دادند، بنابراین اجرا نشد.</value></data>
+<data name="Code_plan_dependency_cycle" xml:space="preserve"><value>وابستگی‌های برنامه به‌صورت حلقه‌ای به هم وابسته‌اند، بنابراین اجرا نشد.</value></data>
+<data name="Code_journal_revision_conflict" xml:space="preserve"><value>رکورد توسط اقدام دیگری تغییر کرد. صفحه را تازه کنید و دوباره تلاش کنید.</value></data>
+<data name="Code_journal_operation_missing" xml:space="preserve"><value>رکورد عملیات یافت نشد.</value></data>
+<data name="Code_journal_invalid_transition" xml:space="preserve"><value>این تغییر وضعیت برای این عملیات مجاز نیست.</value></data>
+<data name="Code_journal_invalid" xml:space="preserve"><value>دفتر ثبت محلی وینورا به‌صورت ایمن خوانده نشد، بنابراین برای محافظت از داده‌های شما متوقف شد. هیچ تنظیمی از ویندوز تغییر نکرد.</value></data>
+<data name="Code_journal_schema_unsupported" xml:space="preserve"><value>دفتر ثبت محلی را نسخه‌ای جدیدتر از وینورا ساخته است و باز نشد.</value></data>
+<data name="Code_journal_schema_corrupt" xml:space="preserve"><value>ساختار دفتر ثبت محلی آسیب دیده است و باز نشد.</value></data>
+<data name="Code_journal_migration_conflict" xml:space="preserve"><value>دفتر ثبت محلی را نمی‌توان با ایمنی ارتقا داد و تغییری نکرد.</value></data>
+<data name="Code_journal_untrusted_definition" xml:space="preserve"><value>یکی از ورودی‌های دفتر ثبت با هیچ تعریف شناخته‌شده‌ای مطابقت نداشت و نادیده گرفته شد.</value></data>
+<data name="Code_store_busy" xml:space="preserve"><value>ذخیره‌سازی محلی وینورا مشغول است. چیزی تغییر نکرد؛ کمی بعد دوباره تلاش کنید.</value></data>
+<data name="Code_store_unavailable" xml:space="preserve"><value>ذخیره‌سازی محلی وینورا در دسترس نیست. چیزی تغییر نکرد؛ بعداً دوباره تلاش کنید.</value></data>
+<data name="Code_store_failure" xml:space="preserve"><value>ذخیره‌سازی محلی وینورا خطا گزارش کرد. پیش از تلاش دوباره ذخیره‌سازی را بررسی کنید.</value></data>
+<data name="Code_protocol_size" xml:space="preserve"><value>درخواست بیش از حد بزرگ بود و رد شد.</value></data>
+<data name="Code_protocol_version" xml:space="preserve"><value>درخواست از نسخه‌ی پروتکل پشتیبانی‌نشده استفاده کرد و رد شد.</value></data>
+<data name="Code_protocol_operation" xml:space="preserve"><value>درخواست شناسه‌ی عملیات معتبر نداشت و رد شد.</value></data>
+<data name="Code_protocol_command" xml:space="preserve"><value>درخواست از فرمان ناشناخته استفاده کرد و رد شد.</value></data>
+<data name="Code_protocol_feature" xml:space="preserve"><value>درخواست نام قابلیت ناشناخته‌ای داشت و رد شد.</value></data>
+<data name="Code_worker_unimplemented" xml:space="preserve"><value>این قابلیت هنوز پیاده‌سازی نشده است. چیزی تغییر نکرد.</value></data>
+<data name="Code_profile_size" xml:space="preserve"><value>فایل نمایه بیش از حد بزرگ است و وارد نشد.</value></data>
+<data name="Code_profile_invalid" xml:space="preserve"><value>فایل نمایه معتبر نیست و وارد نشد.</value></data>
+<data name="Code_profile_duplicate_property" xml:space="preserve"><value>فایل نمایه یک تنظیم را تکرار کرده است و وارد نشد.</value></data>
+<data name="Code_access_denied" xml:space="preserve"><value>ویندوز دسترسی را رد کرد. چیزی تغییر نکرد.</value></data>
+<data name="Code_error_unexpected" xml:space="preserve"><value>اتفاق غیرمنتظره‌ای رخ داد. هیچ چیز به‌عنوان موفق گزارش نشده است. هنگام درخواست کمک می‌توانید شناسه‌ی پیگیری را رونوشت کنید.</value></data>
+<data name="Code_discovery_unavailable" xml:space="preserve"><value>این اطلاعات روی این رایانه در دسترس نیست.</value></data>
+<data name="Code_discovery_item_unreadable" xml:space="preserve"><value>خواندن برخی موارد ممکن نبود و از آن‌ها صرف‌نظر شد.</value></data>
+<data name="DiscoverUsage" xml:space="preserve"><value>نحوه استفاده: discover &lt;startup|tasks|services|apps|all&gt; [--json] [--filter TEXT] [--limit N]
+  --filter: جست‌وجوی متنی بدون حساسیت به حروف (خالی نباشد). --limit: از ۱ تا ۱۰۰۰۰۰ مورد برای هر نوع.</value></data>
+<data name="DiscoverReadOnly" xml:space="preserve"><value>کشف فقط‌خواندنی — هیچ چیزی در این رایانه تغییر نکرد و هیچ چیزی به جایی ارسال نشد.</value></data>
+<data name="DiscoverSection" xml:space="preserve"><value>{0}: نمایش {1} از {2}</value></data>
+<data name="DiscoverNone" xml:space="preserve"><value>موردی پیدا نشد.</value></data>
+<data name="DiscoverSummary" xml:space="preserve"><value>خلاصه: {0} از {1} مورد نمایش داده شد؛ خواندن {2} مورد ممکن نبود.</value></data>
+<data name="DiscoverIssue" xml:space="preserve"><value>خواندن {0} ممکن نبود: {1} — {2}</value></data>
+<data name="DiscoverError" xml:space="preserve"><value>{0} (کد: {1})</value></data>
+<data name="DiscoverReference" xml:space="preserve"><value>(شناسه پیگیری: {0})</value></data>
+<data name="DiscoverCancelled" xml:space="preserve"><value>لغو شد. هیچ چیزی تغییر نکرد.</value></data>
+<data name="KindStartup" xml:space="preserve"><value>موارد راه‌اندازی</value></data>
+<data name="KindTasks" xml:space="preserve"><value>وظایف زمان‌بندی‌شده</value></data>
+<data name="KindServices" xml:space="preserve"><value>سرویس‌ها</value></data>
+<data name="KindApps" xml:space="preserve"><value>برنامه‌های نصب‌شده</value></data>
+<data name="ColName" xml:space="preserve"><value>نام</value></data>
+<data name="ColSource" xml:space="preserve"><value>منبع</value></data>
+<data name="ColScope" xml:space="preserve"><value>محدوده</value></data>
+<data name="ColApproval" xml:space="preserve"><value>وضعیت تأیید</value></data>
+<data name="ColCommand" xml:space="preserve"><value>فرمان</value></data>
+<data name="ColState" xml:space="preserve"><value>وضعیت</value></data>
+<data name="ColPath" xml:space="preserve"><value>مسیر</value></data>
+<data name="ColStartMode" xml:space="preserve"><value>حالت شروع</value></data>
+<data name="ColRunState" xml:space="preserve"><value>وضعیت اجرا</value></data>
+<data name="ColAccount" xml:space="preserve"><value>حساب</value></data>
+<data name="ColVersion" xml:space="preserve"><value>نسخه</value></data>
+<data name="ColPublisher" xml:space="preserve"><value>ناشر</value></data>
+<data name="Code_setting_unknown" xml:space="preserve"><value>این تنظیم در فهرست وینورا نیست. هیچ چیزی تغییر نکرد.</value></data>
+<data name="Code_setting_choice_invalid" xml:space="preserve"><value>این گزینه برای این تنظیم معتبر نیست. هیچ چیزی تغییر نکرد.</value></data>
+<data name="Code_setting_unsupported_build" xml:space="preserve"><value>این تنظیم در این نسخه‌ی ویندوز پشتیبانی نمی‌شود. هیچ چیزی تغییر نکرد.</value></data>
+<data name="Code_setting_state_unrecognized" xml:space="preserve"><value>این تنظیم اکنون مقداری از نوعی دارد که وینورا مدیریت نمی‌کند، بنابراین آن را تغییر نمی‌دهد. هیچ چیزی تغییر نکرد.</value></data>
+<data name="Code_shell_refresh_failed" xml:space="preserve"><value>تنظیم تغییر کرد، اما نتوانستیم به ویندوز اطلاع دهیم که تازه‌سازی کند؛ ممکن است برخی برنامه‌ها هنوز آن را نشان ندهند. می‌توانید از تاریخچه دوباره اعمال کنید.</value></data>
+<data name="Code_shell_restart_failed" xml:space="preserve"><value>تنظیم تغییر کرد، اما کاوشگر فایل راه‌اندازی مجدد نشد؛ پس از خروج از حساب یا راه‌اندازی مجدد کاوشگر فایل اعمال می‌شود. می‌توانید از تاریخچه دوباره تلاش کنید.</value></data>
+<data name="Code_target_not_allowed" xml:space="preserve"><value>وینورا تغییر خارج از فهرست خود را رد کرد. هیچ چیزی تغییر نکرد.</value></data>
+<data name="Code_target_kind_unsupported" xml:space="preserve"><value>دستیار مدیر این نوع تنظیم را پشتیبانی نمی‌کند. چیزی تغییر نکرد.</value></data>
+<data name="Setting_explorer_show_file_extensions_Title" xml:space="preserve"><value>نمایش پسوند فایل‌ها</value></data>
+<data name="Setting_explorer_show_file_extensions_Description" xml:space="preserve"><value>پسوند (مانند txt.) را در انتهای نام همه فایل‌ها در کاوشگر فایل نشان می‌دهد.</value></data>
+<data name="Choice_explorer_show_file_extensions_show" xml:space="preserve"><value>نمایش</value></data>
+<data name="Choice_explorer_show_file_extensions_hide" xml:space="preserve"><value>پنهان</value></data>
+<data name="Setting_explorer_show_hidden_files_Title" xml:space="preserve"><value>نمایش فایل‌ها و پوشه‌های پنهان</value></data>
+<data name="Setting_explorer_show_hidden_files_Description" xml:space="preserve"><value>مواردی که پنهان علامت خورده‌اند را نشان می‌دهد. فایل‌های محافظت‌شده سیستم پنهان می‌مانند.</value></data>
+<data name="Choice_explorer_show_hidden_files_shown" xml:space="preserve"><value>نمایش</value></data>
+<data name="Choice_explorer_show_hidden_files_hidden" xml:space="preserve"><value>عدم نمایش</value></data>
+<data name="Setting_explorer_open_to_Title" xml:space="preserve"><value>باز شدن کاوشگر فایل روی</value></data>
+<data name="Setting_explorer_open_to_Description" xml:space="preserve"><value>تعیین می‌کند پنجره‌های جدید کاوشگر فایل از صفحه‌ی اصلی یا این رایانه شروع شوند.</value></data>
+<data name="Choice_explorer_open_to_home" xml:space="preserve"><value>صفحه‌ی اصلی</value></data>
+<data name="Choice_explorer_open_to_this_pc" xml:space="preserve"><value>این رایانه</value></data>
+<data name="Setting_explorer_compact_view_Title" xml:space="preserve"><value>نمای فشرده</value></data>
+<data name="Setting_explorer_compact_view_Description" xml:space="preserve"><value>فاصله بین موارد در فهرست‌های کاوشگر فایل را کم می‌کند.</value></data>
+<data name="Choice_explorer_compact_view_comfortable" xml:space="preserve"><value>فاصله‌ی استاندارد</value></data>
+<data name="Choice_explorer_compact_view_compact" xml:space="preserve"><value>فشرده</value></data>
+<data name="Setting_taskbar_alignment_Title" xml:space="preserve"><value>چینش نوار وظیفه</value></data>
+<data name="Setting_taskbar_alignment_Description" xml:space="preserve"><value>نمادهای نوار وظیفه را در وسط یا سمت چپ قرار می‌دهد.</value></data>
+<data name="Choice_taskbar_alignment_center" xml:space="preserve"><value>وسط</value></data>
+<data name="Choice_taskbar_alignment_left" xml:space="preserve"><value>چپ</value></data>
+<data name="Setting_taskbar_clock_seconds_Title" xml:space="preserve"><value>ثانیه در ساعت نوار وظیفه</value></data>
+<data name="Setting_taskbar_clock_seconds_Description" xml:space="preserve"><value>ثانیه را در ساعت ناحیه‌ی اعلان نشان می‌دهد.</value></data>
+<data name="Choice_taskbar_clock_seconds_hidden" xml:space="preserve"><value>پنهان کردن ثانیه</value></data>
+<data name="Choice_taskbar_clock_seconds_shown" xml:space="preserve"><value>نمایش ثانیه</value></data>
+<data name="Setting_taskbar_search_mode_Title" xml:space="preserve"><value>جستجو در نوار وظیفه</value></data>
+<data name="Setting_taskbar_search_mode_Description" xml:space="preserve"><value>نحوه نمایش جستجو در نوار وظیفه را تعیین می‌کند.</value></data>
+<data name="Choice_taskbar_search_mode_hidden" xml:space="preserve"><value>پنهان</value></data>
+<data name="Choice_taskbar_search_mode_icon" xml:space="preserve"><value>فقط نماد</value></data>
+<data name="Choice_taskbar_search_mode_box" xml:space="preserve"><value>کادر جستجو</value></data>
+<data name="Setting_taskbar_task_view_button_Title" xml:space="preserve"><value>دکمه‌ی نمای وظایف</value></data>
+<data name="Setting_taskbar_task_view_button_Description" xml:space="preserve"><value>دکمه‌ی نمای وظایف را در نوار وظیفه نشان می‌دهد یا پنهان می‌کند.</value></data>
+<data name="Choice_taskbar_task_view_button_shown" xml:space="preserve"><value>نمایش</value></data>
+<data name="Choice_taskbar_task_view_button_hidden" xml:space="preserve"><value>پنهان</value></data>
+<data name="Setting_privacy_advertising_id_Title" xml:space="preserve"><value>شناسه‌ی تبلیغاتی</value></data>
+<data name="Setting_privacy_advertising_id_Description" xml:space="preserve"><value>به برنامه‌ها اجازه می‌دهد برای تبلیغات شخصی‌سازی‌شده از شناسه‌ی تبلیغاتی شما استفاده کنند. سیاست دستگاه ممکن است آن را نادیده بگیرد.</value></data>
+<data name="Choice_privacy_advertising_id_enabled" xml:space="preserve"><value>روشن</value></data>
+<data name="Choice_privacy_advertising_id_disabled" xml:space="preserve"><value>خاموش</value></data>
+<data name="Setting_privacy_tailored_experiences_Title" xml:space="preserve"><value>تجربه‌های شخصی‌سازی‌شده</value></data>
+<data name="Setting_privacy_tailored_experiences_Description" xml:space="preserve"><value>به ویندوز اجازه می‌دهد از داده‌های عیب‌یابی برای پیشنهاد نکات و توصیه‌ها استفاده کند.</value></data>
+<data name="Choice_privacy_tailored_experiences_enabled" xml:space="preserve"><value>روشن</value></data>
+<data name="Choice_privacy_tailored_experiences_disabled" xml:space="preserve"><value>خاموش</value></data>
+<data name="Setting_search_web_results_Title" xml:space="preserve"><value>نتایج وب در جستجوی استارت</value></data>
+<data name="Setting_search_web_results_Description" xml:space="preserve"><value>هنگام جستجو از استارت، پیشنهادهای وب را هم نشان می‌دهد. فقط تا ویندوز ۱۱ نسخه 23H2 بررسی شده است؛ نیاز به خروج از حساب دارد.</value></data>
+<data name="Choice_search_web_results_enabled" xml:space="preserve"><value>با نتایج وب</value></data>
+<data name="Choice_search_web_results_disabled" xml:space="preserve"><value>فقط نتایج محلی</value></data>
+<data name="Setting_appearance_apps_theme_Title" xml:space="preserve"><value>حالت برنامه‌ها</value></data>
+<data name="Setting_appearance_apps_theme_Description" xml:space="preserve"><value>روشن یا تاریک بودن برنامه‌هایی که از سیستم پیروی می‌کنند را تعیین می‌کند.</value></data>
+<data name="Choice_appearance_apps_theme_light" xml:space="preserve"><value>روشن</value></data>
+<data name="Choice_appearance_apps_theme_dark" xml:space="preserve"><value>تاریک</value></data>
+<data name="Setting_appearance_system_theme_Title" xml:space="preserve"><value>حالت ویندوز</value></data>
+<data name="Setting_appearance_system_theme_Description" xml:space="preserve"><value>روشن یا تاریک بودن نوار وظیفه و استارت را تعیین می‌کند.</value></data>
+<data name="Choice_appearance_system_theme_light" xml:space="preserve"><value>روشن</value></data>
+<data name="Choice_appearance_system_theme_dark" xml:space="preserve"><value>تاریک</value></data>
+<data name="Setting_appearance_window_snapping_Title" xml:space="preserve"><value>چسباندن پنجره‌ها</value></data>
+<data name="Setting_appearance_window_snapping_Description" xml:space="preserve"><value>اجازه می‌دهد پنجره‌ها به لبه‌ها و چیدمان‌های صفحه بچسبند. پس از خروج و ورود دوباره اعمال می‌شود.</value></data>
+<data name="Choice_appearance_window_snapping_on" xml:space="preserve"><value>روشن</value></data>
+<data name="Choice_appearance_window_snapping_off" xml:space="preserve"><value>خاموش</value></data>
+<data name="SettingsUsage" xml:space="preserve"><value>کاربرد: settings &lt;list|show|preview|apply|revert|complete|history|recover&gt; ...
+  list [--json] [--category Explorer|Taskbar|Privacy|Search|Appearance]
+  show &lt;id&gt; [--json]
+  preview &lt;id&gt; &lt;choice&gt; [--json]            فقط طرح؛ چیزی نوشته نمی‌شود
+  apply &lt;id&gt; &lt;choice&gt; [--yes] [--json] [--no-refresh] [--no-restart-explorer] [--restart-explorer]
+  revert &lt;operation-id&gt; [--yes] [--json]
+  complete &lt;operation-id&gt; [--yes] [--json]  تازه‌سازی در انتظار پوسته را اجرا می‌کند (Explorer را راه‌اندازی مجدد می‌کند)
+  history [--json]
+  recover [--json]
+  بدون --yes، نوشتن یک «y» تعاملی می‌خواهد؛ بدون ترمینال با کد 2 خارج می‌شود و چیزی نمی‌نویسد.</value></data>
+<data name="SettingsSandboxInvalid" xml:space="preserve"><value>مقدار --sandbox-root (فقط برای آزمون) باید یک نام از حروف، ارقام و خط تیره باشد (حداکثر ۶۴). کاری انجام نشد.</value></data>
+<data name="SettingsNeedsYes" xml:space="preserve"><value>این کار تنظیمات ویندوز شما را تغییر می‌دهد. آن را در ترمینال اجرا و y را وارد کنید، یا پس از بازبینی تغییر با preview، گزینه --yes را بدهید. چیزی تغییر نکرد.</value></data>
+<data name="SettingsCancelled" xml:space="preserve"><value>لغو شد. وینورا از انتظار دست کشید؛ برای موارد ثبت‌شده «settings history» را ببینید.</value></data>
+<data name="SettingsDeclined" xml:space="preserve"><value>رد شد. چیزی تغییر نکرد.</value></data>
+<data name="SettingsBanner" xml:space="preserve"><value>تنظیمات کاربری ویندوز (کاربر فعلی). هر تغییر ابتدا بازبینی می‌شود و برگشت‌پذیر است.</value></data>
+<data name="SettingsNone" xml:space="preserve"><value>تنظیمی پیدا نشد.</value></data>
+<data name="SettingsListSummary" xml:space="preserve"><value>{0} تنظیم فهرست شد.</value></data>
+<data name="ColId" xml:space="preserve"><value>شناسه</value></data>
+<data name="ColCategory" xml:space="preserve"><value>دسته</value></data>
+<data name="ColCurrent" xml:space="preserve"><value>فعلی</value></data>
+<data name="ColStatus" xml:space="preserve"><value>وضعیت</value></data>
+<data name="SettingsShowTitle" xml:space="preserve"><value>{0} ({1})</value></data>
+<data name="SettingsShowCurrent" xml:space="preserve"><value>مقدار فعلی: {0}</value></data>
+<data name="SettingsShowStatus" xml:space="preserve"><value>وضعیت: {0}</value></data>
+<data name="SettingsShowLocation" xml:space="preserve"><value>محل در رجیستری: {0}</value></data>
+<data name="SettingsShowRisk" xml:space="preserve"><value>ریسک: {0}؛ برگرداندن: {1}</value></data>
+<data name="SettingsShowChoices" xml:space="preserve"><value>گزینه‌ها: {0}</value></data>
+<data name="SettingsShowDefault" xml:space="preserve"><value>گزینه پیش‌فرض ویندوز: {0}</value></data>
+<data name="SettingsIssue" xml:space="preserve"><value>خوانده نشد: {0} - {1}</value></data>
+<data name="SettingsPreviewBanner" xml:space="preserve"><value>فقط پیش‌نمایش - چیزی نوشته نشد.</value></data>
+<data name="SettingsReviewTitle" xml:space="preserve"><value>بازبینی: {0} ({1})</value></data>
+<data name="SettingsBeforeAfter" xml:space="preserve"><value>پیش از تغییر: {0}  -&gt;  پس از تغییر: {1}</value></data>
+<data name="SettingsNoChange" xml:space="preserve"><value>تنظیم از قبل همین مقدار را دارد؛ اعمال، تغییری ثبت نمی‌کند.</value></data>
+<data name="SettingsExplorerWarning" xml:space="preserve"><value>پس از آن کاوشگر فایل راه‌اندازی مجدد می‌شود تا اکنون اعمال شود. پنجره‌های باز کاوشگر فایل بسته می‌شوند و نوار وظیفه سوسو می‌زند.</value></data>
+<data name="SettingsExplorerNotRestarted" xml:space="preserve"><value>کاوشگر فایل راه‌اندازی مجدد نمی‌شود. تغییر پس از راه‌اندازی مجدد کاوشگر فایل اعمال می‌شود؛ بعداً «settings complete» را اجرا کنید.</value></data>
+<data name="SettingsSignOutNote" xml:space="preserve"><value>پس از ورود بعدی شما اعمال می‌شود. وینورا شما را خارج نمی‌کند.</value></data>
+<data name="SettingsConfirmApply" xml:space="preserve"><value>این تغییر اعمال شود؟ [y/N]</value></data>
+<data name="SettingsConfirmRevert" xml:space="preserve"><value>این تغییر برگردانده شود؟ [y/N]</value></data>
+<data name="SettingsConfirmComplete" xml:space="preserve"><value>اکنون کاوشگر فایل راه‌اندازی مجدد شود؟ [y/N]</value></data>
+<data name="SettingsRevertReview" xml:space="preserve"><value>بازبینی برگرداندن: {0} ({1})</value></data>
+<data name="SettingsCompleteReview" xml:space="preserve"><value>بازبینی: اعمال فوری {0} ({1})</value></data>
+<data name="SettingsRevertNote" xml:space="preserve"><value>وینورا مقدار قبلی را فقط در صورتی برمی‌گرداند که پس از آن چیز دیگری تغییرش نداده باشد؛ تغییر تازه‌تر از بیرون را هرگز بازنویسی نمی‌کند.</value></data>
+<data name="SettingsPreviousValue" xml:space="preserve"><value>مقدار قبلی</value></data>
+<data name="SettingsCustomValue" xml:space="preserve"><value>مقدار سفارشی</value></data>
+<data name="SettingsApplied" xml:space="preserve"><value>اعمال شد: {0} اکنون «{1}» است. ثبت شد و برگشت‌پذیر است.</value></data>
+<data name="SettingsReverted" xml:space="preserve"><value>برگردانده شد: {0} به مقدار قبلی برگشت.</value></data>
+<data name="SettingsExplorerRestarted" xml:space="preserve"><value>کاوشگر فایل راه‌اندازی مجدد شد و تغییر اکنون اعمال شده است.</value></data>
+<data name="SettingsAlready" xml:space="preserve"><value>{0} از قبل همین مقدار را داشت؛ چیزی نوشته نشد.</value></data>
+<data name="SettingsPending" xml:space="preserve"><value>نوشته شد اما هنوز اعمال نشده است: {0}.</value></data>
+<data name="SettingsPendingExplorer" xml:space="preserve"><value>پس از راه‌اندازی مجدد کاوشگر فایل اعمال می‌شود. اجرا کنید: winora settings complete {0}</value></data>
+<data name="SettingsPendingSignOut" xml:space="preserve"><value>پس از ورود بعدی شما اعمال می‌شود.</value></data>
+<data name="SettingsShellFailed" xml:space="preserve"><value>تازه‌سازی پوسته کامل نشد (کد: {0}).</value></data>
+<data name="SettingsNotChanged" xml:space="preserve"><value>{0} تغییر نکرد (وضعیت: {1}).</value></data>
+<data name="SettingsCode" xml:space="preserve"><value>کد: {0}</value></data>
+<data name="SettingsOperation" xml:space="preserve"><value>عملیات {0} | {1} | کد: {2}</value></data>
+<data name="SettingsHistoryLine" xml:space="preserve"><value>{0} | {1} | {2} | {3} | {4}</value></data>
+<data name="SettingsHistoryNone" xml:space="preserve"><value>تغییری در تنظیمات ثبت نشده است.</value></data>
+<data name="SettingsRecoverNone" xml:space="preserve"><value>چیزی نیاز به بازیابی نداشت.</value></data>
+<data name="SettingsRecovered" xml:space="preserve"><value>{0} عملیات ناتمام تطبیق داده شد.</value></data>
+<data name="SettingsStatusOk" xml:space="preserve"><value>سالم</value></data>
+<data name="SettingsStatusCustom" xml:space="preserve"><value>مقدار سفارشی</value></data>
+<data name="SettingsStatusUnsupported" xml:space="preserve"><value>در این ساخت ویندوز پشتیبانی نمی‌شود</value></data>
+<data name="SettingsStatusUnknown" xml:space="preserve"><value>سازگاری نامشخص</value></data>
+<data name="SettingsStatusUnreadable" xml:space="preserve"><value>ناخوانا ({0})</value></data>
+<data name="SettingsRestartExplorer" xml:space="preserve"><value>پس از راه‌اندازی مجدد کاوشگر فایل اعمال می‌شود.</value></data>
+<data name="SettingsRestartSignOut" xml:space="preserve"><value>پس از ورود بعدی شما اعمال می‌شود.</value></data>
+<data name="SettingsRestartBoth" xml:space="preserve"><value>پس از راه‌اندازی مجدد کاوشگر فایل و ورود دوباره اعمال می‌شود.</value></data>
+<data name="Code_diagnostics_destination_invalid" xml:space="preserve"><value>از پوشه‌ی انتخاب‌شده نمی‌توان برای بایگانی عیب‌یابی استفاده کرد. یک پوشه‌ی محلی معمولی خارج از پوشه‌ی داده‌ی خود وینورا انتخاب کنید. چیزی ساخته نشد.</value></data>
+<data name="Code_diagnostics_export_failed" xml:space="preserve"><value>ساخت بایگانی عیب‌یابی ممکن نبود. چیزی ارسال نشد و فایل ناقصی باقی نماند؛ فضای دیسک و دسترسی به پوشه را بررسی کنید و دوباره تلاش کنید.</value></data>
+<data name="DiagnosticsUsage" xml:space="preserve"><value>نحوه‌ی استفاده: diagnostics export [--to FOLDER] [--json] | diagnostics log-path. بایگانی در FOLDER ساخته می‌شود (پیش‌فرض: پوشه‌ی جاری).</value></data>
+<data name="DiagExported" xml:space="preserve"><value>بایگانی عیب‌یابی ساخته شد: {0}</value></data>
+<data name="DiagSummary" xml:space="preserve"><value>{0} فایل، {1} بایت.</value></data>
+<data name="DiagNothingUploaded" xml:space="preserve"><value>فقط روی همین رایانه ساخته شد. چیزی ارسال یا آپلود نشد.</value></data>
+<data name="DiagReview" xml:space="preserve"><value>پیش از اشتراک‌گذاری بایگانی را بازبینی کنید؛ حذف اطلاعات شخصی خودکار و بهترین‌تلاش است.</value></data>
+<data name="Code_elevation_unavailable" xml:space="preserve"><value>تغییرهای سطح مدیر در این نشست یا نصب در دسترس نیست.</value></data>
+<data name="Code_elevation_unsigned_build" xml:space="preserve"><value>این نسخه توسط ناشر مورد انتظار امضا نشده است، بنابراین تغییرهای سطح مدیر خاموش است.</value></data>
+<data name="Code_elevation_install_untrusted" xml:space="preserve"><value>محل نصب یا فایل‌های وینورا برای تغییرهای سطح مدیر قابل اعتماد نیست.</value></data>
+<data name="Code_elevation_uac_disabled" xml:space="preserve"><value>کنترل حساب کاربر (UAC) خاموش است، بنابراین تغییرهای سطح مدیر در دسترس نیست.</value></data>
+<data name="Code_elevation_client_elevated" xml:space="preserve"><value>برای اعمال تغییرهای سطح دستگاه، وینورا را بدون دسترسی مدیر اجرا کنید.</value></data>
+<data name="Code_elevation_declined" xml:space="preserve"><value>درخواست دسترسی مدیر رد شد. چیزی تغییر نکرد.</value></data>
+<data name="Code_elevation_launch_failed" xml:space="preserve"><value>دستیار مدیر راه‌اندازی نشد. چیزی تغییر نکرد.</value></data>
+<data name="Code_elevation_blocked" xml:space="preserve"><value>ویندوز یا سازمان شما دستیار مدیر را مسدود کرد. چیزی تغییر نکرد.</value></data>
+<data name="Code_elevation_timeout" xml:space="preserve"><value>دستیار مدیر به‌موقع پاسخ نداد. چیزی تغییر نکرد؛ تلاش دوباره، درخواست دسترسی را دوباره نشان می‌دهد.</value></data>
+<data name="Code_elevation_server_untrusted" xml:space="preserve"><value>دستیار مدیر تأیید نشد، بنابراین چیزی به آن ارسال نشد.</value></data>
+<data name="Code_elevation_client_untrusted" xml:space="preserve"><value>دستیار مدیر برنامه درخواست‌کننده را رد کرد، زیرا نتوانست آن را تأیید کند.</value></data>
+<data name="Code_elevation_channel_failed" xml:space="preserve"><value>کانال امن به دستیار مدیر با خطا مواجه شد. پیش از تلاش دوباره، تغییر را بازبینی کنید.</value></data>
+<data name="Code_elevation_confirmation_required" xml:space="preserve"><value>تغییرهای سطح مدیر به تأیید تعاملی نیاز دارد. این را در یک پنجره تعاملی اجرا کنید.</value></data>
+<data name="Code_elevation_platform_unsupported" xml:space="preserve"><value>تغییرهای سطح مدیر در این نسخه از ویندوز پشتیبانی نمی‌شود.</value></data>
+<data name="Code_elevation_platform_unverified" xml:space="preserve"><value>تغییرهای سطح مدیر در این پیکربندی ویندوز بررسی نشده است، بنابراین خاموش است.</value></data>
+<data name="Code_definition_unknown" xml:space="preserve"><value>این تغییر در فهرست مورد اعتماد وینورا نیست.</value></data>
+<data name="Code_definition_set_mismatch" xml:space="preserve"><value>برنامه و دستیار درباره فهرست مورد اعتماد توافق ندارند.</value></data>
+<data name="Code_definition_revoked" xml:space="preserve"><value>این تغییر کنار گذاشته شده و دیگر در دسترس نیست.</value></data>
+<data name="Code_definition_signature_invalid" xml:space="preserve"><value>فهرست مورد اعتماد وینورا تأیید نشد.</value></data>
+<data name="Code_definition_rollback" xml:space="preserve"><value>یک نسخه‌ی قدیمی‌تر از فهرست مورد اعتماد رد شد.</value></data>
+<data name="Code_trust_store_insecure" xml:space="preserve"><value>رکورد اعتماد این رایانه مجوزهای ناامن دارد.</value></data>
+<data name="Code_setting_managed_by_policy" xml:space="preserve"><value>این تنظیم را یک سیاست مدیریت می‌کند و وینورا آن را تغییر نمی‌دهد.</value></data>
+<data name="Code_worker_busy" xml:space="preserve"><value>دستیار مدیر دیگری در حال اجراست. کمی بعد دوباره تلاش کنید.</value></data>
+<data name="Code_worker_hardening_failed" xml:space="preserve"><value>دستیار مدیر نتوانست به‌طور ایمن روی این سیستم راه‌اندازی شود. چیزی تغییر نکرد.</value></data>
+<data name="MachineUsage" xml:space="preserve"><value>نحوه‌ی استفاده: machine selftest [--json]. کانال مدیر را با یک عملیات بی‌اثر و بی‌خطر آزمایش می‌کند. به نصب امضاشده‌ی وینورا برای همه‌ی کاربران رایانه و یک پنجره‌ی تعاملی نیاز دارد.</value></data>
+<data name="MachineBanner" xml:space="preserve"><value>آزمون خودکار کانال مدیر. این دستور دستیار مدیر وینورا را اجرا می‌کند (ویندوز از شما رضایت می‌خواهد)، یک عملیات بی‌اثر که چیزی نمی‌خواند و نمی‌نویسد برایش می‌فرستد و پاسخ را بررسی می‌کند. فقط از نصب امضاشده‌ی وینورا برای همه‌ی کاربران رایانه و فقط در پنجره‌ی تعاملی کار می‌کند. هیچ تنظیمی در این رایانه تغییر نمی‌کند و چیزی در تاریخچه‌ی شما ثبت نمی‌شود.</value></data>
+<data name="MachinePromptDigest" xml:space="preserve"><value>برای ادامه {0} را بنویسید، یا هر چیز دیگری برای لغو: </value></data>
+<data name="MachineNoConsentWarning" xml:space="preserve"><value>ویندوز در این رایانه طوری تنظیم شده که بدون پرسیدن رضایت به سطح مدیر برود، پس هیچ پیام ویندوزی از شما محافظت نمی‌کند. تنها پشتوانه همین تأیید است.</value></data>
+<data name="MachinePromptSecond" xml:space="preserve"><value>برای تأیید ادامه بدون پیام ویندوز، {0} را یک بار دیگر بنویسید: </value></data>
+<data name="MachineSelftestOk" xml:space="preserve"><value>کانال مدیر درست کار می‌کند: دستیار به عملیات بی‌اثر پاسخ داد و پاسخ تأیید شد. چیزی در این رایانه تغییر نکرد.</value></data>
+<data name="MachineSelftestFailed" xml:space="preserve"><value>آزمون کانال مدیر کامل نشد.</value></data>
+<data name="MachineNothingStarted" xml:space="preserve"><value>هیچ پیام مدیر نمایش داده نشد و چیزی اجرا نشد.</value></data>
+<data name="MachineChangeUsage" xml:space="preserve"><value>روش استفاده: machine plan &lt;تعریف&gt; &lt;گزینه&gt; [--json] | machine apply &lt;تعریف&gt; &lt;گزینه&gt; | machine revert &lt;شناسه عملیات&gt; | machine recover [--json] | machine history [--json]. اعمال و برگرداندن به کنسول تعاملی نیاز دارند و از شما می‌خواهند یک کد تایپ کنید. گزینه --yes وجود ندارد.</value></data>
+<data name="MachineChangeReviewTitle" xml:space="preserve"><value>تغییر برای این رایانه: {0} (نسخه {1})</value></data>
+<data name="MachineChangeScope" xml:space="preserve"><value>این تغییر برای همه‌ی حساب‌های این رایانه اعمال می‌شود و به دستیار مدیر وینورا نیاز دارد.</value></data>
+<data name="MachineChangeCurrent" xml:space="preserve"><value>مقدار فعلی: {0}</value></data>
+<data name="MachineChangeDesired" xml:space="preserve"><value>مقدار جدید: {0}</value></data>
+<data name="MachineChangeRestoreNote" xml:space="preserve"><value>برای برگرداندن، وینورا این مقدار را بازمی‌نویسد: {0}</value></data>
+<data name="MachineChangeNeedsRestart" xml:space="preserve"><value>برای اثر کامل این تغییر باید رایانه را دوباره راه‌اندازی کنید.</value></data>
+<data name="MachineChangeSet" xml:space="preserve"><value>فهرست مورد اعتماد: شماره {0}، هش {1}</value></data>
+<data name="MachineChangeNothingChanged" xml:space="preserve"><value>این فقط یک برنامه بود. چیزی تغییر نکرد.</value></data>
+<data name="MachineChangeAlreadySet" xml:space="preserve"><value>رایانه همین حالا این مقدار را دارد. چیزی تغییر نمی‌کند.</value></data>
+<data name="MachineChangeRevertReview" xml:space="preserve"><value>برگرداندن تغییر {0} (رکورد {1}).</value></data>
+<data name="MachineChangeDone" xml:space="preserve"><value>انجام شد: {0} اکنون {1} است.</value></data>
+<data name="MachineChangeRestart" xml:space="preserve"><value>برای کامل شدن، رایانه را دوباره راه‌اندازی کنید.</value></data>
+<data name="MachineChangeRecovery" xml:space="preserve"><value>نتیجه هنوز تأیید نشد. بعداً machine recover را اجرا کنید.</value></data>
+<data name="MachineChangeNothingToRecover" xml:space="preserve"><value>چیزی برای بازیابی نیست.</value></data>
+<data name="MachineChangeRecoverLine" xml:space="preserve"><value>{0}  {1}  {2}  {3}</value></data>
+<data name="MachineChangeNoHistory" xml:space="preserve"><value>هیچ تغییر سطح مدیر انجام نشده است.</value></data>
+<data name="MachineChangeHistoryLine" xml:space="preserve"><value>{0}  {1}  {2}  {3}  {4}</value></data>
+<data name="MachineChangeNotSet" xml:space="preserve"><value>(تنظیم نشده)</value></data>
+<data name="MachineChangeKeyMissing" xml:space="preserve"><value>(کلید وجود ندارد)</value></data>
+<data name="MachineChangeUnknownState" xml:space="preserve"><value>(نامشخص)</value></data>
+<data name="MachineChangeServiceMissing" xml:space="preserve"><value>(سرویس وجود ندارد)</value></data>
+<data name="MachineChangeStartAutomatic" xml:space="preserve"><value>به‌صورت خودکار شروع می‌شود</value></data>
+<data name="MachineChangeStartManual" xml:space="preserve"><value>به‌صورت دستی شروع می‌شود</value></data>
+<data name="MachineChangeStartDisabled" xml:space="preserve"><value>غیرفعال</value></data>
+<data name="Setting_desktop_icon_this_pc_Title" xml:space="preserve"><value>نماد This PC روی دسکتاپ</value></data>
+<data name="Setting_desktop_icon_this_pc_Description" xml:space="preserve"><value>نماد This PC را روی دسکتاپ نشان می‌دهد یا پنهان می‌کند.</value></data>
+<data name="Choice_desktop_icon_this_pc_shown" xml:space="preserve"><value>نشان‌دادن نماد</value></data>
+<data name="Choice_desktop_icon_this_pc_hidden" xml:space="preserve"><value>پنهان‌کردن نماد</value></data>
+<data name="Setting_desktop_icon_recycle_bin_Title" xml:space="preserve"><value>نماد سطل بازیافت روی دسکتاپ</value></data>
+<data name="Setting_desktop_icon_recycle_bin_Description" xml:space="preserve"><value>نماد سطل بازیافت را روی دسکتاپ نشان می‌دهد یا پنهان می‌کند.</value></data>
+<data name="Choice_desktop_icon_recycle_bin_shown" xml:space="preserve"><value>نشان‌دادن نماد</value></data>
+<data name="Choice_desktop_icon_recycle_bin_hidden" xml:space="preserve"><value>پنهان‌کردن نماد</value></data>
+<data name="Setting_desktop_icon_user_files_Title" xml:space="preserve"><value>نماد پوشه‌ی کاربر روی دسکتاپ</value></data>
+<data name="Setting_desktop_icon_user_files_Description" xml:space="preserve"><value>نماد پوشه‌ی کاربر را روی دسکتاپ نشان می‌دهد یا پنهان می‌کند.</value></data>
+<data name="Choice_desktop_icon_user_files_shown" xml:space="preserve"><value>نشان‌دادن نماد</value></data>
+<data name="Choice_desktop_icon_user_files_hidden" xml:space="preserve"><value>پنهان‌کردن نماد</value></data>
+<data name="Setting_desktop_icon_network_Title" xml:space="preserve"><value>نماد شبکه روی دسکتاپ</value></data>
+<data name="Setting_desktop_icon_network_Description" xml:space="preserve"><value>نماد شبکه را روی دسکتاپ نشان می‌دهد یا پنهان می‌کند.</value></data>
+<data name="Choice_desktop_icon_network_shown" xml:space="preserve"><value>نشان‌دادن نماد</value></data>
+<data name="Choice_desktop_icon_network_hidden" xml:space="preserve"><value>پنهان‌کردن نماد</value></data>
+<data name="Setting_desktop_icon_control_panel_Title" xml:space="preserve"><value>نماد کنترل پنل روی دسکتاپ</value></data>
+<data name="Setting_desktop_icon_control_panel_Description" xml:space="preserve"><value>نماد کنترل پنل را روی دسکتاپ نشان می‌دهد یا پنهان می‌کند.</value></data>
+<data name="Choice_desktop_icon_control_panel_shown" xml:space="preserve"><value>نشان‌دادن نماد</value></data>
+<data name="Choice_desktop_icon_control_panel_hidden" xml:space="preserve"><value>پنهان‌کردن نماد</value></data>
+<data name="Setting_desktop_all_icons_Title" xml:space="preserve"><value>همه‌ی نمادهای دسکتاپ</value></data>
+<data name="Setting_desktop_all_icons_Description" xml:space="preserve"><value>همه‌ی نمادهای دسکتاپ را نشان می‌دهد یا پنهان می‌کند. فایل‌ها سر جای خود می‌مانند.</value></data>
+<data name="Choice_desktop_all_icons_shown" xml:space="preserve"><value>نشان‌دادن نمادها</value></data>
+<data name="Choice_desktop_all_icons_hidden" xml:space="preserve"><value>پنهان‌کردن نمادها</value></data>
+<data name="Setting_explorer_item_checkboxes_Title" xml:space="preserve"><value>کادر انتخاب کنار فایل‌ها</value></data>
+<data name="Setting_explorer_item_checkboxes_Description" xml:space="preserve"><value>کنار هر فایل یک کادر انتخاب نشان می‌دهد تا بدون کلید Ctrl چند فایل را انتخاب کنید.</value></data>
+<data name="Choice_explorer_item_checkboxes_off" xml:space="preserve"><value>بدون کادر انتخاب</value></data>
+<data name="Choice_explorer_item_checkboxes_on" xml:space="preserve"><value>نشان‌دادن کادر انتخاب</value></data>
+<data name="Setting_explorer_sync_notifications_Title" xml:space="preserve"><value>اعلان‌های سرویس همگام‌سازی در کاوشگر فایل</value></data>
+<data name="Setting_explorer_sync_notifications_Description" xml:space="preserve"><value>اعلان‌های سرویس‌های ذخیره‌سازی ابری را در کاوشگر فایل نشان می‌دهد یا پنهان می‌کند.</value></data>
+<data name="Choice_explorer_sync_notifications_shown" xml:space="preserve"><value>نشان‌دادن اعلان‌ها</value></data>
+<data name="Choice_explorer_sync_notifications_hidden" xml:space="preserve"><value>پنهان‌کردن اعلان‌ها</value></data>
+<data name="Setting_taskbar_end_task_Title" xml:space="preserve"><value>دستور End Task در منوی نوار وظیفه</value></data>
+<data name="Setting_taskbar_end_task_Description" xml:space="preserve"><value>دستور End Task را به منوی راست‌کلیک برنامه‌های نوار وظیفه اضافه می‌کند.</value></data>
+<data name="Choice_taskbar_end_task_off" xml:space="preserve"><value>پنهان</value></data>
+<data name="Choice_taskbar_end_task_on" xml:space="preserve"><value>نشان‌دادن End Task</value></data>
+<data name="Setting_taskbar_battery_percentage_Title" xml:space="preserve"><value>درصد باتری در نوار وظیفه</value></data>
+<data name="Setting_taskbar_battery_percentage_Description" xml:space="preserve"><value>درصد باتری را کنار نماد باتری نشان می‌دهد. فقط رایانه‌هایی که باتری دارند آن را نشان می‌دهند.</value></data>
+<data name="Choice_taskbar_battery_percentage_hidden" xml:space="preserve"><value>پنهان‌کردن درصد</value></data>
+<data name="Choice_taskbar_battery_percentage_shown" xml:space="preserve"><value>نشان‌دادن درصد</value></data>
+<data name="Setting_appearance_snap_layouts_Title" xml:space="preserve"><value>طرح‌بندی‌های Snap روی دکمه‌ی بزرگ‌کردن</value></data>
+<data name="Setting_appearance_snap_layouts_Description" xml:space="preserve"><value>با اشاره به دکمه‌ی بزرگ‌کردن پنجره، منوی طرح‌بندی‌های Snap را نشان می‌دهد.</value></data>
+<data name="Choice_appearance_snap_layouts_on" xml:space="preserve"><value>نشان‌دادن طرح‌بندی‌ها</value></data>
+<data name="Choice_appearance_snap_layouts_off" xml:space="preserve"><value>نشان‌داده نشود</value></data>
+<data name="Setting_appearance_window_shake_Title" xml:space="preserve"><value>تکان‌دادن پنجره برای کوچک‌کردن بقیه</value></data>
+<data name="Setting_appearance_window_shake_Description" xml:space="preserve"><value>با تکان‌دادن یک پنجره از نوار عنوان، بقیه‌ی پنجره‌ها کوچک می‌شوند.</value></data>
+<data name="Choice_appearance_window_shake_enabled" xml:space="preserve"><value>تکان‌دادن کار می‌کند</value></data>
+<data name="Choice_appearance_window_shake_disabled" xml:space="preserve"><value>تکان‌دادن اثری ندارد</value></data>
+<data name="Setting_appearance_transparency_Title" xml:space="preserve"><value>جلوه‌های شفاف</value></data>
+<data name="Setting_appearance_transparency_Description" xml:space="preserve"><value>برای پنجره‌ها، استارت و نوار وظیفه از جلوه‌ی شفاف استفاده می‌کند. خاموش‌کردن آن برای کارت گرافیک ضعیف سبک‌تر است.</value></data>
+<data name="Choice_appearance_transparency_on" xml:space="preserve"><value>شفاف</value></data>
+<data name="Choice_appearance_transparency_off" xml:space="preserve"><value>مات</value></data>
+<data name="Setting_privacy_toast_notifications_Title" xml:space="preserve"><value>اعلان‌های برنامه‌ها</value></data>
+<data name="Setting_privacy_toast_notifications_Description" xml:space="preserve"><value>اجازه می‌دهد برنامه‌ها و سیستم بنر اعلان نشان دهند. خاموش‌کردن همه را ساکت می‌کند، از جمله اعلان‌های امنیتی برنامه‌ها.</value></data>
+<data name="Choice_privacy_toast_notifications_on" xml:space="preserve"><value>مجاز</value></data>
+<data name="Choice_privacy_toast_notifications_off" xml:space="preserve"><value>ساکت</value></data>
+<data name="Setting_privacy_clipboard_history_Title" xml:space="preserve"><value>تاریخچه‌ی کلیپ‌بورد</value></data>
+<data name="Setting_privacy_clipboard_history_Description" xml:space="preserve"><value>فهرستی از موارد کپی‌شده‌ی اخیر را برای Win+V نگه می‌دارد. رمزهای کپی‌شده تا پاک‌کردن فهرست در آن می‌مانند.</value></data>
+<data name="Choice_privacy_clipboard_history_off" xml:space="preserve"><value>خاموش</value></data>
+<data name="Choice_privacy_clipboard_history_on" xml:space="preserve"><value>روشن</value></data>
+<data name="Setting_privacy_start_suggestions_Title" xml:space="preserve"><value>پیشنهادها در استارت و تنظیمات</value></data>
+<data name="Setting_privacy_start_suggestions_Description" xml:space="preserve"><value>پیشنهاد برنامه و نکته‌های مایکروسافت را در استارت و تنظیمات نشان می‌دهد.</value></data>
+<data name="Choice_privacy_start_suggestions_shown" xml:space="preserve"><value>نشان‌دادن پیشنهادها</value></data>
+<data name="Choice_privacy_start_suggestions_hidden" xml:space="preserve"><value>بدون پیشنهاد</value></data>
+<data name="Setting_privacy_preinstalled_apps_Title" xml:space="preserve"><value>برنامه‌های پیشنهادی برای حساب‌های تازه</value></data>
+<data name="Setting_privacy_preinstalled_apps_Description" xml:space="preserve"><value>به ویندوز اجازه می‌دهد هنگام ساخت حساب و پس از به‌روزرسانی برنامه‌های پیشنهادی اضافه کند.</value></data>
+<data name="Choice_privacy_preinstalled_apps_enabled" xml:space="preserve"><value>مجاز</value></data>
+<data name="Choice_privacy_preinstalled_apps_disabled" xml:space="preserve"><value>مسدود</value></data>
+<data name="Setting_privacy_oem_preinstalled_apps_Title" xml:space="preserve"><value>برنامه‌هایی که سازنده‌ی رایانه می‌فرستد</value></data>
+<data name="Setting_privacy_oem_preinstalled_apps_Description" xml:space="preserve"><value>به محتوای سازنده‌ی رایانه اجازه می‌دهد در این حساب برنامه نصب کند.</value></data>
+<data name="Choice_privacy_oem_preinstalled_apps_enabled" xml:space="preserve"><value>مجاز</value></data>
+<data name="Choice_privacy_oem_preinstalled_apps_disabled" xml:space="preserve"><value>مسدود</value></data>
+<data name="Setting_privacy_silent_app_installs_Title" xml:space="preserve"><value>نصب بی‌صدای برنامه‌ها</value></data>
+<data name="Setting_privacy_silent_app_installs_Description" xml:space="preserve"><value>به ویندوز اجازه می‌دهد برنامه‌های پیشنهادی را بدون پرسیدن از شما نصب کند.</value></data>
+<data name="Choice_privacy_silent_app_installs_enabled" xml:space="preserve"><value>مجاز</value></data>
+<data name="Choice_privacy_silent_app_installs_disabled" xml:space="preserve"><value>مسدود</value></data>
+<data name="Setting_start_recommended_items_Title" xml:space="preserve"><value>موارد پیشنهادی در منوی استارت</value></data>
+<data name="Setting_start_recommended_items_Description" xml:space="preserve"><value>نکته‌ها، میان‌برها و پیشنهاد برنامه‌های تازه را در بخش پیشنهادی منوی استارت نشان می‌دهد.</value></data>
+<data name="Choice_start_recommended_items_hidden" xml:space="preserve"><value>پنهان</value></data>
+<data name="Choice_start_recommended_items_shown" xml:space="preserve"><value>نمایش</value></data>
+<data name="Setting_start_recent_lists_Title" xml:space="preserve"><value>موارد اخیر و پرکاربرد در استارت</value></data>
+<data name="Setting_start_recent_lists_Description" xml:space="preserve"><value>فایل‌های اخیر و برنامه‌های پرکاربرد را در استارت نشان می‌دهد. با پنهان کردن آن‌ها، ویندوز دیگر سندهای بازشده را برای استارت دنبال نمی‌کند.</value></data>
+<data name="Choice_start_recent_lists_hidden" xml:space="preserve"><value>پنهان</value></data>
+<data name="Choice_start_recent_lists_shown" xml:space="preserve"><value>نمایش</value></data>
+<data name="Setting_start_track_programs_Title" xml:space="preserve"><value>ردیابی برنامه‌های اجراشده برای استارت</value></data>
+<data name="Setting_start_track_programs_Description" xml:space="preserve"><value>به ویندوز اجازه می‌دهد برنامه‌هایی را که اجرا می‌کنید به خاطر بسپارد تا استارت بتواند پرکاربردها را رتبه‌بندی کند. خاموش کردن آن این رتبه‌بندی را عوض می‌کند.</value></data>
+<data name="Choice_start_track_programs_off" xml:space="preserve"><value>ردیابی نشود</value></data>
+<data name="Choice_start_track_programs_on" xml:space="preserve"><value>ردیابی شود</value></data>
+<data name="Setting_start_account_notifications_Title" xml:space="preserve"><value>اعلان‌های حساب</value></data>
+<data name="Setting_start_account_notifications_Description" xml:space="preserve"><value>پیام‌های مربوط به حساب را در استارت و تنظیمات نشان می‌دهد، مثلاً پیشنهاد کامل کردن حساب مایکروسافت.</value></data>
+<data name="Choice_start_account_notifications_off" xml:space="preserve"><value>پنهان</value></data>
+<data name="Choice_start_account_notifications_on" xml:space="preserve"><value>نمایش</value></data>
+<data name="Setting_start_all_apps_view_Title" xml:space="preserve"><value>نمای همه‌ی برنامه‌ها در استارت</value></data>
+<data name="Setting_start_all_apps_view_Description" xml:space="preserve"><value>ظاهر فهرست همه‌ی برنامه‌ها را در منوی استارت جدید تعیین می‌کند.</value></data>
+<data name="Choice_start_all_apps_view_category" xml:space="preserve"><value>دسته‌بندی</value></data>
+<data name="Choice_start_all_apps_view_grid" xml:space="preserve"><value>شبکه‌ای</value></data>
+<data name="Choice_start_all_apps_view_list" xml:space="preserve"><value>فهرست</value></data>
+<data name="Setting_start_hide_all_apps_Title" xml:space="preserve"><value>پنهان کردن فهرست همه‌ی برنامه‌ها</value></data>
+<data name="Setting_start_hide_all_apps_Description" xml:space="preserve"><value>فهرست همه‌ی برنامه‌ها را از استارت برمی‌دارد. استارت دیگر فهرست کامل برنامه‌ها را ندارد. ویندوز این مورد را مثل یک سیاست برای حساب شما می‌بیند.</value></data>
+<data name="Choice_start_hide_all_apps_hidden" xml:space="preserve"><value>پنهان</value></data>
+<data name="Choice_start_hide_all_apps_shown" xml:space="preserve"><value>نمایش</value></data>
+<data name="Setting_privacy_lock_screen_tips_Title" xml:space="preserve"><value>نکته‌های صفحه‌ی قفل</value></data>
+<data name="Setting_privacy_lock_screen_tips_Description" xml:space="preserve"><value>نکته‌ها و مطالب جالب را روی صفحه‌ی قفل نشان می‌دهد. ممکن است ویندوز بعد از یک به‌روزرسانی دوباره آن را روشن کند. این کلید فقط وقتی در تنظیمات دیده می‌شود که صفحه‌ی قفل Windows Spotlight نباشد.</value></data>
+<data name="Choice_privacy_lock_screen_tips_off" xml:space="preserve"><value>خاموش</value></data>
+<data name="Choice_privacy_lock_screen_tips_on" xml:space="preserve"><value>روشن</value></data>
+<data name="Setting_privacy_start_suggested_content_Title" xml:space="preserve"><value>پیشنهادهای استارت، کلید دوم</value></data>
+<data name="Setting_privacy_start_suggested_content_Description" xml:space="preserve"><value>ویندوز برای پیشنهاد برنامه در استارت یک کلید دوم هم دارد. آن را همراه با «پیشنهادها در استارت و تنظیمات» خاموش کنید. ممکن است ویندوز بعد از یک به‌روزرسانی دوباره آن را روشن کند.</value></data>
+<data name="Choice_privacy_start_suggested_content_off" xml:space="preserve"><value>خاموش</value></data>
+<data name="Choice_privacy_start_suggested_content_on" xml:space="preserve"><value>روشن</value></data>
+<data name="Setting_privacy_windows_tips_Title" xml:space="preserve"><value>نکته‌ها و پیشنهادها هنگام کار با ویندوز</value></data>
+<data name="Setting_privacy_windows_tips_Description" xml:space="preserve"><value>نکته‌ها، ترفندها و پیشنهادها را هنگام کار با ویندوز نشان می‌دهد. ممکن است ویندوز بعد از یک به‌روزرسانی دوباره آن را روشن کند.</value></data>
+<data name="Choice_privacy_windows_tips_off" xml:space="preserve"><value>خاموش</value></data>
+<data name="Choice_privacy_windows_tips_on" xml:space="preserve"><value>روشن</value></data>
+<data name="Setting_privacy_settings_suggestions_Title" xml:space="preserve"><value>محتوای پیشنهادی در تنظیمات</value></data>
+<data name="Setting_privacy_settings_suggestions_Description" xml:space="preserve"><value>محتوای پیشنهادی را در برنامه تنظیمات نشان می‌دهد. ممکن است ویندوز بعد از یک به‌روزرسانی دوباره آن را روشن کند.</value></data>
+<data name="Choice_privacy_settings_suggestions_off" xml:space="preserve"><value>خاموش</value></data>
+<data name="Choice_privacy_settings_suggestions_on" xml:space="preserve"><value>روشن</value></data>
+<data name="Setting_privacy_welcome_experience_Title" xml:space="preserve"><value>صفحه‌ی خوش‌آمدگویی بعد از به‌روزرسانی</value></data>
+<data name="Setting_privacy_welcome_experience_Description" xml:space="preserve"><value>صفحه‌ی خوش‌آمدگویی را که ممکن است بعد از به‌روزرسانی ویندوز ظاهر شود نشان می‌دهد. ممکن است ویندوز بعد از یک به‌روزرسانی دوباره آن را روشن کند.</value></data>
+<data name="Choice_privacy_welcome_experience_off" xml:space="preserve"><value>خاموش</value></data>
+<data name="Choice_privacy_welcome_experience_on" xml:space="preserve"><value>روشن</value></data>
+<data name="Setting_privacy_get_most_out_of_windows_Title" xml:space="preserve"><value>پیشنهادهای بهره‌گیری بیشتر از ویندوز</value></data>
+<data name="Setting_privacy_get_most_out_of_windows_Description" xml:space="preserve"><value>پیشنهادهایی را نشان می‌دهد که از شما می‌خواهند راه‌اندازی رایانه و حساب را کامل کنید.</value></data>
+<data name="Choice_privacy_get_most_out_of_windows_off" xml:space="preserve"><value>خاموش</value></data>
+<data name="Choice_privacy_get_most_out_of_windows_on" xml:space="preserve"><value>روشن</value></data>
+<data name="Setting_privacy_suggested_toasts_Title" xml:space="preserve"><value>اعلان‌های پیشنهاد و یادآوری پشتیبان‌گیری</value></data>
+<data name="Setting_privacy_suggested_toasts_Description" xml:space="preserve"><value>اعلان‌هایی را که قابلیتی را پیشنهاد می‌کنند یا پشتیبان‌گیری را یادآوری می‌کنند نشان می‌دهد. اعلان‌های دیگر برنامه‌ها تغییر نمی‌کنند.</value></data>
+<data name="Choice_privacy_suggested_toasts_off" xml:space="preserve"><value>خاموش</value></data>
+<data name="Choice_privacy_suggested_toasts_on" xml:space="preserve"><value>روشن</value></data>
+<data name="Setting_privacy_feedback_frequency_Title" xml:space="preserve"><value>درخواست بازخورد</value></data>
+<data name="Setting_privacy_feedback_frequency_Description" xml:space="preserve"><value>تعیین می‌کند ویندوز هر چند وقت یک بار از شما بازخورد بخواهد.</value></data>
+<data name="Choice_privacy_feedback_frequency_never" xml:space="preserve"><value>هرگز نپرس</value></data>
+<data name="Choice_privacy_feedback_frequency_windows" xml:space="preserve"><value>ویندوز تصمیم می‌گیرد</value></data>
+<data name="Setting_privacy_input_personalization_Title" xml:space="preserve"><value>شخصی‌سازی دست‌خط و تایپ</value></data>
+<data name="Setting_privacy_input_personalization_Description" xml:space="preserve"><value>به ویندوز اجازه می‌دهد از دست‌خط، تایپ و مخاطبان شما یاد بگیرد تا پیشنهادها بهتر شود. محدود کردن آن این جمع‌آوری را متوقف می‌کند.</value></data>
+<data name="Choice_privacy_input_personalization_limited" xml:space="preserve"><value>محدود کردن جمع‌آوری</value></data>
+<data name="Choice_privacy_input_personalization_windows" xml:space="preserve"><value>پیش‌فرض ویندوز</value></data>
+<data name="Setting_privacy_online_speech_Title" xml:space="preserve"><value>تشخیص گفتار آنلاین</value></data>
+<data name="Setting_privacy_online_speech_Description" xml:space="preserve"><value>صدای شما را برای تشخیص بهتر به سرویس‌های گفتار مایکروسافت می‌فرستد. با خاموش کردن آن، تایپ صوتی و دیکته هم کار نمی‌کنند.</value></data>
+<data name="Choice_privacy_online_speech_off" xml:space="preserve"><value>خاموش</value></data>
+<data name="Choice_privacy_online_speech_windows" xml:space="preserve"><value>پیش‌فرض ویندوز</value></data>
+<data name="Setting_privacy_third_party_suggestions_Title" xml:space="preserve"><value>پیشنهادهای شرکت‌های دیگر در Spotlight</value></data>
+<data name="Setting_privacy_third_party_suggestions_Description" xml:space="preserve"><value>جلوی نمایش پیشنهادهای شرکت‌های دیگر را در Windows Spotlight می‌گیرد. ویندوز این مورد را مثل یک سیاست برای حساب شما می‌بیند.</value></data>
+<data name="Choice_privacy_third_party_suggestions_blocked" xml:space="preserve"><value>مسدود</value></data>
+<data name="Choice_privacy_third_party_suggestions_allowed" xml:space="preserve"><value>مجاز</value></data>
+<data name="Setting_privacy_cross_device_resume_Title" xml:space="preserve"><value>ادامه کار از دستگاه‌های دیگر</value></data>
+<data name="Setting_privacy_cross_device_resume_Description" xml:space="preserve"><value>به ویندوز اجازه می‌دهد پیشنهاد دهد کاری را که روی گوشی انجام داده‌اید ادامه دهید.</value></data>
+<data name="Choice_privacy_cross_device_resume_off" xml:space="preserve"><value>خاموش</value></data>
+<data name="Choice_privacy_cross_device_resume_on" xml:space="preserve"><value>روشن</value></data>
+<data name="Setting_privacy_cloud_clipboard_upload_Title" xml:space="preserve"><value>بارگذاری کلیپ‌بورد در فضای ابری</value></data>
+<data name="Setting_privacy_cloud_clipboard_upload_Description" xml:space="preserve"><value>به ویندوز اجازه می‌دهد آنچه کپی می‌کنید در حساب شما بارگذاری شود تا روی رایانه‌های دیگر هم بتوانید آن را جای‌گذاری کنید.</value></data>
+<data name="Choice_privacy_cloud_clipboard_upload_off" xml:space="preserve"><value>خاموش</value></data>
+<data name="Choice_privacy_cloud_clipboard_upload_on" xml:space="preserve"><value>روشن</value></data>
+<data name="Setting_privacy_dev_tool_telemetry_Title" xml:space="preserve"><value>تله‌متری ابزارهای توسعه‌دهنده</value></data>
+<data name="Setting_privacy_dev_tool_telemetry_Description" xml:space="preserve"><value>با تنظیم دو متغیر کاربر، ارسال داده‌های استفاده از ابزارهای خط فرمان دات‌نت و پاورشل را خاموش می‌کند. برنامه‌هایی که از قبل باز هستند این تغییر را نمی‌بینند.</value></data>
+<data name="Choice_privacy_dev_tool_telemetry_optout" xml:space="preserve"><value>انصراف</value></data>
+<data name="Choice_privacy_dev_tool_telemetry_send" xml:space="preserve"><value>ارسال داده‌های استفاده</value></data>
+<data name="Setting_search_box_suggestions_Title" xml:space="preserve"><value>پیشنهادهای وب در کادرهای جستجو</value></data>
+<data name="Setting_search_box_suggestions_Description" xml:space="preserve"><value>پیشنهادهای وب را در کادر جستجوی کاوشگر فایل و استارت خاموش می‌کند. ویندوز این مورد را مثل یک سیاست برای حساب شما می‌بیند و اثر آن روی استارت را مایکروسافت تأیید نکرده است.</value></data>
+<data name="Choice_search_box_suggestions_hidden" xml:space="preserve"><value>خاموش</value></data>
+<data name="Choice_search_box_suggestions_shown" xml:space="preserve"><value>پیش‌فرض ویندوز</value></data>
+<data name="Setting_search_highlights_Title" xml:space="preserve"><value>هایلایت‌های جستجو</value></data>
+<data name="Setting_search_highlights_Description" xml:space="preserve"><value>تصویرها و رویدادهای روز را در کادر جستجو نشان می‌دهد.</value></data>
+<data name="Choice_search_highlights_off" xml:space="preserve"><value>خاموش</value></data>
+<data name="Choice_search_highlights_on" xml:space="preserve"><value>روشن</value></data>
+<data name="Setting_taskbar_button_grouping_Title" xml:space="preserve"><value>ترکیب دکمه‌های نوار وظیفه</value></data>
+<data name="Setting_taskbar_button_grouping_Description" xml:space="preserve"><value>تعیین می‌کند چه زمانی پنجره‌های یک برنامه یک دکمه مشترک در نوار وظیفه داشته باشند. این مورد برای نوار وظیفه اصلی و نوار وظیفه نمایشگرهای دیگر اعمال می‌شود.</value></data>
+<data name="Choice_taskbar_button_grouping_always" xml:space="preserve"><value>همیشه ترکیب شود</value></data>
+<data name="Choice_taskbar_button_grouping_when_full" xml:space="preserve"><value>وقتی نوار وظیفه پر است</value></data>
+<data name="Choice_taskbar_button_grouping_never" xml:space="preserve"><value>هرگز ترکیب نشود</value></data>
+<data name="Setting_taskbar_multi_display_Title" xml:space="preserve"><value>نوار وظیفه در چند نمایشگر</value></data>
+<data name="Setting_taskbar_multi_display_Description" xml:space="preserve"><value>تعیین می‌کند اگر بیش از یک نمایشگر دارید، دکمه‌های نوار وظیفه کجا نشان داده شوند.</value></data>
+<data name="Choice_taskbar_multi_display_all" xml:space="preserve"><value>همه‌ی نمایشگرها</value></data>
+<data name="Choice_taskbar_multi_display_main_only" xml:space="preserve"><value>فقط نمایشگر اصلی</value></data>
+<data name="Choice_taskbar_multi_display_main_and_open" xml:space="preserve"><value>نمایشگر اصلی و جایی که پنجره است</value></data>
+<data name="Choice_taskbar_multi_display_open_only" xml:space="preserve"><value>فقط جایی که پنجره است</value></data>
+<data name="Setting_taskbar_notification_center_Title" xml:space="preserve"><value>مرکز اعلان و تقویم</value></data>
+<data name="Setting_taskbar_notification_center_Description" xml:space="preserve"><value>مرکز اعلان و تقویم کنار ساعت نوار وظیفه را برمی‌دارد. ویندوز این مورد را مثل یک سیاست برای حساب شما می‌بیند.</value></data>
+<data name="Choice_taskbar_notification_center_hidden" xml:space="preserve"><value>پنهان</value></data>
+<data name="Choice_taskbar_notification_center_shown" xml:space="preserve"><value>نمایش</value></data>
+<data name="Setting_appearance_alt_tab_tabs_Title" xml:space="preserve"><value>زبانه‌های Edge در Alt+Tab</value></data>
+<data name="Setting_appearance_alt_tab_tabs_Description" xml:space="preserve"><value>تعیین می‌کند هنگام زدن Alt+Tab یا چسباندن پنجره، چند زبانه از Microsoft Edge کنار پنجره‌ها نشان داده شود.</value></data>
+<data name="Choice_appearance_alt_tab_tabs_tabs20" xml:space="preserve"><value>پنجره‌ها و ۲۰ زبانه</value></data>
+<data name="Choice_appearance_alt_tab_tabs_tabs5" xml:space="preserve"><value>پنجره‌ها و ۵ زبانه</value></data>
+<data name="Choice_appearance_alt_tab_tabs_tabs3" xml:space="preserve"><value>پنجره‌ها و ۳ زبانه</value></data>
+<data name="Choice_appearance_alt_tab_tabs_windows_only" xml:space="preserve"><value>فقط پنجره‌ها</value></data>
+<data name="Setting_appearance_snap_bar_Title" xml:space="preserve"><value>نوار چسباندن در بالای صفحه</value></data>
+<data name="Setting_appearance_snap_bar_Description" xml:space="preserve"><value>وقتی پنجره را به بالای صفحه می‌کشید، نوار چیدمان‌های چسباندن را نشان می‌دهد.</value></data>
+<data name="Choice_appearance_snap_bar_off" xml:space="preserve"><value>خاموش</value></data>
+<data name="Choice_appearance_snap_bar_on" xml:space="preserve"><value>روشن</value></data>
+<data name="Setting_appearance_desktop_spotlight_Title" xml:space="preserve"><value>Windows Spotlight روی دسکتاپ</value></data>
+<data name="Setting_appearance_desktop_spotlight_Description" xml:space="preserve"><value>از تصویرهای Windows Spotlight روی دسکتاپ استفاده می‌کند. ویندوز این مورد را مثل یک سیاست برای حساب شما می‌بیند.</value></data>
+<data name="Choice_appearance_desktop_spotlight_disabled" xml:space="preserve"><value>خاموش</value></data>
+<data name="Choice_appearance_desktop_spotlight_enabled" xml:space="preserve"><value>پیش‌فرض ویندوز</value></data>
+<data name="Setting_explorer_drive_letters_Title" xml:space="preserve"><value>حرف درایو در کاوشگر فایل</value></data>
+<data name="Setting_explorer_drive_letters_Description" xml:space="preserve"><value>تعیین می‌کند حرف درایو در نام درایوها کجا نشان داده شود.</value></data>
+<data name="Choice_explorer_drive_letters_after_label" xml:space="preserve"><value>بعد از نام</value></data>
+<data name="Choice_explorer_drive_letters_network_first" xml:space="preserve"><value>قبل از نام درایوهای شبکه</value></data>
+<data name="Choice_explorer_drive_letters_hidden" xml:space="preserve"><value>پنهان</value></data>
+<data name="Choice_explorer_drive_letters_local_first" xml:space="preserve"><value>قبل از نام درایوهای محلی</value></data>
+<data name="Setting_explorer_nav_home_Title" xml:space="preserve"><value>صفحه‌ی اصلی در پنجره‌ی ناوبری</value></data>
+<data name="Setting_explorer_nav_home_Description" xml:space="preserve"><value>صفحه‌ی اصلی را در پنجره‌ی سمت چپ کاوشگر فایل نشان می‌دهد. اگر آن را پنهان کنید، کاوشگر فایل را روی «این رایانه» باز کنید.</value></data>
+<data name="Choice_explorer_nav_home_hidden" xml:space="preserve"><value>پنهان</value></data>
+<data name="Choice_explorer_nav_home_shown" xml:space="preserve"><value>نمایش</value></data>
+<data name="Setting_explorer_nav_gallery_Title" xml:space="preserve"><value>گالری در پنجره‌ی ناوبری</value></data>
+<data name="Setting_explorer_nav_gallery_Description" xml:space="preserve"><value>گالری را در پنجره‌ی سمت چپ کاوشگر فایل نشان می‌دهد.</value></data>
+<data name="Choice_explorer_nav_gallery_hidden" xml:space="preserve"><value>پنهان</value></data>
+<data name="Choice_explorer_nav_gallery_shown" xml:space="preserve"><value>نمایش</value></data>
+<data name="Setting_explorer_nav_onedrive_Title" xml:space="preserve"><value>وان‌درایو در پنجره‌ی ناوبری</value></data>
+<data name="Setting_explorer_nav_onedrive_Description" xml:space="preserve"><value>وان‌درایو را در پنجره‌ی سمت چپ کاوشگر فایل نشان می‌دهد. فایل‌های وان‌درایو شما دست نمی‌خورند.</value></data>
+<data name="Choice_explorer_nav_onedrive_hidden" xml:space="preserve"><value>پنهان</value></data>
+<data name="Choice_explorer_nav_onedrive_shown" xml:space="preserve"><value>نمایش</value></data>
+<data name="Setting_explorer_classic_context_menu_Title" xml:space="preserve"><value>منوی راست‌کلیک کلاسیک</value></data>
+<data name="Setting_explorer_classic_context_menu_Description" xml:space="preserve"><value>منوی کامل راست‌کلیک را یک‌جا و بدون «نمایش گزینه‌های بیشتر» نشان می‌دهد. این کار از یک کلید رجیستری پشتیبانی‌نشده استفاده می‌کند. ممکن است ویندوز بعد از یک به‌روزرسانی آن را نادیده بگیرد و برخی ابزارهای امنیتی این کلید را گزارش کنند.</value></data>
+<data name="Choice_explorer_classic_context_menu_modern" xml:space="preserve"><value>منوی ویندوز ۱۱</value></data>
+<data name="Choice_explorer_classic_context_menu_classic" xml:space="preserve"><value>منوی کلاسیک</value></data>
+<data name="Setting_explorer_copy_dialog_details_Title" xml:space="preserve"><value>پنجره‌ی جزئیات کپی فایل</value></data>
+<data name="Setting_explorer_copy_dialog_details_Description" xml:space="preserve"><value>هنگام کپی یا انتقال فایل‌ها، نمودار سرعت و جزئیات را در پنجره نشان می‌دهد.</value></data>
+<data name="Choice_explorer_copy_dialog_details_detailed" xml:space="preserve"><value>با جزئیات</value></data>
+<data name="Choice_explorer_copy_dialog_details_simple" xml:space="preserve"><value>کوتاه</value></data>
+<data name="Setting_explorer_autoplay_Title" xml:space="preserve"><value>پخش خودکار</value></data>
+<data name="Setting_explorer_autoplay_Description" xml:space="preserve"><value>به ویندوز اجازه می‌دهد وقتی درایو یا کارت حافظه وصل می‌کنید کاری را خودکار شروع کند.</value></data>
+<data name="Choice_explorer_autoplay_off" xml:space="preserve"><value>خاموش</value></data>
+<data name="Choice_explorer_autoplay_on" xml:space="preserve"><value>روشن</value></data>
+<data name="Setting_desktop_unsupported_hardware_notice_Title" xml:space="preserve"><value>اعلان نیازمندی‌های سیستم</value></data>
+<data name="Setting_desktop_unsupported_hardware_notice_Description" xml:space="preserve"><value>اعلانی را که می‌گوید این رایانه نیازمندی‌های ویندوز ۱۱ را ندارد نشان می‌دهد. این اعلان فقط روی چنین رایانه‌هایی دیده می‌شود.</value></data>
+<data name="Choice_desktop_unsupported_hardware_notice_hidden" xml:space="preserve"><value>پنهان</value></data>
+<data name="Choice_desktop_unsupported_hardware_notice_shown" xml:space="preserve"><value>نمایش</value></data>
+<data name="Setting_desktop_lock_wallpaper_Title" xml:space="preserve"><value>قفل کردن تصویر دسکتاپ</value></data>
+<data name="Setting_desktop_lock_wallpaper_Description" xml:space="preserve"><value>جلوی تغییر تصویر دسکتاپ را برای این حساب می‌گیرد. برای رایانه‌های مشترک مناسب است. تنظیمات بعد از آن این گزینه را «مدیریت‌شده توسط سازمان» نشان می‌دهد.</value></data>
+<data name="Choice_desktop_lock_wallpaper_locked" xml:space="preserve"><value>قفل</value></data>
+<data name="Choice_desktop_lock_wallpaper_allowed" xml:space="preserve"><value>مجاز</value></data>
+<data name="Setting_input_scrollbars_Title" xml:space="preserve"><value>نوارهای پیمایش</value></data>
+<data name="Setting_input_scrollbars_Description" xml:space="preserve"><value>تعیین می‌کند نوارهای پیمایش همیشه دیده شوند یا وقتی استفاده نمی‌شوند پنهان شوند. بعد از خروج و ورود دوباره اعمال می‌شود.</value></data>
+<data name="Choice_input_scrollbars_always" xml:space="preserve"><value>همیشه نشان داده شود</value></data>
+<data name="Choice_input_scrollbars_auto_hide" xml:space="preserve"><value>خودکار پنهان شود</value></data>
+<data name="Setting_input_time_format_24h_Title" xml:space="preserve"><value>ساعت ۲۴ ساعته</value></data>
+<data name="Setting_input_time_format_24h_Description" xml:space="preserve"><value>زمان را در ساعت نوار وظیفه و برنامه‌هایی که از قالب منطقه پیروی می‌کنند به‌صورت ۲۴ ساعته نشان می‌دهد. قالب دیگر منطقه به‌صورت «مقدار سفارشی» دیده می‌شود.</value></data>
+<data name="Choice_input_time_format_24h_h24" xml:space="preserve"><value>۲۴ ساعته</value></data>
+<data name="Choice_input_time_format_24h_h12" xml:space="preserve"><value>۱۲ ساعته</value></data>
+<data name="Setting_input_mouse_acceleration_Title" xml:space="preserve"><value>افزایش دقت اشاره‌گر</value></data>
+<data name="Setting_input_mouse_acceleration_Description" xml:space="preserve"><value>شتاب اشاره‌گر باعث می‌شود با حرکت سریع‌تر ماوس، اشاره‌گر بیشتر جابه‌جا شود. برای نشانه‌روی ثابت آن را خاموش کنید. بعضی افراد با محدودیت حرکت دست به آن نیاز دارند.</value></data>
+<data name="Choice_input_mouse_acceleration_on" xml:space="preserve"><value>روشن</value></data>
+<data name="Choice_input_mouse_acceleration_off" xml:space="preserve"><value>خاموش</value></data>
+<data name="Setting_input_keyboard_repeat_Title" xml:space="preserve"><value>تأخیر تکرار کلید</value></data>
+<data name="Setting_input_keyboard_repeat_Description" xml:space="preserve"><value>تعیین می‌کند چه مدت باید کلید را نگه دارید تا شروع به تکرار کند. تأخیر کوتاه ممکن است اگر کلید را بیش از حد نگه دارید، حرف‌های تکراری بسازد.</value></data>
+<data name="Choice_input_keyboard_repeat_standard" xml:space="preserve"><value>استاندارد</value></data>
+<data name="Choice_input_keyboard_repeat_fast" xml:space="preserve"><value>کوتاه</value></data>
+<data name="Setting_input_accessibility_hotkeys_Title" xml:space="preserve"><value>پنجره‌های میان‌بر دسترسی‌پذیری</value></data>
+<data name="Setting_input_accessibility_hotkeys_Description" xml:space="preserve"><value>پنجره‌های Sticky Keys، Filter Keys و Toggle Keys را که با پنج بار زدن Shift یا نگه داشتن یک کلید ظاهر می‌شوند متوقف می‌کند. این قابلیت‌ها در تنظیمات در دسترس می‌مانند.</value></data>
+<data name="Choice_input_accessibility_hotkeys_allowed" xml:space="preserve"><value>میان‌بر روشن</value></data>
+<data name="Choice_input_accessibility_hotkeys_off" xml:space="preserve"><value>میان‌بر خاموش</value></data>
+<data name="Setting_apps_game_mode_Title" xml:space="preserve"><value>حالت بازی</value></data>
+<data name="Setting_apps_game_mode_Description" xml:space="preserve"><value>به ویندوز اجازه می‌دهد توان بیشتری از رایانه را به بازی‌ها بدهد. بهتر است روشن بماند.</value></data>
+<data name="Choice_apps_game_mode_on" xml:space="preserve"><value>روشن</value></data>
+<data name="Choice_apps_game_mode_off" xml:space="preserve"><value>خاموش</value></data>
+<data name="Setting_apps_game_capture_Title" xml:space="preserve"><value>ضبط بازی و کلیپ‌ها</value></data>
+<data name="Setting_apps_game_capture_Description" xml:space="preserve"><value>به ویندوز اجازه می‌دهد بازی را در پس‌زمینه ضبط کند و با نوار بازی کلیپ ذخیره کند. با خاموش کردن آن، ضبط کلیپ متوقف می‌شود.</value></data>
+<data name="Choice_apps_game_capture_on" xml:space="preserve"><value>روشن</value></data>
+<data name="Choice_apps_game_capture_off" xml:space="preserve"><value>خاموش</value></data>
+<data name="Setting_apps_new_outlook_migration_Title" xml:space="preserve"><value>انتقال به Outlook جدید</value></data>
+<data name="Setting_apps_new_outlook_migration_Description" xml:space="preserve"><value>جلوی انتقال خودکار شما از Outlook کلاسیک به Outlook جدید را می‌گیرد. فقط وقتی Outlook کلاسیک نصب باشد اهمیت دارد.</value></data>
+<data name="Choice_apps_new_outlook_migration_blocked" xml:space="preserve"><value>مسدود</value></data>
+<data name="Choice_apps_new_outlook_migration_allowed" xml:space="preserve"><value>مجاز</value></data>
+<data name="Setting_performance_storage_sense_Title" xml:space="preserve"><value>حس ذخیره‌سازی</value></data>
+<data name="Setting_performance_storage_sense_Description" xml:space="preserve"><value>به ویندوز اجازه می‌دهد با حذف فایل‌های موقت و خالی کردن سطل بازیافت به‌صورت زمان‌بندی‌شده، فضای دیسک را خودش آزاد کند.</value></data>
+<data name="Choice_performance_storage_sense_off" xml:space="preserve"><value>خاموش</value></data>
+<data name="Choice_performance_storage_sense_on" xml:space="preserve"><value>روشن</value></data>
+<data name="Setting_performance_app_shutdown_timeouts_Title" xml:space="preserve"><value>زمان انتظار برنامه‌ها هنگام خاموش شدن</value></data>
+<data name="Setting_performance_app_shutdown_timeouts_Description" xml:space="preserve"><value>تعیین می‌کند ویندوز هنگام خروج و خاموش شدن چه مدت منتظر بسته شدن برنامه‌ها بماند. انتظار کوتاه ممکن است برنامه‌ای را که هنوز ذخیره می‌کند قطع کند. بعد از خروج و ورود دوباره اعمال می‌شود.</value></data>
+<data name="Choice_performance_app_shutdown_timeouts_windows" xml:space="preserve"><value>پیش‌فرض ویندوز</value></data>
+<data name="Choice_performance_app_shutdown_timeouts_faster" xml:space="preserve"><value>سریع‌تر (۵ ثانیه)</value></data>
+<data name="Setting_performance_auto_end_tasks_Title" xml:space="preserve"><value>بستن برنامه‌ها هنگام خاموش شدن بدون پرسش</value></data>
+<data name="Setting_performance_auto_end_tasks_Description" xml:space="preserve"><value>برنامه‌ها را هنگام خروج و خاموش شدن بدون پرسیدن از شما می‌بندد. کار ذخیره‌نشده در آن برنامه‌ها از بین می‌رود. بعد از خروج و ورود دوباره اعمال می‌شود.</value></data>
+<data name="Choice_performance_auto_end_tasks_ask" xml:space="preserve"><value>اول بپرس</value></data>
+<data name="Choice_performance_auto_end_tasks_auto" xml:space="preserve"><value>بدون پرسش ببند</value></data>
+<data name="Choice_taskbar_search_mode_icon_label" xml:space="preserve"><value>نماد و برچسب</value></data>
+<data name="Choice_explorer_open_to_downloads" xml:space="preserve"><value>دانلودها</value></data>
+<data name="Choice_explorer_open_to_onedrive" xml:space="preserve"><value>وان‌درایو</value></data>
+</root>

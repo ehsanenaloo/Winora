@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<root>
+<resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+<resheader name="version"><value>2.0</value></resheader>
+<data name="Unavailable" xml:space="preserve"><value>Worker unavailable: no elevation, IPC or mutation handlers are implemented.</value></data>
+<data name="Code_operation_recovery_required" xml:space="preserve"><value>An earlier operation needs recovery first. Restart Winora or run recover so it can be reconciled.</value></data>
+<data name="Code_operation_not_reversible" xml:space="preserve"><value>This operation cannot be reverted.</value></data>
+<data name="Code_operation_superseded" xml:space="preserve"><value>A newer operation has changed this value, so this older operation can no longer be reverted. Nothing was changed.</value></data>
+<data name="Code_operation_revision_unknown" xml:space="preserve"><value>The journal has no record of the exact state this operation produced, so it cannot be reverted safely.</value></data>
+<data name="Code_operation_resource_changed" xml:space="preserve"><value>The value changed while the action was starting. Nothing was changed; review the current value and try again.</value></data>
+<data name="Code_operation_external_conflict" xml:space="preserve"><value>The simulated value was changed by something else, so Winora did not overwrite it. Review the current value.</value></data>
+<data name="Code_operation_verification_failed" xml:space="preserve"><value>The value was written but could not be verified. Review is required.</value></data>
+<data name="Code_operation_reconciled_partial" xml:space="preserve"><value>After an interruption the value matched neither the original nor the requested value. Review is required.</value></data>
+<data name="Code_operation_rollback_uncertain" xml:space="preserve"><value>The revert could not be confirmed. Review is required.</value></data>
+<data name="Code_operation_rollback_failed" xml:space="preserve"><value>The revert did not restore the previous value. Review is required.</value></data>
+<data name="Code_operation_cancelled" xml:space="preserve"><value>The action was cancelled before it changed anything.</value></data>
+<data name="Code_plan_stale" xml:space="preserve"><value>The simulated value changed after you reviewed it. Nothing was applied; review the change again.</value></data>
+<data name="Code_plan_duplicate_feature" xml:space="preserve"><value>The plan lists the same feature more than once.</value></data>
+<data name="Code_plan_missing_dependency" xml:space="preserve"><value>The plan depends on a feature that is not part of it.</value></data>
+<data name="Code_plan_resource_conflict" xml:space="preserve"><value>Two features in the plan change the same resource.</value></data>
+<data name="Code_plan_dependency_cycle" xml:space="preserve"><value>The plan has features that depend on each other in a cycle.</value></data>
+<data name="Code_journal_revision_conflict" xml:space="preserve"><value>The record was changed by another action. Refresh and try again.</value></data>
+<data name="Code_journal_operation_missing" xml:space="preserve"><value>The operation record could not be found.</value></data>
+<data name="Code_journal_invalid_transition" xml:space="preserve"><value>That change of state is not allowed for this operation.</value></data>
+<data name="Code_journal_invalid" xml:space="preserve"><value>Winora&apos;s local journal could not be read safely, so it stopped to protect your data. No Windows setting was changed.</value></data>
+<data name="Code_journal_schema_unsupported" xml:space="preserve"><value>The local journal was created by a newer version of Winora and was not opened.</value></data>
+<data name="Code_journal_schema_corrupt" xml:space="preserve"><value>The local journal structure is damaged and was not opened.</value></data>
+<data name="Code_journal_migration_conflict" xml:space="preserve"><value>The local journal could not be upgraded safely and was not changed.</value></data>
+<data name="Code_journal_untrusted_definition" xml:space="preserve"><value>A journal entry did not match any known definition and was ignored.</value></data>
+<data name="Code_store_busy" xml:space="preserve"><value>Winora&apos;s local storage is busy. Nothing was changed; try again in a moment.</value></data>
+<data name="Code_store_unavailable" xml:space="preserve"><value>Winora&apos;s local storage could not be reached. Nothing was changed; check disk access and try again.</value></data>
+<data name="Code_store_failure" xml:space="preserve"><value>Winora&apos;s local storage reported an error. Review storage before retrying.</value></data>
+<data name="Code_protocol_size" xml:space="preserve"><value>The request was too large and was rejected.</value></data>
+<data name="Code_protocol_version" xml:space="preserve"><value>The request uses an unsupported protocol version and was rejected.</value></data>
+<data name="Code_protocol_operation" xml:space="preserve"><value>The request has no valid operation identifier and was rejected.</value></data>
+<data name="Code_protocol_command" xml:space="preserve"><value>The request command is not supported and was rejected.</value></data>
+<data name="Code_protocol_feature" xml:space="preserve"><value>The request names a feature that is not supported and was rejected.</value></data>
+<data name="Code_worker_unimplemented" xml:space="preserve"><value>This action is not available yet. Nothing was changed.</value></data>
+<data name="Code_profile_size" xml:space="preserve"><value>The profile file is too large and was not imported.</value></data>
+<data name="Code_profile_invalid" xml:space="preserve"><value>The profile is not valid and was not imported.</value></data>
+<data name="Code_profile_duplicate_property" xml:space="preserve"><value>The profile repeats a setting name and was not imported.</value></data>
+<data name="Code_access_denied" xml:space="preserve"><value>Access was denied. Nothing was changed.</value></data>
+<data name="Code_error_unexpected" xml:space="preserve"><value>Something unexpected happened. Nothing was reported as successful. You can copy the reference when asking for help.</value></data>
+<data name="Code_discovery_unavailable" xml:space="preserve"><value>This information is not available on this computer.</value></data>
+<data name="Code_discovery_item_unreadable" xml:space="preserve"><value>Some entries could not be read and were skipped.</value></data>
+<data name="Code_setting_unknown" xml:space="preserve"><value>This setting is not part of Winora's catalog. Nothing was changed.</value></data>
+<data name="Code_setting_choice_invalid" xml:space="preserve"><value>That choice is not valid for this setting. Nothing was changed.</value></data>
+<data name="Code_setting_unsupported_build" xml:space="preserve"><value>This setting is not supported on this version of Windows. Nothing was changed.</value></data>
+<data name="Code_setting_state_unrecognized" xml:space="preserve"><value>This setting currently holds a value of a kind Winora does not manage, so Winora will not change it. Nothing was changed.</value></data>
+<data name="Code_shell_refresh_failed" xml:space="preserve"><value>The setting was changed, but Windows could not be told to refresh, so some apps may not show it yet. You can apply it again from History.</value></data>
+<data name="Code_shell_restart_failed" xml:space="preserve"><value>The setting was changed, but Windows Explorer could not be restarted, so it takes effect after you sign out or restart Explorer. You can try again from History.</value></data>
+<data name="Code_target_not_allowed" xml:space="preserve"><value>Winora refused a change outside its own catalog. Nothing was changed.</value></data>
+<data name="Code_target_kind_unsupported" xml:space="preserve"><value>The administrator helper does not support this kind of setting. Nothing was changed.</value></data>
+<data name="Code_diagnostics_destination_invalid" xml:space="preserve"><value>The chosen folder cannot be used for the diagnostics archive. Pick a normal local folder outside Winora's own data folder. Nothing was created.</value></data>
+<data name="Code_diagnostics_export_failed" xml:space="preserve"><value>The diagnostics archive could not be created. Nothing was uploaded and no partial file was kept; check disk space and folder access, then try again.</value></data>
+<data name="Code_elevation_unavailable" xml:space="preserve"><value>Administrator changes are not available in this session or installation.</value></data>
+<data name="Code_elevation_unsigned_build" xml:space="preserve"><value>This build is not signed by the expected publisher, so administrator changes are turned off.</value></data>
+<data name="Code_elevation_install_untrusted" xml:space="preserve"><value>Winora's installation location or files cannot be trusted for administrator changes.</value></data>
+<data name="Code_elevation_uac_disabled" xml:space="preserve"><value>User Account Control is turned off, so administrator changes are not available.</value></data>
+<data name="Code_elevation_client_elevated" xml:space="preserve"><value>Run Winora without administrator rights to make machine changes.</value></data>
+<data name="Code_elevation_declined" xml:space="preserve"><value>The administrator prompt was declined. Nothing changed.</value></data>
+<data name="Code_elevation_launch_failed" xml:space="preserve"><value>The administrator helper could not be started. Nothing changed.</value></data>
+<data name="Code_elevation_blocked" xml:space="preserve"><value>Windows or your organization blocked the administrator helper. Nothing changed.</value></data>
+<data name="Code_elevation_timeout" xml:space="preserve"><value>The administrator helper did not respond in time. Nothing changed; trying again shows the prompt again.</value></data>
+<data name="Code_elevation_server_untrusted" xml:space="preserve"><value>The administrator helper could not be verified, so nothing was sent to it.</value></data>
+<data name="Code_elevation_client_untrusted" xml:space="preserve"><value>The helper refused the requesting program because it could not be verified.</value></data>
+<data name="Code_elevation_channel_failed" xml:space="preserve"><value>The secure channel to the administrator helper failed. Review the change before trying again.</value></data>
+<data name="Code_elevation_confirmation_required" xml:space="preserve"><value>Administrator changes need an interactive confirmation. Run this in an interactive window.</value></data>
+<data name="Code_elevation_platform_unsupported" xml:space="preserve"><value>Administrator changes are not supported on this version of Windows.</value></data>
+<data name="Code_elevation_platform_unverified" xml:space="preserve"><value>Administrator changes have not been verified on this Windows configuration, so they are turned off.</value></data>
+<data name="Code_definition_unknown" xml:space="preserve"><value>The change is not in Winora's trusted list.</value></data>
+<data name="Code_definition_set_mismatch" xml:space="preserve"><value>The app and the helper disagree about the trusted list.</value></data>
+<data name="Code_definition_revoked" xml:space="preserve"><value>The change was withdrawn and is no longer available.</value></data>
+<data name="Code_definition_signature_invalid" xml:space="preserve"><value>Winora&apos;s trusted list failed verification.</value></data>
+<data name="Code_definition_rollback" xml:space="preserve"><value>An older trusted list was refused.</value></data>
+<data name="Code_trust_store_insecure" xml:space="preserve"><value>The machine trust record has unsafe permissions.</value></data>
+<data name="Code_setting_managed_by_policy" xml:space="preserve"><value>This setting is managed by a policy. Winora does not change it.</value></data>
+<data name="Code_worker_busy" xml:space="preserve"><value>Another administrator helper is running. Try again in a moment.</value></data>
+<data name="Code_worker_hardening_failed" xml:space="preserve"><value>The administrator helper could not start safely on this system. Nothing changed.</value></data>
+</root>

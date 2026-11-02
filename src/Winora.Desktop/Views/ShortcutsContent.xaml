@@ -1,0 +1,23 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<UserControl x:Class="Winora.Desktop.ShortcutsContent"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ AutomationProperties.Name="{Binding Text[ShortcutsTitle]}">
+ <StackPanel MinWidth="380" MaxWidth="520">
+  <TextBlock Style="{StaticResource WinoraBodySecondary}" Text="{Binding Text[ShortcutsIntro]}" Margin="{StaticResource WinoraSpace.B12}"/>
+  <ItemsControl ItemsSource="{Binding Rows}" IsTabStop="False" Focusable="False" AutomationProperties.Name="{Binding Text[ShortcutsTitle]}">
+   <ItemsControl.ItemTemplate>
+    <DataTemplate>
+     <Grid Margin="{StaticResource WinoraSpace.B8}" AutomationProperties.Name="{Binding AutomationName}">
+      <Grid.ColumnDefinitions><ColumnDefinition Width="132"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+      <Border Padding="{StaticResource WinoraSpace.H8V4}" CornerRadius="{StaticResource WinoraCornerRadiusSmall}" BorderThickness="1" HorizontalAlignment="Left" FlowDirection="LeftToRight"
+       Background="{DynamicResource ControlFillColorSecondaryBrush}" BorderBrush="{DynamicResource WinoraControlBorderBrush}">
+       <TextBlock Style="{StaticResource WinoraMono}" FontWeight="SemiBold" Text="{Binding Keys}" TextWrapping="NoWrap"/>
+      </Border>
+      <TextBlock Grid.Column="1" Style="{StaticResource WinoraBody}" Text="{Binding Description}" Margin="{StaticResource WinoraSpace.L12}" VerticalAlignment="Center"/>
+     </Grid>
+    </DataTemplate>
+   </ItemsControl.ItemTemplate>
+  </ItemsControl>
+ </StackPanel>
+</UserControl>

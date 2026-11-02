@@ -1,0 +1,984 @@
+{
+ "format": "winora.machine-definitions/1",
+ "setId": "winora-machine",
+ "serial": 1,
+ "minProtocol": 1,
+ "minWorkerBuild": 22621,
+ "revoked": [],
+ "definitions": [
+  {
+   "id": "machine.update.defer_quality",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_update_defer_quality_Title",
+   "descriptionKey": "Machine_machine_update_defer_quality_Description",
+   "category": "Updates",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+    "valueName": "DeferQualityUpdates",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "on",
+     "labelKey": "Machine_machine_update_defer_quality_Choice_on",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_update_defer_quality_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+     "valueName": "DeferQualityUpdates"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-update#deferqualityupdatesperiodindays"
+   ],
+   "sourceClass": "A",
+   "editions": [
+    "Pro",
+    "Enterprise",
+    "Education"
+   ]
+  },
+  {
+   "id": "machine.update.defer_quality_days",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_update_defer_quality_days_Title",
+   "descriptionKey": "Machine_machine_update_defer_quality_days_Description",
+   "category": "Updates",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+    "valueName": "DeferQualityUpdatesPeriodInDays",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "d4",
+     "labelKey": "Machine_machine_update_defer_quality_days_Choice_d4",
+     "value": {
+      "kind": "dword",
+      "number": 4
+     }
+    },
+    {
+     "id": "d7",
+     "labelKey": "Machine_machine_update_defer_quality_days_Choice_d7",
+     "value": {
+      "kind": "dword",
+      "number": 7
+     }
+    },
+    {
+     "id": "d14",
+     "labelKey": "Machine_machine_update_defer_quality_days_Choice_d14",
+     "value": {
+      "kind": "dword",
+      "number": 14
+     }
+    },
+    {
+     "id": "d30",
+     "labelKey": "Machine_machine_update_defer_quality_days_Choice_d30",
+     "value": {
+      "kind": "dword",
+      "number": 30
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_update_defer_quality_days_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    },
+    {
+     "kind": "dword",
+     "number": 2
+    },
+    {
+     "kind": "dword",
+     "number": 3
+    },
+    {
+     "kind": "dword",
+     "number": 4
+    },
+    {
+     "kind": "dword",
+     "number": 5
+    },
+    {
+     "kind": "dword",
+     "number": 6
+    },
+    {
+     "kind": "dword",
+     "number": 7
+    },
+    {
+     "kind": "dword",
+     "number": 14
+    },
+    {
+     "kind": "dword",
+     "number": 21
+    },
+    {
+     "kind": "dword",
+     "number": 30
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+     "valueName": "DeferQualityUpdatesPeriodInDays"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-update#deferqualityupdatesperiodindays"
+   ],
+   "sourceClass": "A",
+   "editions": [
+    "Pro",
+    "Enterprise",
+    "Education"
+   ]
+  },
+  {
+   "id": "machine.update.defer_feature",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_update_defer_feature_Title",
+   "descriptionKey": "Machine_machine_update_defer_feature_Description",
+   "category": "Updates",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+    "valueName": "DeferFeatureUpdates",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "on",
+     "labelKey": "Machine_machine_update_defer_feature_Choice_on",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_update_defer_feature_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+     "valueName": "DeferFeatureUpdates"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-update#deferfeatureupdatesperiodindays"
+   ],
+   "sourceClass": "A",
+   "editions": [
+    "Pro",
+    "Enterprise",
+    "Education"
+   ]
+  },
+  {
+   "id": "machine.update.defer_feature_days",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_update_defer_feature_days_Title",
+   "descriptionKey": "Machine_machine_update_defer_feature_days_Description",
+   "category": "Updates",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+    "valueName": "DeferFeatureUpdatesPeriodInDays",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "d30",
+     "labelKey": "Machine_machine_update_defer_feature_days_Choice_d30",
+     "value": {
+      "kind": "dword",
+      "number": 30
+     }
+    },
+    {
+     "id": "d90",
+     "labelKey": "Machine_machine_update_defer_feature_days_Choice_d90",
+     "value": {
+      "kind": "dword",
+      "number": 90
+     }
+    },
+    {
+     "id": "d180",
+     "labelKey": "Machine_machine_update_defer_feature_days_Choice_d180",
+     "value": {
+      "kind": "dword",
+      "number": 180
+     }
+    },
+    {
+     "id": "d365",
+     "labelKey": "Machine_machine_update_defer_feature_days_Choice_d365",
+     "value": {
+      "kind": "dword",
+      "number": 365
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_update_defer_feature_days_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 30
+    },
+    {
+     "kind": "dword",
+     "number": 60
+    },
+    {
+     "kind": "dword",
+     "number": 90
+    },
+    {
+     "kind": "dword",
+     "number": 120
+    },
+    {
+     "kind": "dword",
+     "number": 180
+    },
+    {
+     "kind": "dword",
+     "number": 270
+    },
+    {
+     "kind": "dword",
+     "number": 365
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+     "valueName": "DeferFeatureUpdatesPeriodInDays"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-update#deferfeatureupdatesperiodindays"
+   ],
+   "sourceClass": "A",
+   "editions": [
+    "Pro",
+    "Enterprise",
+    "Education"
+   ]
+  },
+  {
+   "id": "machine.update.target_release",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_update_target_release_Title",
+   "descriptionKey": "Machine_machine_update_target_release_Description",
+   "category": "Updates",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+    "valueName": "TargetReleaseVersion",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "pin",
+     "labelKey": "Machine_machine_update_target_release_Choice_pin",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_update_target_release_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+     "valueName": "TargetReleaseVersion"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-update#targetreleaseversion"
+   ],
+   "sourceClass": "A",
+   "editions": [
+    "Pro",
+    "Enterprise",
+    "Education"
+   ]
+  },
+  {
+   "id": "machine.update.target_release_version",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_update_target_release_version_Title",
+   "descriptionKey": "Machine_machine_update_target_release_version_Description",
+   "category": "Updates",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+    "valueName": "TargetReleaseVersionInfo",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "v23h2",
+     "labelKey": "Machine_machine_update_target_release_version_Choice_v23h2",
+     "value": {
+      "kind": "string",
+      "text": "23H2"
+     }
+    },
+    {
+     "id": "v24h2",
+     "labelKey": "Machine_machine_update_target_release_version_Choice_v24h2",
+     "value": {
+      "kind": "string",
+      "text": "24H2"
+     }
+    },
+    {
+     "id": "v25h2",
+     "labelKey": "Machine_machine_update_target_release_version_Choice_v25h2",
+     "value": {
+      "kind": "string",
+      "text": "25H2"
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_update_target_release_version_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "string",
+     "text": "22H2"
+    },
+    {
+     "kind": "string",
+     "text": "23H2"
+    },
+    {
+     "kind": "string",
+     "text": "24H2"
+    },
+    {
+     "kind": "string",
+     "text": "25H2"
+    },
+    {
+     "kind": "string",
+     "text": "26H1"
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+     "valueName": "TargetReleaseVersionInfo"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-update#targetreleaseversion"
+   ],
+   "sourceClass": "A",
+   "editions": [
+    "Pro",
+    "Enterprise",
+    "Education"
+   ]
+  },
+  {
+   "id": "machine.update.target_release_product",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_update_target_release_product_Title",
+   "descriptionKey": "Machine_machine_update_target_release_product_Description",
+   "category": "Updates",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+    "valueName": "ProductVersion",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "win11",
+     "labelKey": "Machine_machine_update_target_release_product_Choice_win11",
+     "value": {
+      "kind": "string",
+      "text": "Windows 11"
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_update_target_release_product_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "string",
+     "text": "Windows 10"
+    },
+    {
+     "kind": "string",
+     "text": "Windows 11"
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+     "valueName": "ProductVersion"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-update#productversion"
+   ],
+   "sourceClass": "A",
+   "editions": [
+    "Pro",
+    "Enterprise",
+    "Education"
+   ]
+  },
+  {
+   "id": "machine.update.au_notify",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_update_au_notify_Title",
+   "descriptionKey": "Machine_machine_update_au_notify_Description",
+   "category": "Updates",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU",
+    "valueName": "AUOptions",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "ask_download",
+     "labelKey": "Machine_machine_update_au_notify_Choice_ask_download",
+     "value": {
+      "kind": "dword",
+      "number": 2
+     }
+    },
+    {
+     "id": "ask_install",
+     "labelKey": "Machine_machine_update_au_notify_Choice_ask_install",
+     "value": {
+      "kind": "dword",
+      "number": 3
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_update_au_notify_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 2
+    },
+    {
+     "kind": "dword",
+     "number": 3
+    },
+    {
+     "kind": "dword",
+     "number": 4
+    },
+    {
+     "kind": "dword",
+     "number": 5
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU",
+     "valueName": "AUOptions"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/deployment/update/waas-wu-settings#configuring-automatic-updates-by-editing-the-registry"
+   ],
+   "sourceClass": "A",
+   "editions": [
+    "Pro",
+    "Enterprise",
+    "Education"
+   ]
+  },
+  {
+   "id": "machine.update.wake_for_updates",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_update_wake_for_updates_Title",
+   "descriptionKey": "Machine_machine_update_wake_for_updates_Description",
+   "category": "Updates",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU",
+    "valueName": "AUPowerManagement",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "no_wake",
+     "labelKey": "Machine_machine_update_wake_for_updates_Choice_no_wake",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_update_wake_for_updates_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU",
+     "valueName": "AUPowerManagement"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/deployment/update/waas-wu-settings#configuring-automatic-updates-by-editing-the-registry"
+   ],
+   "sourceClass": "B",
+   "communitySources": [
+    "community source 1"
+   ],
+   "editions": [
+    "Pro",
+    "Enterprise",
+    "Education"
+   ]
+  },
+  {
+   "id": "machine.update.no_auto_reboot",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_update_no_auto_reboot_Title",
+   "descriptionKey": "Machine_machine_update_no_auto_reboot_Description",
+   "category": "Updates",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU",
+    "valueName": "NoAutoRebootWithLoggedOnUsers",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "no_restart",
+     "labelKey": "Machine_machine_update_no_auto_reboot_Choice_no_restart",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_update_no_auto_reboot_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU",
+     "valueName": "NoAutoRebootWithLoggedOnUsers"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/deployment/update/waas-wu-settings#configuring-automatic-updates-by-editing-the-registry"
+   ],
+   "sourceClass": "A",
+   "editions": [
+    "Pro",
+    "Enterprise",
+    "Education"
+   ]
+  },
+  {
+   "id": "machine.update.optional_content",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_update_optional_content_Title",
+   "descriptionKey": "Machine_machine_update_optional_content_Description",
+   "category": "Updates",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\WindowsUpdate\\UX\\Settings",
+    "valueName": "IsContinuousInnovationOptedIn",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_update_optional_content_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "on",
+     "labelKey": "Machine_machine_update_optional_content_Choice_on",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    }
+   ],
+   "defaultChoiceId": "off",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "sourceClass": "C",
+   "communitySources": [
+    "community source 2"
+   ]
+  },
+  {
+   "id": "machine.update.block_update_page",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_update_block_update_page_Title",
+   "descriptionKey": "Machine_machine_update_block_update_page_Description",
+   "category": "Updates",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+    "valueName": "SetDisableUXWUAccess",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "block",
+     "labelKey": "Machine_machine_update_block_update_page_Choice_block",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_update_block_update_page_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+     "valueName": "SetDisableUXWUAccess"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-update#setdisableuxwuaccess"
+   ],
+   "sourceClass": "A",
+   "editions": [
+    "Pro",
+    "Enterprise",
+    "Education"
+   ]
+  }
+ ]
+}

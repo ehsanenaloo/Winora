@@ -1,0 +1,15 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<Project Sdk="Microsoft.NET.Sdk">
+ <!-- Starts or reaches Winora without asking for administrator rights itself. The jump list entries start this program:
+ it hands a page key to the running Winora, or starts Winora when none runs. No window, no WPF, asInvoker. -->
+ <PropertyGroup>
+  <OutputType>WinExe</OutputType>
+  
+  <ApplicationManifest>app.manifest</ApplicationManifest>
+  <ApplicationIcon>..\Winora.Desktop\Assets\Winora.ico</ApplicationIcon>
+  <StartupHookSupport>false</StartupHookSupport>
+  <InvariantGlobalization>true</InvariantGlobalization>
+ </PropertyGroup>
+ <ItemGroup><ProjectReference Include="../Winora.Instance/Winora.Instance.csproj" /></ItemGroup>
+ <ItemGroup><InternalsVisibleTo Include="Winora.Windows.Tests" /></ItemGroup>
+</Project>

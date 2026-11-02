@@ -1,0 +1,15 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<Project>
+ <PropertyGroup><ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally></PropertyGroup>
+ <ItemGroup>
+  <PackageVersion Include="WPF-UI" Version="4.3.0" />
+  <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+  <PackageVersion Include="System.Security.Cryptography.Cose" Version="10.0.12" />
+  <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="10.0.12" />
+  <PackageVersion Include="Microsoft.Extensions.Logging" Version="10.0.12" />
+  <PackageVersion Include="Microsoft.Data.Sqlite" Version="10.0.12" />
+  <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.10.1" />
+  <PackageVersion Include="xunit" Version="2.9.3" />
+  <PackageVersion Include="xunit.runner.visualstudio" Version="4.0.0" />
+ </ItemGroup>
+</Project>

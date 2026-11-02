@@ -1,0 +1,64 @@
+{
+ "version": 1,
+ "profile": {
+  "id": "security",
+  "nameKey": "Profile_security_Name",
+  "descriptionKey": "Profile_security_Description",
+  "entries": [
+   {
+    "kind": "user",
+    "id": "explorer.show_file_extensions",
+    "choice": "show",
+    "reasonKey": "ProfileReason_Extensions"
+   },
+   {
+    "kind": "user",
+    "id": "explorer.autoplay",
+    "choice": "off",
+    "reasonKey": "ProfileReason_Autoplay"
+   },
+   {
+    "kind": "user",
+    "id": "privacy.silent_app_installs",
+    "choice": "disabled",
+    "reasonKey": "ProfileReason_SilentInstalls"
+   },
+   {
+    "kind": "user",
+    "id": "privacy.third_party_suggestions",
+    "choice": "blocked",
+    "reasonKey": "ProfileReason_ThirdParty"
+   },
+   {
+    "kind": "user",
+    "id": "privacy.cloud_clipboard_upload",
+    "choice": "off",
+    "reasonKey": "ProfileReason_CrossDevice"
+   },
+   {
+    "kind": "machine",
+    "id": "machine.shell.lock_screen_notifications",
+    "choice": "off",
+    "reasonKey": "ProfileReason_LockNotifications"
+   },
+   {
+    "kind": "machine",
+    "id": "machine.shell.lock_screen_camera",
+    "choice": "off",
+    "reasonKey": "ProfileReason_LockCamera"
+   },
+   {
+    "kind": "machine",
+    "id": "machine.network.smart_name_resolution",
+    "choice": "off",
+    "reasonKey": "ProfileReason_NameResolution"
+   },
+   {
+    "kind": "machine",
+    "id": "machine.apps.push_to_install",
+    "choice": "off",
+    "reasonKey": "ProfileReason_PushInstall"
+   }
+  ]
+ }
+}

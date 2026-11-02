@@ -1,0 +1,15 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<!-- Dark overlay merged after the WPF-UI dark theme. Same tokens as ThemeLight.xaml. -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+ <ResourceDictionary.MergedDictionaries><ResourceDictionary Source="Colors.Dark.xaml"/></ResourceDictionary.MergedDictionaries>
+ <Color x:Key="WinoraControlBorderColor">#8A8A8A</Color>
+ <SolidColorBrush x:Key="WinoraControlBorderBrush" Color="{StaticResource WinoraControlBorderColor}"/>
+ <SolidColorBrush x:Key="ControlElevationBorderBrush" Color="{StaticResource WinoraControlBorderColor}"/>
+ <SolidColorBrush x:Key="TextControlElevationBorderBrush" Color="{StaticResource WinoraControlBorderColor}"/>
+ <SolidColorBrush x:Key="CheckBoxBorderBrush" Color="{StaticResource WinoraControlBorderColor}"/>
+ <SolidColorBrush x:Key="ToggleSwitchStrokeOff" Color="{StaticResource WinoraControlBorderColor}"/>
+ <!-- A switch that is On but cannot be changed keeps a muted accent track; the default dark grey track reads as Off. -->
+ <SolidColorBrush x:Key="ToggleSwitchFillOnDisabled" Color="{DynamicResource SystemAccentColorSecondary}" Opacity="0.45"/>
+ <SolidColorBrush x:Key="ToggleSwitchStrokeOnDisabled" Color="{DynamicResource SystemAccentColorSecondary}" Opacity="0.45"/>
+ <DropShadowEffect x:Key="WinoraElevation1" BlurRadius="8" ShadowDepth="2" Direction="270" Opacity="0.40" Color="Black"/>
+</ResourceDictionary>

@@ -1,0 +1,66 @@
+name: Translation fix
+description: Report wrong, awkward or missing Persian text.
+title: "[Translation]: "
+labels: ["translation", "persian"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping with the Persian text. You can also send a pull request. See the Persian text section of CONTRIBUTING.md.
+  - type: input
+    id: location
+    attributes:
+      label: Where is the text?
+      description: The page and the button, label or message. A screenshot helps.
+      placeholder: "History page, the undo button"
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: Current text
+      description: Copy the Persian text as it is now.
+    validations:
+      required: true
+  - type: textarea
+    id: suggested
+    attributes:
+      label: Suggested text
+      description: Keep placeholders such as {0} and {1} as they are. Keep product names and keyboard keys in Latin letters.
+    validations:
+      required: true
+  - type: dropdown
+    id: problem
+    attributes:
+      label: What is wrong?
+      options:
+        - Wrong meaning
+        - Awkward wording
+        - Spelling, spacing or half-space (نیم‌فاصله)
+        - Wrong direction or mixed with Latin text
+        - Text is cut off
+        - Text is missing or still in English
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: native
+    attributes:
+      label: Are you a native Persian speaker?
+      options:
+        - "Yes"
+        - "No, but I am fluent"
+        - "No"
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you submit
+      options:
+        - label: I did not include personal data.
+          required: true

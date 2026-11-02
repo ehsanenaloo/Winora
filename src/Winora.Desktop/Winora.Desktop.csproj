@@ -1,0 +1,8 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<Project Sdk="Microsoft.NET.Sdk">
+ <PropertyGroup><OutputType>WinExe</OutputType><TargetFramework>net10.0-windows</TargetFramework><UseWPF>true</UseWPF><ApplicationManifest>app.manifest</ApplicationManifest><ApplicationIcon>Assets\Winora.ico</ApplicationIcon><StartupHookSupport>false</StartupHookSupport><AssemblyTitle>Winora</AssemblyTitle><RuntimeIdentifiers>win-x64</RuntimeIdentifiers><PublishReadyToRun>true</PublishReadyToRun></PropertyGroup>
+ <ItemGroup><Resource Include="Assets\Winora.ico"/></ItemGroup>
+ <!-- The Gallery (a window of every shared control, for design review) exists in Debug builds only. -->
+ <ItemGroup Condition="'$(Configuration)' != 'Debug'"><Compile Remove="Gallery\**"/><None Remove="Gallery\**"/></ItemGroup>
+ <ItemGroup><ProjectReference Include="../Winora.Application/Winora.Application.csproj"/><ProjectReference Include="../Winora.Infrastructure.Persistence/Winora.Infrastructure.Persistence.csproj"/><ProjectReference Include="../Winora.Infrastructure.Windows/Winora.Infrastructure.Windows.csproj"/><ProjectReference Include="../Winora.Instance/Winora.Instance.csproj"/><ProjectReference Include="../Winora.Presentation/Winora.Presentation.csproj"/><PackageReference Include="WPF-UI"/><PackageReference Include="CommunityToolkit.Mvvm"/><PackageReference Include="Microsoft.Extensions.DependencyInjection"/><PackageReference Include="Microsoft.Extensions.Logging"/></ItemGroup>
+</Project>

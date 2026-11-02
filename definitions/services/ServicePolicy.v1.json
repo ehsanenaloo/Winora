@@ -1,0 +1,29 @@
+{
+ "format": "winora.service-policy/1",
+ "protected": [
+  { "reason": "core", "sourceClass": "microsoft", "source": "Services that Windows needs to start and run (Microsoft guidance on system services, research/web-services.md, deny list of DEC-IW-033).",
+    "names": ["RpcSs", "RpcEptMapper", "DcomLaunch", "LSM", "SamSs", "KeyIso", "CryptSvc", "Winmgmt", "ProfSvc", "UserManager", "Schedule", "gpsvc", "EventSystem", "SENS", "BrokerInfrastructure", "StateRepository", "TokenBroker", "CoreMessagingRegistrar", "PlugPlay", "Power", "TrustedInstaller", "msiserver", "AppInfo", "AppIDSvc", "SystemEventsBroker", "TimeBrokerSvc", "tiledatamodelsvc", "WpnService", "WpnUserService*", "Themes", "ksecdd", "CNG", "VBS", "ShellHWDetection"] },
+  { "reason": "security", "sourceClass": "microsoft", "source": "Microsoft Defender, Security Center, firewall and base filtering engine; stopping them leaves the PC unprotected.",
+    "names": ["WinDefend", "WdNisSvc", "WdFilter", "WdBoot", "Sense", "SecurityHealthService", "wscsvc", "mpssvc", "BFE", "SgrmBroker", "VaultSvc"] },
+  { "reason": "update", "sourceClass": "microsoft", "source": "Windows Update, Store install, delivery and browser update services (deny list of DEC-IW-033).",
+    "names": ["wuauserv", "UsoSvc", "WaaSMedicSvc", "BITS", "DoSvc", "InstallService", "edgeupdate", "edgeupdatem", "MicrosoftEdgeElevationService"] },
+  { "reason": "network", "sourceClass": "microsoft", "source": "Network stack, name resolution, Wi-Fi, file sharing client and server, and the brokers that depend on them.",
+    "names": ["Dhcp", "Dnscache", "NlaSvc", "netprofm", "nsi", "LanmanWorkstation", "LanmanServer", "WlanSvc", "Wcmsvc", "WinHttpAutoProxySvc", "iphlpsvc", "mrxsmb", "bowser", "tdx", "Tcpip", "NetBT", "afd", "NcbService", "SstpSvc", "TapiSrv", "Netman", "NetSetupSvc", "RasMan", "PolicyAgent", "IKEEXT"] },
+  { "reason": "time", "sourceClass": "microsoft", "source": "Windows Time keeps the clock right; wrong time breaks sign in, certificates and updates.",
+    "names": ["W32Time"] },
+  { "reason": "storage", "sourceClass": "microsoft", "source": "Storage, volume shadow copy and virtual disk services; stopping them can stop backups and restore points.",
+    "names": ["StorSvc", "vds", "swprv", "VSS", "smphost", "MSiSCSI"] },
+  { "reason": "identity", "sourceClass": "microsoft", "source": "Account sign in, Windows Hello and domain logon.",
+    "names": ["wlidsvc", "NgcSvc", "NgcCtnrSvc", "Netlogon"] },
+  { "reason": "licensing", "sourceClass": "microsoft", "source": "Windows license and Store license services.",
+    "names": ["sppsvc", "LicenseManager", "ClipSVC"] },
+  { "reason": "logging", "sourceClass": "microsoft", "source": "Event log, error reporting and the diagnostic base that Windows tools read.",
+    "names": ["EventLog", "Wecsvc", "WerSvc", "DPS", "WdiServiceHost", "WdiSystemHost", "diagsvc"] },
+  { "reason": "remote_access", "sourceClass": "observed", "source": "Remote Desktop, remote management and Secure Shell services. Stopping one can end the session you are using.",
+    "names": ["TermService", "SessionEnv", "UmRdpService", "WinRM", "sshd"] },
+  { "reason": "virtual_guest", "sourceClass": "observed", "source": "Guest services of virtual machines (Hyper-V and VMware); the host needs them.",
+    "names": ["HvHost", "vmic*", "VMTools", "VGAuthService", "vm3dservice", "vmvss"] },
+  { "reason": "winora", "sourceClass": "observed", "source": "Winora's own services must not be stopped by the page that runs inside Winora.",
+    "names": ["Winora*"] }
+ ]
+}

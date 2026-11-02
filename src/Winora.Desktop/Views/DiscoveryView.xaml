@@ -1,0 +1,447 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<UserControl x:Class="Winora.Desktop.DiscoveryView"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:ctl="clr-namespace:Winora.Desktop.Controls"
+ xmlns:local="clr-namespace:Winora.Desktop" xmlns:vm="clr-namespace:Winora.Desktop;assembly=Winora.Presentation"
+ AutomationProperties.Name="{Binding Title}" Focusable="False" SizeChanged="OnSizeChanged" Loaded="OnLoaded" Unloaded="OnUnloaded">
+ <UserControl.CommandBindings>
+  <CommandBinding Command="ApplicationCommands.Find" Executed="OnFind"/>
+ </UserControl.CommandBindings>
+ <UserControl.Resources>
+  <!-- The "more" button of a row: its menu opens the details dialog. -->
+  <Style x:Key="RowMenu" TargetType="ctl:RowMenuButton">
+   <Setter Property="Tabbable" Value="False"/><Setter Property="VerticalAlignment" Value="Center"/>
+   <Setter Property="DetailsCommand" Value="{Binding DataContext.ShowDetailsCommand, RelativeSource={RelativeSource AncestorType=local:DiscoveryView}}"/>
+   <Setter Property="DetailsText" Value="{Binding DataContext.Text[RowDetails], RelativeSource={RelativeSource AncestorType=local:DiscoveryView}}"/>
+   <Setter Property="MoreHelp" Value="{Binding DataContext.Text[RowMoreDetailsHelp], RelativeSource={RelativeSource AncestorType=local:DiscoveryView}}"/>
+  </Style>
+  <!-- Status chip: tinted for meaning, outlined for neutral facts. Text always carries the meaning. -->
+  <!-- Panels of the Startup page: notices above the list, buttons in the details pane, change history below the list. -->
+  <DataTemplate DataType="{x:Type vm:StartupBannerPanel}">
+   <StackPanel>
+    <ctl:InfoBanner x:Name="SignInBar" IsOpen="True" IsClosable="False" Severity="Informational" Title="{Binding InfoTitle}" Message="{Binding InfoText}" AutomationProperties.Name="{Binding InfoTitle}"/>
+    <!-- Impact: how many of the entries that start with Windows are estimated High, Medium and Low. The bar has a hatched middle part, and the labels carry the counts. -->
+    <Border x:Name="ImpactCard" Style="{StaticResource WinoraCardBorder}" Margin="{StaticResource WinoraSpace.T8}" Visibility="{Binding HasImpact, Converter={StaticResource BoolToVisibility}}" AutomationProperties.Name="{Binding BarAutomationName}">
+     <StackPanel>
+      <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding ImpactHeadline}" TextWrapping="Wrap"/>
+      <ctl:SegmentedBar x:Name="ImpactBar" First="{Binding HighCount}" Second="{Binding MediumCount}" Third="{Binding LowCount}" Height="10" Margin="{StaticResource WinoraSpace.V8}" HorizontalAlignment="Stretch" AutomationProperties.Name="{Binding BarAutomationName}"/>
+      <WrapPanel>
+       <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding HighLabel}" Margin="{StaticResource WinoraSpace.R16}"/>
+       <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding MediumLabel}" Margin="{StaticResource WinoraSpace.R16}"/>
+       <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding LowLabel}" Margin="{StaticResource WinoraSpace.R16}"/>
+      </WrapPanel>
+      <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding ImpactNote}" TextWrapping="Wrap" Margin="{StaticResource WinoraSpace.T4}"/>
+     </StackPanel>
+    </Border>
+    <Grid Margin="{StaticResource WinoraSpace.T8}">
+     <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+     <TextBlock x:Name="StartupSummary" Style="{StaticResource WinoraBodyStrong}" Text="{Binding SummaryText}" TextWrapping="Wrap" VerticalAlignment="Center" Visibility="{Binding HasSummary, Converter={StaticResource BoolToVisibility}}"
+      AutomationProperties.LiveSetting="Polite" AutomationProperties.Name="{Binding SummaryText}"/>
+     <ui:Button x:Name="ToggleGroupsButton" Grid.Column="1" Content="{Binding ToggleAllLabel}" Command="{Binding ToggleAllCommand}" Margin="{StaticResource WinoraSpace.L12}" VerticalAlignment="Center"
+      Visibility="{Binding HasGroups, Converter={StaticResource BoolToVisibility}}" AutomationProperties.Name="{Binding ToggleAllLabel}" AutomationProperties.HelpText="{Binding ToggleAllHelp}"/>
+    </Grid>
+    <ctl:AdminNotice IsOpen="{Binding ShowNeedsAdministrator, Mode=OneWay}" Title="{Binding NeedsAdministratorTitle}" Message="{Binding NeedsAdministratorText, Mode=OneWay}" ShowLink="{Binding ShowAdminHowTo}" LinkText="{Binding Text[AdminNoticeLink]}" LinkHelp="{Binding Text[AdminNoticeLinkHelp]}"/>
+    <ctl:InfoBanner IsOpen="{Binding HasNotice, Mode=OneWay}" IsClosable="False" Severity="{Binding NoticeSeverity, Converter={x:Static ctl:BannerLook.Severity}}" Title="{Binding NoticeTitle}" Message="{Binding Notice}"
+     AutomationProperties.LiveSetting="Polite" AutomationProperties.Name="{Binding Notice}"/>
+   </StackPanel>
+  </DataTemplate>
+  <DataTemplate DataType="{x:Type vm:StartupHistoryPanel}"><ctl:PageHistory DataContext="{Binding List}"/></DataTemplate>
+
+  <local:IsCategoryRowConverter x:Key="IsCategoryRow"/>
+  <ItemsPanelTemplate x:Key="WrapItems"><WrapPanel/></ItemsPanelTemplate>
+  <ItemsPanelTemplate x:Key="VirtualItems"><VirtualizingStackPanel IsVirtualizing="True" VirtualizationMode="Recycling"/></ItemsPanelTemplate>
+
+  <Style x:Key="LtrCaption" TargetType="TextBlock" BasedOn="{StaticResource WinoraCaption}">
+   <Setter Property="TextWrapping" Value="NoWrap"/><Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+   <Style.Triggers>
+    <DataTrigger Binding="{Binding SubtitleIsLtr}" Value="True">
+     <Setter Property="FlowDirection" Value="LeftToRight"/><Setter Property="FontFamily" Value="{StaticResource WinoraMonoFontFamily}"/><Setter Property="HorizontalAlignment" Value="Left"/>
+    </DataTrigger>
+   </Style.Triggers>
+  </Style>
+
+  <DataTemplate DataType="{x:Type vm:QuarantineBannerPanel}">
+   <StackPanel>
+    <Grid Margin="{StaticResource WinoraSpace.T4B8}">
+     <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+     <StackPanel VerticalAlignment="Center">
+      <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding SummaryText}" TextWrapping="Wrap" Visibility="{Binding HasSummary, Converter={StaticResource BoolToVisibility}}" AutomationProperties.LiveSetting="Polite"/>
+      <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding NoteText}" TextWrapping="Wrap"/>
+     </StackPanel>
+     <ui:Button x:Name="EmptyAllButton" Grid.Column="1" Content="{Binding EmptyLabel}" Command="{Binding EmptyCommand}" Icon="{ui:SymbolIcon Delete24}" Margin="{StaticResource WinoraSpace.L12}" Visibility="{Binding CanEmpty, Converter={StaticResource BoolToVisibility}}"
+      AutomationProperties.Name="{Binding EmptyLabel}" AutomationProperties.HelpText="{Binding EmptyHelp}"/>
+    </Grid>
+    <ctl:InfoBanner IsOpen="{Binding HasNotice, Mode=OneWay}" IsClosable="False" Severity="{Binding NoticeSeverity, Converter={x:Static ctl:BannerLook.Severity}}" Title="{Binding NoticeTitle}" Message="{Binding Notice}"
+     AutomationProperties.LiveSetting="Polite" AutomationProperties.Name="{Binding Notice}"/>
+   </StackPanel>
+  </DataTemplate>
+
+  <DataTemplate DataType="{x:Type vm:QuarantineRow}">
+   <ctl:InventoryRow>
+    <ctl:InventoryRow.Lead>
+     <Border Style="{StaticResource WinoraRowIconTile}">
+      <ui:SymbolIcon Symbol="ShieldLock24" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+     </Border>
+    </ctl:InventoryRow.Lead>
+    <StackPanel VerticalAlignment="Center">
+     <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding FileName}" TextTrimming="CharacterEllipsis"/>
+     <TextBlock Style="{StaticResource LtrCaption}" Text="{Binding Folder}"/>
+     <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Program}" TextTrimming="CharacterEllipsis" Visibility="{Binding HasProgram, Converter={StaticResource BoolToVisibility}}"/>
+     <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding WhenText}" TextTrimming="CharacterEllipsis"/>
+    </StackPanel>
+    <ctl:InventoryRow.Control>
+     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+      <TextBlock Style="{StaticResource WinoraBodySecondary}" Text="{Binding SizeText}" Margin="{StaticResource WinoraSpace.R12}" VerticalAlignment="Center" FlowDirection="LeftToRight"/>
+      <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Visibility="{Binding CanAct, Converter={StaticResource BoolToVisibility}}">
+       <ui:Button Content="{Binding RestoreLabel}" Command="{Binding RestoreCommand}" CommandParameter="{Binding}" Icon="{ui:SymbolIcon ArrowUndo24}" Margin="{StaticResource WinoraSpace.R8}" IsTabStop="False"
+        AutomationProperties.Name="{Binding RestoreName}"/>
+       <ui:Button Style="{StaticResource WinoraDangerRowButton}" Content="{Binding DeleteLabel}" Command="{Binding DeleteCommand}" CommandParameter="{Binding}" IsTabStop="False"
+        AutomationProperties.Name="{Binding DeleteName}"/>
+      </StackPanel>
+     </StackPanel>
+    </ctl:InventoryRow.Control>
+    <ctl:InventoryRow.Menu><ctl:RowMenuButton Style="{StaticResource RowMenu}" DetailsParameter="{Binding}" MoreName="{Binding MoreName}"/></ctl:InventoryRow.Menu>
+   </ctl:InventoryRow>
+  </DataTemplate>
+
+  <DataTemplate DataType="{x:Type vm:AppsBannerPanel}">
+   <StackPanel>
+    <Border Style="{StaticResource WinoraCardBorder}" Margin="{StaticResource WinoraSpace.T8}" Visibility="{Binding HasResults, Converter={StaticResource BoolToVisibility}}">
+     <StackPanel Margin="{DynamicResource WinoraCardPadding}">
+      <Grid>
+       <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+       <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding ResultsTitle}" TextWrapping="Wrap" VerticalAlignment="Center" AutomationProperties.LiveSetting="Polite"/>
+       <ui:Button Grid.Column="1" Content="{Binding DismissLabel}" Command="{Binding DismissCommand}" Appearance="Transparent" AutomationProperties.Name="{Binding DismissLabel}"/>
+      </Grid>
+      <ItemsControl ItemsSource="{Binding Results}" IsTabStop="False" Focusable="False" Margin="{StaticResource WinoraSpace.T4}">
+       <ItemsControl.ItemTemplate>
+        <DataTemplate>
+         <Grid Margin="{StaticResource WinoraSpace.V2}" AutomationProperties.Name="{Binding AutomationName}">
+          <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="2*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+          <TextBlock Style="{StaticResource WinoraBody}" Text="{Binding Name}" TextTrimming="CharacterEllipsis" Margin="{StaticResource WinoraSpace.R12}" VerticalAlignment="Center"/>
+          <TextBlock Grid.Column="1" Style="{StaticResource WinoraBodySecondary}" Text="{Binding Status}" TextWrapping="Wrap" VerticalAlignment="Center" AutomationProperties.LiveSetting="Polite"/>
+          <ui:Button Grid.Column="2" Content="{Binding FindLabel}" Command="{Binding FindCommand}" CommandParameter="{Binding}" Icon="{ui:SymbolIcon DocumentSearch24}" Margin="{StaticResource WinoraSpace.L12}"
+           Visibility="{Binding CanFindLeftovers, Converter={StaticResource BoolToVisibility}}" AutomationProperties.Name="{Binding FindName}" AutomationProperties.HelpText="{Binding FindHelp}"/>
+         </Grid>
+        </DataTemplate>
+       </ItemsControl.ItemTemplate>
+      </ItemsControl>
+     </StackPanel>
+    </Border>
+    <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding NoteText}" TextWrapping="Wrap" Margin="{StaticResource WinoraSpace.T8}" Visibility="{Binding ShowNote, Converter={StaticResource BoolToVisibility}}"/>
+   </StackPanel>
+  </DataTemplate>
+
+  <DataTemplate DataType="{x:Type vm:AppRow}">
+   <ctl:InventoryRow>
+    <ctl:InventoryRow.Lead>
+     <Grid>
+      <Grid.ColumnDefinitions><ColumnDefinition Width="36"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <CheckBox x:Name="SelectBox" Grid.Column="0" IsChecked="{Binding IsSelected, Mode=TwoWay}" MinWidth="0" Width="28" Padding="{StaticResource WinoraSpace.None}" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Center" IsTabStop="False" Visibility="{Binding CanSelect, Converter={StaticResource BoolToVisibility}}"
+       AutomationProperties.Name="{Binding SelectName}"/>
+      <ctl:AppIcon Grid.Column="1" NameText="{Binding AvatarName}" Source="{Binding Icon.Source}" VerticalAlignment="Center"/>
+     </Grid>
+    </ctl:InventoryRow.Lead>
+    <StackPanel VerticalAlignment="Center">
+     <WrapPanel>
+      <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding DisplayTitle}" TextTrimming="CharacterEllipsis" Margin="{StaticResource WinoraSpace.R8}" VerticalAlignment="Center"/>
+      <ItemsControl ItemsSource="{Binding AttentionBadges}" ItemTemplate="{StaticResource WinoraBadgeItemTemplate}" ItemsPanel="{StaticResource WrapItems}" IsTabStop="False" Focusable="False"
+       VerticalAlignment="Center" Visibility="{Binding HasAttention, Converter={StaticResource BoolToVisibility}}"/>
+     </WrapPanel>
+     <TextBlock Style="{StaticResource LtrCaption}" Text="{Binding Subtitle}" Margin="{StaticResource WinoraSpace.T2}" Visibility="{Binding HasSubtitle, Converter={StaticResource BoolToVisibility}}"/>
+     <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding MetaText}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Margin="{StaticResource WinoraSpace.T2}" Visibility="{Binding HasMeta, Converter={StaticResource BoolToVisibility}}"/>
+    </StackPanel>
+    <ctl:InventoryRow.Control>
+     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+      <ctl:StatusBadge Text="{Binding LockText}" MaxWidth="{StaticResource WinoraLockBadgeMaxWidth}" Margin="{StaticResource WinoraSpace.R8}" ToolTip="{Binding LockText}" Visibility="{Binding IsLocked, Converter={StaticResource BoolToVisibility}}">
+       <ctl:StatusBadge.Style><Style TargetType="ctl:StatusBadge"><Setter Property="Kind" Value="Managed"/><Style.Triggers><DataTrigger Binding="{Binding IsAlreadyRemoved}" Value="True"><Setter Property="Kind" Value="Info"/></DataTrigger></Style.Triggers></Style></ctl:StatusBadge.Style>
+      </ctl:StatusBadge>
+      <!-- Keyboard users tick the box or use the pending bar; the row button is skipped by Tab so a long list is not a long tab chain. -->
+      <ui:Button Style="{StaticResource WinoraDangerRowButton}" Content="{Binding RemoveLabel}" Command="{Binding RemoveCommand}" CommandParameter="{Binding}" IsTabStop="False"
+       Visibility="{Binding CanSelect, Converter={StaticResource BoolToVisibility}}" AutomationProperties.Name="{Binding RemoveName}"/>
+     </StackPanel>
+    </ctl:InventoryRow.Control>
+    <ctl:InventoryRow.Menu><ctl:RowMenuButton Style="{StaticResource RowMenu}" DetailsParameter="{Binding}" MoreName="{Binding MoreName}"/></ctl:InventoryRow.Menu>
+   </ctl:InventoryRow>
+  </DataTemplate>
+
+  <!-- Head of one group of the Startup list: a card with icon, title, count chip, one line of text and a chevron. The whole card toggles the group. -->
+  <DataTemplate DataType="{x:Type vm:StartupCategoryRow}">
+   <Border x:Name="Frame" Style="{StaticResource WinoraCardBorder}" Margin="{StaticResource WinoraSpace.T4}" Padding="{StaticResource WinoraSpace.None}">
+    <ctl:ChevronToggle x:Name="CategoryToggle" Style="{StaticResource WinoraCardExpanderHeader}" IsChecked="{Binding IsExpanded, Mode=TwoWay}"
+     AutomationProperties.Name="{Binding AutomationName}" AutomationProperties.HelpText="{Binding ToggleHelp}">
+     <Grid>
+      <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+      <ui:SymbolIcon Symbol="{Binding Icon, Converter={x:Static ctl:IconKeys.Symbol}}" FontSize="24" Margin="{StaticResource WinoraSpace.R12}" VerticalAlignment="Center" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+      <StackPanel Grid.Column="1" VerticalAlignment="Center">
+       <WrapPanel>
+        <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding Title}" TextWrapping="Wrap" Margin="{StaticResource WinoraSpace.R8}" VerticalAlignment="Center" AutomationProperties.HeadingLevel="Level2"/>
+        <ctl:StatusBadge Kind="Neutral" Text="{Binding CountText}" VerticalAlignment="Center"/>
+       </WrapPanel>
+       <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Description}" TextWrapping="Wrap" Margin="{StaticResource WinoraSpace.T2}"/>
+      </StackPanel>
+     </Grid>
+    </ctl:ChevronToggle>
+   </Border>
+   <DataTemplate.Triggers>
+    <!-- An open group is one card: this header is its top and the rows under it share its edge. -->
+    <DataTrigger Binding="{Binding JoinsNext}" Value="True"><Setter TargetName="Frame" Property="BorderThickness" Value="1,1,1,0"/><Setter TargetName="Frame" Property="CornerRadius" Value="8,8,0,0"/></DataTrigger>
+   </DataTemplate.Triggers>
+  </DataTemplate>
+
+  <DataTemplate DataType="{x:Type vm:StartupRow}">
+   <ctl:InventoryRow IsPending="{Binding IsStaged}" IsFirst="False" IsLast="{Binding IsLastInGroup}">
+    <ctl:InventoryRow.Lead><ctl:AppIcon NameText="{Binding AvatarName}" Source="{Binding Icon.Source}" VerticalAlignment="Center"/></ctl:InventoryRow.Lead>
+      <StackPanel VerticalAlignment="Center">
+       <WrapPanel>
+        <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding DisplayTitle}" TextTrimming="CharacterEllipsis" Margin="{StaticResource WinoraSpace.R8}" VerticalAlignment="Center"/>
+        <ItemsControl ItemsSource="{Binding SourceChips}" ItemTemplate="{StaticResource WinoraBadgeItemTemplate}" ItemsPanel="{StaticResource WrapItems}" IsTabStop="False" Focusable="False" VerticalAlignment="Center"/>
+        <ctl:StatusBadge x:Name="ImpactBadgeHigh" Kind="Error" Text="{Binding ImpactText}" Margin="{StaticResource WinoraSpace.R4}" VerticalAlignment="Center" Visibility="{Binding IsHighImpact, Converter={StaticResource BoolToVisibility}}"/>
+        <ctl:StatusBadge x:Name="ImpactBadgeMedium" Kind="Warning" Text="{Binding ImpactText}" Margin="{StaticResource WinoraSpace.R4}" VerticalAlignment="Center" Visibility="{Binding IsMediumImpact, Converter={StaticResource BoolToVisibility}}"/>
+        <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding ImpactText}" Margin="{StaticResource WinoraSpace.R4}" VerticalAlignment="Center" Visibility="{Binding ShowImpactQuiet, Converter={StaticResource BoolToVisibility}}"/>
+        <ctl:StatusBadge Kind="Pending" Text="{Binding WillChangeText}" VerticalAlignment="Center" Visibility="{Binding IsStaged, Converter={StaticResource BoolToVisibility}}"/>
+       </WrapPanel>
+       <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding PublisherText}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" Margin="{StaticResource WinoraSpace.T2}"/>
+       <TextBlock Style="{StaticResource LtrCaption}" Text="{Binding PathText}" Margin="{StaticResource WinoraSpace.T2}" ToolTip="{Binding PathText}" Visibility="{Binding HasPath, Converter={StaticResource BoolToVisibility}}">
+        <TextBlock.Resources><Style TargetType="ToolTip" BasedOn="{StaticResource {x:Type ToolTip}}"><Setter Property="FlowDirection" Value="LeftToRight"/></Style></TextBlock.Resources>
+       </TextBlock>
+      </StackPanel>
+    <ctl:InventoryRow.Control>
+     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+      <ctl:StatusBadge Kind="Managed" Text="{Binding LockText}" MaxWidth="{StaticResource WinoraLockBadgeMaxWidth}" Margin="{StaticResource WinoraSpace.R12}" ToolTip="{Binding LockText}" Visibility="{Binding IsLocked, Converter={StaticResource BoolToVisibility}}"/>
+      <TextBlock Style="{StaticResource WinoraBodySecondary}" Text="{Binding StatusText}" Margin="{StaticResource WinoraSpace.R8}" VerticalAlignment="Center" MinWidth="24"/>
+      <ui:ToggleSwitch IsChecked="{Binding IsOn, Mode=TwoWay}" IsEnabled="{Binding CanStage}" VerticalAlignment="Center"
+       AutomationProperties.Name="{Binding SwitchName}" AutomationProperties.HelpText="{Binding SwitchHelp}"/>
+      <ui:Button Command="{Binding OpenLocationCommand}" Appearance="Transparent" Icon="{ui:SymbolIcon FolderOpen24}" Margin="{StaticResource WinoraSpace.L8}" IsTabStop="False" VerticalAlignment="Center"
+       Visibility="{Binding CanOpenLocation, Converter={StaticResource BoolToVisibility}}" ToolTip="{Binding OpenLocationText}" AutomationProperties.Name="{Binding OpenLocationName}"/>
+     </StackPanel>
+    </ctl:InventoryRow.Control>
+    <ctl:InventoryRow.Menu><ctl:RowMenuButton Style="{StaticResource RowMenu}" DetailsParameter="{Binding}" MoreName="{Binding MoreName}"/></ctl:InventoryRow.Menu>
+   </ctl:InventoryRow>
+  </DataTemplate>
+
+  <DataTemplate DataType="{x:Type vm:DiscoveryRow}">
+   <ctl:InventoryRow>
+     <!-- Avatar, name with a badge only for a state that needs a look, the id or path, and the quiet states on one line. -->
+    <ctl:InventoryRow.Lead><ctl:AvatarBadge NameText="{Binding AvatarName}" Size="32" VerticalAlignment="Center"/></ctl:InventoryRow.Lead>
+      <StackPanel VerticalAlignment="Center">
+       <WrapPanel>
+        <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding DisplayTitle}" TextTrimming="CharacterEllipsis" Margin="{StaticResource WinoraSpace.R8}" VerticalAlignment="Center"/>
+        <ItemsControl ItemsSource="{Binding AttentionBadges}" ItemTemplate="{StaticResource WinoraBadgeItemTemplate}" ItemsPanel="{StaticResource WrapItems}" IsTabStop="False" Focusable="False"
+         VerticalAlignment="Center" Visibility="{Binding HasAttention, Converter={StaticResource BoolToVisibility}}"/>
+       </WrapPanel>
+       <TextBlock Style="{StaticResource LtrCaption}" Text="{Binding Subtitle}" Margin="{StaticResource WinoraSpace.T2}" Visibility="{Binding HasSubtitle, Converter={StaticResource BoolToVisibility}}"/>
+       <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding MetaText}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Margin="{StaticResource WinoraSpace.T2}" Visibility="{Binding HasMeta, Converter={StaticResource BoolToVisibility}}"/>
+      </StackPanel>
+      <!-- Keyboard users reach the same action in the details pane; the row button is skipped by Tab so a long list is not a long tab chain. -->
+    <ctl:InventoryRow.Control>
+     <ui:Button Content="{Binding ActionLabel}" Command="{Binding DataContext.RowActionCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding Key}"
+      MinHeight="36" VerticalAlignment="Center" IsTabStop="False" Visibility="{Binding HasAction, Converter={StaticResource BoolToVisibility}}"
+      AutomationProperties.Name="{Binding ActionAutomationName}" AutomationProperties.HelpText="{Binding ActionHelp}"/>
+    </ctl:InventoryRow.Control>
+    <ctl:InventoryRow.Menu><ctl:RowMenuButton Style="{StaticResource RowMenu}" DetailsParameter="{Binding}" MoreName="{Binding MoreName}"/></ctl:InventoryRow.Menu>
+   </ctl:InventoryRow>
+  </DataTemplate>
+
+  <DataTemplate x:Key="ChoiceFilterTemplate" DataType="{x:Type vm:ChoiceFilter}">
+   <StackPanel Margin="{StaticResource WinoraSpace.R12B8}">
+    <TextBlock x:Name="FilterLabel" Style="{StaticResource WinoraCaption}" Text="{Binding Label}"/>
+    <ComboBox ItemsSource="{Binding Choices}" SelectedItem="{Binding Selected, Mode=TwoWay}" MinWidth="160" AutomationProperties.LabeledBy="{Binding ElementName=FilterLabel}" AutomationProperties.Name="{Binding Label}" AutomationProperties.HelpText="{Binding HelpText}">
+     <ComboBox.ItemTemplate><DataTemplate><TextBlock Text="{Binding Label}"/></DataTemplate></ComboBox.ItemTemplate>
+    </ComboBox>
+   </StackPanel>
+  </DataTemplate>
+  <DataTemplate x:Key="ToggleFilterTemplate" DataType="{x:Type vm:ToggleFilter}">
+   <CheckBox IsChecked="{Binding IsOn, Mode=TwoWay}" Content="{Binding Label}" Margin="{StaticResource WinoraSpace.T16R12B8}" VerticalAlignment="Bottom" MinHeight="40" AutomationProperties.Name="{Binding Label}" AutomationProperties.HelpText="{Binding HelpText}"/>
+  </DataTemplate>
+  <local:FilterTemplateSelector x:Key="FilterSelector" ChoiceTemplate="{StaticResource ChoiceFilterTemplate}" ToggleTemplate="{StaticResource ToggleFilterTemplate}"/>
+  <!-- Scheduled Tasks page parts: notices, the actions of the selected task and the history of changes. -->
+  <DataTemplate DataType="{x:Type vm:TaskNoticePanel}">
+   <StackPanel>
+    <ctl:AdminNotice IsOpen="{Binding ShowNeedsAdministrator, Mode=OneWay}" Title="{Binding NeedsAdministratorTitle}" Message="{Binding NeedsAdministratorText, Mode=OneWay}" ShowLink="{Binding ShowAdminHowTo}" LinkText="{Binding Text[AdminNoticeLink]}" LinkHelp="{Binding Text[AdminNoticeLinkHelp]}"/>
+    <ctl:InfoBanner IsOpen="{Binding ShowError, Mode=OneWay}" IsClosable="False" Severity="Error" Title="{Binding Text[TaskResultError]}" Message="{Binding Notice}"
+     AutomationProperties.LiveSetting="Assertive" AutomationProperties.Name="{Binding Notice}"/>
+   </StackPanel>
+  </DataTemplate>
+
+  <!-- One scheduled task as a card: icon, name with its state, path, trigger chips, command; on the right the switch with its state word, Details, Run or Stop, and Delete. -->
+  <DataTemplate DataType="{x:Type vm:TaskRow}">
+   <ctl:InventoryRow>
+    <ctl:InventoryRow.Resources>
+     <Style x:Key="TaskIconButton" TargetType="ui:Button" BasedOn="{StaticResource {x:Type ui:Button}}">
+      <Setter Property="Appearance" Value="Transparent"/><Setter Property="Width" Value="36"/><Setter Property="Height" Value="36"/><Setter Property="MinWidth" Value="36"/><Setter Property="MinHeight" Value="36"/>
+      <Setter Property="Padding" Value="{StaticResource WinoraSpace.None}"/><Setter Property="Margin" Value="{StaticResource WinoraSpace.L2}"/><Setter Property="VerticalAlignment" Value="Center"/>
+      <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
+     </Style>
+     <!-- Red only while it can be used: a disabled delete (protected task) gets the disabled text color. -->
+     <Style x:Key="TaskDangerIconButton" TargetType="ui:Button" BasedOn="{StaticResource TaskIconButton}">
+      <Setter Property="Foreground" Value="{DynamicResource WinoraRiskHighForeground}"/>
+      <Style.Triggers><Trigger Property="IsEnabled" Value="False"><Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}"/></Trigger></Style.Triggers>
+     </Style>
+     <Style x:Key="TaskChip" TargetType="Border">
+      <Setter Property="BorderBrush" Value="{DynamicResource WinoraCardBorderBrush}"/><Setter Property="BorderThickness" Value="{DynamicResource WinoraChipBorderThickness}"/><Setter Property="CornerRadius" Value="{DynamicResource WinoraCornerRadiusPill}"/>
+      <Setter Property="Padding" Value="{StaticResource WinoraSpace.H8V2}"/><Setter Property="MinHeight" Value="22"/><Setter Property="Margin" Value="{StaticResource WinoraSpace.R4B4}"/>
+     </Style>
+    </ctl:InventoryRow.Resources>
+    <ctl:InventoryRow.Lead>
+      <Grid Width="32" Height="32" VerticalAlignment="Top">
+       <ctl:AppIcon Size="32" NameText="{Binding AvatarName}" Source="{Binding Icon.Source}">
+        <ctl:AppIcon.Style>
+         <Style TargetType="ctl:AppIcon"><Style.Triggers><DataTrigger Binding="{Binding Icon.Source}" Value="{x:Null}"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger></Style.Triggers></Style>
+        </ctl:AppIcon.Style>
+       </ctl:AppIcon>
+       <Border CornerRadius="{StaticResource WinoraCornerRadiusSmall}" BorderThickness="1" BorderBrush="{DynamicResource WinoraCardBorderBrush}" Background="{DynamicResource WinoraIconPlateBrush}">
+        <ui:SymbolIcon Symbol="CalendarClock24" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+        <Border.Style>
+         <Style TargetType="Border"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding Icon.Source}" Value="{x:Null}"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style>
+        </Border.Style>
+       </Border>
+      </Grid>
+    </ctl:InventoryRow.Lead>
+      <StackPanel VerticalAlignment="Center">
+       <WrapPanel>
+        <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding DisplayTitle}" TextTrimming="CharacterEllipsis" Margin="{StaticResource WinoraSpace.R8}" VerticalAlignment="Center"/>
+        <ctl:StatusBadge StatusTone="{Binding StateTone}" Text="{Binding StateText}" Margin="{StaticResource WinoraSpace.R4}" VerticalAlignment="Center"/>
+        <ctl:StatusBadge Kind="Managed" Text="{Binding PolicyChip}" MaxWidth="{StaticResource WinoraLockBadgeMaxWidth}" ToolTip="{Binding PolicyChip}" Visibility="{Binding HasPolicyChip, Converter={StaticResource BoolToVisibility}}"/>
+       </WrapPanel>
+       <TextBlock Style="{StaticResource LtrCaption}" Text="{Binding Subtitle}" Margin="{StaticResource WinoraSpace.T2}" Visibility="{Binding HasSubtitle, Converter={StaticResource BoolToVisibility}}"/>
+       <ItemsControl ItemsSource="{Binding TriggerChips}" ItemsPanel="{StaticResource WrapItems}" Margin="{StaticResource WinoraSpace.T4}" IsTabStop="False" Focusable="False" Visibility="{Binding HasTriggers, Converter={StaticResource BoolToVisibility}}">
+        <ItemsControl.ItemTemplate><DataTemplate>
+         <Border Style="{StaticResource TaskChip}">
+          <StackPanel Orientation="Horizontal">
+           <ui:SymbolIcon Symbol="Clock16" FontSize="14" Margin="{StaticResource WinoraSpace.R4}" VerticalAlignment="Center" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+           <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding}" VerticalAlignment="Center"/>
+          </StackPanel>
+         </Border>
+        </DataTemplate></ItemsControl.ItemTemplate>
+       </ItemsControl>
+       <TextBlock Text="{Binding CommandLine}" ToolTip="{Binding CommandTip}" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left"
+        Margin="{StaticResource WinoraSpace.T2}" Visibility="{Binding HasCommand, Converter={StaticResource BoolToVisibility}}">
+        <TextBlock.Style><Style TargetType="TextBlock" BasedOn="{StaticResource WinoraCaption}"><Style.Triggers><DataTrigger Binding="{Binding CommandIsLtr}" Value="True">
+         <Setter Property="FlowDirection" Value="LeftToRight"/><Setter Property="FontFamily" Value="{StaticResource WinoraMonoFontFamily}"/></DataTrigger></Style.Triggers></Style></TextBlock.Style>
+       </TextBlock>
+      </StackPanel>
+    <ctl:InventoryRow.Control>
+      <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+       <TextBlock Style="{StaticResource WinoraBodySecondary}" Text="{Binding StatusText}" Margin="{StaticResource WinoraSpace.R8}" VerticalAlignment="Center"/>
+       <ui:ToggleSwitch IsChecked="{Binding IsOn, Mode=TwoWay}" IsEnabled="{Binding CanSwitch}" VerticalAlignment="Center" ToolTip="{Binding SwitchTip}" ToolTipService.ShowOnDisabled="True"
+        AutomationProperties.Name="{Binding SwitchName}" AutomationProperties.HelpText="{Binding SwitchTip}"/>
+       <ui:Button Style="{StaticResource TaskIconButton}" Command="{Binding RunStopCommand}" ToolTip="{Binding RunStopTip}" AutomationProperties.Name="{Binding RunStopName}" AutomationProperties.HelpText="{Binding RunStopTip}">
+        <ui:SymbolIcon Symbol="{Binding RunStopSymbol, Converter={x:Static ctl:IconKeys.Symbol}}" FontSize="16"/>
+       </ui:Button>
+       <ui:Button Style="{StaticResource TaskDangerIconButton}" Command="{Binding DeleteCommand}" ToolTip="{Binding DeleteTip}" AutomationProperties.Name="{Binding DeleteName}" AutomationProperties.HelpText="{Binding DeleteTip}">
+        <ui:SymbolIcon Symbol="Delete24" FontSize="16"/>
+       </ui:Button>
+     </StackPanel>
+    </ctl:InventoryRow.Control>
+    <ctl:InventoryRow.Menu><ctl:RowMenuButton Style="{StaticResource RowMenu}" Tabbable="True" DetailsParameter="{Binding}" MoreName="{Binding MoreName}"/></ctl:InventoryRow.Menu>
+   </ctl:InventoryRow>
+  </DataTemplate>
+
+  <DataTemplate DataType="{x:Type vm:TaskHistoryPanel}"><ctl:PageHistory DataContext="{Binding List}"/></DataTemplate>
+
+  <!-- Services page parts: notices, the actions of the selected service and the history of startup type changes. -->
+  <DataTemplate DataType="{x:Type vm:ServiceNoticePanel}">
+   <StackPanel>
+    <ctl:AdminNotice IsOpen="{Binding ShowNeedsAdministrator, Mode=OneWay}" Title="{Binding NeedsAdministratorTitle}" Message="{Binding NeedsAdministratorText, Mode=OneWay}" ShowLink="{Binding ShowAdminHowTo}" LinkText="{Binding Text[AdminNoticeLink]}" LinkHelp="{Binding Text[AdminNoticeLinkHelp]}"/>
+    <ctl:InfoBanner IsOpen="{Binding ShowError, Mode=OneWay}" IsClosable="False" Severity="Error" Title="{Binding Text[V2SvResultError]}" Message="{Binding Notice}"
+     AutomationProperties.LiveSetting="Assertive" AutomationProperties.Name="{Binding Notice}"/>
+   </StackPanel>
+  </DataTemplate>
+
+  <DataTemplate DataType="{x:Type ctl:ListExtra}"><ContentPresenter DataContext="{Binding Context}" Content="{Binding DataContext.Content, RelativeSource={RelativeSource AncestorType=ListBoxItem}}"/></DataTemplate>
+  <DataTemplate DataType="{x:Type vm:ServiceHistoryPanel}"><ctl:PageHistory DataContext="{Binding List}"/></DataTemplate>
+  <DataTemplate DataType="{x:Type vm:QuarantineHistoryPanel}"><ctl:PageHistory DataContext="{Binding List}"/></DataTemplate>
+ </UserControl.Resources>
+
+<!-- The page is a workspace: the header and the toolbar stay at the top, the notices and states sit under them, and the list is the one scroll area. Its footer (the history of changes) is the last item of the list. -->
+ <ctl:ListPage x:Name="Workspace" BodyScrolls="False">
+  <ctl:ListPage.Header>
+   <!-- Header: title, status line and the only action on this page: read the list again. -->
+   <ctl:PageHeader x:Name="HeaderPart" Title="{Binding Title}" Subtitle="{Binding Intro}" ShowTitle="{Binding ShowTitle}" MetaText="{Binding HeaderStatusText}">
+    <ctl:PageHeader.Actions>
+     <WrapPanel>
+      <ui:ProgressRing IsIndeterminate="{Binding IsVisible, RelativeSource={RelativeSource Self}, Mode=OneWay}" Margin="{StaticResource WinoraSpace.A4}" Visibility="{Binding IsScanning, Converter={StaticResource BoolToVisibility}}" AutomationProperties.Name="{Binding Text[DiscScanning]}"/>
+      <ui:Button Margin="{StaticResource WinoraSpace.A4}" x:Name="RefreshButton" ToolTip="{Binding Text[DiscRefresh]}" Style="{StaticResource WinoraHeaderIconButton}" Command="{Binding RefreshCommand}" Icon="{ui:SymbolIcon ArrowClockwise24}"
+       AutomationProperties.Name="{Binding Text[DiscRefresh]}" AutomationProperties.HelpText="{Binding Text[DiscRefreshHelp]}"/>
+     </WrapPanel>
+    </ctl:PageHeader.Actions>
+   </ctl:PageHeader>
+  </ctl:ListPage.Header>
+
+  <!-- Stat strip and the one toolbar: chips, search, sort, Filters. -->
+  <ctl:ListPage.Toolbar>
+   <StackPanel x:Name="ToolbarPart" Margin="{StaticResource WinoraSpace.B4}" Visibility="{Binding ShowToolbar, Converter={StaticResource BoolToVisibility}}">
+    <ctl:FilterBar x:Name="Toolbar" GroupName="{Binding Text[FbGroup]}" IsNarrow="{Binding IsCompactLayout, Mode=OneWay}" SearchKeyPressed="OnSearchKeyPressed"
+     ChipsSource="{Binding QuickChips}" SelectedChip="{Binding SelectedQuickChip, Mode=TwoWay}" ChipsName="{Binding QuickChipsName}" ChipsHelp="{Binding Text[V2MaChipsHelp]}"
+     SearchText="{Binding SearchText, Mode=TwoWay}" SearchLabel="{Binding Text[DiscSearchLabel]}" SearchPlaceholder="{Binding SearchPlaceholder}" SearchHelp="{Binding Text[DiscSearchHelp]}"
+     SortSource="{Binding SortOptions}" SelectedSort="{Binding SelectedSort, Mode=TwoWay}" SortLabel="{Binding Text[DiscSortLabel]}" SortHelp="{Binding Text[DiscSortHelp]}"
+     SortDirectionCommand="{Binding ToggleSortDirectionCommand}" SortDirectionText="{Binding SortDirectionLabel}" SortDirectionSymbol="{Binding SortDirectionSymbol, Converter={x:Static ctl:IconKeys.Symbol}}" SortDirectionHelp="{Binding Text[DiscSortDirectionHelp]}"
+     HasFilters="{Binding ShowFilterToggle}" FiltersText="{Binding FiltersToggleLabel}" FiltersHelp="{Binding Text[DiscFiltersHelp]}" FiltersOpen="{Binding FiltersOpen, Mode=TwoWay}"
+     ClearCommand="{Binding ClearFiltersCommand}" ClearText="{Binding Text[DiscClearFilters]}" ClearHelp="{Binding Text[DiscClearFiltersHelp]}" ShowClear="{Binding HasActiveFilter}"
+     CountText="{Binding CountText}" ShowCount="{Binding ShowCountLine}">
+     <ctl:FilterBar.ExtraContent>
+      <ui:ToggleSwitch IsChecked="{Binding InlineToggle.IsOn, Mode=TwoWay}" Content="{Binding InlineToggle.Label}" OnContent="{Binding InlineToggle.Label}" OffContent="{Binding InlineToggle.Label}"
+       MinHeight="{DynamicResource MinHitTarget}" Visibility="{Binding HasInlineToggle, Converter={StaticResource BoolToVisibility}}"
+       AutomationProperties.Name="{Binding InlineToggle.Label}" AutomationProperties.HelpText="{Binding InlineToggle.HelpText}"/>
+     </ctl:FilterBar.ExtraContent>
+     <ctl:FilterBar.PanelContent>
+      <ItemsControl ItemsSource="{Binding FilterItems}" ItemTemplateSelector="{StaticResource FilterSelector}" ItemsPanel="{StaticResource WrapItems}" IsTabStop="False" Focusable="False"/>
+     </ctl:FilterBar.PanelContent>
+    </ctl:FilterBar>
+   </StackPanel>
+  </ctl:ListPage.Toolbar>
+
+
+  <!-- Content: the list at full width. Details open in a dialog. -->
+  <ctl:ListPage.Body>
+   <Grid x:Name="Split" MinHeight="120">
+    <ui:ListView x:Name="List" Grid.Column="0" SelectedItem="{Binding SelectedRow, Mode=TwoWay}" SelectionChanged="OnListSelectionChanged" ItemsPanel="{StaticResource VirtualItems}"
+     PreviewKeyDown="OnListKeyDown" PreviewMouseLeftButtonDown="OnListMouseDown" SelectionMode="Single" KeyboardNavigation.TabNavigation="Once" ctl:ListExtras.Guarded="True"
+     VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" VirtualizingPanel.ScrollUnit="Pixel" ScrollViewer.CanContentScroll="True"
+     ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" Padding="{StaticResource WinoraSpace.R12}"
+     AutomationProperties.Name="{Binding Title}" AutomationProperties.HelpText="{Binding Text[DiscListHelp]}">
+     <!-- Banners: the page is honest that it only reads; partial results say how much could not be read. A state (scanning, failed, nothing found) shows here instead of rows. -->
+     <ctl:ListExtras.Head>
+      <StackPanel x:Name="BannerPart">
+       <!-- The totals scroll with the rows; only the toolbar stays in the fixed band. -->
+       <StackPanel Visibility="{Binding ShowToolbar, Converter={StaticResource BoolToVisibility}}">
+        <ctl:StatStrip x:Name="SummaryStrip" ItemsSource="{Binding Summary}" Visibility="{Binding HasSummary, Converter={StaticResource BoolToVisibility}}" AutomationProperties.Name="{Binding SummaryName}"/>
+       </StackPanel>
+    <ctl:InfoBanner x:Name="ReadOnlyBar" IsOpen="{Binding ShowReadOnlyNotice, Mode=OneWay}" IsClosable="False" Severity="Informational"
+     Title="{Binding ReadOnlyTitle}" Message="{Binding ReadOnlyMessage}" AutomationProperties.Name="{Binding ReadOnlyBannerText}"/>
+    <ctl:InfoBanner x:Name="PartialBar" IsOpen="{Binding HasPartial, Mode=OneWay}" IsClosable="False" Severity="Warning"
+     Title="{Binding PartialTitle}" Message="{Binding PartialMessage}" AutomationProperties.LiveSetting="Polite" AutomationProperties.Name="{Binding PartialTitle}"/>
+    <ContentControl Content="{Binding BannerPanel}" IsTabStop="False" Focusable="False"/>
+    <ctl:LoadingSkeleton x:Name="ProgressState" VerticalAlignment="Top" Margin="{StaticResource WinoraSpace.T16}" Message="{Binding Text[DiscScanning]}" Visibility="{Binding ShowProgress, Converter={StaticResource BoolToVisibility}}"/>
+    <StackPanel x:Name="SlowState" Visibility="{Binding ShowSlow, Converter={StaticResource BoolToVisibility}}">
+     <ctl:ErrorState Headline="{Binding Text[DiscSlowTitle]}" Message="{Binding Text[DiscSlowBody]}" ActionText="{Binding Text[TryAgain]}" ActionCommand="{Binding TryAgainSlowCommand}" ActionHelp="{Binding Text[DiscSlowTryHelp]}"/>
+    </StackPanel>
+    <ctl:ErrorState x:Name="FailureState" Headline="{Binding Text[DiscFailureTitle]}" Message="{Binding FailureMessage}" Details="{Binding FailureDetails}" DetailsHeader="{Binding Text[DetailsTitle]}" ActionText="{Binding RetryText}" ActionCommand="{Binding RefreshCommand}"
+     ActionHelp="{Binding Text[DiscTryAgainHelp]}" Visibility="{Binding ShowFailure, Converter={StaticResource BoolToVisibility}}"/>
+    <ctl:EmptyState x:Name="NotScannedState" Icon="{Binding Icon, Converter={x:Static ctl:IconKeys.Symbol}}" Headline="{Binding Text[DiscNotScannedTitle]}" Message="{Binding Text[DiscNotScannedBody]}"
+     ActionText="{Binding Text[DiscScanNow]}" ActionCommand="{Binding RefreshCommand}" ActionHelp="{Binding Text[DiscRefreshHelp]}" Visibility="{Binding ShowNotScanned, Converter={StaticResource BoolToVisibility}}"/>
+    <ctl:EmptyState x:Name="EmptyListState" Icon="{Binding Icon, Converter={x:Static ctl:IconKeys.Symbol}}" Headline="{Binding EmptyTitle}" Message="{Binding EmptyBody}"
+     Visibility="{Binding ShowEmpty, Converter={StaticResource BoolToVisibility}}"/>
+    <ctl:EmptyState x:Name="NoMatchesState" Icon="Search24" Headline="{Binding Text[DiscNoMatchesTitle]}" Message="{Binding Text[DiscNoMatchesBody]}"
+     ActionText="{Binding Text[DiscClearFilters]}" ActionCommand="{Binding ClearFiltersCommand}" ActionHelp="{Binding Text[DiscClearFiltersHelp]}" Visibility="{Binding ShowNoMatches, Converter={StaticResource BoolToVisibility}}"/>
+   </StackPanel>
+     </ctl:ListExtras.Head>
+     <ui:ListView.ItemContainerStyle>
+      <Style TargetType="ui:ListViewItem" BasedOn="{StaticResource WinoraInventoryItem}">
+       <!-- A gutter on the end side keeps the scroll bar of the list off the rows. -->
+       <Setter Property="Margin" Value="{StaticResource WinoraSpace.R12B4}"/>
+       <Style.Triggers>
+        <DataTrigger Binding="{Binding DataContext, RelativeSource={RelativeSource Self}, Converter={StaticResource IsCategoryRow}}" Value="True">
+         <Setter Property="Focusable" Value="False"/>
+        </DataTrigger>
+        <DataTrigger Binding="{Binding JoinsNext}" Value="True"><Setter Property="Margin" Value="{StaticResource WinoraSpace.R12}"/></DataTrigger>
+       </Style.Triggers>
+      </Style>
+     </ui:ListView.ItemContainerStyle>
+    </ui:ListView>
+   </Grid>
+  </ctl:ListPage.Body>
+ </ctl:ListPage>
+</UserControl>

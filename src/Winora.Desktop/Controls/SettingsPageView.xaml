@@ -1,0 +1,87 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<UserControl x:Class="Winora.Desktop.Controls.SettingsPageView"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:ctl="clr-namespace:Winora.Desktop.Controls"
+ xmlns:local="clr-namespace:Winora.Desktop" xmlns:vm="clr-namespace:Winora.Desktop;assembly=Winora.Presentation"
+ Focusable="False">
+ <UserControl.Resources>
+  <DataTemplate DataType="{x:Type vm:SettingsGroupEntry}"><ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource WinoraGroupHeaderTemplate}"/></DataTemplate>
+  <DataTemplate DataType="{x:Type vm:SettingsRowEntry}">
+   <ctl:SettingCard Row="{Binding Row}" IsFirst="{Binding IsFirst}" IsLast="{Binding IsLast}" List="{Binding DataContext.List, RelativeSource={RelativeSource AncestorType=ctl:SettingsPageView}}" Text="{Binding DataContext.Text, RelativeSource={RelativeSource AncestorType=ctl:SettingsPageView}}"/>
+  </DataTemplate>
+  <Style x:Key="WinoraCategoryTabItem" TargetType="TabItem" BasedOn="{StaticResource WinoraRailTabItem}">
+   <Setter Property="AutomationProperties.Name" Value="{Binding Header.AutomationName, RelativeSource={RelativeSource Self}}"/>
+  </Style>
+  <DataTemplate x:Key="WinoraCategoryTabHeader"><TextBlock Text="{Binding Label}"/></DataTemplate>
+  <DataTemplate DataType="{x:Type ctl:ListExtra}"><ContentPresenter DataContext="{Binding Context}" Content="{Binding DataContext.Content, RelativeSource={RelativeSource AncestorType=ListBoxItem}}"/></DataTemplate>
+ </UserControl.Resources>
+ <ctl:SettingsPage x:Name="Workspace" BodyScrolls="False" Header="{Binding Header, RelativeSource={RelativeSource AncestorType=ctl:SettingsPageView}}">
+  <ctl:SettingsPage.Tabs>
+   <ctl:TabRail x:Name="CategoryTabs" ItemsSource="{Binding List.Categories}" ActiveItem="{Binding List.SelectedCategory, Mode=TwoWay}" ItemContainerStyle="{StaticResource WinoraCategoryTabItem}" ItemTemplate="{StaticResource WinoraCategoryTabHeader}"
+    AutomationProperties.Name="{Binding Text[FbCategories]}" AutomationProperties.HelpText="{Binding Text[V2PaTabsHelp]}" Visibility="{Binding HasItems, RelativeSource={RelativeSource Self}, Converter={StaticResource BoolToVisibility}}"/>
+  </ctl:SettingsPage.Tabs>
+  <ctl:SettingsPage.Toolbar>
+   <ctl:FilterBar x:Name="Filters" GroupName="{Binding Text[FbGroup]}" Visibility="{Binding ShowList, Converter={StaticResource BoolToVisibility}}"
+    SearchText="{Binding List.SearchText, Mode=TwoWay}" SearchLabel="{Binding Text[DiscSearchLabel]}" SearchPlaceholder="{Binding Text[V2PaFilterPlaceholder]}" SearchHelp="{Binding Text[SetSearchHelp]}"
+    SortSource="{Binding List.Sorts}" SelectedSort="{Binding List.SelectedSort, Mode=TwoWay}" SortLabel="{Binding Text[FbSortLabel]}" SortHelp="{Binding Text[FbSortHelp]}"
+    SortDirectionCommand="{Binding List.ToggleSortDirectionCommand}" SortDirectionText="{Binding List.SortDirectionLabel}" SortDirectionSymbol="{Binding List.SortDirectionSymbol, Converter={x:Static ctl:IconKeys.Symbol}}" SortDirectionHelp="{Binding Text[DiscSortDirectionHelp]}"
+    HasFilters="True" FiltersText="{Binding List.FiltersButtonText}" FiltersHelp="{Binding Text[FbFiltersHelp]}"
+    ClearCommand="{Binding List.ClearFiltersCommand}" ClearText="{Binding Text[DiscClearFilters]}" ClearHelp="{Binding Text[DiscClearFiltersHelp]}" ShowClear="{Binding List.HasAnyFilterToClear}"
+    CountText="{Binding List.CountText}" ShowCount="{Binding List.HasAnyFilterToClear}">
+    <ctl:FilterBar.PanelContent>
+     <WrapPanel>
+      <StackPanel Margin="{StaticResource WinoraSpace.R16B8}">
+       <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Text[FbRiskGroup]}"/>
+       <ItemsControl ItemsSource="{Binding List.RiskFilters}" ItemTemplate="{StaticResource WinoraFilterToggleItem}" ItemsPanel="{StaticResource WinoraWrapItems}" IsTabStop="False" Focusable="False" AutomationProperties.Name="{Binding Text[FbRiskGroup]}"/>
+      </StackPanel>
+      <StackPanel Margin="{StaticResource WinoraSpace.R16B8}">
+       <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Text[FbSourceGroup]}"/>
+       <ItemsControl ItemsSource="{Binding List.SourceFilters}" ItemTemplate="{StaticResource WinoraFilterToggleItem}" ItemsPanel="{StaticResource WinoraWrapItems}" IsTabStop="False" Focusable="False" AutomationProperties.Name="{Binding Text[FbSourceGroup]}"/>
+      </StackPanel>
+      <StackPanel Margin="{StaticResource WinoraSpace.R16B8}">
+       <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Text[FbStateLabel]}"/>
+       <ComboBox ItemsSource="{Binding List.States}" SelectedItem="{Binding List.SelectedState, Mode=TwoWay}" DisplayMemberPath="Label" MinWidth="200" AutomationProperties.Name="{Binding Text[FbStateLabel]}" AutomationProperties.HelpText="{Binding Text[FbStateHelp]}"/>
+      </StackPanel>
+     </WrapPanel>
+    </ctl:FilterBar.PanelContent>
+   </ctl:FilterBar>
+  </ctl:SettingsPage.Toolbar>
+  <ctl:SettingsPage.Body>
+   <ListBox x:Name="SettingsList" VerticalAlignment="Stretch" Padding="{StaticResource WinoraSpace.R12}" ItemContainerStyle="{StaticResource WinoraSettingsItem}" SelectionMode="Single" BorderThickness="0" Background="Transparent"
+    VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling" VirtualizingPanel.ScrollUnit="Pixel" ScrollViewer.CanContentScroll="True"
+    ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" KeyboardNavigation.TabNavigation="Once"
+    ctl:ListExtras.Guarded="True"
+    AutomationProperties.Name="{Binding Title}" AutomationProperties.HelpText="{Binding Text[SetListHelp]}"
+    PreviewKeyDown="OnListKeyDown" PreviewMouseLeftButtonUp="OnListClick" PreviewMouseLeftButtonDown="OnListMouseDown">
+    <!-- Notices, states and the recommended bar scroll with the rows. -->
+    <ctl:ListExtras.Head>
+   <StackPanel>
+    <ContentPresenter x:Name="BannerSlot" Content="{Binding Banners, RelativeSource={RelativeSource AncestorType=ctl:SettingsPageView}}"/>
+    <ContentPresenter x:Name="StateSlot" Content="{Binding States, RelativeSource={RelativeSource AncestorType=ctl:SettingsPageView}}"/>
+    <StackPanel x:Name="ListArea" Visibility="{Binding ShowList, Converter={StaticResource BoolToVisibility}}">
+     <Border x:Name="RecommendedBar" Background="{DynamicResource WinoraChangedByWinoraBrush}" CornerRadius="{StaticResource WinoraCornerRadius}" Padding="{StaticResource WinoraSpace.H16V8}" MinHeight="48" Margin="{StaticResource WinoraSpace.B16}"
+      Visibility="{Binding List.HasRecommendations, Converter={StaticResource BoolToVisibility}}">
+      <Grid>
+       <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+       <ui:SymbolIcon Symbol="Sparkle24" FontSize="24" Margin="{StaticResource WinoraSpace.R16}" VerticalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+       <TextBlock Grid.Column="1" Style="{StaticResource WinoraBodyStrong}" Text="{Binding List.RecommendedText}" VerticalAlignment="Center" AutomationProperties.LiveSetting="Polite"/>
+       <ui:Button Grid.Column="2" Margin="{StaticResource WinoraSpace.L16}" Content="{Binding List.SelectRecommendedLabel}" Command="{Binding List.SelectRecommendedCommand}" Visibility="{Binding List.ShowSelectRecommended, Converter={StaticResource BoolToVisibility}}"
+        AutomationProperties.Name="{Binding List.SelectRecommendedLabel}" AutomationProperties.HelpText="{Binding Text[V2PaSelectRecHelp]}"/>
+      </Grid>
+     </Border>
+     <Grid x:Name="ChangedHeader" Margin="{StaticResource WinoraSpace.B8}" Visibility="{Binding List.ShowChangedView, Converter={StaticResource BoolToVisibility}}">
+      <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding List.ChangedViewText}" VerticalAlignment="Center" AutomationProperties.LiveSetting="Polite"/>
+      <ui:Button Grid.Column="1" Content="{Binding Text[FbUndoAll]}" Command="{Binding List.UndoAllChangedCommand}" Icon="{ui:SymbolIcon ArrowUndo24}"
+       AutomationProperties.Name="{Binding Text[FbUndoAll]}" AutomationProperties.HelpText="{Binding Text[FbUndoAllHelp]}"/>
+     </Grid>
+    </StackPanel>
+    <ctl:EmptyState Icon="Search24" Headline="{Binding Text[DiscNoMatchesTitle]}" Message="{Binding Text[DiscNoMatchesBody]}" ActionText="{Binding Text[DiscClearFilters]}" ActionCommand="{Binding List.ClearFiltersCommand}"
+     ActionHelp="{Binding Text[DiscClearFiltersHelp]}" Visibility="{Binding List.ShowNoMatches, Converter={StaticResource BoolToVisibility}}"/>
+   </StackPanel>
+    </ctl:ListExtras.Head>
+   </ListBox>
+  </ctl:SettingsPage.Body>
+ </ctl:SettingsPage>
+</UserControl>

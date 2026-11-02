@@ -1,0 +1,39 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<UserControl x:Class="Winora.Desktop.Controls.PageHistory"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:ctl="clr-namespace:Winora.Desktop.Controls"
+ Focusable="False" IsTabStop="False">
+ <StackPanel Margin="{StaticResource WinoraSpace.T24}" Visibility="{Binding HasRows, Converter={StaticResource BoolToVisibility}}">
+  <!-- Folding header: the same card header as the Startup groups. Closed it shows the count and the newest change. -->
+  <Border Style="{StaticResource WinoraCardBorder}" Padding="{StaticResource WinoraSpace.None}" Visibility="{Binding CanCollapse, Converter={StaticResource BoolToVisibility}}">
+   <ctl:ChevronToggle x:Name="HistoryToggle" Style="{StaticResource WinoraCardExpanderHeader}" IsChecked="{Binding IsExpanded, Mode=TwoWay}"
+    AutomationProperties.AutomationId="HistoryToggle" AutomationProperties.Name="{Binding Heading}" AutomationProperties.HelpText="{Binding ToggleHelp}">
+    <Grid>
+     <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+     <ui:SymbolIcon Symbol="History24" FontSize="24" Margin="{StaticResource WinoraSpace.R12}" VerticalAlignment="Center" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+     <StackPanel Grid.Column="1" VerticalAlignment="Center">
+      <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding Heading}" TextWrapping="Wrap" AutomationProperties.HeadingLevel="Level2"/>
+      <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding LatestText}" TextTrimming="CharacterEllipsis" Margin="{StaticResource WinoraSpace.T2}"/>
+     </StackPanel>
+    </Grid>
+   </ctl:ChevronToggle>
+  </Border>
+  <!-- Plain heading where the block never folds (the Overview's Recent changes tab). -->
+  <TextBlock Style="{StaticResource WinoraSectionHeading}" Text="{Binding Heading}" Margin="{StaticResource WinoraSpace.B4}" AutomationProperties.HeadingLevel="Level2"
+   Visibility="{Binding ShowPlainHeading, Converter={StaticResource BoolToVisibility}}"/>
+
+  <StackPanel x:Name="Body" Visibility="{Binding ShowBody, Converter={StaticResource BoolToVisibility}}">
+   <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Note}" TextWrapping="Wrap" Margin="{StaticResource WinoraSpace.T8B4}" Visibility="{Binding HasNote, Converter={StaticResource BoolToVisibility}}"/>
+   <ctl:HistoryTimeline x:Name="Timeline" ListMaxHeight="Infinity" Margin="{StaticResource WinoraSpace.T8}"/>
+   <Grid Margin="{StaticResource WinoraSpace.None}">
+    <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+    <!-- One page of rows at a time: Newer and Older move through the page's history without making the page long. -->
+    <ctl:Pager x:Name="Pages" IsPaged="{Binding HasPages}" PageText="{Binding PageText}" NewerText="{Binding NewerText}" OlderText="{Binding OlderText}" NewerHelp="{Binding NewerHelp}" OlderHelp="{Binding OlderHelp}"
+     NewerCommand="{Binding NewerCommand}" OlderCommand="{Binding OlderCommand}"/>
+    <ui:Button x:Name="ShowAll" Grid.Column="2" Appearance="Transparent" Content="{Binding ShowAllText}" Command="{Binding ShowAllCommand}" Icon="{ui:SymbolIcon History24}"
+     AutomationProperties.Name="{Binding ShowAllName}" AutomationProperties.HelpText="{Binding ShowAllHelp}"/>
+   </Grid>
+  </StackPanel>
+ </StackPanel>
+</UserControl>

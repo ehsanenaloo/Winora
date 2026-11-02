@@ -1,0 +1,2 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<Project Sdk="Microsoft.NET.Sdk"><ItemGroup><ProjectReference Include="../Winora.Application/Winora.Application.csproj" /><PackageReference Include="Microsoft.Data.Sqlite" /><PackageReference Include="Microsoft.Extensions.Logging" /><InternalsVisibleTo Include="Winora.Engine.Tests" /></ItemGroup></Project>

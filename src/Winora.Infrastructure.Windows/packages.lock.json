@@ -1,0 +1,44 @@
+{
+  "version": 2,
+  "dependencies": {
+    "net10.0": {
+      "System.Formats.Cbor": {
+        "type": "Transitive",
+        "resolved": "10.0.12",
+        "contentHash": "CGIkyGIf3UWBFmYJrFJ7FIxQ++3h5yDcDXwyQ0sOH4+5EJK04XMVU+hyy1Q8mTUsWLXz6/ydq1ln9SPutxFVoQ=="
+      },
+      "winora.application": {
+        "type": "Project",
+        "dependencies": {
+          "Winora.Domain": "[0.1.0, )"
+        }
+      },
+      "winora.domain": {
+        "type": "Project"
+      },
+      "winora.elevation.protocol": {
+        "type": "Project",
+        "dependencies": {
+          "System.Security.Cryptography.Cose": "[10.0.12, )",
+          "Winora.Domain": "[0.1.0, )"
+        }
+      },
+      "winora.elevation.windows": {
+        "type": "Project",
+        "dependencies": {
+          "Winora.Domain": "[0.1.0, )",
+          "Winora.Elevation.Protocol": "[0.1.0, )"
+        }
+      },
+      "System.Security.Cryptography.Cose": {
+        "type": "CentralTransitive",
+        "requested": "[10.0.12, )",
+        "resolved": "10.0.12",
+        "contentHash": "HwChs+Vs0sd76fUR4MH1inZZHn4E6GDtstEP8TwNHqA51GQnoC9agOXfLqOM7TNR+02MUN7YY/4hweGeM47xFQ==",
+        "dependencies": {
+          "System.Formats.Cbor": "10.0.12"
+        }
+      }
+    }
+  }
+}

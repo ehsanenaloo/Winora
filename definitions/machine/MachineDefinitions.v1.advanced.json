@@ -1,0 +1,329 @@
+{
+ "format": "winora.machine-definitions/1",
+ "setId": "winora-machine",
+ "serial": 1,
+ "minProtocol": 1,
+ "minWorkerBuild": 22621,
+ "revoked": [],
+ "definitions": [
+  {
+   "id": "machine.security.mrt_offer",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_mrt_offer_Title",
+   "descriptionKey": "Machine_machine_security_mrt_offer_Description",
+   "category": "System",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\MRT",
+    "valueName": "DontOfferThroughWUAU",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_security_mrt_offer_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_mrt_offer_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\MRT",
+     "valueName": "DontOfferThroughWUAU"
+    }
+   ],
+   "sourceRefs": [],
+   "sourceClass": "C",
+   "communitySources": [
+    "community source 1"
+   ]
+  },
+  {
+   "id": "machine.system.device_coinstallers",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_system_device_coinstallers_Title",
+   "descriptionKey": "Machine_machine_system_device_coinstallers_Description",
+   "category": "System",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Device Installer",
+    "valueName": "DisableCoInstallers",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_system_device_coinstallers_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_system_device_coinstallers_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "sourceClass": "C",
+   "communitySources": [
+    "community source 1"
+   ]
+  },
+  {
+   "id": "machine.system.unsupported_upgrade",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_system_unsupported_upgrade_Title",
+   "descriptionKey": "Machine_machine_system_unsupported_upgrade_Description",
+   "category": "System",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\Setup\\MoSetup",
+    "valueName": "AllowUpgradesWithUnsupportedTPMOrCPU",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "allow",
+     "labelKey": "Machine_machine_system_unsupported_upgrade_Choice_allow",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_system_unsupported_upgrade_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "sourceClass": "C",
+   "communitySources": [
+    "community source 1"
+   ]
+  },
+  {
+   "id": "machine.edge.update_default",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_edge_update_default_Title",
+   "descriptionKey": "Machine_machine_edge_update_default_Description",
+   "category": "Updates",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\EdgeUpdate",
+    "valueName": "UpdateDefault",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_edge_update_default_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_edge_update_default_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    },
+    {
+     "kind": "dword",
+     "number": 2
+    },
+    {
+     "kind": "dword",
+     "number": 3
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\EdgeUpdate",
+     "valueName": "UpdateDefault"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-update-policies"
+   ],
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.edge.update_check_period",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_edge_update_check_period_Title",
+   "descriptionKey": "Machine_machine_edge_update_check_period_Description",
+   "category": "Updates",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\EdgeUpdate",
+    "valueName": "AutoUpdateCheckPeriodMinutes",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_edge_update_check_period_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_edge_update_check_period_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1440
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\EdgeUpdate",
+     "valueName": "AutoUpdateCheckPeriodMinutes"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-update-policies"
+   ],
+   "sourceClass": "A"
+  }
+ ]
+}

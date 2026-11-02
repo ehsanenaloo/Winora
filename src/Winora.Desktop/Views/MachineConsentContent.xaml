@@ -1,0 +1,41 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<UserControl x:Class="Winora.Desktop.MachineConsentContent"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:ctl="clr-namespace:Winora.Desktop.Controls"
+ AutomationProperties.Name="{Binding Title}">
+ <!-- No scroll viewer here: the dialog scrolls its content. -->
+ <StackPanel>
+  <StackPanel MinWidth="400" MaxWidth="560">
+   <TextBlock Style="{StaticResource WinoraBodySecondary}" Text="{Binding Intro}" Margin="{StaticResource WinoraSpace.B12}" TextWrapping="Wrap"/>
+   <Border Style="{StaticResource WinoraCardBorder}" Padding="{StaticResource WinoraSpace.A16}" Margin="{StaticResource WinoraSpace.B8}" AutomationProperties.Name="{Binding SettingName}">
+    <StackPanel>
+     <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding SettingName}"/>
+     <TextBlock Style="{StaticResource WinoraBody}" Text="{Binding ScopeText}" Margin="{StaticResource WinoraSpace.T4B8}" TextWrapping="Wrap"/>
+     <ctl:DiffView Margin="{StaticResource WinoraSpace.B8}" Before="{Binding BeforeText}" After="{Binding AfterText}" BeforeLabel="{Binding Text[DiffBefore]}" AfterLabel="{Binding Text[DiffAfter]}"/>
+     <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Text[CfUndoLabel]}"/>
+     <TextBlock Style="{StaticResource WinoraBody}" Text="{Binding RestoreText}" TextWrapping="Wrap"/>
+     <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding RestartNote}" Visibility="{Binding HasRestartNote, Converter={StaticResource BoolToVisibility}}" Margin="{StaticResource WinoraSpace.T4}" TextWrapping="Wrap"/>
+     <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding SourceText}" Margin="{StaticResource WinoraSpace.T8}" TextWrapping="Wrap" FlowDirection="LeftToRight" HorizontalAlignment="Left"
+      AutomationProperties.Name="{Binding SourceText}"/>
+    </StackPanel>
+   </Border>
+   <Border Padding="{StaticResource WinoraSpace.A12}" CornerRadius="{StaticResource WinoraCornerRadius}" BorderThickness="1" Margin="{StaticResource WinoraSpace.B8}" Background="{DynamicResource ControlFillColorSecondaryBrush}" BorderBrush="{DynamicResource WinoraControlBorderBrush}">
+    <StackPanel>
+     <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding DigestLabel}"/>
+     <TextBlock Style="{StaticResource WinoraSubtitle}" Text="{Binding DigestText}" FlowDirection="LeftToRight" HorizontalAlignment="Left"
+      FontFamily="{StaticResource WinoraMonoFontFamily}" AutomationProperties.Name="{Binding DigestText}" AutomationProperties.HelpText="{Binding DigestHelp}"/>
+     <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding DigestHelp}" TextWrapping="Wrap" Margin="{StaticResource WinoraSpace.T4}"/>
+     <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding PublisherText}" TextWrapping="Wrap" Margin="{StaticResource WinoraSpace.T4}"/>
+    </StackPanel>
+   </Border>
+   <Border Visibility="{Binding ShowNoPromptWarning, Converter={StaticResource BoolToVisibility}}" Padding="{StaticResource WinoraSpace.A12}" CornerRadius="{StaticResource WinoraCornerRadius}" BorderThickness="1"
+    Background="{DynamicResource ControlFillColorSecondaryBrush}" BorderBrush="{DynamicResource WinoraControlBorderBrush}">
+    <StackPanel>
+     <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding NoPromptWarning}" TextWrapping="Wrap" AutomationProperties.LiveSetting="Assertive"/>
+     <CheckBox x:Name="SecondConfirm" IsChecked="{Binding SecondConfirmed, Mode=TwoWay}" Content="{Binding SecondConfirmLabel}" AutomationProperties.Name="{Binding SecondConfirmLabel}" Margin="{StaticResource WinoraSpace.T8}"/>
+    </StackPanel>
+   </Border>
+  </StackPanel>
+ </StackPanel>
+</UserControl>

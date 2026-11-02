@@ -1,0 +1,20 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<!--
+ Per-user, UNSIGNED MSI definition. WiX Toolset SDK 5.0.2 (MS-RL) is restored from NuGet like any package; no global tool, no download outside NuGet.
+ Build only, through tools/publish.ps1. The MSI is never executed on a development machine.
+ ICE validation is suppressed because it opens Windows Installer on the build host; run it on a VM.
+-->
+<Project Sdk="WixToolset.Sdk/5.0.2">
+ <PropertyGroup>
+  <OutputType>Package</OutputType>
+  <InstallerPlatform>x64</InstallerPlatform>
+  <OutputName>Winora</OutputName>
+  <SuppressValidation>true</SuppressValidation>
+  <WinoraVersion Condition="'$(WinoraVersion)' == ''">0.0.0</WinoraVersion>
+  <!-- Shown as the MSI manufacturer. Must equal the publisher on the signing certificate once builds are signed. -->
+  <WinoraPublisher Condition="'$(WinoraPublisher)' == ''">Winora project</WinoraPublisher>
+  <StageDir Condition="'$(StageDir)' == ''">$(MSBuildProjectDirectory)\..\..\dist\stage</StageDir>
+  <DefineConstants>$(DefineConstants);WinoraVersion=$(WinoraVersion);WinoraPublisher=$(WinoraPublisher);WinoraProductCode=$(WinoraProductCode);StageDir=$(StageDir)</DefineConstants>
+  <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+ </PropertyGroup>
+</Project>

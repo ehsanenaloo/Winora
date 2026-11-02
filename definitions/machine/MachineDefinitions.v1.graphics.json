@@ -1,0 +1,327 @@
+{
+ "format": "winora.machine-definitions/1",
+ "setId": "winora-machine",
+ "serial": 1,
+ "minProtocol": 1,
+ "minWorkerBuild": 22621,
+ "revoked": [],
+ "definitions": [
+  {
+   "id": "machine.graphics.amd_ulps",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_graphics_amd_ulps_Title",
+   "descriptionKey": "Machine_machine_graphics_amd_ulps_Description",
+   "category": "Performance",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "displayDriver",
+    "valueName": "EnableUlps",
+    "vendorId": "1002"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_graphics_amd_ulps_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_graphics_amd_ulps_Choice_default",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "sourceClass": "C",
+   "communitySources": [
+    "https://community.amd.com/t5/pc-graphics/amd-radeon-6600xt-restart-pc-when-screen-timeout-is-turned-on/m-p/614981"
+   ]
+  },
+  {
+   "id": "machine.graphics.nvidia_fixed_pstate",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_graphics_nvidia_fixed_pstate_Title",
+   "descriptionKey": "Machine_machine_graphics_nvidia_fixed_pstate_Description",
+   "category": "Performance",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "displayDriver",
+    "valueName": "DisableDynamicPstate",
+    "vendorId": "10DE"
+   },
+   "choices": [
+    {
+     "id": "fixed",
+     "labelKey": "Machine_machine_graphics_nvidia_fixed_pstate_Choice_fixed",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_graphics_nvidia_fixed_pstate_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "sourceClass": "C",
+   "communitySources": [
+    "https://forums.blurbusters.com/viewtopic.php?p=95124",
+    "https://forums.blurbusters.com/viewtopic.php?p=93972"
+   ]
+  },
+  {
+   "id": "machine.graphics.hardware_gpu_scheduling",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_graphics_hardware_gpu_scheduling_Title",
+   "descriptionKey": "Machine_machine_graphics_hardware_gpu_scheduling_Description",
+   "category": "Performance",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+    "valueName": "HwSchMode",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "on",
+     "labelKey": "Machine_machine_graphics_hardware_gpu_scheduling_Choice_on",
+     "value": {
+      "kind": "dword",
+      "number": 2
+     }
+    },
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_graphics_hardware_gpu_scheduling_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_graphics_hardware_gpu_scheduling_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    },
+    {
+     "kind": "dword",
+     "number": 2
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "sourceClass": "C",
+   "communitySources": [
+    "https://devblogs.microsoft.com/directx/hardware-accelerated-gpu-scheduling/",
+    "https://winaero.com/turn-on-or-off-hardware-accelerated-gpu-scheduling-in-windows-10/"
+   ]
+  },
+  {
+   "id": "machine.graphics.multiplane_overlay",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_graphics_multiplane_overlay_Title",
+   "descriptionKey": "Machine_machine_graphics_multiplane_overlay_Description",
+   "category": "Performance",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\Dwm",
+    "valueName": "OverlayTestMode",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_graphics_multiplane_overlay_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 5
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_graphics_multiplane_overlay_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 5
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [],
+   "sourceClass": "C",
+   "communitySources": [
+    "https://nvidia.custhelp.com/app/answers/detail/a_id/5157",
+    "https://learn.microsoft.com/en-us/answers/questions/5749171/error-screen-flickering-and-black-screen-issue-on"
+   ]
+  },
+  {
+   "id": "machine.graphics.gpu_timeout",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_graphics_gpu_timeout_Title",
+   "descriptionKey": "Machine_machine_graphics_gpu_timeout_Description",
+   "category": "Performance",
+   "risk": "High",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+    "valueName": "TdrDelay",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_graphics_gpu_timeout_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    },
+    {
+     "id": "sec10",
+     "labelKey": "Machine_machine_graphics_gpu_timeout_Choice_sec10",
+     "value": {
+      "kind": "dword",
+      "number": 10
+     }
+    },
+    {
+     "id": "sec60",
+     "labelKey": "Machine_machine_graphics_gpu_timeout_Choice_sec60",
+     "value": {
+      "kind": "dword",
+      "number": 60
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 2
+    },
+    {
+     "kind": "dword",
+     "number": 10
+    },
+    {
+     "kind": "dword",
+     "number": 60
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys"
+   ],
+   "sourceClass": "A"
+  }
+ ]
+}

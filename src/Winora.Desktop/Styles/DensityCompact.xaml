@@ -1,0 +1,12 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<!-- Compact density. The hit target stays above 24 px (WCAG 2.2). DensityComfortable.xaml defines the same keys; a test enforces it. -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+ <sys:Double x:Key="WinoraControlHeight">28</sys:Double>
+ <sys:Double x:Key="MinHitTarget">32</sys:Double>
+ <sys:Double x:Key="WinoraRowMinHeight">44</sys:Double>
+ <Thickness x:Key="WinoraCardPadding">12,8</Thickness>
+ <sys:Double x:Key="WinoraSectionGap">16</sys:Double>
+ <sys:Int32 x:Key="WinoraDescriptionLines">2</sys:Int32>
+ <sys:Boolean x:Key="WinoraCompactChips">True</sys:Boolean>
+</ResourceDictionary>

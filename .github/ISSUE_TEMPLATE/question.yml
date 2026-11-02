@@ -1,0 +1,35 @@
+name: Question
+description: Ask how to use Winora.
+title: "[Question]: "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please read the README first. Issues are public, so do not paste personal data.
+  - type: textarea
+    id: question
+    attributes:
+      label: What do you want to do?
+      description: Say what you want to do and what you tried.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Winora version
+      description: Shown in About Winora.
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+      placeholder: "Windows 11 24H2, build 26100"
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you submit
+      options:
+        - label: I read the README and searched existing issues.
+          required: true
+        - label: I did not include personal data.
+          required: true

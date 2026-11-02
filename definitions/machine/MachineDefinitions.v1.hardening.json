@@ -1,0 +1,568 @@
+{
+ "format": "winora.machine-definitions/1",
+ "setId": "winora-machine",
+ "serial": 1,
+ "minProtocol": 1,
+ "minWorkerBuild": 22621,
+ "revoked": [],
+ "definitions": [
+  {
+   "id": "machine.network.llmnr",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_network_llmnr_Title",
+   "descriptionKey": "Machine_machine_network_llmnr_Description",
+   "category": "Network",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows NT\\DNSClient",
+    "valueName": "EnableMulticast",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_network_llmnr_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_network_llmnr_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows NT\\DNSClient",
+     "valueName": "EnableMulticast"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-dnsclient"
+   ],
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.security.smb1_server",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_smb1_server_Title",
+   "descriptionKey": "Machine_machine_security_smb1_server_Description",
+   "category": "Network",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+    "valueName": "SMB1",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_security_smb1_server_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_smb1_server_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3"
+   ],
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.security.smb_client_signing",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_smb_client_signing_Title",
+   "descriptionKey": "Machine_machine_security_smb_client_signing_Description",
+   "category": "Network",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters",
+    "valueName": "RequireSecuritySignature",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "require",
+     "labelKey": "Machine_machine_security_smb_client_signing_Choice_require",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_smb_client_signing_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing-overview"
+   ],
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.security.smb_server_signing",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_smb_server_signing_Title",
+   "descriptionKey": "Machine_machine_security_smb_server_signing_Description",
+   "category": "Network",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": true,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+    "valueName": "RequireSecuritySignature",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "require",
+     "labelKey": "Machine_machine_security_smb_server_signing_Choice_require",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_smb_server_signing_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing-overview"
+   ],
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.security.smb_insecure_guest",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_smb_insecure_guest_Title",
+   "descriptionKey": "Machine_machine_security_smb_insecure_guest_Description",
+   "category": "Network",
+   "risk": "Medium",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\LanmanWorkstation",
+    "valueName": "AllowInsecureGuestAuth",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "block",
+     "labelKey": "Machine_machine_security_smb_insecure_guest_Choice_block",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_smb_insecure_guest_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\LanmanWorkstation",
+     "valueName": "AllowInsecureGuestAuth"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-lanmanworkstation"
+   ],
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.security.smb_mailslots",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_smb_mailslots_Title",
+   "descriptionKey": "Machine_machine_security_smb_mailslots_Description",
+   "category": "Network",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 26100,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\NetworkProvider",
+    "valueName": "EnableMailslots",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "off",
+     "labelKey": "Machine_machine_security_smb_mailslots_Choice_off",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_smb_mailslots_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\NetworkProvider",
+     "valueName": "EnableMailslots"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-lanmanworkstation"
+   ],
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.security.password_reveal",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_password_reveal_Title",
+   "descriptionKey": "Machine_machine_security_password_reveal_Description",
+   "category": "System",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows\\CredUI",
+    "valueName": "DisablePasswordReveal",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "hide",
+     "labelKey": "Machine_machine_security_password_reveal_Choice_hide",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_password_reveal_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows\\CredUI",
+     "valueName": "DisablePasswordReveal"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-credentialsui"
+   ],
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.security.enumerate_admins",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_enumerate_admins_Title",
+   "descriptionKey": "Machine_machine_security_enumerate_admins_Description",
+   "category": "System",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\CredUI",
+    "valueName": "EnumerateAdministrators",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "hide",
+     "labelKey": "Machine_machine_security_enumerate_admins_Choice_hide",
+     "value": {
+      "kind": "dword",
+      "number": 0
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_enumerate_admins_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\CredUI",
+     "valueName": "EnumerateAdministrators"
+    }
+   ],
+   "sourceRefs": [
+    "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-credentialsui"
+   ],
+   "sourceClass": "A"
+  },
+  {
+   "id": "machine.security.printer_driver_admin",
+   "version": 1,
+   "scope": "machine",
+   "titleKey": "Machine_machine_security_printer_driver_admin_Title",
+   "descriptionKey": "Machine_machine_security_printer_driver_admin_Description",
+   "category": "System",
+   "risk": "Low",
+   "recovery": "Reversible",
+   "requiresRestart": false,
+   "minBuild": 22621,
+   "maxBuild": null,
+   "target": {
+    "kind": "registry",
+    "subKey": "SOFTWARE\\Policies\\Microsoft\\Windows NT\\Printers\\PointAndPrint",
+    "valueName": "RestrictDriverInstallationToAdministrators",
+    "view": "Registry64"
+   },
+   "choices": [
+    {
+     "id": "admins",
+     "labelKey": "Machine_machine_security_printer_driver_admin_Choice_admins",
+     "value": {
+      "kind": "dword",
+      "number": 1
+     }
+    },
+    {
+     "id": "default",
+     "labelKey": "Machine_machine_security_printer_driver_admin_Choice_default",
+     "value": {
+      "kind": "absent"
+     }
+    }
+   ],
+   "defaultChoiceId": "default",
+   "recommendedChoiceId": null,
+   "restoreDomain": [
+    {
+     "kind": "absent"
+    },
+    {
+     "kind": "dword",
+     "number": 0
+    },
+    {
+     "kind": "dword",
+     "number": 1
+    }
+   ],
+   "restoreCompatible": [],
+   "allowRestore": false,
+   "managedBy": [
+    {
+     "kind": "PolicyRegistryValue",
+     "location": "SOFTWARE\\Policies\\Microsoft\\Windows NT\\Printers\\PointAndPrint",
+     "valueName": "RestrictDriverInstallationToAdministrators"
+    }
+   ],
+   "sourceRefs": [
+    "https://support.microsoft.com/en-us/topic/kb5005652-manage-new-point-and-print-default-driver-installation-behavior-cve-2021-34481-873642bf-2634-49c5-a23b-6d8e9a302872"
+   ],
+   "sourceClass": "A"
+  }
+ ]
+}

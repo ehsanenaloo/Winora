@@ -1,0 +1,184 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<!-- Review and feedback controls: diff view, action bar, progress panel, result report and toast. Colors are DynamicResource so the theme dictionaries swap them. -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:ctl="clr-namespace:Winora.Desktop.Controls">
+ <ResourceDictionary.MergedDictionaries>
+  <ResourceDictionary Source="Tokens.xaml"/>
+  <ResourceDictionary Source="Theme.xaml"/>
+ </ResourceDictionary.MergedDictionaries>
+
+ <!-- Diff view: the markers are text, the tints only help. -->
+ <Style x:Key="WinoraDiffMarker" TargetType="TextBlock" BasedOn="{StaticResource WinoraBodyStrong}">
+  <Setter Property="Margin" Value="0,0,8,0"/><Setter Property="VerticalAlignment" Value="Top"/>
+ </Style>
+ <Style x:Key="WinoraDiffViewStyle" TargetType="ctl:DiffView">
+  <Setter Property="Focusable" Value="False"/><Setter Property="IsTabStop" Value="False"/>
+  <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ctl:DiffView">
+   <Border Background="{DynamicResource WinoraSurfaceSunkenBrush}" CornerRadius="{StaticResource WinoraCornerRadiusSmall}" Padding="4">
+    <StackPanel>
+     <Border Background="{DynamicResource WinoraDiffRemovedBrush}" CornerRadius="{StaticResource WinoraCornerRadiusSmall}" Padding="8,4" Margin="0,0,0,4">
+      <Grid>
+       <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+       <TextBlock Style="{StaticResource WinoraDiffMarker}" Text="&#x2212;"/>
+       <StackPanel Grid.Column="1"><TextBlock Style="{StaticResource WinoraCaption}" Text="{TemplateBinding BeforeLabel}" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+        <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{TemplateBinding Before}"/></StackPanel>
+      </Grid>
+     </Border>
+     <Border Background="{DynamicResource WinoraDiffAddedBrush}" CornerRadius="{StaticResource WinoraCornerRadiusSmall}" Padding="8,4">
+      <Grid>
+       <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+       <TextBlock Style="{StaticResource WinoraDiffMarker}" Text="+"/>
+       <StackPanel Grid.Column="1"><TextBlock Style="{StaticResource WinoraCaption}" Text="{TemplateBinding AfterLabel}" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+        <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{TemplateBinding After}"/></StackPanel>
+      </Grid>
+     </Border>
+    </StackPanel>
+   </Border>
+  </ControlTemplate></Setter.Value></Setter>
+ </Style>
+ <Style TargetType="ctl:DiffView" BasedOn="{StaticResource WinoraDiffViewStyle}"/>
+
+ <!-- The Winora toggle button: rounded, hover fill, accent border and fill when on, 2 px focus border. Used by the filter bar and the action bar (no default WPF chrome). -->
+ <Style x:Key="WinoraToggleButton" TargetType="ToggleButton">
+  <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/><Setter Property="Background" Value="Transparent"/>
+  <Setter Property="BorderBrush" Value="{DynamicResource WinoraControlBorderBrush}"/><Setter Property="BorderThickness" Value="1"/>
+  <Setter Property="MinHeight" Value="{DynamicResource MinHitTarget}"/><Setter Property="Padding" Value="12,4"/><Setter Property="Cursor" Value="Hand"/>
+  <Setter Property="FocusVisualStyle" Value="{x:Null}"/><Setter Property="HorizontalContentAlignment" Value="Center"/><Setter Property="VerticalContentAlignment" Value="Center"/>
+  <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ToggleButton">
+   <Border x:Name="Chrome" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+    CornerRadius="{StaticResource WinoraCornerRadius}" Padding="{TemplateBinding Padding}" MinHeight="{TemplateBinding MinHeight}" SnapsToDevicePixels="True">
+    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True"/>
+   </Border>
+   <ControlTemplate.Triggers>
+    <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Chrome" Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/></Trigger>
+    <Trigger Property="IsChecked" Value="True"><Setter TargetName="Chrome" Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/><Setter TargetName="Chrome" Property="BorderBrush" Value="{DynamicResource AccentFillColorDefaultBrush}"/></Trigger>
+    <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="Chrome" Property="BorderBrush" Value="{DynamicResource WinoraFocusBrush}"/><Setter TargetName="Chrome" Property="BorderThickness" Value="2"/></Trigger>
+    <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="0.5"/></Trigger>
+   </ControlTemplate.Triggers>
+  </ControlTemplate></Setter.Value></Setter>
+ </Style>
+
+
+ <!-- Progress panel -->
+ <Style x:Key="WinoraProgressPanelStyle" TargetType="ctl:ProgressPanel">
+  <Setter Property="Focusable" Value="False"/><Setter Property="IsTabStop" Value="False"/><Setter Property="Margin" Value="0,0,0,12"/>
+  <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ctl:ProgressPanel">
+   <Border Background="{DynamicResource WinoraSurfaceCardBrush}" BorderBrush="{DynamicResource WinoraCardBorderBrush}" BorderThickness="{StaticResource WinoraBorderThickness}" CornerRadius="{StaticResource WinoraCornerRadius}" Padding="16">
+    <Grid>
+     <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+     <StackPanel>
+      <StackPanel Orientation="Horizontal">
+       <ui:ProgressRing x:Name="Ring" Margin="0,0,8,0" IsIndeterminate="{TemplateBinding BarIndeterminate}" Visibility="Collapsed" VerticalAlignment="Center" AutomationProperties.Name="{TemplateBinding Title}"/>
+       <TextBlock x:Name="TitleText" Style="{StaticResource WinoraBodyStrong}" Text="{TemplateBinding Title}" AutomationProperties.LiveSetting="Polite" VerticalAlignment="Center"/>
+      </StackPanel>
+      <ProgressBar x:Name="Bar" Minimum="0" Maximum="1" Value="{TemplateBinding Value}" IsIndeterminate="{TemplateBinding BarIndeterminate}" Margin="0,8,0,8" MinHeight="4"
+       AutomationProperties.Name="{TemplateBinding Title}"/>
+      <TextBlock x:Name="StepText" Style="{StaticResource WinoraBody}" Text="{TemplateBinding StepText}" AutomationProperties.LiveSetting="Polite"/>
+      <TextBlock x:Name="ElapsedText" Style="{StaticResource WinoraCaption}" Text="{TemplateBinding ElapsedText}" Margin="0,4,0,0"/>
+      <TextBlock x:Name="CancelReason" Style="{StaticResource WinoraCaption}" Text="{TemplateBinding CancelDisabledReason}" Margin="0,4,0,0"/>
+     </StackPanel>
+     <ui:Button Grid.Column="1" x:Name="CancelButton" Content="{TemplateBinding CancelText}" Command="{TemplateBinding CancelCommand}" Margin="16,0,0,0" VerticalAlignment="Top"
+      AutomationProperties.Name="{TemplateBinding CancelText}" AutomationProperties.HelpText="{TemplateBinding CancelHelp}"/>
+    </Grid>
+   </Border>
+   <ControlTemplate.Triggers>
+    <Trigger Property="BarIndeterminate" Value="True"><Setter TargetName="Ring" Property="Visibility" Value="Visible"/></Trigger>
+    <Trigger Property="HasElapsed" Value="False"><Setter TargetName="ElapsedText" Property="Visibility" Value="Collapsed"/></Trigger>
+    <Trigger Property="HasCancelReason" Value="False"><Setter TargetName="CancelReason" Property="Visibility" Value="Collapsed"/></Trigger>
+    <Trigger Property="HasCancelReason" Value="True"><Setter TargetName="CancelButton" Property="IsEnabled" Value="False"/></Trigger>
+    <Trigger Property="CancelText" Value=""><Setter TargetName="CancelButton" Property="Visibility" Value="Collapsed"/></Trigger>
+   </ControlTemplate.Triggers>
+  </ControlTemplate></Setter.Value></Setter>
+ </Style>
+ <Style TargetType="ctl:ProgressPanel" BasedOn="{StaticResource WinoraProgressPanelStyle}"/>
+
+ <!-- Result report -->
+ <DataTemplate x:Key="WinoraResultTile">
+  <Border Background="{DynamicResource WinoraSurfaceSunkenBrush}" CornerRadius="{StaticResource WinoraCornerRadiusSmall}" Padding="12,8" Margin="0,0,8,8" MinWidth="110">
+   <StackPanel>
+    <TextBlock Style="{StaticResource WinoraValue}" Text="{Binding Count}"/>
+    <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Label}" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+   </StackPanel>
+  </Border>
+ </DataTemplate>
+ <Style x:Key="WinoraResultReportStyle" TargetType="ctl:ResultReport">
+  <Setter Property="Focusable" Value="False"/><Setter Property="IsTabStop" Value="False"/><Setter Property="Margin" Value="0,0,0,12"/>
+  <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ctl:ResultReport">
+   <Border Background="{DynamicResource WinoraSurfaceCardBrush}" BorderBrush="{DynamicResource WinoraCardBorderBrush}" BorderThickness="{StaticResource WinoraBorderThickness}" CornerRadius="{StaticResource WinoraCornerRadius}" Padding="16">
+    <StackPanel>
+     <TextBlock x:Name="Headline" Style="{StaticResource WinoraSectionHeading}" Text="{Binding Model.Headline, RelativeSource={RelativeSource TemplatedParent}}"/>
+     <WrapPanel Margin="0,8,0,0" AutomationProperties.Name="{Binding Model.AutomationName, RelativeSource={RelativeSource TemplatedParent}}">
+      <Border Background="{DynamicResource WinoraSurfaceSunkenBrush}" CornerRadius="{StaticResource WinoraCornerRadiusSmall}" Padding="12,8" Margin="0,0,8,8" MinWidth="110"><StackPanel>
+       <TextBlock Style="{StaticResource WinoraValue}" Text="{Binding Model.Applied, RelativeSource={RelativeSource TemplatedParent}}"/>
+       <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Model.AppliedLabel, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/></StackPanel></Border>
+      <Border Background="{DynamicResource WinoraSurfaceSunkenBrush}" CornerRadius="{StaticResource WinoraCornerRadiusSmall}" Padding="12,8" Margin="0,0,8,8" MinWidth="110"><StackPanel>
+       <TextBlock Style="{StaticResource WinoraValue}" Text="{Binding Model.AlreadySet, RelativeSource={RelativeSource TemplatedParent}}"/>
+       <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Model.AlreadySetLabel, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/></StackPanel></Border>
+      <Border Background="{DynamicResource WinoraSurfaceSunkenBrush}" CornerRadius="{StaticResource WinoraCornerRadiusSmall}" Padding="12,8" Margin="0,0,8,8" MinWidth="110"><StackPanel>
+       <TextBlock Style="{StaticResource WinoraValue}" Text="{Binding Model.Failed, RelativeSource={RelativeSource TemplatedParent}}"/>
+       <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding Model.FailedLabel, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/></StackPanel></Border>
+     </WrapPanel>
+     <StackPanel x:Name="FailureBlock" Margin="0,4,0,0">
+      <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding Model.FailuresHeading, RelativeSource={RelativeSource TemplatedParent}}"/>
+      <ItemsControl ItemsSource="{Binding Model.Failures, RelativeSource={RelativeSource TemplatedParent}}" IsTabStop="False" AutomationProperties.Name="{Binding Model.FailuresHeading, RelativeSource={RelativeSource TemplatedParent}}">
+       <ItemsControl.ItemTemplate><DataTemplate>
+        <StackPanel Margin="0,4,0,0" AutomationProperties.Name="{Binding AutomationName}">
+         <TextBlock Style="{StaticResource WinoraBodyStrong}" Text="{Binding Title}"/>
+         <TextBlock Style="{StaticResource WinoraBody}" Text="{Binding Reason}"/>
+         <TextBlock Style="{StaticResource WinoraCaption}" Text="{Binding NextStep}"/>
+        </StackPanel>
+       </DataTemplate></ItemsControl.ItemTemplate>
+      </ItemsControl>
+     </StackPanel>
+     <WrapPanel Margin="0,12,0,0">
+      <ui:Button x:Name="UndoAll" Content="{Binding Model.UndoAllText, RelativeSource={RelativeSource TemplatedParent}}" Command="{Binding Model.UndoAllCommand, RelativeSource={RelativeSource TemplatedParent}}" Margin="0,0,8,0"
+       AutomationProperties.Name="{Binding Model.UndoAllText, RelativeSource={RelativeSource TemplatedParent}}" AutomationProperties.HelpText="{Binding Model.UndoAllHelp, RelativeSource={RelativeSource TemplatedParent}}"/>
+      <ui:Button Content="{Binding Model.CopyText, RelativeSource={RelativeSource TemplatedParent}}" Command="{Binding Model.CopyCommand, RelativeSource={RelativeSource TemplatedParent}}" Margin="0,0,8,0"
+       AutomationProperties.Name="{Binding Model.CopyText, RelativeSource={RelativeSource TemplatedParent}}" AutomationProperties.HelpText="{Binding Model.CopyHelp, RelativeSource={RelativeSource TemplatedParent}}"/>
+      <ui:Button x:Name="CloseButton" Content="{Binding Model.CloseText, RelativeSource={RelativeSource TemplatedParent}}" Command="{Binding Model.CloseCommand, RelativeSource={RelativeSource TemplatedParent}}" Appearance="Primary"
+       AutomationProperties.Name="{Binding Model.CloseText, RelativeSource={RelativeSource TemplatedParent}}" AutomationProperties.HelpText="{Binding Model.CloseText, RelativeSource={RelativeSource TemplatedParent}}"/>
+     </WrapPanel>
+    </StackPanel>
+   </Border>
+  </ControlTemplate></Setter.Value></Setter>
+ </Style>
+ <Style TargetType="ctl:ResultReport" BasedOn="{StaticResource WinoraResultReportStyle}"/>
+
+ <!-- Toast -->
+ <Style x:Key="WinoraToastHostStyle" TargetType="ctl:ToastHost">
+  <Setter Property="Focusable" Value="False"/><Setter Property="IsTabStop" Value="False"/><Setter Property="HorizontalAlignment" Value="Center"/><Setter Property="VerticalAlignment" Value="Bottom"/>
+  <Setter Property="Margin" Value="16,0,16,16"/>
+  <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ctl:ToastHost">
+   <Border x:Name="Root" Background="{DynamicResource WinoraStatusInfoBackground}" BorderBrush="{DynamicResource WinoraStatusInfoBorder}" BorderThickness="{StaticResource WinoraChipBorderThickness}"
+    CornerRadius="{StaticResource WinoraCornerRadius}" Padding="12,4" MaxWidth="560" Effect="{DynamicResource WinoraElevation1}">
+    <Grid>
+     <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+     <ui:SymbolIcon x:Name="Icon" Symbol="{TemplateBinding Symbol}" FontSize="24" Foreground="{DynamicResource WinoraStatusInfoForeground}" VerticalAlignment="Center" Margin="0,0,12,0"/>
+     <TextBlock x:Name="Message" Grid.Column="1" Style="{StaticResource WinoraBody}" Text="{Binding Toast.Text, RelativeSource={RelativeSource TemplatedParent}}" Foreground="{DynamicResource WinoraStatusInfoForeground}" VerticalAlignment="Center"/>
+     <ui:Button x:Name="ActionButton" Grid.Column="2" Content="{Binding Toast.ActionText, RelativeSource={RelativeSource TemplatedParent}}" Appearance="Transparent" Margin="8,0,0,0" Foreground="{DynamicResource WinoraStatusInfoForeground}"
+      AutomationProperties.Name="{Binding Toast.ActionText, RelativeSource={RelativeSource TemplatedParent}}" AutomationProperties.HelpText="{Binding Toast.ActionHelp, RelativeSource={RelativeSource TemplatedParent}}"/>
+     <ui:Button x:Name="CloseButton" Grid.Column="3" Icon="{ui:SymbolIcon Dismiss20}" Appearance="Transparent" Margin="4,0,0,0" Foreground="{DynamicResource WinoraStatusInfoForeground}"
+      AutomationProperties.Name="{TemplateBinding CloseText}" AutomationProperties.HelpText="{TemplateBinding CloseText}"/>
+    </Grid>
+   </Border>
+   <ControlTemplate.Triggers>
+    <Trigger Property="Tone" Value="Success">
+     <Setter TargetName="Root" Property="Background" Value="{DynamicResource WinoraStatusSuccessBackground}"/><Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource WinoraStatusSuccessBorder}"/>
+     <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource WinoraStatusSuccessForeground}"/><Setter TargetName="Message" Property="Foreground" Value="{DynamicResource WinoraStatusSuccessForeground}"/>
+     <Setter TargetName="ActionButton" Property="Foreground" Value="{DynamicResource WinoraStatusSuccessForeground}"/><Setter TargetName="CloseButton" Property="Foreground" Value="{DynamicResource WinoraStatusSuccessForeground}"/>
+    </Trigger>
+    <Trigger Property="Tone" Value="Warning">
+     <Setter TargetName="Root" Property="Background" Value="{DynamicResource WinoraStatusWarningBackground}"/><Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource WinoraStatusWarningBorder}"/>
+     <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource WinoraStatusWarningForeground}"/><Setter TargetName="Message" Property="Foreground" Value="{DynamicResource WinoraStatusWarningForeground}"/>
+     <Setter TargetName="ActionButton" Property="Foreground" Value="{DynamicResource WinoraStatusWarningForeground}"/><Setter TargetName="CloseButton" Property="Foreground" Value="{DynamicResource WinoraStatusWarningForeground}"/>
+    </Trigger>
+    <Trigger Property="Tone" Value="Error">
+     <Setter TargetName="Root" Property="Background" Value="{DynamicResource WinoraStatusErrorBackground}"/><Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource WinoraStatusErrorBorder}"/>
+     <Setter TargetName="Icon" Property="Foreground" Value="{DynamicResource WinoraStatusErrorForeground}"/><Setter TargetName="Message" Property="Foreground" Value="{DynamicResource WinoraStatusErrorForeground}"/>
+     <Setter TargetName="ActionButton" Property="Foreground" Value="{DynamicResource WinoraStatusErrorForeground}"/><Setter TargetName="CloseButton" Property="Foreground" Value="{DynamicResource WinoraStatusErrorForeground}"/>
+    </Trigger>
+   </ControlTemplate.Triggers>
+  </ControlTemplate></Setter.Value></Setter>
+ </Style>
+ <Style TargetType="ctl:ToastHost" BasedOn="{StaticResource WinoraToastHostStyle}"/>
+</ResourceDictionary>

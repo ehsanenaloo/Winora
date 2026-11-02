@@ -1,0 +1,47 @@
+name: Feature request
+description: Suggest an improvement or a new feature.
+title: "[Feature]: "
+labels: ["enhancement", "needs triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Winora works offline and changes only items from its own lists. Ideas that need the internet, an account or a way to write any registry value will not fit.
+        To ask for a new Windows setting, use the Setting request form.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem do you have?
+      description: Describe what is hard today.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would you like to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Other ideas you thought about
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which part of Winora?
+      options:
+        - A page in the desktop app
+        - Profiles
+        - History and undo
+        - Action center
+        - Command-line tool (winora)
+        - Installer
+        - Language or accessibility
+        - Something new
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you submit
+      options:
+        - label: I searched existing issues.
+          required: true

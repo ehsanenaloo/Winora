@@ -1,0 +1,94 @@
+name: Bug report
+description: Something in Winora does not work as expected.
+title: "[Bug]: "
+labels: ["bug", "needs triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Issues are public. Do not paste your user name, computer name, product keys or network addresses.
+        For a security problem, use the private link on the issue chooser instead.
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+      description: Press Win+R, type `winver` and press Enter.
+      placeholder: "Windows 11 Pro 24H2, build 26100"
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Winora version
+      description: Shown in About Winora.
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: page
+    attributes:
+      label: Where does it happen?
+      options:
+        - Overview
+        - Profiles
+        - Customize
+        - Optimize
+        - Power
+        - Network
+        - Privacy
+        - Windows Update
+        - Cleanup
+        - Preinstalled apps
+        - Startup
+        - Scheduled tasks
+        - Services
+        - Apps
+        - Repair and features
+        - History
+        - Settings
+        - Action center
+        - First-run guide
+        - Command-line tool (winora)
+        - Installer or uninstaller
+        - Persian or right-to-left layout
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open Customize
+        2. Change "Show file extensions" to Show
+        3. Choose Review changes and confirm
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: What happened?
+      description: Quote any message Winora showed. For a change, quote its result on the History page.
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics archive (optional)
+      description: |
+        In Winora, choose Settings > Export diagnostics. Winora removes personal data from the archive, but open it and check it before you attach it. Attach only what you are happy to share in public.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you submit
+      options:
+        - label: I searched existing issues.
+          required: true
+        - label: I did not include personal data.
+          required: true

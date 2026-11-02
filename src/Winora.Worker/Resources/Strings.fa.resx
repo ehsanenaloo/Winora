@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<root>
+<resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+<resheader name="version"><value>2.0</value></resheader>
+<data name="Unavailable" xml:space="preserve"><value>عامل اجرایی در دسترس نیست: ارتقای دسترسی، ارتباط و تغییر سیستم پیاده‌سازی نشده‌اند.</value></data>
+<data name="Code_operation_recovery_required" xml:space="preserve"><value>یک عملیات پیشین ابتدا نیاز به بازیابی دارد. وینورا را دوباره اجرا کنید تا تطبیق داده شود.</value></data>
+<data name="Code_operation_not_reversible" xml:space="preserve"><value>این عملیات برگشت‌پذیر نیست.</value></data>
+<data name="Code_operation_superseded" xml:space="preserve"><value>عملیات جدیدتری این مقدار را تغییر داده است، بنابراین این عملیات قدیمی‌تر دیگر برگشت‌پذیر نیست. چیزی تغییر نکرد.</value></data>
+<data name="Code_operation_revision_unknown" xml:space="preserve"><value>در دفتر ثبت، وضعیت دقیق حاصل از این عملیات ثبت نشده است، بنابراین نمی‌توان آن را با ایمنی برگرداند.</value></data>
+<data name="Code_operation_resource_changed" xml:space="preserve"><value>مقدار شبیه‌سازی‌شده هنگام شروع اقدام تغییر کرد. چیزی تغییر نکرد؛ بازبینی کنید و دوباره تلاش کنید.</value></data>
+<data name="Code_operation_external_conflict" xml:space="preserve"><value>مقدار شبیه‌سازی‌شده را چیز دیگری تغییر داده بود، بنابراین وینورا آن را بازنویسی نکرد. مقدار فعلی را بررسی کنید.</value></data>
+<data name="Code_operation_verification_failed" xml:space="preserve"><value>مقدار نوشته شد اما راستی‌آزمایی نشد. بررسی لازم است.</value></data>
+<data name="Code_operation_reconciled_partial" xml:space="preserve"><value>پس از یک وقفه، مقدار نه با مقدار اولیه برابر بود و نه با مقدار درخواستی. بررسی لازم است.</value></data>
+<data name="Code_operation_rollback_uncertain" xml:space="preserve"><value>برگرداندن تأیید نشد. بررسی لازم است.</value></data>
+<data name="Code_operation_rollback_failed" xml:space="preserve"><value>برگرداندن مقدار پیشین را برنگرداند. بررسی لازم است.</value></data>
+<data name="Code_operation_cancelled" xml:space="preserve"><value>اقدام لغو شد. چیزی تغییر نکرد.</value></data>
+<data name="Code_plan_stale" xml:space="preserve"><value>مقدار شبیه‌سازی‌شده پس از بازبینی شما تغییر کرد. چیزی اعمال نشد؛ تغییر را دوباره بازبینی کنید.</value></data>
+<data name="Code_plan_duplicate_feature" xml:space="preserve"><value>برنامه یک قابلیت را دو بار فهرست کرده است، بنابراین اجرا نشد.</value></data>
+<data name="Code_plan_missing_dependency" xml:space="preserve"><value>برنامه به قابلیت دیگری نیاز دارد که شامل نشده است، بنابراین اجرا نشد.</value></data>
+<data name="Code_plan_resource_conflict" xml:space="preserve"><value>دو بخش برنامه یک منبع را تغییر می‌دادند، بنابراین اجرا نشد.</value></data>
+<data name="Code_plan_dependency_cycle" xml:space="preserve"><value>وابستگی‌های برنامه به‌صورت حلقه‌ای به هم وابسته‌اند، بنابراین اجرا نشد.</value></data>
+<data name="Code_journal_revision_conflict" xml:space="preserve"><value>رکورد توسط اقدام دیگری تغییر کرد. صفحه را تازه کنید و دوباره تلاش کنید.</value></data>
+<data name="Code_journal_operation_missing" xml:space="preserve"><value>رکورد عملیات یافت نشد.</value></data>
+<data name="Code_journal_invalid_transition" xml:space="preserve"><value>این تغییر وضعیت برای این عملیات مجاز نیست.</value></data>
+<data name="Code_journal_invalid" xml:space="preserve"><value>دفتر ثبت محلی وینورا به‌صورت ایمن خوانده نشد، بنابراین برای محافظت از داده‌های شما متوقف شد. هیچ تنظیمی از ویندوز تغییر نکرد.</value></data>
+<data name="Code_journal_schema_unsupported" xml:space="preserve"><value>دفتر ثبت محلی را نسخه‌ای جدیدتر از وینورا ساخته است و باز نشد.</value></data>
+<data name="Code_journal_schema_corrupt" xml:space="preserve"><value>ساختار دفتر ثبت محلی آسیب دیده است و باز نشد.</value></data>
+<data name="Code_journal_migration_conflict" xml:space="preserve"><value>دفتر ثبت محلی را نمی‌توان با ایمنی ارتقا داد و تغییری نکرد.</value></data>
+<data name="Code_journal_untrusted_definition" xml:space="preserve"><value>یکی از ورودی‌های دفتر ثبت با هیچ تعریف شناخته‌شده‌ای مطابقت نداشت و نادیده گرفته شد.</value></data>
+<data name="Code_store_busy" xml:space="preserve"><value>ذخیره‌سازی محلی وینورا مشغول است. چیزی تغییر نکرد؛ کمی بعد دوباره تلاش کنید.</value></data>
+<data name="Code_store_unavailable" xml:space="preserve"><value>ذخیره‌سازی محلی وینورا در دسترس نیست. چیزی تغییر نکرد؛ بعداً دوباره تلاش کنید.</value></data>
+<data name="Code_store_failure" xml:space="preserve"><value>ذخیره‌سازی محلی وینورا خطا گزارش کرد. پیش از تلاش دوباره ذخیره‌سازی را بررسی کنید.</value></data>
+<data name="Code_protocol_size" xml:space="preserve"><value>درخواست بیش از حد بزرگ بود و رد شد.</value></data>
+<data name="Code_protocol_version" xml:space="preserve"><value>درخواست از نسخه‌ی پروتکل پشتیبانی‌نشده استفاده کرد و رد شد.</value></data>
+<data name="Code_protocol_operation" xml:space="preserve"><value>درخواست شناسه‌ی عملیات معتبر نداشت و رد شد.</value></data>
+<data name="Code_protocol_command" xml:space="preserve"><value>درخواست از فرمان ناشناخته استفاده کرد و رد شد.</value></data>
+<data name="Code_protocol_feature" xml:space="preserve"><value>درخواست نام قابلیت ناشناخته‌ای داشت و رد شد.</value></data>
+<data name="Code_worker_unimplemented" xml:space="preserve"><value>این قابلیت هنوز پیاده‌سازی نشده است. چیزی تغییر نکرد.</value></data>
+<data name="Code_profile_size" xml:space="preserve"><value>فایل نمایه بیش از حد بزرگ است و وارد نشد.</value></data>
+<data name="Code_profile_invalid" xml:space="preserve"><value>فایل نمایه معتبر نیست و وارد نشد.</value></data>
+<data name="Code_profile_duplicate_property" xml:space="preserve"><value>فایل نمایه یک تنظیم را تکرار کرده است و وارد نشد.</value></data>
+<data name="Code_access_denied" xml:space="preserve"><value>ویندوز دسترسی را رد کرد. چیزی تغییر نکرد.</value></data>
+<data name="Code_error_unexpected" xml:space="preserve"><value>اتفاق غیرمنتظره‌ای رخ داد. هیچ چیز به‌عنوان موفق گزارش نشده است. هنگام درخواست کمک می‌توانید شناسه‌ی پیگیری را رونوشت کنید.</value></data>
+<data name="Code_discovery_unavailable" xml:space="preserve"><value>این اطلاعات روی این رایانه در دسترس نیست.</value></data>
+<data name="Code_discovery_item_unreadable" xml:space="preserve"><value>خواندن برخی موارد ممکن نبود و از آن‌ها صرف‌نظر شد.</value></data>
+<data name="Code_setting_unknown" xml:space="preserve"><value>این تنظیم در فهرست وینورا نیست. هیچ چیزی تغییر نکرد.</value></data>
+<data name="Code_setting_choice_invalid" xml:space="preserve"><value>این گزینه برای این تنظیم معتبر نیست. هیچ چیزی تغییر نکرد.</value></data>
+<data name="Code_setting_unsupported_build" xml:space="preserve"><value>این تنظیم در این نسخه‌ی ویندوز پشتیبانی نمی‌شود. هیچ چیزی تغییر نکرد.</value></data>
+<data name="Code_setting_state_unrecognized" xml:space="preserve"><value>این تنظیم اکنون مقداری از نوعی دارد که وینورا مدیریت نمی‌کند، بنابراین آن را تغییر نمی‌دهد. هیچ چیزی تغییر نکرد.</value></data>
+<data name="Code_shell_refresh_failed" xml:space="preserve"><value>تنظیم تغییر کرد، اما نتوانستیم به ویندوز اطلاع دهیم که تازه‌سازی کند؛ ممکن است برخی برنامه‌ها هنوز آن را نشان ندهند. می‌توانید از تاریخچه دوباره اعمال کنید.</value></data>
+<data name="Code_shell_restart_failed" xml:space="preserve"><value>تنظیم تغییر کرد، اما کاوشگر فایل راه‌اندازی مجدد نشد؛ پس از خروج از حساب یا راه‌اندازی مجدد کاوشگر فایل اعمال می‌شود. می‌توانید از تاریخچه دوباره تلاش کنید.</value></data>
+<data name="Code_target_not_allowed" xml:space="preserve"><value>وینورا تغییر خارج از فهرست خود را رد کرد. هیچ چیزی تغییر نکرد.</value></data>
+<data name="Code_target_kind_unsupported" xml:space="preserve"><value>دستیار مدیر این نوع تنظیم را پشتیبانی نمی‌کند. چیزی تغییر نکرد.</value></data>
+<data name="Code_diagnostics_destination_invalid" xml:space="preserve"><value>از پوشه‌ی انتخاب‌شده نمی‌توان برای بایگانی عیب‌یابی استفاده کرد. یک پوشه‌ی محلی معمولی خارج از پوشه‌ی داده‌ی خود وینورا انتخاب کنید. چیزی ساخته نشد.</value></data>
+<data name="Code_diagnostics_export_failed" xml:space="preserve"><value>ساخت بایگانی عیب‌یابی ممکن نبود. چیزی ارسال نشد و فایل ناقصی باقی نماند؛ فضای دیسک و دسترسی به پوشه را بررسی کنید و دوباره تلاش کنید.</value></data>
+<data name="Code_elevation_unavailable" xml:space="preserve"><value>تغییرهای سطح مدیر در این نشست یا نصب در دسترس نیست.</value></data>
+<data name="Code_elevation_unsigned_build" xml:space="preserve"><value>این نسخه توسط ناشر مورد انتظار امضا نشده است، بنابراین تغییرهای سطح مدیر خاموش است.</value></data>
+<data name="Code_elevation_install_untrusted" xml:space="preserve"><value>محل نصب یا فایل‌های وینورا برای تغییرهای سطح مدیر قابل اعتماد نیست.</value></data>
+<data name="Code_elevation_uac_disabled" xml:space="preserve"><value>کنترل حساب کاربر (UAC) خاموش است، بنابراین تغییرهای سطح مدیر در دسترس نیست.</value></data>
+<data name="Code_elevation_client_elevated" xml:space="preserve"><value>برای اعمال تغییرهای سطح دستگاه، وینورا را بدون دسترسی مدیر اجرا کنید.</value></data>
+<data name="Code_elevation_declined" xml:space="preserve"><value>درخواست دسترسی مدیر رد شد. چیزی تغییر نکرد.</value></data>
+<data name="Code_elevation_launch_failed" xml:space="preserve"><value>دستیار مدیر راه‌اندازی نشد. چیزی تغییر نکرد.</value></data>
+<data name="Code_elevation_blocked" xml:space="preserve"><value>ویندوز یا سازمان شما دستیار مدیر را مسدود کرد. چیزی تغییر نکرد.</value></data>
+<data name="Code_elevation_timeout" xml:space="preserve"><value>دستیار مدیر به‌موقع پاسخ نداد. چیزی تغییر نکرد؛ تلاش دوباره، درخواست دسترسی را دوباره نشان می‌دهد.</value></data>
+<data name="Code_elevation_server_untrusted" xml:space="preserve"><value>دستیار مدیر تأیید نشد، بنابراین چیزی به آن ارسال نشد.</value></data>
+<data name="Code_elevation_client_untrusted" xml:space="preserve"><value>دستیار مدیر برنامه درخواست‌کننده را رد کرد، زیرا نتوانست آن را تأیید کند.</value></data>
+<data name="Code_elevation_channel_failed" xml:space="preserve"><value>کانال امن به دستیار مدیر با خطا مواجه شد. پیش از تلاش دوباره، تغییر را بازبینی کنید.</value></data>
+<data name="Code_elevation_confirmation_required" xml:space="preserve"><value>تغییرهای سطح مدیر به تأیید تعاملی نیاز دارد. این را در یک پنجره تعاملی اجرا کنید.</value></data>
+<data name="Code_elevation_platform_unsupported" xml:space="preserve"><value>تغییرهای سطح مدیر در این نسخه از ویندوز پشتیبانی نمی‌شود.</value></data>
+<data name="Code_elevation_platform_unverified" xml:space="preserve"><value>تغییرهای سطح مدیر در این پیکربندی ویندوز بررسی نشده است، بنابراین خاموش است.</value></data>
+<data name="Code_definition_unknown" xml:space="preserve"><value>این تغییر در فهرست مورد اعتماد وینورا نیست.</value></data>
+<data name="Code_definition_set_mismatch" xml:space="preserve"><value>برنامه و دستیار درباره فهرست مورد اعتماد توافق ندارند.</value></data>
+<data name="Code_definition_revoked" xml:space="preserve"><value>این تغییر کنار گذاشته شده و دیگر در دسترس نیست.</value></data>
+<data name="Code_definition_signature_invalid" xml:space="preserve"><value>فهرست مورد اعتماد وینورا تأیید نشد.</value></data>
+<data name="Code_definition_rollback" xml:space="preserve"><value>یک نسخه‌ی قدیمی‌تر از فهرست مورد اعتماد رد شد.</value></data>
+<data name="Code_trust_store_insecure" xml:space="preserve"><value>رکورد اعتماد این رایانه مجوزهای ناامن دارد.</value></data>
+<data name="Code_setting_managed_by_policy" xml:space="preserve"><value>این تنظیم را یک سیاست مدیریت می‌کند و وینورا آن را تغییر نمی‌دهد.</value></data>
+<data name="Code_worker_busy" xml:space="preserve"><value>دستیار مدیر دیگری در حال اجراست. کمی بعد دوباره تلاش کنید.</value></data>
+<data name="Code_worker_hardening_failed" xml:space="preserve"><value>دستیار مدیر نتوانست به‌طور ایمن روی این سیستم راه‌اندازی شود. چیزی تغییر نکرد.</value></data>
+</root>

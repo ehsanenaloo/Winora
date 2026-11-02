@@ -1,0 +1,97 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<ui:FluentWindow x:Class="Winora.Desktop.MainWindow" Icon="Assets/Winora.ico"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" xmlns:ctl="clr-namespace:Winora.Desktop.Controls" xmlns:local="clr-namespace:Winora.Desktop" xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+ Title="{Binding Text[AppName]}" Width="1120" Height="780" MinWidth="820" MinHeight="600"
+ ExtendsContentIntoTitleBar="True" WindowBackdropType="Mica" WindowCornerPreference="Round" WindowStartupLocation="CenterScreen"
+ FlowDirection="{Binding Text.Direction, Converter={x:Static ctl:TextDirections.Flow}}" FontFamily="{StaticResource WinoraFontFamily}"
+ Background="{DynamicResource ApplicationBackgroundBrush}" Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+ AutomationProperties.Name="{Binding Text[AppName]}">
+ <ui:FluentWindow.Resources>
+  <!-- A title bar button: a 20 px icon in a 40 by 32 area, readable next to the caption buttons of Windows. -->
+  <Style x:Key="WinoraTitleButton" TargetType="ui:Button" BasedOn="{StaticResource {x:Type ui:Button}}">
+   <!-- Disabled (Back or Forward with nowhere to go) only dims the icon; the dark theme's disabled fill read as a box. -->
+   <Style.Resources>
+    <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="Transparent"/>
+    <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="Transparent"/>
+   </Style.Resources>
+   <Setter Property="Appearance" Value="Transparent"/><Setter Property="BorderThickness" Value="0"/><Setter Property="Background" Value="Transparent"/>
+   <Setter Property="Padding" Value="{StaticResource WinoraSpace.None}"/><Setter Property="MinWidth" Value="40"/><Setter Property="Width" Value="40"/><Setter Property="MinHeight" Value="32"/><Setter Property="Height" Value="32"/>
+   <Setter Property="VerticalAlignment" Value="Center"/><Setter Property="HorizontalContentAlignment" Value="Center"/><Setter Property="VerticalContentAlignment" Value="Center"/>
+  </Style>
+  <ControlTemplate x:Key="WinoraNavSectionHeaderTemplate" TargetType="ui:NavigationViewItemHeader">
+   <Grid>
+   <ToggleButton x:Name="PART_Toggle" Margin="{StaticResource WinoraSpace.L4T4R4}" MinHeight="32" HorizontalContentAlignment="Stretch" Cursor="Hand"
+    Foreground="{DynamicResource TextFillColorSecondaryBrush}" FocusVisualStyle="{StaticResource WinoraFocusRect}">
+    <ToggleButton.Template>
+     <ControlTemplate TargetType="ToggleButton">
+      <Border x:Name="Frame" CornerRadius="{StaticResource WinoraCornerRadiusSmall}" Background="Transparent" Padding="{StaticResource WinoraSpace.H8V4}">
+       <ContentPresenter VerticalAlignment="Center"/>
+      </Border>
+      <ControlTemplate.Triggers>
+       <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Frame" Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}"/></Trigger>
+      </ControlTemplate.Triggers>
+     </ControlTemplate>
+    </ToggleButton.Template>
+    <Grid>
+     <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+     <TextBlock Text="{TemplateBinding Text}" Style="{StaticResource WinoraChromeTextStrong}" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" AutomationProperties.Name=""/>
+     <ui:SymbolIcon x:Name="Chevron" Grid.Column="1" FontSize="14" Symbol="ChevronDown12" Margin="{StaticResource WinoraSpace.L8}" FlowDirection="LeftToRight"/>
+    </Grid>
+   </ToggleButton>
+   <!-- With the pane closed the section name is gone; a thin line keeps the groups apart. -->
+   <Rectangle x:Name="PART_Divider" Height="1" Margin="{StaticResource WinoraSpace.H12V8}" Fill="{DynamicResource WinoraCardBorderBrush}" Visibility="Collapsed" VerticalAlignment="Center"/>
+   </Grid>
+  </ControlTemplate>
+ </ui:FluentWindow.Resources>
+ <Grid>
+  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+  <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+  <ui:NavigationView x:Name="RootNavigation" Grid.Row="1" Visibility="{Binding ShowShell, Converter={StaticResource BoolToVisibility}}" IsBackButtonVisible="Collapsed" IsPaneToggleVisible="False" OpenPaneLength="240" CompactPaneLength="56"
+   PaneDisplayMode="Left" IsTabStop="False" KeyboardNavigation.TabIndex="1" AutomationProperties.Name="{Binding Text[Navigation]}" AutomationProperties.HelpText="{Binding Text[NavigationHelp]}"/>
+  <!-- Docked: a column on the right. At 1000 px and below it is a drawer over the content with a backdrop (MainWindow.ActionCenter.cs sets the placement). -->
+  <Rectangle x:Name="ActionCenterBackdrop" Grid.Row="1" Grid.ColumnSpan="2" Fill="{DynamicResource WinoraBackdropBrush}" Visibility="Collapsed" AutomationProperties.AutomationId="ActionCenterBackdrop"/>
+  <!-- Closed, the pane stays as a 40 px rail in the same column, docked and drawer alike; the open drawer covers it. -->
+  <ctl:ActionCenterRail x:Name="ActionCenterRail" Grid.Row="1" Grid.Column="1" DataContext="{Binding ActionCenter}" KeyboardNavigation.TabIndex="2"/>
+  <ctl:ActionCenterPane x:Name="ActionCenter" Grid.Row="1" Grid.Column="1" DataContext="{Binding ActionCenter}" Visibility="Collapsed" KeyboardNavigation.TabIndex="2" HorizontalAlignment="Right"/>
+  <local:FirstRunView x:Name="FirstRunHost" Grid.Row="1" Grid.ColumnSpan="2" DataContext="{Binding FirstRun}" Visibility="{Binding DataContext.IsActive, RelativeSource={RelativeSource Self}, Converter={StaticResource BoolToVisibility}}"
+   KeyboardNavigation.TabIndex="1"/>
+  <TextBlock x:Name="ActionCenterAnnouncer" Grid.Row="1" Text="{Binding ActionCenter.Announcement}" Opacity="0" Height="1" Width="1" IsHitTestVisible="False" Focusable="False" AutomationProperties.LiveSetting="Polite"
+   AutomationProperties.AutomationId="ActionCenterAnnouncer"/>
+  <ui:ContentDialogHost x:Name="DialogHost" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="2" IsTabStop="False" Focusable="False"/>
+  <!-- The template's title column stays empty (the name sits in the header), so it gets no side padding and the menu button starts at the window edge. -->
+  <ui:TitleBar x:Name="TitleBar" Grid.Row="0" Grid.ColumnSpan="2" Padding="{StaticResource WinoraSpace.V4}" KeyboardNavigation.TabIndex="0" Title="" ShowHelp="False" AutomationProperties.Name="{Binding Text[AppName]}">
+   <ui:TitleBar.Header>
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="{StaticResource WinoraSpace.L4}" shell:WindowChrome.IsHitTestVisibleInChrome="True" Visibility="{Binding ShowShell, Converter={StaticResource BoolToVisibility}}">
+      <!-- Menu, sidebar, Back, Forward: the same order and icons as editors such as VS Code. The panel follows the reading direction, so Persian mirrors it. -->
+      <ui:Button x:Name="HelpButton" Style="{StaticResource WinoraTitleButton}" Click="OnHelpClick" shell:WindowChrome.IsHitTestVisibleInChrome="True"><ui:SymbolIcon Symbol="LineHorizontal320" FontSize="20"/></ui:Button>
+      <ui:Button x:Name="SidebarButton" Style="{StaticResource WinoraTitleButton}" Click="OnSidebarClick" AutomationProperties.AutomationId="NavigationToggleButton" shell:WindowChrome.IsHitTestVisibleInChrome="True"><ui:SymbolIcon Symbol="PanelLeft20" FontSize="20"/></ui:Button>
+      <ui:Button x:Name="BackButton" Style="{StaticResource WinoraTitleButton}" IsEnabled="{Binding CanGoBack}" Click="OnBackClick" shell:WindowChrome.IsHitTestVisibleInChrome="True"><ui:SymbolIcon Symbol="ArrowLeft20" FontSize="20"/></ui:Button>
+      <ui:Button x:Name="ForwardButton" Style="{StaticResource WinoraTitleButton}" IsEnabled="{Binding CanGoForward}" Click="OnForwardClick" Margin="{StaticResource WinoraSpace.R4}" shell:WindowChrome.IsHitTestVisibleInChrome="True"><ui:SymbolIcon Symbol="ArrowRight20" FontSize="20"/></ui:Button>
+    </StackPanel>
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="{StaticResource WinoraSpace.L8}">
+     <Image Source="Assets/Winora.ico" Width="16" Height="16" RenderOptions.BitmapScalingMode="HighQuality" VerticalAlignment="Center" AutomationProperties.AutomationId="TitleBarIcon"/>
+     <TextBlock Text="{Binding Text[AppName]}" Style="{StaticResource WinoraChromeTextStrong}" Margin="{StaticResource WinoraSpace.L8}" VerticalAlignment="Center" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+     <TextBlock x:Name="TitleVersion" Text="{Binding Settings.VersionText}" Style="{StaticResource WinoraChromeText}" Margin="{StaticResource WinoraSpace.L8}" VerticalAlignment="Center" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+     <Border x:Name="AdminBadge" Margin="{StaticResource WinoraSpace.L8}" Padding="{StaticResource WinoraSpace.H8V2}" CornerRadius="{DynamicResource WinoraCornerRadiusPill}" VerticalAlignment="Center" Background="{DynamicResource WinoraChangedByWinoraBrush}" shell:WindowChrome.IsHitTestVisibleInChrome="True"
+      Visibility="{Binding IsElevated, Converter={StaticResource BoolToVisibility}}" AutomationProperties.Name="{Binding Text[TitleAdminName]}" AutomationProperties.HelpText="{Binding Text[TitleAdminHelp]}" Focusable="False"
+      ToolTip="{Binding Text[TitleAdminHelp]}">
+      <StackPanel Orientation="Horizontal">
+       <ui:SymbolIcon Symbol="ShieldKeyhole16" FontSize="14" VerticalAlignment="Center" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"/>
+       <TextBlock x:Name="AdminBadgeText" Text="{Binding Text[TitleAdminName]}" Style="{StaticResource WinoraChromeText}" Margin="{StaticResource WinoraSpace.L4}" VerticalAlignment="Center" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+      </StackPanel>
+     </Border>
+    </StackPanel>
+    </StackPanel>
+   </ui:TitleBar.Header>
+   <ui:TitleBar.TrailingContent>
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+     <ctl:GlobalSearchBox x:Name="GlobalSearch" DataContext="{Binding Search}" Margin="{StaticResource WinoraSpace.R8}" Visibility="{Binding DataContext.ShowShell, RelativeSource={RelativeSource AncestorType=ui:FluentWindow}, Converter={StaticResource BoolToVisibility}}"/>
+     <ui:Button x:Name="HeartButton" Style="{StaticResource WinoraTitleButton}" Click="OnHeartClick" Margin="{StaticResource WinoraSpace.R4}" Visibility="{Binding ShowShell, Converter={StaticResource BoolToVisibility}}" shell:WindowChrome.IsHitTestVisibleInChrome="True"><ui:SymbolIcon Symbol="Heart20" FontSize="20"/></ui:Button>
+    </StackPanel>
+   </ui:TitleBar.TrailingContent>
+  </ui:TitleBar>
+ </Grid>
+</ui:FluentWindow>

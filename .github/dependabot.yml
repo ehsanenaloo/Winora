@@ -1,0 +1,19 @@
+version: 2
+updates:
+  # Package versions are pinned in Directory.Packages.props and locked in packages.lock.json files.
+  - package-ecosystem: nuget
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: Update
+    labels:
+      - dependencies
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: Update
+    labels:
+      - dependencies

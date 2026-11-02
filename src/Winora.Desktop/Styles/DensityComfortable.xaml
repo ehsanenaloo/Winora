@@ -1,0 +1,12 @@
+<!-- SPDX-License-Identifier: GPL-3.0-only -->
+<!-- Comfortable density (default). DensityCompact.xaml defines the same keys; a test enforces it. -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+ <sys:Double x:Key="WinoraControlHeight">36</sys:Double>
+ <sys:Double x:Key="MinHitTarget">40</sys:Double>
+ <sys:Double x:Key="WinoraRowMinHeight">64</sys:Double>
+ <Thickness x:Key="WinoraCardPadding">16</Thickness>
+ <sys:Double x:Key="WinoraSectionGap">24</sys:Double>
+ <sys:Int32 x:Key="WinoraDescriptionLines">3</sys:Int32>
+ <sys:Boolean x:Key="WinoraCompactChips">False</sys:Boolean>
+</ResourceDictionary>
