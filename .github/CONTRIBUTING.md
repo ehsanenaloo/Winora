@@ -24,10 +24,6 @@ Before you start on an issue, leave a short comment so two people do not do the 
 
 A change that breaks one of these rules needs a talk in an issue before any code.
 
-## Safety
-
-The app changes the real settings of the PC it runs on when you confirm a change. It asks for administrator rights. Try your changes in a virtual machine, never on the PC you work on. A script you add must never change real settings by itself.
-
 ## Build
 
 You need Windows and the .NET SDK version in `global.json`. The first restore needs the internet.
@@ -39,7 +35,7 @@ dotnet build Winora.slnx -c Release --no-restore
 
 Warnings are errors, so a build with a warning fails. If you change a package, update the lock files in the same pull request and say why.
 
-To run the app you built (in a virtual machine):
+To run the app you built:
 
 ```powershell
 dotnet run --project src/Winora.Desktop -c Release --no-build

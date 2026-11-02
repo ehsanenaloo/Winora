@@ -8,7 +8,7 @@
 
 ## How I tried it
 
-<!-- What you did in the app and what you saw. Say if you used a virtual machine. -->
+<!-- What you did in the app and what you saw. -->
 
 ## Source (settings only)
 

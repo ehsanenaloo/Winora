@@ -65,8 +65,6 @@ dotnet build Winora.slnx -c Release --no-restore
 dotnet run --project src/Winora.Desktop -c Release --no-build
 ```
 
-The app changes your real Windows settings when you confirm a change. Try it in a virtual machine first if you are not sure.
-
 ## How to use it
 
 <img src=".github/assets/steps-en.png" alt="Three steps: pick a change, review it, undo it any time">
