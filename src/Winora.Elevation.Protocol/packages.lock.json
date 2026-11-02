@@ -4,23 +4,23 @@
     "net10.0": {
       "Microsoft.NET.ILLink.Tasks": {
         "type": "Direct",
-        "requested": "[10.0.14, )",
-        "resolved": "10.0.14",
-        "contentHash": "YlTamXppEQls6DYWt7RdUuwWDb0lyw/vXCaGeQpLCpsLmfwGuCkOz/vIGgMTV7ECsJcavkCOkxZXv9s8rdAHkQ=="
+        "requested": "[10.0.12, )",
+        "resolved": "10.0.12",
+        "contentHash": "xi+BDjFpW+Sb+MHFHaH6Y/gV9I8BluFwRXc1QyCdoZbIK26eNiBeFuMTe/FMwc33G1wdHCyDg7CVTmb8OdQrMQ=="
       },
       "System.Security.Cryptography.Cose": {
         "type": "Direct",
-        "requested": "[10.0.12, )",
-        "resolved": "10.0.12",
-        "contentHash": "HwChs+Vs0sd76fUR4MH1inZZHn4E6GDtstEP8TwNHqA51GQnoC9agOXfLqOM7TNR+02MUN7YY/4hweGeM47xFQ==",
+        "requested": "[10.0.14, )",
+        "resolved": "10.0.14",
+        "contentHash": "lYxCFQ7udvcSID67wRHcr4k2XspfmzRejkhjuRc4NixnIdqcO4PpVJg3nGzm/wCvnoo8eBaGjuBATcQykFtCyw==",
         "dependencies": {
-          "System.Formats.Cbor": "10.0.12"
+          "System.Formats.Cbor": "10.0.14"
         }
       },
       "System.Formats.Cbor": {
         "type": "Transitive",
-        "resolved": "10.0.12",
-        "contentHash": "CGIkyGIf3UWBFmYJrFJ7FIxQ++3h5yDcDXwyQ0sOH4+5EJK04XMVU+hyy1Q8mTUsWLXz6/ydq1ln9SPutxFVoQ=="
+        "resolved": "10.0.14",
+        "contentHash": "eHnlBHHk6ft/5TsuZPtz9xgxKFIILf3nA+yKVZaKmJ7GCHpz8nd4cjnMys5NQF3PvBpWcb0u01LNR2jX9jrRFw=="
       },
       "winora.domain": {
         "type": "Project"
