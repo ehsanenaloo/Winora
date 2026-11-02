@@ -28,7 +28,7 @@ jobs:
 
       - name: Package
         shell: pwsh
-        run: ./tools/publish.ps1 -SkipTests
+        run: ./tools/publish.ps1 -SkipTests -Machine
 
       - name: Check the packages
         shell: pwsh
@@ -41,7 +41,13 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           $tag = '${{ github.ref_name }}'
-          $zip = Get-ChildItem dist -Filter 'Winora-*-portable.zip' | Select-Object -First 1
-          if (-not $zip -or $zip.Name -ne "Winora-$($tag.TrimStart('v'))-win-x64-portable.zip") { throw "Tag $tag does not match the built version ($($zip.Name))." }
-          $files = @($zip.FullName) + @(Get-ChildItem dist -Filter 'Winora-*.msi' | ForEach-Object FullName) + @('dist/SHA256SUMS', 'dist/sbom.cdx.json')
-          gh release create $tag @files --title "Winora $($tag.TrimStart('v'))" --notes-file dist/RELEASE-NOTES.md --verify-tag
+          # The release carries the all-users MSI only: it installs into Program Files, the folder the administrator features require.
+          $msi = "dist/Winora-$($tag.TrimStart('v'))-win-x64-machine.msi"
+          if (-not (Test-Path $msi)) { throw "Tag $tag does not match the built version (no $msi)." }
+          # SHA256SUMS and the notes list only the files attached to the release.
+          New-Item -ItemType Directory -Force -Path dist/release | Out-Null
+          $names = @((Split-Path $msi -Leaf), 'sbom.cdx.json')
+          Get-Content dist/SHA256SUMS | Where-Object { $names -contains ($_ -replace '^\S+ \*', '') } | Set-Content -Encoding utf8NoBOM dist/release/SHA256SUMS
+          Get-Content dist/RELEASE-NOTES.md | Where-Object { $_ -notmatch '^Files: ' } | Set-Content -Encoding utf8NoBOM dist/release/RELEASE-NOTES.md
+          $files = @($msi, 'dist/release/SHA256SUMS', 'dist/sbom.cdx.json')
+          gh release create $tag @files --title "Winora $($tag.TrimStart('v'))" --notes-file dist/release/RELEASE-NOTES.md --verify-tag

@@ -51,7 +51,7 @@ Windows 11 keeps its settings in many places: the Settings app, Control Panel, G
 
 ## Install
 
-Download the latest version from the [Releases](https://github.com/ehsanenaloo/Winora/releases/latest) page. It has a portable zip and an MSI installer. Check the files against `SHA256SUMS`.
+Download `Winora-<version>-win-x64-machine.msi` from the [Releases](https://github.com/ehsanenaloo/Winora/releases/latest) page and run it. It installs Winora for all users in Program Files. You can check the file against `SHA256SUMS`.
 
 You need Windows 11 (x64) and the .NET 10 Desktop Runtime.
 
